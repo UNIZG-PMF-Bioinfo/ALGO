@@ -1,0 +1,261 @@
+[
+  {
+    "objectID": "00_main_page.html",
+    "href": "00_main_page.html",
+    "title": "Algorithms and programimg course",
+    "section": "",
+    "text": "👋 Welcome to the Algorithms and programming course\nThis website hosts the material for the Algorithms and programming course. You’ll find R code examples, tasks, and explanations for each week"
+  },
+  {
+    "objectID": "00_main_page.html#running-code",
+    "href": "00_main_page.html#running-code",
+    "title": "00_main_page",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html",
+    "href": "Week1/week1_lecture2.html",
+    "title": "Week 1 - Lecture 2",
+    "section": "",
+    "text": "myfun <- function(input, parameters) {\ndo a thing\ndo another thing\n…\noutput\n}\nWrite a function\nMake a simple function which will multiplies two numbers.\n\nmySimpleFun <- function(a=1,b) {\n    product <- a*b\n    return(product)\n}\n\nThe function will return whatever is called on the last line, or you can explicitly state it with return().\nExecution i.e. calling a function\n\nmySimpleFun(b=3)\n\n[1] 3\n\nmySimpleFun(a=2, b=3)\n\n[1] 6\n\nmySimpleFun(2, 3)\n\n[1] 6"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#global-and-local-variables",
+    "href": "Week1/week1_lecture2.html#global-and-local-variables",
+    "title": "Week 1 - Lecture 2",
+    "section": "Global and local variables",
+    "text": "Global and local variables\n\nmySimpleFun <- function(a=1,b) {\n    product <- a*b\n    return(product)\n}\n\nWhat happens with the function if we change variable vol outside it? Nothing! The function has its own local environment.\n\nproduct <- 5\nmySimpleFun(2, 3)\n\n[1] 6\n\nproduct\n\n[1] 5"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#function-as-binary-operator",
+    "href": "Week1/week1_lecture2.html#function-as-binary-operator",
+    "title": "Week 1 - Lecture 2",
+    "section": "Function as binary operator",
+    "text": "Function as binary operator\nAll functions are beautiful, but not all come in the same shape :)\nAn operator is a function that takes one or two arguments and can be written without parentheses\nfunction(arg1, arg2)\nvs.\narg1 operator arg2\nOperator %in% is used to identify if an element belongs to a vector or dataframe.\n\nc(1,4,2,1) %in% c(2,3)\n\n[1] FALSE FALSE  TRUE FALSE"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#multiple-inputs-vectorisation",
+    "href": "Week1/week1_lecture2.html#multiple-inputs-vectorisation",
+    "title": "Week 1 - Lecture 2",
+    "section": "Multiple inputs / vectorisation",
+    "text": "Multiple inputs / vectorisation\n\nmySimpleFun(1:3, 3:5)\n\n[1]  3  8 15"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#flow-control-if-statement",
+    "href": "Week1/week1_lecture2.html#flow-control-if-statement",
+    "title": "Week 1 - Lecture 2",
+    "section": "Flow control: if statement",
+    "text": "Flow control: if statement\nif(condition is fulfilled) {\ndo the thing\n} else {\ndo the other thing\n}\n\nmySimpleFun <- function(a=1,b) {\n    if (a < 0) {\n        a <- (-1)*a\n    } else {\n        a <- a\n    }\n    \n    product <- a*b\n    return(product)\n}"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#warnings-errors-and-messages",
+    "href": "Week1/week1_lecture2.html#warnings-errors-and-messages",
+    "title": "Week 1 - Lecture 2",
+    "section": "Warnings, errors and messages",
+    "text": "Warnings, errors and messages\nYou are getting the hang of this, and with an additional pair of hands the work is coming along quickly. But after one calculation, you notice the numbers are fishy. Upon closer inspection, you discover that you input thickness with a decimal dot in the wrong place. To prevent this from happening again and going unnoticed, you add a warning():\n\nmySimpleFun <- function(a=1,b) {\n    if (a < 0) {\n        warning(\"First number is negative! Changing it to positive.\")\n        a <- (-1)*a\n    } else {\n        a <- a\n    }\n    \n    product <- a*b\n    return(product)\n}\n\nIf you want the function to stop executing, use break().\nmessage() has similar syntax but different “level of alert”."
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#multiple-outputs",
+    "href": "Week1/week1_lecture2.html#multiple-outputs",
+    "title": "Week 1 - Lecture 2",
+    "section": "Multiple outputs",
+    "text": "Multiple outputs\n\nmySimpleFun <- function(a=1,b) {\n    if (a < 0) {\n        warning(\"First number is negative! Changing it to positive.\")\n        a <- (-1)*a\n    } else {\n        a <- a\n    }\n    # calculate product\n    product <- a*b\n    # make a figure\n    figure <-  plot(c(a,b))\n    # save a list\n    res_list <- list(\"product\"=product, \"figure\"=figure)\n    # return\n    return(res_list)\n}\n## run the fuction\nmySimpleFun(b=-2)\n\n\n\n\n$product\n[1] -2\n\n$figure\nNULL\n\n\nifelse(test, yes, no) - vectorised\n\nmySimpleFun <- function(a=1,b) {\n  # make all negatives positive\n  a <- ifelse(a < 0, -a, a)\n\n  # calculate product\n  product <- a * b\n\n  # (plots will only show the last one in a loop, so you usually don’t do this inside)\n  plot(a, b)   # e.g. scatter plot\n\n  list(product = product)\n}\n\nmySimpleFun(a= c(2,3,2,-1), b=c(3,4,5,2))\n\n\n\n\n$product\n[1]  6 12 10  2\n\n\nTry to change ‘list’ with ‘c’ and see what happens. You have to put multiple outputs together as a list, otherwise it doesn’t work properly!"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#looping-in-r",
+    "href": "Week1/week1_lecture2.html#looping-in-r",
+    "title": "Week 1 - Lecture 2",
+    "section": "Looping in R",
+    "text": "Looping in R\nfor(each value in sequence) {\ndo the thing\n}\n\nfor(i in 1:5) {\n    print(\"bla\")\n}\n\n[1] \"bla\"\n[1] \"bla\"\n[1] \"bla\"\n[1] \"bla\"\n[1] \"bla\"\n\n\nwhile(condition is true) {\ndo the thing\n}\nrepeat {\nthe thing\nif(condition is true) { break }\n}\nIt’s NEVER a time for a loop in R. Instead, there’s the apply() family of functions:"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#apply-family-of-functions",
+    "href": "Week1/week1_lecture2.html#apply-family-of-functions",
+    "title": "Week 1 - Lecture 2",
+    "section": "Apply family of functions",
+    "text": "Apply family of functions\nlapply():\n\nlapply(iris[, 1:4], sum)          # preforms a function over each list element\n\n$Sepal.Length\n[1] 876.5\n\n$Sepal.Width\n[1] 458.6\n\n$Petal.Length\n[1] 563.7\n\n$Petal.Width\n[1] 179.9\n\nclass(lapply(iris[, 1:4], sum))   # returns a list\n\n[1] \"list\"\n\n\nNotice the three dots (ellipsis) in function description: lapply(X, FUN, ...)\nAccess list entries explicitly by using function(x):\n\nlapply(iris[, 1:4], function(x) sqrt(x[20:30]))\n\n$Sepal.Length\n [1] 2.258318 2.323790 2.258318 2.144761 2.258318 2.190890 2.236068 2.236068\n [9] 2.280351 2.280351 2.167948\n\n$Sepal.Width\n [1] 1.949359 1.843909 1.923538 1.897367 1.816590 1.843909 1.732051 1.843909\n [9] 1.870829 1.843909 1.788854\n\n$Petal.Length\n [1] 1.224745 1.303840 1.224745 1.000000 1.303840 1.378405 1.264911 1.264911\n [9] 1.224745 1.183216 1.264911\n\n$Petal.Width\n [1] 0.5477226 0.4472136 0.6324555 0.4472136 0.7071068 0.4472136 0.4472136\n [8] 0.6324555 0.4472136 0.4472136 0.4472136"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#apply-family-of-functions-1",
+    "href": "Week1/week1_lecture2.html#apply-family-of-functions-1",
+    "title": "Week 1 - Lecture 2",
+    "section": "Apply family of functions",
+    "text": "Apply family of functions\nsapply() : lapply, but tries to return simpler data format\n\nsapply(iris[, 1:4], sum)\n\nSepal.Length  Sepal.Width Petal.Length  Petal.Width \n       876.5        458.6        563.7        179.9 \n\nclass(sapply(iris[, 1:4], sum))\n\n[1] \"numeric\""
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#apply-family-of-functions-2",
+    "href": "Week1/week1_lecture2.html#apply-family-of-functions-2",
+    "title": "Week 1 - Lecture 2",
+    "section": "Apply family of functions",
+    "text": "Apply family of functions\napply() : apply function over margins of array (1 for rows, 2 for columns)\n\napply(iris[, 1:4], 1, sum)\n\n  [1] 10.2  9.5  9.4  9.4 10.2 11.4  9.7 10.1  8.9  9.6 10.8 10.0  9.3  8.5 11.2\n [16] 12.0 11.0 10.3 11.5 10.7 10.7 10.7  9.4 10.6 10.3  9.8 10.4 10.4 10.2  9.7\n [31]  9.7 10.7 10.9 11.3  9.7  9.6 10.5 10.0  8.9 10.2 10.1  8.4  9.1 10.7 11.2\n [46]  9.5 10.7  9.4 10.7  9.9 16.3 15.6 16.4 13.1 15.4 14.3 15.9 11.6 15.4 13.2\n [61] 11.5 14.6 13.2 15.1 13.4 15.6 14.6 13.6 14.4 13.1 15.7 14.2 15.2 14.8 14.9\n [76] 15.4 15.8 16.4 14.9 12.8 12.8 12.6 13.6 15.4 14.4 15.5 16.0 14.3 14.0 13.3\n [91] 13.7 15.1 13.6 11.6 13.8 14.1 14.1 14.7 11.7 13.9 18.1 15.5 18.1 16.6 17.5\n[106] 19.3 13.6 18.3 16.8 19.4 16.8 16.3 17.4 15.2 16.1 17.2 16.8 20.4 19.5 14.7\n[121] 18.1 15.3 19.2 15.7 17.8 18.2 15.6 15.8 16.9 17.6 18.2 20.1 17.0 15.7 15.7\n[136] 19.1 17.7 16.8 15.6 17.5 17.8 17.4 15.5 18.2 18.2 17.2 15.7 16.7 17.3 15.8"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#apply-family-of-functions-3",
+    "href": "Week1/week1_lecture2.html#apply-family-of-functions-3",
+    "title": "Week 1 - Lecture 2",
+    "section": "Apply family of functions",
+    "text": "Apply family of functions\nreplicate() : repeated evaluation of expression; returns an array\n\nreplicate(3, sample(1:10, 5))\n\n     [,1] [,2] [,3]\n[1,]    8    9    2\n[2,]    6    3    3\n[3,]    7    1    9\n[4,]    9   10    8\n[5,]   10    4   10"
+  },
+  {
+    "objectID": "Week1/week1_lecture2.html#take-home-messages-on-writing-your-own-functions",
+    "href": "Week1/week1_lecture2.html#take-home-messages-on-writing-your-own-functions",
+    "title": "Week 1 - Lecture 2",
+    "section": "Take home messages on writing your own functions",
+    "text": "Take home messages on writing your own functions\nTake care of the future user of your function - it’ll probably be you.\n\ntidy and clear commands - avoid salami code\ntidy and logical higher structures - avoid spaghetti code\nsensible function and variable names\n(b, bb, bbs, dajproradivise, omg, matfixmerggr)\nCOMMENT YOUR CODE\n\n\n# example of salami code:\nsum(as.numeric(names(table(sample(50:300, 1000, replace=T) %/% 25))))   \n\n[1] 77\n\n\nvs.\n\nmysample <- sample(50:300, 1000, replace=T)\nroundit <- mysample %/% 25\ntb <- table(roundit)\ntb\n\nroundit\n  2   3   4   5   6   7   8   9  10  11  12 \n 89  87  92 104  97 118 121  97  92  97   6 \n\ncategories <- as.numeric(names(tb))\ncategories\n\n [1]  2  3  4  5  6  7  8  9 10 11 12\n\ncat_sum <- sum(categories)\ncat_sum\n\n[1] 77\n\n\nMost importantly, if there is already a function for what you are trying to do, don’t write your own without a good reason. (Homework instructions are a good reason.)"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html",
+    "href": "Week1/week1_lecture1.html",
+    "title": "Week 1 - Lecture 1",
+    "section": "",
+    "text": "homeworks + exam\nMoodle forum\nno copy-pasting, no group work\nNO ChatGPT!!\nstudent participation !!!"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#r",
+    "href": "Week1/week1_lecture1.html#r",
+    "title": "Week 1 - Lecture 1",
+    "section": "R",
+    "text": "R\n\ntoolbox for statistical analyses and data manipulation\nadvanced, flexible data formats\nuser-friendly\nsimple syntax\npackages\ncommunity: documentation, stackOverflow, Github, Biostars…\n\n\nGoogle. Google. Google."
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#make-your-r-usage-easier",
+    "href": "Week1/week1_lecture1.html#make-your-r-usage-easier",
+    "title": "Week 1 - Lecture 1",
+    "section": "Make your R usage easier",
+    "text": "Make your R usage easier\n\nTips&Tricks\n\nCtrl+Enter to run code/send to console\ntab for auto-complete\nkeyboard shortcuts listed in Help\nHistory: send to console, up arrow\nHelp: search manually or from console (?, ??, example())\nadjust defaults in Global options"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#make-your-r-usage-easier-1",
+    "href": "Week1/week1_lecture1.html#make-your-r-usage-easier-1",
+    "title": "Week 1 - Lecture 1",
+    "section": "Make your R usage easier",
+    "text": "Make your R usage easier\n\nRmarkdown (https://rmarkdown.rstudio.com/)\n\nvarious outputs for sharing your work (.html, .pdf, Word, website…)\ntext + code chunks\nCtrl+Alt+I to insert new chunk\nchunk options (message, warning, fig…)"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#make-your-r-usage-easier-2",
+    "href": "Week1/week1_lecture1.html#make-your-r-usage-easier-2",
+    "title": "Week 1 - Lecture 1",
+    "section": "Make your R usage easier",
+    "text": "Make your R usage easier\n\nUser interfaces\n\nRGui - useful when upgrading versions (package installR)\nRStudio - additional functionality, projects"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#basic-components",
+    "href": "Week1/week1_lecture1.html#basic-components",
+    "title": "Week 1 - Lecture 1",
+    "section": "Basic components",
+    "text": "Basic components\n\nvariables\n\nfunctions\n\nenvironment\n\nFor starters, you can use R as a calculator:\n\n3 + 5\n10/2\n4^2\n8 %/% 3\n8 %% 3\n\n[1] 8\n[1] 5\n[1] 16\n[1] 2\n[1] 2\n\n\nSome basic functions:\n\nround(1.86)\nsqrt(25)\nlog10(1000)\n\n[1] 2\n[1] 5\n[1] 3"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#variables",
+    "href": "Week1/week1_lecture1.html#variables",
+    "title": "Week 1 - Lecture 1",
+    "section": "Variables",
+    "text": "Variables\n\neverything is a vector\n\nassignment:\n\n<-\n<<-\n\n=\nbut don’t touch the last two!!!\nn <- 5\n\ncreate/collate: c()\n\nview: print() or type name"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#vectors",
+    "href": "Week1/week1_lecture1.html#vectors",
+    "title": "Week 1 - Lecture 1",
+    "section": "Vectors",
+    "text": "Vectors\n\ncharacter, numeric (integer and double), logical\nclass(), typeof()\nas.x() family of functions\n\nCreate your first variable:\n\nn <- 9\n\nLet’s see it:\n\nn\nprint(n)\nclass(n)\n\n[1] 9\n[1] 9\n[1] \"numeric\"\n\n\nAs we said, every variable in R is a vector. So what does this mean?\nLet’s add one more number to our variable n using function c():\n\nn <- c(n, 16); n\nclass(n)\n\n[1]  9 16\n[1] \"numeric\"\n\n\nHow do functions work on this?\n\nsqrt(n)\n\n[1] 3 4\n\n\nWhat happens when we try to add a letter?\n\nn <- c(n, \"z\"); n\nclass(n)\n\n[1] \"9\"  \"16\" \"z\" \n[1] \"character\"\n\n\nNumeric vector:\n\nn1 <- c(1,2,4); n1\nas.character(n1)\n\n[1] 1 2 4\n[1] \"1\" \"2\" \"4\"\n\n\nCreate sequential numeric vector:\n\nn2 <- 1:10; n2\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCharacter vector:\n\nch <- c(\"a\", \"b\", \"c\", \"d\", \"spanishinquisition\"); ch\n\n[1] \"a\"                  \"b\"                  \"c\"                 \n[4] \"d\"                  \"spanishinquisition\""
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#boolean-variable",
+    "href": "Week1/week1_lecture1.html#boolean-variable",
+    "title": "Week 1 - Lecture 1",
+    "section": "Boolean variable",
+    "text": "Boolean variable\nTRUE FALSE\nIt is a binary variable.\n\nbool <- c(T,F,T,T,F); bool\n\n[1]  TRUE FALSE  TRUE  TRUE FALSE\n\nas.numeric(bool)\n\n[1] 1 0 1 1 0\n\nbin <- c(0,1,1,0,1); bin\n\n[1] 0 1 1 0 1\n\nclass(bin)\n\n[1] \"numeric\"\n\nas.logical(bin)\n\n[1] FALSE  TRUE  TRUE FALSE  TRUE"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#boolean-operators",
+    "href": "Week1/week1_lecture1.html#boolean-operators",
+    "title": "Week 1 - Lecture 1",
+    "section": "Boolean operators",
+    "text": "Boolean operators\n\nAND &\nOR |\nNOT !\n\n\nprint(bool)\n\n[1]  TRUE FALSE  TRUE  TRUE FALSE\n\nprint(bin)\n\n[1] 0 1 1 0 1\n\n\n\n& and | are vectorised\n&& and || are short-circuited\n\n\nbool & bin\nbool && bin\n\n\nbool | bin\nbool || bin\n\n\n!bool\n!bool || bin\n\n\nComparison operators\n==\n!=\n>\n>=\n<\n<=\n\nn2\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\nn2 == 2\n\n [1] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE\n\nn2 > 5\n\n [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE\n\nn2 >= 5\n\n [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE\n\n\n\n\nComparison operators\n\nbool\nbin\n\n[1]  TRUE FALSE  TRUE  TRUE FALSE\n[1] 0 1 1 0 1\n\n\n\nbool == bin\n\n[1] FALSE FALSE  TRUE FALSE FALSE\n\nbool != bin\n\n[1]  TRUE  TRUE FALSE  TRUE  TRUE\n\n\n\n\nRECYCLING\nWhat happens when vectors are not the same length?\n\nn1; n2\n\n[1] 1 2 4\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\nn2*c(2,3)\n\n [1]  2  6  6 12 10 18 14 24 18 30\n\n\n\nn2*n1\n\nWarning in n2 * n1: longer object length is not a multiple of shorter object\nlength\n\nn2 == n1\n\nWarning in n2 == n1: longer object length is not a multiple of shorter object\nlength\n\n\n [1]  1  4 12  4 10 24  7 16 36 10\n [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#basic-functions",
+    "href": "Week1/week1_lecture1.html#basic-functions",
+    "title": "Week 1 - Lecture 1",
+    "section": "Basic functions",
+    "text": "Basic functions\nlength() : how many elements in a vector\n\nmyvec <- 1:20\nlength(myvec)\n\n[1] 20\n\n\n\nlength(\"banana\")\nnchar(\"banana\")\n\n[1] 1\n[1] 6\n\n\nwhich() : returns positions of elements which satisfy the condition\n\nwhich(n1 == 4)\nwhich((myvec<=2) | (myvec>17))\n\n[1] 3\n[1]  1  2 18 19 20"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#basic-functions-1",
+    "href": "Week1/week1_lecture1.html#basic-functions-1",
+    "title": "Week 1 - Lecture 1",
+    "section": "Basic functions",
+    "text": "Basic functions\nnames() : gives names to the elements\n\nnames(ch) <- c(\"letter\", \"letter\", \"letter\", \"anotherletter\", \"nobodyexpected\")\nch\n\n              letter               letter               letter \n                 \"a\"                  \"b\"                  \"c\" \n       anotherletter       nobodyexpected \n                 \"d\" \"spanishinquisition\" \n\n\n%in% operator - are elements of the first vector present in the second vector?\n\nn2 %in% n1 \n\n [1]  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#basic-functions-2",
+    "href": "Week1/week1_lecture1.html#basic-functions-2",
+    "title": "Week 1 - Lecture 1",
+    "section": "Basic functions",
+    "text": "Basic functions\nunique() : returns unique elements\n\nn3 <- c(0,0,0,0,1,1,1,2,2,2,2,2,3,3,3,3,5)\nunique(n3)\n\n[1] 0 1 2 3 5\n\n\nduplicated() : logical: did the same element appear before in the vector?\n\nduplicated(n3)\nduplicated(c(5, n3))\n\n [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n[13] FALSE  TRUE  TRUE  TRUE FALSE\n [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE\n[13]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE\n\n\ntable() : how many times does each unique element appear\n\ntable(n3)\n\nn3\n0 1 2 3 5 \n4 3 5 4 1 \n\n\nGet just the frequencies from table:\n\nn3\nas.numeric(table(n3))\n\n [1] 0 0 0 0 1 1 1 2 2 2 2 2 3 3 3 3 5\n[1] 4 3 5 4 1\n\n\nGet unique elements using names - but be careful!\n\nnames(table(n3))\nclass(names(table(n3)))\n\n[1] \"0\" \"1\" \"2\" \"3\" \"5\"\n[1] \"character\"\n\n\n\nTaking a sample\nsample() : take a sample from vector\n\nsample(n3, 4)\nsample(n3, 25, replace=TRUE)\n\n[1] 0 2 2 1\n [1] 5 3 1 0 5 1 1 3 2 0 1 2 1 1 0 1 0 3 3 5 3 0 0 3 3\n\n\nTake a sample from some basic distributions: \n\nsample(1:100, size = 10)\nrunif(10, min=1, max=100)\ns <- rnorm(20, mean=3, sd=0.7); s\n\n [1] 14 12 11 10 56 49 68 80 77 92\n [1] 99.57869 50.99023 57.28312 22.67158 84.39368 13.41171 80.77906 49.02567\n [9] 66.36299 37.80214\n [1] 3.025210 3.356918 2.971556 2.244913 3.204477 2.153606 1.296598 3.098032\n [9] 2.965125 2.615825 2.172487 4.641286 3.041624 2.174420 3.114539 3.277892\n[17] 3.636015 3.580725 2.664805 3.754689\n\n\n\n\nGenerating sequences\nseq()\n\nseq(from=1, to=100, by=2)\nseq(from=0, to=10, length.out=21)\n\n [1]  1  3  5  7  9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49\n[26] 51 53 55 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99\n [1]  0.0  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0  6.5  7.0\n[16]  7.5  8.0  8.5  9.0  9.5 10.0\n\n\nrep()\n\nrep(1:3, times=4)\nrep(1:3, each=4)\n\n [1] 1 2 3 1 2 3 1 2 3 1 2 3\n [1] 1 1 1 1 2 2 2 2 3 3 3 3\n\n\ndon’t mix up rep() and replicate()!\n\nreplicate(n = 10, expr = mean(sample(x = 1:10, size = 3)) )\n\n [1] 3.666667 5.000000 4.333333 5.000000 5.666667 4.666667 6.333333 5.333333\n [9] 5.666667 6.666667\n\n\n\n\nBasic statistics\n\nmean(s)\n\n[1] 2.949537\n\nsd(s)\n\n[1] 0.7270044\n\nquantile(s)\n\n      0%      25%      50%      75%     100% \n1.296598 2.523097 3.033417 3.297648 4.641286"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#vector-subsetting",
+    "href": "Week1/week1_lecture1.html#vector-subsetting",
+    "title": "Week 1 - Lecture 1",
+    "section": "Vector subsetting []",
+    "text": "Vector subsetting []\n\nby position\nby condition\n\nOne position:\n\nn1[3] \n\n[1] 4\n\n\nMultiple positions:\n\nn2[1:5]\nch[c(2,4,5)]\n\n[1] 1 2 3 4 5\n              letter        anotherletter       nobodyexpected \n                 \"b\"                  \"d\" \"spanishinquisition\" \n\n\nEverything except 1 position:\n\nn2[-7]\n\n[1]  1  2  3  4  5  6  8  9 10\n\n\nPositions stored in another vector:\n\nn2[n1]\n\n[1] 1 2 4"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#vector-subsetting-1",
+    "href": "Week1/week1_lecture1.html#vector-subsetting-1",
+    "title": "Week 1 - Lecture 1",
+    "section": "Vector subsetting []",
+    "text": "Vector subsetting []\n\nby position\nby condition\n\n\nn2\nn2 > 5\nn2[n2 > 5]\n\n [1]  1  2  3  4  5  6  7  8  9 10\n [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE\n[1]  6  7  8  9 10\n\n\n\nbin\nn2[bin]\nn2[as.logical(bin)]\n\n[1] 0 1 1 0 1\n[1] 1 1 1\n[1]  2  3  5  7  8 10\n\n\n\nExercise 1\nCreate a vector myvec which contains all numbers from 1 to 20 except 3 and 6. Subset fifth and fourth number by position.\n\n\nExercise 2\nSubset myvec to get only numbers smaller or equal to 2 or larger than 17. Return first the numbers, then their positions in the original vector.\nSubset myvec to return only elements which are in positions divisible by 3.\n\n\nExercise 3\nReturn words from vector ch which have more than 5 letters."
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#data-structures",
+    "href": "Week1/week1_lecture1.html#data-structures",
+    "title": "Week 1 - Lecture 1",
+    "section": "Data structures",
+    "text": "Data structures\n- vectors  \n- factors = vectors with (unchangeable) levels  \n- matrices = dataframes with 1 type of data  \n- lists  \n- data frames = pretty lists"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#factors",
+    "href": "Week1/week1_lecture1.html#factors",
+    "title": "Week 1 - Lecture 1",
+    "section": "Factors",
+    "text": "Factors\nVectors with predefined levels.\nUsual suspects for your errors.\n\nfac <- factor(n3); fac\n\n [1] 0 0 0 0 1 1 1 2 2 2 2 2 3 3 3 3 5\nLevels: 0 1 2 3 5\n\n\n\nfac[1] <- 6\n\nWarning in `[<-.factor`(`*tmp*`, 1, value = 6): invalid factor level, NA\ngenerated\n\nfac\n\n [1] <NA> 0    0    0    1    1    1    2    2    2    2    2    3    3    3   \n[16] 3    5   \nLevels: 0 1 2 3 5\n\n\nSo how to turn a factor into normal numeric vector? There’s a hack.\n\nas.numeric(fac)\nas.numeric(as.character(fac))\n\n [1] NA  1  1  1  2  2  2  3  3  3  3  3  4  4  4  4  5\n [1] NA  0  0  0  1  1  1  2  2  2  2  2  3  3  3  3  5"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#matrices",
+    "href": "Week1/week1_lecture1.html#matrices",
+    "title": "Week 1 - Lecture 1",
+    "section": "Matrices",
+    "text": "Matrices\n\nm <- matrix(1:15, nrow=5, ncol=3); m\n\n     [,1] [,2] [,3]\n[1,]    1    6   11\n[2,]    2    7   12\n[3,]    3    8   13\n[4,]    4    9   14\n[5,]    5   10   15\n\n\nSubsetting:\n\nm[1,3]\nm[12]\nm[,2]\n\n[1] 11\n[1] 12\n[1]  6  7  8  9 10\n\n\nBasic functions:\n\nt(m)      # transpose\ndiag(m)   # extract diagonal\ndim(m)    # see dimensions\n\n     [,1] [,2] [,3] [,4] [,5]\n[1,]    1    2    3    4    5\n[2,]    6    7    8    9   10\n[3,]   11   12   13   14   15\n[1]  1  7 13\n[1] 5 3\n\n\n\nExercise 4\nMake a 4x4 matrix m2 with numbers from 1 to 16. Let the first row be: 1 2 3 4 (hint: consult help with ?matrix).\nChange all the numbers on the diagonal to zeroes.\nSum the elements in each row."
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#lists",
+    "href": "Week1/week1_lecture1.html#lists",
+    "title": "Week 1 - Lecture 1",
+    "section": "Lists",
+    "text": "Lists\nStore anything; most flexible data type.\n\nl <- list(n2, bool, m, fac); l\n\n[[1]]\n [1]  1  2  3  4  5  6  7  8  9 10\n\n[[2]]\n[1]  TRUE FALSE  TRUE  TRUE FALSE\n\n[[3]]\n     [,1] [,2] [,3]\n[1,]    1    6   11\n[2,]    2    7   12\n[3,]    3    8   13\n[4,]    4    9   14\n[5,]    5   10   15\n\n[[4]]\n [1] <NA> 0    0    0    1    1    1    2    2    2    2    2    3    3    3   \n[16] 3    5   \nLevels: 0 1 2 3 5"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#lists-1",
+    "href": "Week1/week1_lecture1.html#lists-1",
+    "title": "Week 1 - Lecture 1",
+    "section": "Lists",
+    "text": "Lists\nLet’s name the entries:\n\nnames(l) <- c(\"vector1\", \"vector2\", \"matrix1\", \"factor1\")\n\nHow many entries?\n\nlength(l)\n\n[1] 4\n\n\nHow about dimensions?\n\ndim(l)\n\nNULL\n\n\n\nList subsetting\nBy position:\n\nl[2]\nclass(l[2])\n\n$vector2\n[1]  TRUE FALSE  TRUE  TRUE FALSE\n\n[1] \"list\"\n\n\nBy position, another way:\n\nl[[4]]\nclass(l[[4]])\n\n [1] <NA> 0    0    0    1    1    1    2    2    2    2    2    3    3    3   \n[16] 3    5   \nLevels: 0 1 2 3 5\n[1] \"factor\"\n\n\nBy name:\n\nl$vector2\nclass(l$vector2)\nl[[\"factor1\"]]\n\n[1]  TRUE FALSE  TRUE  TRUE FALSE\n[1] \"logical\"\n [1] <NA> 0    0    0    1    1    1    2    2    2    2    2    3    3    3   \n[16] 3    5   \nLevels: 0 1 2 3 5\n\n\nSubset an element of an element:\n\nunlist(l[2])\n\nvector21 vector22 vector23 vector24 vector25 \n    TRUE    FALSE     TRUE     TRUE    FALSE \n\nclass(unlist(l[2]))\n\n[1] \"logical\"\n\nl[3]\n\n$matrix1\n     [,1] [,2] [,3]\n[1,]    1    6   11\n[2,]    2    7   12\n[3,]    3    8   13\n[4,]    4    9   14\n[5,]    5   10   15\n\nl[[3]][2,3]\n\n[1] 12\n\n#l[3][2,3]"
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#data-frames",
+    "href": "Week1/week1_lecture1.html#data-frames",
+    "title": "Week 1 - Lecture 1",
+    "section": "Data frames",
+    "text": "Data frames\n“Matrices” with different types of data.\n\ndf <- data.frame(m, ch); df\n\n\n\n  \n\n\ndim(df)\n\n[1] 5 4\n\nncol(df); nrow(df)\n\n[1] 4\n\n\n[1] 5\n\ncolnames(df); rownames(df)\n\n[1] \"X1\" \"X2\" \"X3\" \"ch\"\n\n\n[1] \"1\" \"2\" \"3\" \"4\" \"5\"\n\n\n\nData frame subsetting\nBy position:\n\ndf[2, 3]\ndf[, 3:4]\n\n[1] 12\n\n\n\n\n  \n\n\n\nBy names:\n\ndf[\"ch\"]\ndf$ch\nclass(df[\"ch\"])\nclass(df$ch)\n\n\n\n  \n\n\n\n[1] \"a\"                  \"b\"                  \"c\"                 \n[4] \"d\"                  \"spanishinquisition\"\n[1] \"data.frame\"\n[1] \"character\"\n\n\nInternally, data frames are lists with entries of equal lengths."
+  },
+  {
+    "objectID": "Week1/week1_lecture1.html#data-frames-1",
+    "href": "Week1/week1_lecture1.html#data-frames-1",
+    "title": "Week 1 - Lecture 1",
+    "section": "Data frames",
+    "text": "Data frames\nAdding a column:\n\ndf <- cbind(df, bool); df\n\n\n\n  \n\n\n\nRemoving a column:\n\ndf[\"bool\"] <- NULL; df\n\n\n\n  \n\n\n\nRemoving a row:\n\n#df[5, ] <- NULL; df\n\ndf <- df[-5, ]\n\n\nExercise 5\nR has a number of pre-loaded datasets, iris probably being the most famous one.\nLoad iris and calculate mean length of sepal."
+  }
+]

@@ -1,0 +1,31 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  title: "Algorithms and programimg course"
+  navbar:
+    right:
+      - text: UVOD
+        href: 00_main_page
+      - text: Week1
+        menu: 
+          - text: Lecture 1
+            href: Week1/week1_lecture1.qmd
+          # - text: Functions and conditions
+          #   href: Week1/week1_lecture2.qmd
+
+  page-footer:
+    background: light
+    left: "Copyright 2024, Bioinformatics Group"
+    right: "This website is built with Quarto."
+format:
+  html:
+    theme: styles.scss
+    mainfont: Nunito
+    toc: true
+    page-layout: full
+editor: visual
+execute:
+  echo: true
+  message: false
+  collapse: true
