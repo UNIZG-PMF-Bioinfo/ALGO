@@ -98,3 +98,9 @@ pre code { background: inherit !important; }
   background: mix($primary-color, #000000, 80%) !important;
   color: #ffffff !important;
 }
+
+/* Global type scale bump (~+6%) */
+$font-size-root: 19px;   // default is 16px
+
+/* (optional) keep comfortable line-height with larger text */
+$line-height-base: 1.65;
