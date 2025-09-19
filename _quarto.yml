@@ -2,8 +2,9 @@ project:
   type: website
   output-dir: docs
 website:
-  title: "Algorithms and programimg course"
+  title: "Algorithms and programming course"
   navbar:
+    logo: logo_bioinfo.png
     right:
       - text: UVOD
         href: 00_main_page

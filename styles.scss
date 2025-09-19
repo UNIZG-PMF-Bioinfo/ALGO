@@ -1,79 +1,100 @@
 /*-- scss:defaults --*/
 
-// Import fonts 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap');
+$font-family-sans-serif: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 
-// Colors extracted from screenshot
-$primary-color: #0077C8;   // Bright bioinfo blue (DNA + logo)
-$secondary-color: #2C3E50; // Dark navy/gray (navbar + strong contrast text)
-$accent-color: #5A5A5A;    // Neutral gray accent (button shadow, subtext)
-$background-color: #FFFFFF; // White background
-$text-color: #000000;       // Black text
+/* Palette */
+$primary-color:   #0077C8;   // brand blue
+$secondary-color: #2C3E50;   // deep navy/gray
+$accent-color:    #5A5A5A;   // neutral gray
+$background-color:#FFFFFF;
+$text-color:      #000000;
 
+/* Bootstrap/Quarto tokens */
+$primary:   $primary-color;
+$secondary: $secondary-color;
+$info:      $accent-color;
 
-// Base document colors
-$navbar-bg: $primary-color; // navbar 
-$navbar-fg: $background-color; // navbar foreground elements
-$navbar-hl: $secondary-color; // highlight color when hovering over navbar links 
-$body-bg: $background-color; // page background 
-$body-color: $text-color; // page text
-$footer-bg: $primary-color; // footer 
-$link-color: $secondary-color; // hyperlinks
+$body-bg:   $background-color;
+$body-color:$text-color;
 
-// Inline code 
-$code-bg: $background-color; // inline code background color
-$code-color: $accent-color; //inline code text color
+$link-color:       $primary-color;
+$link-hover-color: darken($link-color, 10%);
+
+$navbar-bg: $primary-color;
+$navbar-fg: #ffffff;
+$navbar-hl: mix(#ffffff, $primary-color, 85%);
+$footer-bg: $primary-color;
+
+/* Inline code chip colors */
+$code-bg: mix($primary-color, #ffffff, 92%);    // tinted background
+$code-color: $secondary-color;
 
 /*-- scss:rules --*/
+
+/* Logo + title */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
 .navbar-brand img {
-    max-height: 40px;
-    width: auto;
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
-.navbar-brand, .navbar-nav .nav-link {
-    font-weight: 700;  // Makes navbar text bold
-}
+/* Navbar links */
+.navbar .nav-link { font-weight: 700; }
+.navbar .nav-link:hover,
+.navbar .nav-link.active { color: $navbar-hl !important; }
 
-.tocify-item, .tocify-subheader {
-    font-weight: 600;  // Slightly bold sidebar links
-}
+/* TOC */
+#TOC .nav-link { font-weight: 600; }
+#TOC .nav-link.active { font-weight: 800; }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-    font-weight: 800;  // Extra bold on hover or active state
-}
-
-
-/*-- scss:rules --*/
-
-/* Main page headers (H1) */
+/* Headings */
 h1 {
-    font-size: 2.4rem;  /* Adjust size */
-    font-weight: 700;   /* Extra bold */
-    color: #0B2545;     /* Dark blue (adjust as needed) */
-    text-transform: uppercase;  /* Uppercase for emphasis */
-    letter-spacing: 1.5px; /* More spacing for clarity */
-    margin-bottom: 1rem; /* Space below header */
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: $secondary-color;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 1rem;
 }
-
-/* Subheaders (H2) */
 h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #163172;  /* Slightly lighter blue */
-    border-bottom: 3px solid #A3C4F3; /* Adds a subtle underline */
-    padding-bottom: 5px; /* Space between text and underline */
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: mix($secondary-color, $primary-color, 30%);
+  border-bottom: 3px solid mix($primary-color, #ffffff, 70%);
+  padding-bottom: .3rem;
+  margin: 2rem 0 1rem;
 }
-
-/* Section headers (H3) */
 h3 {
-    font-size: 1.75rem;
-    font-weight: 500;
-    color: #28527A;  /* Medium blue */
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: mix($secondary-color, $primary-color, 50%);
+  margin: 1.25rem 0 .75rem;
 }
 
+/* Inline code chip — only inline, not blocks */
+:not(pre) > code {
+  background: $code-bg !important;
+  color: $background-color !important;
+  padding: .12rem .35rem;
+  border-radius: .3rem;
+  font-weight: 700;
+  font-size: 0.95em;
+}
 
+/* Keep block code clean */
+pre code { background: inherit !important; }
+
+/* Dark mode variant */
+.quarto-dark :not(pre) > code {
+  background: mix($primary-color, #000000, 80%) !important;
+  color: #ffffff !important;
+}

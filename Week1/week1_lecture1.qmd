@@ -329,8 +329,7 @@ sample(n3, 4)
 sample(n3, 25, replace=TRUE)
 ```
 
-Take a sample from some basic distributions:
-![](normal_distribution.jpg)
+Take a sample from some basic distributions: ![](normal_distribution.jpg)
 
 ```{r, results = "hold"}
 sample(1:100, size = 10)
