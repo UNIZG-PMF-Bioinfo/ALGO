@@ -1,0 +1,4 @@
+"0","```r
+library(data.table)
+( flights <- fread(\"https://raw.githubusercontent.com/Rdatatable/data.table/master/vignettes/flights14.csv\") )
+```"

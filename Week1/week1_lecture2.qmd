@@ -19,10 +19,10 @@ format:
 ### General structure:
 
 myfun **\<- function(**input, parameters**) {**\
-    do a thing\
-    do another thing\
-    ...\
-    output\
+do a thing\
+do another thing\
+...\
+output\
 **}**
 
 **Write a function**

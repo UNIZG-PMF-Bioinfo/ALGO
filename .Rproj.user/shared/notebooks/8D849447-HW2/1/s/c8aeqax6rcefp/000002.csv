@@ -1,0 +1,4 @@
+"0","```r
+mononucleotides <- data.table::fread(\"Task4/mononucleotides.txt\")
+dinucleotides <- data.table::fread(\"Task4/dinucleotide.txt\")
+```"

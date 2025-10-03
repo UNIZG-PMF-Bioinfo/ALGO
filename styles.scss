@@ -1,106 +1,102 @@
 /*-- scss:defaults --*/
 
-/* Font */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap');
-$font-family-sans-serif: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+// Import font
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap');
 
-/* Palette */
-$primary-color:   #0077C8;   // brand blue
-$secondary-color: #2C3E50;   // deep navy/gray
-$accent-color:    #5A5A5A;   // neutral gray
-$background-color:#FFFFFF;
-$text-color:      #000000;
 
-/* Bootstrap/Quarto tokens */
-$primary:   $primary-color;
-$secondary: $secondary-color;
-$info:      $accent-color;
+// Color palette inspired by logos
+$primary-color: #5A5A5A;     // dark blue (University)
+$secondary-color: #2C3E50;   // vivid red (IRB)
+$accent-color: #0077C8;      // coral (Kuzman Consulting)
+$background-color: #FFFFFF;
+$text-color: #000000;
+$gray-light: #F5F5F5;
 
-$body-bg:   $background-color;
-$body-color:$text-color;
 
-$link-color:       $primary-color;
-$link-hover-color: darken($link-color, 10%);
-
-$navbar-bg: $primary-color;
-$navbar-fg: #ffffff;
-$navbar-hl: mix(#ffffff, $primary-color, 85%);
+// Base document colors
+$navbar-bg: $accent-color;
+$navbar-fg: $background-color;
+$navbar-hl: $accent-color;
+$body-bg: $background-color;
+$body-color: $text-color;
 $footer-bg: $primary-color;
+$link-color: $secondary-color;
 
-/* Inline code chip colors */
-$code-bg: mix($primary-color, #ffffff, 92%);    // tinted background
-$code-color: $secondary-color;
+// Inline code
+$code-bg: #F8F9FA;
+$code-color: $accent-color;
 
 /*-- scss:rules --*/
 
-/* Logo + title */
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  font-weight: 800;
-  letter-spacing: .2px;
-}
+// Navbar logo size
 .navbar-brand img {
-  height: 28px;
+  max-height: 30px;
   width: auto;
-  display: block;
 }
 
-/* Navbar links */
-.navbar .nav-link { font-weight: 700; }
-.navbar .nav-link:hover,
-.navbar .nav-link.active { color: $navbar-hl !important; }
+// Navbar text
+.navbar-brand,
+.navbar-nav .nav-link {
+  font-weight: 700;
+}
 
-/* TOC */
-#TOC .nav-link { font-weight: 600; }
-#TOC .nav-link.active { font-weight: 800; }
-
-/* Headings */
-h1 {
-  font-size: 2.25rem;
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
   font-weight: 800;
-  color: $secondary-color;
+  color: $accent-color !important;
+}
+
+// Sidebar ToC items
+.tocify-item,
+.tocify-subheader {
+  font-weight: 600;
+}
+
+// Headers
+h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: $primary-color;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
   margin-bottom: 1rem;
 }
+
 h2 {
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: mix($secondary-color, $primary-color, 30%);
-  border-bottom: 3px solid mix($primary-color, #ffffff, 70%);
-  padding-bottom: .3rem;
-  margin: 2rem 0 1rem;
-}
-h3 {
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 600;
-  color: mix($secondary-color, $primary-color, 50%);
-  margin: 1.25rem 0 .75rem;
+  color: $secondary-color;
+  border-bottom: 3px solid lighten($secondary-color, 25%);
+  padding-bottom: 5px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
-/* Inline code chip — only inline, not blocks */
-:not(pre) > code {
-  background: $code-bg !important;
-  color: $background-color !important;
-  padding: .12rem .35rem;
-  border-radius: .3rem;
-  font-weight: 700;
-  font-size: 0.95em;
+h3 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: $accent-color;
+  border-bottom: 3px solid lighten($accent-color, 25%);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Keep block code clean */
-pre code { background: inherit !important; }
 
-/* Dark mode variant */
-.quarto-dark :not(pre) > code {
-  background: mix($primary-color, #000000, 80%) !important;
-  color: #ffffff !important;
+h4 {
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: $primary-color;
+  border-bottom: 3px solid lighten($primary-color, 25%);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Global type scale bump (~+6%) */
-$font-size-root: 19px;   // default is 16px
+h5 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: $primary-color;
+  border-bottom: 3px solid lighten($primary-color, 45%);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
 
-/* (optional) keep comfortable line-height with larger text */
-$line-height-base: 1.65;
