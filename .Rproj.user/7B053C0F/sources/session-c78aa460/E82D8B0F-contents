@@ -14,14 +14,14 @@ website:
             href: Week1/week1_lecture1.qmd
           - text: Functions and conditions
             href: Week1/week1_lecture2.qmd
-      # - text: Week2
-      #   menu: 
-      #     - text: Packages
-      #       href: Week2/week2_part0.qmd
-      #     - text: Data manipulation
-      #       href: Week2/week2_part0.qmd
+      - text: Week2
+        menu:
+          - text: Packages
+            href: Week2/week2_part0.qmd
+          - text: Data manipulation
+            href: Week2/week2_part1.qmd
       #     - text: Tidy table
-      #       href: Week2/week2_part3.qmd
+      #       href: Week2/week2_part2.qmd
 
   page-footer:
     background: light

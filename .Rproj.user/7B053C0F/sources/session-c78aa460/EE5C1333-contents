@@ -1,0 +1,483 @@
+---
+title: "Homework 1"
+author: Karla Vujicic
+output: html_document
+---
+
+
+Rename this RMarkdown document titled “Homework_1_Name_Surname” and solve the following tasks in chunks. Create chunks with Ctrl+Alt+I. 
+You are encouraged to comment on your code, especially if you were having some doubts about how to solve a task. This will make it easier for us to understand your way of thinking. If you don't know how to solve a task but still try to do it, leave your attempts with comments, and if you are close you may get some points.
+
+
+### 1.
+##### 4 points (1+1+2)
+
+Put numbers from 1 to 200 to vector myVector.
+
+Calculate :  
+
+A) Sum of every third number of vector myVector and save it in a variable var1a.
+```{r}
+
+myVector <- 1:200
+myVector
+
+svakitreci <- myVector[seq(from=3,to=length(myVector), by=3)] #pomocu funkcije seq i by=3 odabirem samo svaki treci element
+svakitreci
+
+sum(svakitreci)
+
+var1a <- sum(svakitreci)
+var1a
+
+```
+
+
+B) Sum of all numbers that are divisible by 15 and save it in a variable var1b.
+
+```{r}
+
+var1b <- sum(myVector[myVector%%15==0])
+var1b
+
+```
+
+C) Sum of all numbers that are divisible by number X or number Y, but not by numbers X and Y. Try it with X=5 and Y=3 and save it in a variable var1c.  
+
+Razmisljati o boljim nazivima varijabli, koristiti radije engleske rijeci i sto krace ili sazeto
+
+```{r}
+
+X <- 5
+Y <- 3
+myVector <- 1:200
+
+#uzima sve brojeve 1-200 koji su djeljivi s X=5 ili Y=3
+djeljivi_sXiliY <- myVector[myVector%%X==0 | myVector%%Y==0]
+djeljivi_sXiliY
+
+#rjesava se brojeva djeljivih i s 5 i s 3, tj. djeljivi s 15
+djeljivi_samo_sXiliY <- djeljivi_sXiliY[djeljivi_sXiliY %% (X*Y) != 0]
+
+#zbroj djeljivih samo s X ili Y
+var1c <- sum(djeljivi_samo_sXiliY)
+var1c
+
+```
+
+
+
+### 2.
+##### 4 points (1+1+2)
+ 
+Check out functions seq and rep and then do the following:
+
+A) Make a sequence of equidistant 100 numbers ranging from 15.7 to 16.838 and save it in a variable var2a.  
+
+```{r}
+
+var2a <- seq(from=15.7,to=16.838,length.out=100) #length.out - koliko elemenata zelim u nizu,a on sam racuna jednaki razmak izmedu brojeva u vektoru
+var2a
+length(var2a) #provjera duljine vektora
+
+```
+
+B) Do this with cumsum() function  and save it in a variable var2b
+
+```{r}
+
+#pronalazenje koraka je razlika 16.838 i 15.7, a ima 99 razmaka jer je ukupno 100 brojeva - to nam daje udaljenost izmedu dva broja u sekvenci
+korak <- (16.838 - 15.7) / 99 
+
+rep(korak, 100)
+
+cumsum(rep(korak, 100))
+
+15.7 + cumsum(rep(korak, 100)) - korak #oduzimam jedan korak da dobijem 15.7, a ne 15.71149
+
+var2b <- 15.7 + cumsum(rep(korak, 100)) - korak
+var2b
+
+```
+
+
+C) Make a sequence of equidistant numbers ranging from 1.002 to 1.560 with distance between them equal to 0.006. Again, do it with and without using seq and save it in a variable var2c and var2d.  
+
+
+```{r}
+
+#s funkcijom seq
+var2c <- seq(from=1.002,to=1.560,by=0.006)
+var2c
+
+#bez funkcije seq
+#pronalazenje razmaka => razlika 1.560 i 1.002 podijeljena s 0.006 kako bismo dobili broj razmaka
+#1.560 - 1.002 = 0.558
+#0.558/0.006 = 93 # +1 pocetni razmak, znaci ukupno 94 
+
+rep(0.006, 94)         # 94 puta ponavljamo korak 0.006
+cumsum(rep(0.006, 94)) 
+1.002 + cumsum(rep(0.006, 94)) #ovdje je prvi broj 1.008, a zelimo da bude 1.002, tako da treba oduzet jedan korak
+var2d <- 1.002 + cumsum(rep(0.006, 94)) - 0.006
+var2d
+
+```
+
+### 3.
+##### 3 points
+Create a binary operator approx (modify the name if you need to) which will compare two vectors and return TRUE if they are equal or the difference in their values is less than 0.1. In other words, you need to create a function which acts the same as ==, but with tolerance of +-0.1.
+
+#3/3
+# | a==b nije potrebno
+```{r}
+"%checky%" <- function(a, b) {
+  abs(a - b) < 0.1 | a==b
+}
+
+#rezultat valja sve dok je razlika u njihovim vrijednostima manja od 0.1, a razlika mora biti u apsolutnoj, jer npr. ako je a=0.8 i b=0.85, rezultat razlike je -0.05, i to bi bilo tocno da je pozitivan rezultat 
+
+#provjera
+0.7 %checky% 0.75   #tocno jer je razlika 0.05 < 0.1
+7 %checky% 7.2    #krivo jer je razlika 0.2 > 0.1
+7 %checky% 7      #tocno jer su isti brojevi
+
+```
+
+
+### 4.   
+##### 8 points (2 points each)
+Create a 5 x 20 matrix named M and fill it with numbers from 1 to 100. 
+
+A) Create a 2 x 3 matrix M2 and fill it with numbers from 1 to 6, by column. Replace the lowermost and rightmost elements (2 x 3) of M with M2. This replacement should be done with one command. After this, save M as var5a.  
+#2/2
+```{r}
+
+M<-matrix(1:100, nrow=5, ncol=20, byrow=FALSE)
+M
+M2<-matrix(1:6, nrow=2, ncol=3, byrow=FALSE)
+M2
+M[4:5, 18:20]<-M2
+M
+var5a<-M
+var5a
+
+```
+
+
+B) Create a 5x20 matrix named N and fill it with numbers 1 to 100 by row Replace all the elements of matrix M, which are larger then corresponding elements of matrix N, with 5. Do this in one line! (var5b)   
+#2/2
+#Nepotrebne {}
+```{r}
+
+N<-matrix(1:100, nrow=5, ncol=20, byrow=TRUE)
+N
+var5b <- {M[M>N] <- 5;M}
+var5b
+
+```
+
+C) Multiply by 2 those columns in matrix M for which first row of matrix N is divisible by first row of matrix M. (For example if first row of N is 1,6 and first row of M is 2,3 , 1 is not divisible by 2 but 6 is divisible by 3, so we need to multiply only the second column of matrix M) (var5c)  
+#2/2
+```{r}
+
+trazenistupac <- N[1,]%%M[1,]==0
+M[,trazenistupac] <- M[,trazenistupac]*2
+M
+var5c <- M
+var5c
+
+```
+
+D) Square only those elements in matrix M which are in rows that have a sum smaller than 200. (var5d)  
+#2/2
+```{r}
+
+manjasuma<-rowSums(M)<200
+manjasuma
+M[manjasuma,]<-M[manjasuma,]^2
+M
+var5d<-M
+var5d
+
+```
+
+
+### 5.
+#### 7 points  (1 point each)
+Dataset iris is loaded into R by default.   
+
+a) How would you get the petal length of the 10th and 15th row of the dataset (do it both with [[ and $) (var6c1 and var6c2)
+
+
+```{r}
+
+iris
+
+#upotreba $
+var6c1 <- iris$Petal.Length[c(10, 15)]
+var6c1 
+
+#upotreba [[ ]]
+var6c2 <- iris[["Petal.Length"]][c(10, 15)]
+var6c2 
+
+```
+1/1 
+
+b) How about all distinct petal widths of the dataset? (var6d)
+
+```{r}
+
+#dobivanje svih razlicitih sirina latica
+var6d <- unique(iris$Petal.Width)
+var6d
+
+```
+1/1
+
+c) Get sepal widths of all the versicolor flowers with Sepal.Lengths larger than 6.1. (var6e)
+
+```{r}
+
+var6e <- iris[(iris$Species == "versicolor") & (iris$Sepal.Length > 6.1),"Sepal.Width"]
+var6e
+
+```
+1/1
+
+
+
+d) Copy iris data to my.iris variable. Add another variable to my.iris, Petal.Width.Sqrd, which contains squared widths of the petal widths. (my.iris)
+
+```{r}
+
+my.iris <- iris  #kopiranje iris data u my.iris
+
+my.iris$Petal.Width.Sqrd <- my.iris$Petal.Width^2 #novi stupac je kvadrat stupca petal.width za svaki red
+
+```
+1/1
+
+e) Count how many flowers there are of each species that have with petal length smaller than 3.5 (use table to count). (save table as var6g)
+
+```{r}
+
+noviiris <- iris[iris$Petal.Length<3.5,]
+
+var6g <- table(noviiris$Species) #nova funkcija table() prebrojava koliko ima cvjetova svake vrste s tom duljinom u stupcu Species
+var6g
+
+```
+0.75/1 Kako biste to u jednom redu?
+
+f) Count how many flowers there are of each species that have with sepal length smaller than 5.5 and sepal width greater than 2.8. (save table as var6h)
+
+```{r}
+
+josnovijiiris<-iris[iris$Sepal.Length<5.5 & iris$Sepal.Width>2.8,]
+var6h <- table(josnovijiiris$Species)
+var6h
+
+```
+0.75/1 Kako biste to u jednom redu?
+
+
+g) Add new column named NewColumn to my.iris. For all virginica flowers that have sepal length greater than 7, change NewColumn to sepal Length * petal Length. (my.iris2) What is the mean value for all those numbers? (var6i)
+
+```{r}
+
+novimy.iris <- my.iris
+novimy.iris$NewColumn <- NA  #NA osigurava da redovi koji ne zadovoljavaju uvjet imaju NA i da će ih funkcija mean() ignorirati (mora vrijediti na.rm = TRUE).
+
+#postavljanje uvjeta
+virginica <- (novimy.iris$Species=="virginica") & (novimy.iris$Sepal.Length>7)
+
+#stavljanje podataka u novi stupac ako su uvjeti zadovoljeni
+novimy.iris[virginica, "NewColumn"] <- novimy.iris[virginica,"Sepal.Length"] * novimy.iris[virginica,"Petal.Length"]
+
+var6i <- mean(novimy.iris$NewColumn,na.rm=TRUE) #mora se dodati na.rm=TRUE za ignoriranje NA vrijednosti od ostalih cvjetova
+var6i
+
+```
+1/1
+
+### 6. 
+#### 16 points (+1 extra point)
+####  a-f = 1 point each, g = 2 points, h=2, i= 2, j=1 (+1 extra point), k=3 points 
+The CO2 dataset is preloaded into R (you can get more details in R by executing: ??CO2).
+
+Subset it (without using the subset function) so that: 
+
+a) Only chilled Mc1 plants are returned. (var7a)  
+
+```{r}
+
+CO2
+var7a<-CO2[CO2$Plant=="Mc1"&CO2$Treatment=="chilled",]
+var7a
+
+```
+
+1/1
+
+b) Only chilled plants from Quebec that were exposed to concentrations less than 250 mL/L of CO2 are returned (var7b)  
+
+```{r}
+
+var7b<-CO2[CO2$Treatment=="chilled"&CO2$Type=="Que"&CO2$conc<250,]
+var7b 
+#dobivam 0 rows, to mozda znaci da nema biljaka koje su istovremeno s Quebec-a, da su "chilled" i da im je konc<250 
+
+quechill<-CO2[CO2$Treatment=="chilled"&CO2$Type=="Que",]
+quechill 
+#ovdje sam isla provjeriti je li imaju biljke koje su istovremeno chilled i que, te isto dobivam 0 rows, tako da pretpostavljam da je ovo iznad tocno
+
+```
+0/1 Jeste li pogledali kako se zovu vrijednosti u stupcu Type?
+
+c) As in b part of the exercise but return only odd-numbered rows from the original dataset. (var7c)  
+
+```{r}
+
+#neparniredovi
+neparni<- seq(from=1,to=nrow(CO2),by=2)
+
+uvjet <- CO2$Treatment=="chilled" & CO2$Type=="Quebec" & CO2$conc<250
+
+#uzima redove koji zadovoljavaju gornji uvjet
+zadovoljeniuvjet <- which(uvjet)
+
+#redovi sa zadovoljenim uvjetima koji se nalaze (%in%) u vektoru neparnih
+konacno <- zadovoljeniuvjet[zadovoljeniuvjet %in% neparni]
+
+var7c <- CO2[konacno,]
+var7c
+
+```
+0.75/1 Tocno, ali moglo se u jednom redu.
+
+
+d) Only plants exposed to more than 350 mL/L CO2 and that had the uptake of more than 35 ?mol/m^2 sec-1. (var7d)  
+
+```{r}
+
+CO2
+var7d<-CO2[CO2$conc>350&CO2$uptake>35,]
+var7d
+
+```
+1/1
+
+e) Same as d part of the exercise, but return only Plant and type part of the dataset (var7e)  
+
+```{r}
+
+CO2
+var7e<-CO2[CO2$conc>350&CO2$uptake>35,c("Plant","Type")]
+var7e
+
+```
+1/1
+
+
+f) Add a new column to the dataset, smalluptake which will have values of uptake divided by 3. (var7f)
+
+```{r}
+
+var7f<-cbind(CO2,smalluptake=CO2$uptake/3)
+var7f
+
+```
+1/1
+
+
+g) Count the number of plants (rows) that have the value of smalluptake 3.1 or 4.1. (var7g)
+
+```{r}
+
+var7g<-sum(var7f$smalluptake==3.1 | var7f$smalluptake==4.1)
+
+#ili pomocu %in%
+var7g<-sum(var7f$smalluptake %in% c(3.1,4.1))
+var7g
+
+```
+0/2 Tocno rjesenje je 2.
+
+h) Calculate the mean uptake for nonchilled plants. Calculate the mean uptake for chilled plants. (var7h1 and 2) 
+
+```{r}
+
+var7h1 <- mean(CO2$uptake[CO2$Treatment=="nonchilled"])
+var7h1
+
+var7h2 <- mean(CO2$uptake[CO2$Treatment=="chilled"])
+var7h2
+
+```
+2/2
+
+i) Add a column diffFromMeanUptake that will represent all the difference between uptake and the mean uptake for nonchilled plants and chilled plants (in the same column, if the plant is chilled calculate difference from mean of all chilled plants, if the plant is unchilled calculate difference from mean for all unchilled plants). Do this by subsetting! (at the end save dataset as var7i)     
+
+```{r}
+
+#prosjek za chilled
+meanchilled<-mean(CO2$uptake[CO2$Treatment=="chilled"])  #var7h2
+
+#prosjek za non chilled 
+meannonchilled<-mean(CO2$uptake[CO2$Treatment=="nonchilled"]) #var7h1
+
+var7i <- CO2
+
+#dodavanje novog stupca
+var7i$diffFromMeanUptake <- NA 
+
+# nonchilled, uvjet je gdje je treatment nonchilled
+nonchilleduvjet <- var7i$Treatment=="nonchilled"
+var7i[nonchilleduvjet,"diffFromMeanUptake"] <- var7i[nonchilleduvjet,"uptake"] - meannonchilled
+
+
+# chilled, uvjet je gdje je treatment chilled
+chilleduvjet <- var7i$Treatment=="chilled"
+var7i[chilleduvjet,"diffFromMeanUptake"] <- var7i[chilleduvjet, "uptake"] - meanchilled
+var7i
+
+```
+2/2
+
+j) What is the mean diffFromMeanUptake for chilled and nonchilled group? Bonus point: Is this value informative to you in any way? Can you use it to conclude anything? (var7j)   
+
+```{r}
+
+#mean diffFromMeanUptake za nonchilled
+var7j1 <- mean(var7i$diffFromMeanUptake[var7i$Treatment=="nonchilled"])
+var7j1
+
+#mean diffFromMeanUptake za chilled
+var7j2 <- mean(var7i$diffFromMeanUptake[var7i$Treatment=="chilled"])
+var7j2
+
+#tu nisam bila sigurna je li to smijem podijeliti u 1 i 2, ili sam to trebala nekako odvojiti??
+
+#pronasla sam da prosjecna vrijednost razlika svih brojeva u grupi od prosjeka te grupe mora biti 0. Ja ne dobivam 0, vec priblizne vrijednosti 0 (1.691355e-16 i 1.73381e-15), sto bi znacilo da su izracuni iz ranijeg zadatka tocni. Da sam dobila broj razlicit od 0, to bi znacilo da sam u ranijem zadatku napravila gresku, i da sam oduzela krive prosjeke.
+
+```
+1.5/2 A u biološkom kontekstu značenja same tablice?
+
+
+k) Add a column uptakefctr that will have uptake as a factor. (then save dataset as var7k1) Use this column to calculate mean uptake for chilled plants from Quebec. (var7k2)   
+
+
+```{r}
+
+var7k1 <- CO2 
+
+var7k1$uptakefctr <- as.factor(var7k1$uptake) #pretvara numericke vrijednosti iz uptake u faktore
+
+dvauvjeta <- var7k1$Treatment=="chilled" & var7k1$Type=="Quebec"
+
+var7k2 <- mean(var7k1$uptake[dvauvjeta])
+var7k2
+
+```
+1/3 Poanta je bila iz stupca s faktorom dobiti srednju vrijednost.
