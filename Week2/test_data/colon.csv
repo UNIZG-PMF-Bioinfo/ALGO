@@ -1,0 +1,9 @@
+sampleID,number_of_mutations,type_of_mutation,cancer_type
+COL_001,418,Indel,Colon
+COL_002,348,CNV,Colon
+COL_003,360,CNV,Colon
+COL_004,259,Indel,Colon
+COL_005,314,Indel,Colon
+COL_006,481,SV,Colon
+COL_007,298,SV,Colon
+COL_008,24,SV,Colon

@@ -1,0 +1,6 @@
+sampleID,number_of_mutations,type_of_mutation,cancer_type
+LUN_001,485,Indel,Lung
+LUN_002,321,Indel,Lung
+LUN_003,153,SNV,Lung
+LUN_004,74,SV,Lung
+LUN_005,228,CNV,Lung

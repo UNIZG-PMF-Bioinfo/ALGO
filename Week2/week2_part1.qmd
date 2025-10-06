@@ -1,0 +1,590 @@
+---
+title: "Table manipulation"
+author: 
+  - name: "dr.sc. Paula Štancl"
+    affiliation: "Bioinformatis group"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc-depth: 5
+    code-fold: false
+    fig-align: center
+    df-print: paged
+    code-summary: "Show code"
+    code-line-numbers: false
+    code-tools: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# Tables (`data.frame` vs `data.table`)
+
+A **`data.frame`** is a 2D table-like structure where columns can hold different data types. **`data.table`** is an enhanced version of **`data.frame`** that provides faster and more memory-efficient operations.
+
+::: callout-important
+## Built-in datasets
+
+-   R comes with several **built-in datasets** that are useful for learning, testing, and demonstrating functions without needing to load external data.
+
+-   These datasets are included in base R and standard packages like `datasets`, and can be accessed directly by name (e.g., **`CO2`**, **`iris`**, **`mtcars`**, etc.).
+:::
+
+We will be working with build-in dataset **iris** introduced by Ronald Fisher in his 1936 paper *The use of multiple measurements in taxonomic problems*, contains three plant species (setosa, virginica, versicolor) and four features measured for each sample.
+
+Let's examine the first six rows of the table!
+
+```{r}
+# Call the table
+head(iris)
+```
+
++----------------+--------------------------------+-------------------------------------+
+| Feature        | `data.frame`                   | `data.table`                        |
++================+================================+=====================================+
+| Base structure | Base R object                  | Extension of `data.frame`           |
++----------------+--------------------------------+-------------------------------------+
+| Speed          | Moderate                       | Very fast, optimized for large data |
++----------------+--------------------------------+-------------------------------------+
+| Syntax         | Verbose                        | Concise and powerful                |
++----------------+--------------------------------+-------------------------------------+
+| Rownames       | Supported                      | Discouraged / ignored               |
++----------------+--------------------------------+-------------------------------------+
+| Memory usage   | Standard                       | More memory-efficient               |
++----------------+--------------------------------+-------------------------------------+
+| Grouping       | Uses `aggregate()` or `dplyr`  | Built-in with `by=`                 |
++----------------+--------------------------------+-------------------------------------+
+| Joining        | Uses `merge()`                 | Fast joins with keys (`setkey()`)   |
++----------------+--------------------------------+-------------------------------------+
+| Learning curve | Low (familiar to most R users) | Medium (different syntax)           |
++----------------+--------------------------------+-------------------------------------+
+
+### Import different type of data
+
+::: callout-important
+## Functions to import the data
+
+-   basic R import function:
+
+    `df <- read.csv()`
+
+    `df <- read.tsv()`
+
+    `df <- read.table()`
+
+-   data.table import function:
+
+    `dt <- fread()`
+
+-   using specialized funcions from R packages to import files such as Excel, SPSS
+
+    `df <- read_excel()`
+
+    `df <- read.spss()`
+
+    `...`
+:::
+
+# Data.table
+
+To use `data.table`, load the package:
+
+```{r}
+library(data.table)
+```
+
+![](http://ryo-n7.github.io/assets/2019-07-21-user2019-reflections_files/datatableFORM.PNG){fig-align="center"}
+
+## How to obtain data.table?
+
+::: callout-important
+# Import as data.table or convert existing formats to data.table
+
+1.  Import data using function **fread()**.
+
+**`dt_import <- fread("PATH/TO/FILE")`**
+
+2.  Convert data.frame (even other objects such as matrices, GRanges object...) using **as.data.table()**.
+
+**`dt_import <- as.data.table(df)`**
+
+3.  Another approach of converting object to data.table using **setDT()** but without defining the new variable.
+
+**`setDT(df)`**
+:::
+
+::: callout-tip
+A **file path** tells R where to find or save a file.
+
+-   **Absolute path**: The full location starting from the root of your computer.
+    -   Example: `"C:/Users/Paula/Documents/data.csv"`
+-   **Relative path**: A shortcut from the current working directory.
+    -   Example: `"data/data.csv"`
+
+Use `getwd()` to check your current working directory.
+
+💡 **Tip**: In RStudio Projects, use **relative paths** so your code works on any computer.
+:::
+
+## From *data.frame* to *data.table*
+
+Run the code chunk below. If you want, check it out using **rownames()**.
+
+```{r}
+( df_letters <- data.frame( one=1:6, two=2:7, row.names=letters[1:6]) )
+( dt_letters <- as.data.table(df_letters) )
+```
+
+### How to keep the rownames?
+
+Set argument ***keep.rownames*** to TRUE if you want to keep the rownames as a separate column in data.table.
+
+```{r}
+( dt_letters <- as.data.table(df_letters, keep.rownames=TRUE) )
+```
+
+Instead of keep.rownames=TRUE, you can specify the name of the column containing the rownames from the data.frame.
+
+Example:
+
+```{r}
+( dt_letters <- as.data.table(df_letters, keep.rownames="letters") )
+```
+
+#### Task example: Convert ***iris*** to data table using as.data.table
+
+Create a variable **iris_dt** that contains iris data set as data.table object. In this tutorial we are going to compare and analyze the default data set ***iris*** as data frame and data table objects.
+
+```{r}
+iris_dt <- as.data.table(iris)
+
+
+iris
+rownames(iris)
+rownames(iris_dt)
+```
+
+## Row subsetting
+
+### Syntax comparison
+
++----------------------------------+-------------------+----------------+
+| Operation                        | *data.frame*      | ```            |
+|                                  |                   | _data.table_   |
+|                                  |                   | ```            |
++==================================+===================+================+
+| Subseting rows                   | `df[1:20, ]`      | `df[1:20]`     |
++----------------------------------+-------------------+----------------+
+| Subseting rows based on criteria | `df[df$id < 4, ]` | `df[id < 4]`   |
++----------------------------------+-------------------+----------------+
+
+##### Task
+
+Select all rows in **iris_dt** with Sepal.Length less than 6.7 and Petal.Length less than 1.2.
+
+```{r}
+# Write the solution here
+
+```
+
+Select only setosa species with more than 0.3 Petal.Width.
+
+```{r}
+# Write the solution here
+```
+
+## Column subsetting
+
+### Syntax comparison
+
++-------------------------------------+-----------------+----------------+
+| Operation                           | *data.frame*    | ```            |
+|                                     |                 | _data.table_   |
+|                                     |                 | ```            |
++=====================================+=================+================+
+| Subseting columns                   | `df[, c(1,5)]`  | `df[, c(1,5)]` |
++-------------------------------------+-----------------+----------------+
+| Subseting columns based on colnames | `df[, c("id")]` | `df[,.(id)]`   |
++-------------------------------------+-----------------+----------------+
+
+::: callout-important
+*Data.table* does not use **c()** but **.()** which represents list
+:::
+
+##### Task
+
+Select columns Petal.Length and Petal.Width and first 3 rows
+
+```{r}
+# Write the solution here
+
+```
+
+### Additional methods of subsetting columns in data.table
+
+::: callout-tip
+1.  **Using a character vector of column names**
+
+You can store column names in a vector and use `..` to evaluate it inside `data.table`.
+
+```{r}
+cnames <- c("Petal.Length", "Petal.Width")
+
+iris_dt[1:3, ..cnames]
+```
+
+2.  **Using a range of column names**
+
+You can select a range of columns using the `:` operator between two column names.
+
+```{r}
+iris_dt[1:3, Sepal.Length:Petal.Width]
+```
+
+3.  **Negative subsetting to exclude columns**
+
+Use `-()` or `!()` to exclude a range of columns.
+
+```{r}
+iris_dt[1:3, -(Sepal.Length:Petal.Width)]
+
+iris_dt[1:3, !(Sepal.Length:Petal.Length)]
+```
+
+Note: `Sepal.Length:Petal.Width` works only in column context---it is not the same as numeric indexing.
+:::
+
+##### Task
+
+Select all rows in **iris_dt** with Sepal.Width equal to **3.0**, but show only columns for **Species** and **Sepal.Width** (Do it by using column names!). You may also try other methods of subsetting.
+
+```{r}
+# Write the solution here
+```
+
+## Operation on columns
+
+### Syntax comparison
+
++--------------------------------+--------------------------------+---------------------------+
+| Operation                      | *data.frame*                   | *data.table*              |
++================================+================================+===========================+
+| Calculate sum                  | `sum(df$id)`                   | `df[, sum(id)]`           |
++--------------------------------+--------------------------------+---------------------------+
+| Calculate sum by group         | `by(df$id,` `df$group,` `sum)` | `df[, sum(id), by=group]` |
++--------------------------------+--------------------------------+---------------------------+
+| Calling column out as a vector | `df$id`                        | `df[, id]`                |
++--------------------------------+--------------------------------+---------------------------+
+
+Calculate mean of Sepal.Width for all species.
+
+```{r}
+iris_dt[, mean(Sepal.Width)]
+```
+
+Calculate mean of Sepal.Width for and for each species
+
+```{r}
+iris_dt[, mean(Sepal.Width), by=Species] 
+```
+
+Also the following syntax works for data.table because in the third part it is always the group operation when calculating something per rows: `iris_dt[, mean(Sepal.Width), Species]`
+
+::: callout-important
+# Adding the column immediately when performing the operation in data.table
+
+Syntax: `df[, .(new_col = sum(id) ), by=group]`
+
+Example:
+
+```{r}
+iris_dt[, .( mean_col = mean(Sepal.Width) ), by=Species]
+```
+:::
+
+### The power of *data.table* over *data.frame*
+
+`data.table` offers an elegant and efficient way to perform multiple calculations on columns and save the results --- all in a concise syntax.
+
+Example: Calculate mean, standard deviation, max, min, and count of `Sepal.Width` by Species, then order by mean. ::: callout-important With `data.table`, you can chain multiple operations using square brackets `[]`, similar in spirit to the `dplyr` pipe `%>%`. :::
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| *data.frame*                                                                                                                                                                                                                                                 | *data.table*                                                                                                                                                    |
++==============================================================================================================================================================================================================================================================+=================================================================================================================================================================+
+| <font size="4">`meanic <- by(iris$Sepal.Width,INDICES = iris$Species, mean)` `sdic <- by(iris$Sepal.Width,INDICES = iris$Species, sd)` `maxx <- by(iris$Sepal.Width,INDICES = iris$Species, max)` `minx <- by(iris$Sepal.Width,INDICES = iris$Species, min)` | <font size="4">`iris_dt[ ,` `.(mean=mean(Sepal.Width),` `sd=sd(Sepal.Width),` `min_x= min(Sepal.Width),` `max_x= max(Sepal.Width)),` `by=Species][order(mean)]` |
+|                                                                                                                                                                                                                                                              |                                                                                                                                                                 |
+| `res_df <- data.frame(as.numeric(meanic),` `as.numeric(sdic),` `as.numeric(maxx),` `as.numeric(minx))`                                                                                                                                                       | </font>                                                                                                                                                         |
+|                                                                                                                                                                                                                                                              |                                                                                                                                                                 |
+| `res_df[order(res_df$as.numeric.meanic.),]`</font>                                                                                                                                                                                                           |                                                                                                                                                                 |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Output example
+
+```{r}
+iris_dt[ , 
+        .(mean=mean(Sepal.Width),
+          sd=sd(Sepal.Width),
+          min_x= min(Sepal.Width),
+          max_x= max(Sepal.Width)),
+        by=Species][order(mean)]
+```
+
+##### Task
+
+Select all rows where Sepal.Length \< 6.7 and flower species **virginica** and calculate mean Petal.Width in **iris_dt.** Do it with and without chaining.
+
+*With chaining*
+
+```{r}
+# Write the solution here
+```
+
+*No chaining*
+
+```{r}
+# Write the solution here
+```
+
+### Adding new permanent columns
+
+Adding one columns in data table is done with **:=** and multiple columns with **':='**.
+
+Here is a new column that contains the maximal sepal width for each species was added.
+
+```{r}
+iris_dt[, max_width1 := max(Sepal.Width), Species]
+iris_dt[1:3]
+```
+
+Addition of multiple columns.
+
+```{r}
+iris_dt[, ":=" (max_width2 = max(Sepal.Width),  
+                max_width3 = max(Sepal.Length) ),
+        by=.(Species)]
+iris_dt[1:3]
+```
+
+##### Task: Add a new column
+
+Add columns to iris_dt that represent mean and sd of `Petal.Width` grouped by species. Columns are called **meanPW** and **sdPW**.
+
+```{r}
+# Write the solution here
+```
+
+Use function **uniqueN()** to check how many unique mean `Petal.Width` there are in total and by Species group.
+
+```{r}
+# Write the solution here
+```
+
+### Special symbols in data.table
+
+**.N** (an integer containing the number of rows in the group)
+
+```{r}
+iris_dt[, .N]
+```
+
+Can be used on groups. What is happening here with this subsetting in group?
+
+```{r}
+iris_dt[, .N, by=.(Species, Sepal.Length>=4.8)]
+```
+
+**.I** (vector representing the row number)
+
+```{r}
+iris_dt[, .(row_id=.I, Species)]
+```
+
+Warning! It does not assign unique row ID based on specified group!
+
+```{r}
+iris_dt[, .(row_id=.I), by=Species][c(1,51,101)]
+```
+
+**.GRP** (an integer containing a simple group counter)
+
+```{r}
+iris_dt[,.GRP, by=.(Species, Petal.Width>=2)]
+```
+
+##### Exercise: :=, .N, .I, .GRP
+
+Add columns to **iris_dt** that represent the number of observations, row number, and group ID of all rows for which Petal.Length is smaller than 6.5, grouped by Species.
+
+```{r}
+# Write the solution here
+```
+
+Moreover, show only the newly added columns in your final results and use `na.omit()` to remove all missing values from your table
+
+```{r}
+# Write the solution here
+```
+
+One great benefit of data.table is the ability to **sub-assign by reference**: Try it: select all rows that have species=="virginica" and rename those Species entries using `:=` to `new_virginica`.
+
+```{r}
+# Write the solution here
+```
+
+#### Data.table special **{}**
+
+Suppressing Intermediate Output with **{}** is useful when you have to perform multiple consecutive calculations. Instead of adding column after a column that contains each step you can use **{}** to get only the final outcome and not all the intermediate steps.
+
+##### Example
+
+Create a new variable sepal_length_diff as the difference from mean value of Sepal.Length and use function *round()* to round the result to one decimal
+
+```{r}
+iris_dt[, sepal_length_diff := {
+  mean_sepal_length = mean(Sepal.Length)
+  diff_from_avg = Sepal.Length - mean_sepal_length
+  round(diff_from_avg, 1)
+}]
+
+iris_dt[, .(sepal_length_diff)]
+```
+
+##### Example
+
+Add two new columns to iris_dt, grouped by Species:
+
+`sepal_length_diff` -- the difference between each observation's Sepal.Length and the group mean of Sepal.Length, rounded to one decimal.
+
+`mean_diff` -- the mean of these differences within each group (which should be approximately zero).
+
+Use `{}` inside data.table to perform intermediate calculations and return both results in one step.
+
+```{r}
+iris_dt[, c("sepal_length_diff", "mean_diff") := {
+  mean_sepal_length <- mean(Sepal.Length)
+  diff_from_avg <- Sepal.Length - mean_sepal_length
+  .(round(diff_from_avg, 1), mean(diff_from_avg))
+}, by = Species]
+
+iris_dt[, .(sepal_length_diff, mean_diff, Species)]
+```
+
+
+## Subset of the original Data.table
+
+**.SD** (a smaller data.table that is a **Subset** of the original **Data.table** for each group)
+
+**.SDcols** (subset columns which are then used by .SD)
+
+-   Select all columns with .SD. Select only a subset of all columns by .SDcols
+
+```{r, echo=FALSE,  fig.align='center'}
+img2 <- png::readPNG("figures/SDcols.png")
+grid::grid.raster(img2)
+```
+
+Selecting columns can be done by writing column names in .SDcols (Note: It is important to write it as stings in *c()* )
+
+```{r}
+iris_dt[, .SD, .SDcols=c("Sepal.Width", "Species")][1:2]
+```
+
+This allows powerful calculation on subset of desired columns and groups.
+
+```{r, echo=FALSE,  fig.align='center'}
+img3 <- png::readPNG("figures/SDcols_grp.png")
+grid::grid.raster(img3)
+```
+
+You can use `lapply()` together with `.SD` (Subset of Data) to apply functions to selected columns within groups. This is particularly useful for performing calculations like mean or sum on a subset of numeric columns.
+
+```{r}
+iris_dt[, lapply(.SD, mean), by=Species, .SDcols=1:2]
+```
+
+Apply mean to all numeric columns by species
+
+```{r}
+iris_dt[, lapply(.SD, mean), by=Species, .SDcols=is.numeric]
+```
+
+.SD is amazing for selecting first and last row of certain group since we can imagine every group with selected table as a new separate data table. As well as other operation that can be done on *data.table*.
+
+```{r, echo=FALSE, fig.align='center'}
+img4 <- png::readPNG("figures/SDcols_grp_filter.png")
+grid::grid.raster(img4)
+```
+
+```{r}
+iris_dt[, .SD[c(1, .N)], by=Species]
+```
+
+##### Task: .SD
+
+Order the results by Petal.Width and select first three (smallest) observations by species. Calculate mean of first three columns for iris_dt for those observations. Do it in one command with chaining.
+
+```{r}
+# Write the solution here
+```
+
+### Regular expression trick within `data.table` `.SD`
+
+The combination of `.SD` and regular expressions provides a powerful way to work with multiple columns in `data.table`. Instead of typing every column name, you can use regex to **select, transform, or summarize groups of variables** in one step using `data.table::patterns`.
+
+::: callout-note
+Key points:\
+- `.SD` contains only the columns specified in `.SDcols`.\
+- `.SDcols = patterns("regex1", "regex2")` selects columns matching **all** the given regex patterns.\
+- Useful for grouped operations, bulk transformations, or creating multiple new columns at once.
+:::
+
+#### A short peek: what are regex?
+
+::: callout-tip
+Regular expressions (regex) are just *search patterns for text*.\
+- `"Sepal"` → matches any column with `"Sepal"` in the name\
+- `"^Sepal"` → matches columns **starting** with `"Sepal"`\
+- `"Length$"` → matches columns **ending** with `"Length"`\
+- `"(Sepal|Petal)"` → matches either `"Sepal"` or `"Petal"`
+:::
+
+We'll cover regex more deeply later --- for now, just think of them as "smart wildcards" for column names.
+
+#### Example
+
+```{r}
+iris_dt[, lapply(.SD, mean), .SDcols = patterns("Sepal")]
+```
+
+
+## Exercise data.table
+
+We are going to resolve some of the task from HW1 using data.table for `CO2` data.set.
+
+a) Convert CO2 to data.table object in a variable `co2_dt`.
+```{r}
+# Write the solution here
+```
+
+b)  Calculate the mean uptake for nonchilled plants and chilled plants.
+```{r}
+# Write the solution here
+```
+
+c) Add a new column to the dataset, smalluptake which will have values of uptake divided by 3.
+```{r}
+# Write the solution here
+```
+
+d) Count the number of plants that have the value of smalluptake 3.1 or 4.1
+```{r}
+# Write the solution here
+```
+
+e) Add a column diffFromMeanUptake that will represent all the difference between uptake and the mean uptake for nonchilled plants and chilled plants.
+```{r}
+# Write the solution here
+```
+

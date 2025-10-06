@@ -1,0 +1,9 @@
+sampleID,number_of_mutations,type_of_mutation,cancer_type
+BRE_001,89,SNV,Breast
+BRE_002,165,SNV,Breast
+BRE_003,110,CNV,Breast
+BRE_004,20,SV,Breast
+BRE_005,410,SNV,Breast
+BRE_006,370,CNV,Breast
+BRE_007,367,SNV,Breast
+BRE_008,387,SNV,Breast

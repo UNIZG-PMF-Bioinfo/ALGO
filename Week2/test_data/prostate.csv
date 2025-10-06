@@ -1,0 +1,11 @@
+sampleID,number_of_mutations,type_of_mutation,cancer_type
+PRO_001,146,SNV,Prostate
+PRO_002,109,SNV,Prostate
+PRO_003,348,Indel,Prostate
+PRO_004,197,Indel,Prostate
+PRO_005,4,Indel,Prostate
+PRO_006,226,Indel,Prostate
+PRO_007,434,Indel,Prostate
+PRO_008,355,SV,Prostate
+PRO_009,472,CNV,Prostate
+PRO_010,215,Indel,Prostate
