@@ -61,7 +61,7 @@ Tab Separated Values (TSV)and Comma Separated Values (CSV). A .tsv file will hav
 ![](https://rstudio.github.io/cheatsheets/pngs/data-import.png)
 
 ::: callout-note
-Each function for corectly importing tables contains important arguments such as,
+Each function for correctly importing tables contains important arguments such as,
 
 -   **`header`** - If TRUE then any empty column names are given a name where first data line is a character (non-empty)
 -   **`sep`** - The separator between columns. Most commonly used are ";", "\t",";"..
