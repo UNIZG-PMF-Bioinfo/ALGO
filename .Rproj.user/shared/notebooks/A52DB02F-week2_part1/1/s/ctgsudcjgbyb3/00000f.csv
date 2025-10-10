@@ -1,0 +1,6 @@
+"0","# Write the solution here"
+"0","iris_dt[Sepal.Length < 6.7, mean(Petal.Width)]"
+"1","[1]"
+"1"," 1.018033"
+"1","
+"

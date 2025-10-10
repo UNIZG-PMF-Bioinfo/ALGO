@@ -1,0 +1,166 @@
+"0","x1 <- covid19(level = 1)
+"
+"1","We have invested a lot of time and effort in
+creating COVID-19 Data Hub, please cite the
+following when using it:
+
+  Guidotti, E., Ardia, D., (2020), ""COVID-19 Data
+  Hub"", Journal of Open Source Software
+  5(51):2376, doi: 10.21105/joss.02376
+
+The implementation details and the latest version
+of the data are described in:
+
+  Guidotti, E., (2022), ""A worldwide
+  epidemiological database for COVID-19 at
+  fine-grained spatial resolution"", Sci Data
+  9(1):112, doi: 10.1038/s41597-022-01245-1
+"
+"1","To print citations in BibTeX format use:
+"
+"1"," > print(citation('COVID19'), bibtex=TRUE)
+
+"
+"1","To hide this message use 'verbose = FALSE'.
+"
+"0","x2 <- covid19(level  = 2)"
+"1","We have invested a lot of time and effort in
+creating COVID-19 Data Hub, please cite the
+following when using it:
+
+  Guidotti, E., Ardia, D., (2020), ""COVID-19 Data
+  Hub"", Journal of Open Source Software
+  5(51):2376, doi: 10.21105/joss.02376
+
+The implementation details and the latest version
+of the data are described in:
+
+  Guidotti, E., (2022), ""A worldwide
+  epidemiological database for COVID-19 at
+  fine-grained spatial resolution"", Sci Data
+  9(1):112, doi: 10.1038/s41597-022-01245-1
+"
+"1","To print citations in BibTeX format use:
+"
+"1"," > print(citation('COVID19'), bibtex=TRUE)
+
+"
+"1","To hide this message use 'verbose = FALSE'.
+"
+"0","x3 <- covid19(level = 3)"
+"2","trying URL 'https://storage.covid19datahub.io/level/3.csv.gz'
+"
+"2","Content type 'application/octet-stream'"
+"2"," length 131009088 bytes (124.9 MB)
+"
+"2","downloaded 124.9 MB
+
+"
+"2","|--------------------------------------------------|
+|"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","|
+"
+"2","|--------------------------------------------------|
+|"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","|
+"

@@ -38,7 +38,7 @@ Let's examine the first six rows of the table!
 
 ```{r}
 # Call the table
-head(iris)
+head(iris) 
 ```
 
 +----------------+--------------------------------+-------------------------------------+
@@ -186,7 +186,6 @@ Select all rows in **iris_dt** with Sepal.Length less than 6.7 and Petal.Length 
 
 ```{r}
 # Write the solution here
-
 ```
 
 Select only setosa species with more than 0.3 Petal.Width.
@@ -218,7 +217,6 @@ Select only setosa species with more than 0.3 Petal.Width.
 Select columns Petal.Length and Petal.Width and first 3 rows
 
 ```{r}
-# Write the solution here
 
 ```
 
@@ -471,7 +469,6 @@ iris_dt[, c("sepal_length_diff", "mean_diff") := {
 iris_dt[, .(sepal_length_diff, mean_diff, Species)]
 ```
 
-
 ## Subset of the original Data.table
 
 **.SD** (a smaller data.table that is a **Subset** of the original **Data.table** for each group)
@@ -523,7 +520,7 @@ iris_dt[, .SD[c(1, .N)], by=Species]
 
 ##### Task: .SD
 
-Order the results by Petal.Width and select first three (smallest) observations by species. Calculate mean of first three columns for iris_dt for those observations. Do it in one command with chaining.
+Order the results by Petal.Width and select first three (smallest) observations by species. *Calculate mean of first three columns for iris_dt for those observations.* Do it in one command with chaining.
 
 ```{r}
 # Write the solution here
@@ -558,33 +555,36 @@ We'll cover regex more deeply later --- for now, just think of them as "smart wi
 iris_dt[, lapply(.SD, mean), .SDcols = patterns("Sepal")]
 ```
 
-
 ## Exercise data.table
 
 We are going to resolve some of the task from HW1 using data.table for `CO2` data.set.
 
-a) Convert CO2 to data.table object in a variable `co2_dt`.
+a)  Convert CO2 to data.table object in a variable `co2_dt`.
+
 ```{r}
 # Write the solution here
 ```
 
 b)  Calculate the mean uptake for nonchilled plants and chilled plants.
+
 ```{r}
 # Write the solution here
 ```
 
-c) Add a new column to the dataset, smalluptake which will have values of uptake divided by 3.
+c)  Add a new column to the dataset, smalluptake which will have values of uptake divided by 3.
+
 ```{r}
 # Write the solution here
 ```
 
-d) Count the number of plants that have the value of smalluptake 3.1 or 4.1
+d)  Count the number of plants that have the value of smalluptake 3.1 or 4.1
+
 ```{r}
 # Write the solution here
 ```
 
-e) Add a column diffFromMeanUptake that will represent all the difference between uptake and the mean uptake for nonchilled plants and chilled plants.
+e)  Add a column diffFromMeanUptake that will represent all the difference between uptake and the mean uptake for nonchilled plants and chilled plants.
+
 ```{r}
 # Write the solution here
 ```
-

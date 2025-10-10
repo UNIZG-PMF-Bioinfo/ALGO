@@ -20,8 +20,8 @@ website:
             href: Week2/week2_part0.qmd
           - text: Data manipulation
             href: Week2/week2_part1.qmd
-      #     - text: Tidy table
-      #       href: Week2/week2_part2.qmd
+          - text: Tidy table
+            href: Week2/week2_part2.qmd
 
   page-footer:
     background: light

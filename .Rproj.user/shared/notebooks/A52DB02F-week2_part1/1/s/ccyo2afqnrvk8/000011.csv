@@ -1,0 +1,2 @@
+"0","# Write the solution here"
+"0","iris_dt[Sepal.Length < 6.7 & Petal.Length < 1.2]"

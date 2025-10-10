@@ -1,0 +1,998 @@
+---
+title: "Lecture: data.table"
+author: "Paula Štancl"
+output: 
+  learnr::tutorial:
+  progressive: false
+allow_skip: true
+toc: true
+runtime: shiny_prerendered
+
+---
+
+
+```{r setup, include=FALSE}
+## First specify the packages of interest
+packages <- c("learnr", "png", "grid",
+             "data.table", "knitr")
+
+## Now load all
+#lapply(packages, function(X) { library(X, character.only = TRUE)})
+library(learnr)
+library(knitr)
+library(data.table)
+library(png)
+library(grid)
+
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{css, echo=FALSE}
+.topicsList .topic.current {
+    font-family: 'Roboto Slab', serif;
+    background-color: orange;
+    color: "#ffffff";
+    border: 0px;
+     border-bottom: 1px solid teal;
+  font-size: 15px;
+}
+
+.topicsList .topic {
+    font-family: 'Roboto Slab', serif;
+    border-bottom: 1px solid teal;
+  font-size: 15px;
+}
+
+body {
+  background-color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+}
+
+
+h2 {
+  color: white;
+  font-weight: bold;
+  font-family: 'Roboto Slab', serif;
+  background-color: teal;
+     background-size: 8px 1260px;
+    text-align: center;
+}
+
+h3 {
+  color: teal;
+  font-weight: bold;
+  font-family: 'Roboto Slab', serif;
+    border-bottom: 2px solid teal;
+    border-top: 2px solid teal;
+    text-align: center;
+  
+}
+
+h4 {
+  color: teal;
+   font-size: 20px;
+}
+
+h5 {
+  color: black;
+   font-size: 20px;
+}
+
+h6 {
+  color: teal;
+   font-size: 20px;
+    border-bottom: 2px solid teal;
+  text-align: center;
+}
+
+p.caption {
+  font-size: 0.6em;
+}
+
+.tutorial-exercise-output pre code {
+  white-space: pre;
+  font-size: 1.4vw;
+}
+
+.tutorial-exercise-code-editor {
+  font-size: 1.4vw;
+}
+```
+
+
+##  Introduction
+
+Welcome! Today we are going to learn about an amazing R package called _data.table_.
+
+```{r, fig.align='center'}
+knitr::include_graphics("https://i2.wp.com/hutsons-hacks.info/wp-content/uploads/2021/03/data.table_-1.png?zoom=1.5&resize=191%2C191&ssl=1")
+```
+
+### learnr
+
+- turns any Rmarkdown document into an interactive tutorial
+
+- various types of exercises; questions and coding chunks
+
+###### Exercise 0a
+
+
+```{r, echo=FALSE, fig.align='center'}
+knitr::include_graphics("https://s3.amazonaws.com/eit-planttoolbox-prod/media/images/Iris-virginica--Justin-Meissen--CC-BY-SA.jpg")
+```
+
+```{r kala, echo=FALSE}
+question("What iris species is shown on the image?",
+  answer("Setosa"),
+  answer("Yellow iris"),
+  answer("Virginica", correct = TRUE),
+  answer("Brevicaulis")
+)
+```
+
+
+###### Exercise 0b
+What is 1+1?
+```{r addition, exercise=TRUE}
+
+```
+
+```{r addition-solution}
+1 + 1
+```
+
+
+###### Dataset
+
+#### Iris data
+
+We will be working with build-in dataset **iris** introduced by Ronald Fisher in his 1936 paper *The use of multiple measurements in taxonomic problems*, contains three plant species (setosa, virginica, versicolor) and four features measured for each sample.
+
+Let's examine the first six rows of the table!
+
+```{r, size="tiny"}
+head(iris)
+```
+
+
+## What is data.table?
+
+### Data.table
+
+```{r, out.width="80%", out.height="80%", fig.align='center'}
+include_graphics("http://ryo-n7.github.io/assets/2019-07-21-user2019-reflections_files/datatableFORM.PNG")
+```
+
+
+##  How to obtain data.table?
+
+
+### Import as data.table or convert existing formats to data.table
+
+##### 1. Import data using function **fread()**.
+
+**`dt_import <- fread("PATH/TO/FILE")`**
+
+##### 2. Convert data.frame (even other objects such as matrices, GRanges object...) using **as.data.table()**. 
+
+**`dt_import <- as.data.table(df)`**
+
+##### 3. Another approach of converting object to data.table using **setDT()** but without defining the new variable.
+
+**`setDT(df)`**
+
+### What is the main difference between the _data.table_ and _data.frame_? 
+
+Run the code chunk below. If you want, check it out using **rownames()**. 
+```{r df, exercise=TRUE,  exercise.eval = FALSE}
+( df_letters <- data.frame( one=1:6, two=2:7, row.names=letters[1:6]) )
+( dt_letters <- as.data.table(df_letters) )
+```
+
+```{r df-solution}
+nrow(df_letters); nrow(dt_letters)
+```
+
+```{r import_df, echo=FALSE}
+df_letters <- data.frame( one=1:6, two=2:7, row.names=letters[1:6])
+```
+
+
+### How to keep the rownames?
+##### Set argument ***keep.rownames*** to TRUE if you want to keep the rownames as a separate column in data.table.
+```{r df2, exercise=TRUE, exercise.setup = "import_df"}
+( dt_letters <- as.data.table(df_letters, keep.rownames=TRUE) )
+```
+
+
+##### Instead of keep.rownames=TRUE, you can specify the name of the column containing the rownames from the data.frame. 
+
+Example:
+```{r example_df_nme, exercise=TRUE,  exercise.eval = FALSE, exercise.setup = "import_df"}
+( dt_letters <- as.data.table(df_letters, keep.rownames="letters") )
+```
+
+
+### Exercise: Convert ***iris*** to data table using as.data.table
+
+Create a variable **iris_dt** that contains iris data set as data.table object. In this tutorial we are going to compare and analyze the default data set ***iris*** as data frame and data table objects. 
+
+```{r iris-convert, exercise=TRUE}
+
+```
+```{r iris-convert-solution}
+iris_dt <- as.data.table(iris)
+```
+
+
+## Row subsetting
+
+### Syntax comparison
+
++------------------+-----------------+--------------------+
+| Operation        | _data.frame_    |     _data.table_   |
++==================+=================+====================+
+|Subseting rows    |`df[1:20, ]`     |    `df[1:20]`      |
+|                  |                 |                    |
++------------------+-----------------+--------------------+
+|Subseting rows    |`df[df$id < 4, ]`|    `df[id < 4]`    |
+|based on criteria |                 |                    |
++------------------+-----------------+--------------------+
+
+#### Select all rows in **iris_dt** with Sepal.Length less than 6.7 and Petal.Length less than 1.2.
+
+```{r irisImport, exercise=TRUE,  exercise.eval = FALSE, exercise.setup = "iris-convert-solution"}
+iris_dt
+```
+
+```{r irisImport-solution}
+iris_dt[Sepal.Length < 6.7 & Petal.Length < 1.2]
+```
+
+
+### Exercise: Select only setosa species with more than 0.3 Petal.Width.
+
+```{r sub1, exercise=TRUE,  exercise.setup = "iris-convert-solution"}
+
+```
+```{r sub1-solution}
+iris_dt[Species=="setosa" & Petal.Width > 0.3]
+```
+
+
+
+
+## Column subsetting
+
+### Syntax comparison
+
++------------------+-----------------+--------------------+
+| Operation        | _data.frame_    |     _data.table_   |
++==================+=================+====================+
+|Subseting columns |`df[, c(1,5)]`   |    `df[, c(1,5)]`  |
+|                  |                 |                    |
++------------------+-----------------+--------------------+
+|Subseting columns |`df[, c("id")]`  |    `df[,.(id)]`    |
+|based on colnames |                 |                    |
++------------------+-----------------+--------------------+
+
+
+- *Data.table* does not use **c()** but **.()** which represents list
+
+#### Select columns Petal.Length and Petal.Width and first 3 rows
+
+
+```{r my1, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+
+```{r my1-solution}
+iris_dt[1:3, .(Petal.Length, Petal.Width)]
+```
+
+### Additional methods of subsetting columns in data.table.
+
+##### 1. Subsetting with a vector of containing the names of the columns we want to subset.
+
+```{r add_m1, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+cnames <- c("Petal.Length", "Petal.Width")
+
+iris_dt[1:3, ..cnames]
+```
+
+
+##### 2. Defining the range of columns we want to subset using their names.
+
+```{r add_m2, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[1:3, Sepal.Length:Petal.Width]
+```
+
+
+##### 3. Negative subsetting using **-()** or **!()**
+
+```{r add_m3, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[1:3, -(Sepal.Length:Petal.Width)]
+
+iris_dt[1:3, !(Sepal.Length:Petal.Length)]
+```
+
+### Exercise: Select all rows in **iris_dt** with Sepal.Width eaqual to 3.0, but show only columns  for Species and Sepal.Width (Do it by using column names!). You may also try other methods of subsetting.
+
+
+```{r sub2, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r sub2-solution}
+iris_dt[ Sepal.Width == 3.0, .(Sepal.Width, Species)]
+```
+
+
+## Operation on columns
+
+### Syntax comparison
+
++---------------+-----------------+--------------------------+
+| Operation     | _data.frame_    | _data.table_             |
++===============+=================+==========================+
+|Calculate      |`sum(df$id)`     |`df[, sum(id)]`           |
+|   sum         |                 |                          |
++---------------+-----------------+--------------------------+
+|Calculate sum  |`by(df$id, `     |                          |
+|  by group     |`   df$group,`   |`df[, sum(id), by=group]` |
+|               |`   sum)`        |                          |
++---------------+-----------------+--------------------------+
+|Calling column |`df$id `         |                          |
+|  out as       |                 |`df[, id]`                |
+|    a vector   |                 |                          |
++---------------+-----------------+--------------------------+
+
+#### Calculate mean of Sepal.Width for all species.
+
+```{r my2, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r my2-solution}
+# All species
+iris_dt[, mean(Sepal.Width)]
+```
+
+#### Calculate mean of Sepal.Width for and for each species
+
+```{r my3, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r my3-solution}
+iris_dt[, mean(Sepal.Width), by=Species] 
+## Also the following syntax works for data.table because in the third part it is always the group operation when calculating something per rows: iris_dt[, mean(Sepal.Width), Species] 
+```
+
+What are the differences in the two calculated outputs of the examples above?
+
+
+
+### Adding the column immediately when performing the operation in data.table
+
+Syntax: `df[, .(new_col = sum(id) ), by=group]`
+
+Example:
+
+```{r add_col, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, .( mean_col = mean(Sepal.Width) ), by=Species]
+```
+
+### The power of _data.table_ over _data.frame_
+
+Elegant way to perform multiple calculations on columns and saving its results.
+
+#### Example: Calculate of mean, sd, max x , min x, number of observations per species and order it by mean.
+Chaining of the multiple commands can be done with **[]**. This is similar to dpylr pipe ` %>% `
+
++---------------------------------------------------------------------------------+-------------------------------------+
+| _data.frame_                                                                    | _data.table_                        |
++=================================================================================+=====================================+
+| <font size="5">`meanic <- by(iris$Sepal.Width,INDICES = iris$Species, mean)`    |<font size="5">`iris_dt[ ,`          |
+| `sdic <- by(iris$Sepal.Width,INDICES = iris$Species, sd)`                       |      ` .(mean=mean(Sepal.Width),`   |
+|  `maxx <- by(iris$Sepal.Width,INDICES = iris$Species, max)`                     |        ` sd=sd(Sepal.Width), `      |
+| `minx <- by(iris$Sepal.Width,INDICES = iris$Species, min)`                      |         `min_x= min(Sepal.Width),`  |
+|                                                                                 |         `max_x= max(Sepal.Width)),` |
+| `res_df <- data.frame(as.numeric(meanic),`                                      |         `by=Species][order(mean)]`  |
+|                      `as.numeric(sdic),`                                        |                                     |
+|                      `as.numeric(maxx),`                                        |                                     |
+|                       `as.numeric(minx))`                                       |                                     |
+|                                                                                 |                                     |
+| `res_df[order(res_df$as.numeric.meanic.),]`</font>                              |   </font>                           |
++---------------------------------------------------------------------------------+-------------------------------------+
+
+Output example
+
+```{r op7, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[ , 
+        .(mean=mean(Sepal.Width),
+          sd=sd(Sepal.Width),
+          min_x= min(Sepal.Width),
+          max_x= max(Sepal.Width)),
+        by=Species][order(mean)]
+```
+
+### Keyby()
+
+Automatically order the result by the columns specified in by
+```{r op8, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, 
+        .(mean=mean(Sepal.Width),
+          sd=sd(Sepal.Width)),
+        keyby=.(Species)]
+```
+
+
+
+### Exercise
+
+Select all rows where Sepal.Length < 6.7 and flower species **virginica** and calculate mean Petal.Width in **iris_dt.** Do it with and without chaining.
+
+*With chaining*
+```{r sub-mean, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r sub-mean-solution}
+iris_dt[Sepal.Length < 6.7 & Species=="virginica"][,  mean(Petal.Width)]
+```
+
+*No chaining*
+```{r sub-mean2, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r sub-mean2-solution}
+iris_dt[Sepal.Length < 6.7 & Species=="virginica", mean(Petal.Width)]
+```
+
+Repeat the previous calculations (Sepal.Length < 6.7) but now do it for all the flower Species and return the vector of the means, order it by ascending means, and return the vector
+
+```{r sub-mean3,exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r sub-mean3-solution}
+iris_dt[Sepal.Length < 6.7, mean(Petal.Width), Species][order(V1), V1]
+```
+
+
+## Adding new permanent columns
+
+Adding one columns in data table is done with **:=** and multiple columns with **':='**. 
+
+
+Here is a new column that contains the maximal sepal width for each species was added.
+
+```{r add_perm1, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, max_width1 := max(Sepal.Width), Species]
+iris_dt
+```
+
+Addition of multiple columns.
+
+```{r  add_perm2, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, ":=" (max_width2 = max(Sepal.Width),  
+                max_width3 = max(Sepal.Length) ),
+        by=.(Species)]
+iris_dt
+```
+
+
+### Exercise: Add a new column
+Add columns to iris_dt that represent mean and sd of Petal.Width grouped by species. Columns are called **meanPW** and **sdPW**.
+```{r addCol, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r addCol-solution}
+iris_dt[,
+        ':='(meanPW = mean(Petal.Width),
+             sdPW = sd(Petal.Width)), 
+        by=Species]
+```
+
+Use function **uniqueN()** to check how many unique mean petal widths there are in total and by Species group.
+```{r addCol2, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+
+```{r addCol2-solution}
+iris_dt[,uniqueN(meanPW)]
+iris_dt[,uniqueN(meanPW), by=Species]
+```
+
+
+
+## Special in data table
+
+### Data.table special **{}**
+
+Suppressing Intermediate Output with **{}** is useful when you have to perform multiple consecutive calculations. Instead of adding column after a column that contains each step you can use **{}** to get only the final outcome and not all the intermediate steps.
+
+Example: Create a new variable sepal_length_diff as the difference from mean value of Sepal.Length and use function *round()* to round the result to one decimal
+
+```{r supint, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, sepal_length_diff := {
+  mean_sepal_length = mean(Sepal.Length)
+  diff_from_avg = Sepal.Length - mean_sepal_length
+  round(diff_from_avg, 1)
+}]
+
+iris_dt[, .(sepal_length_diff)]
+```
+
+### Special symbols in data.table
+
+###### **.N** (an integer containing the number of rows in the group)
+
+```{r spec1,  exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[,.N]
+```
+
+Can be used on groups. What is happening here with this subsetting in group?
+```{r ndt, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[,.N,by=.(Species, Sepal.Length>=4.8)]
+```
+
+
+###### **.I**  (vector representing the row number)
+
+```{r spec2,  exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, .(row_id=.I, Species)]
+```
+
+Warning! It does not assign unique row ID based on specified group!
+```{r warID, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, .(row_id=.I), by=Species][c(1,51,101)]
+```
+
+###### **.GRP** (an integer containing a simple group counter)
+
+```{r spec3,  exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[,.GRP, by=.(Species, Petal.Width>=2)]
+```
+
+
+### Exercise: :=, .N, .I, .GRP
+Add columns to **iris_dt** that represent number of observations, row number and group ID of all rows for which Petal.Length is smaller than 6.5 in **iris_dt** grouped by species. Moreover, show only the newly added columns in your final results and use *na.omit()* to remove all missing values from your table
+```{r special1, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r special1-solution}
+# create the values
+iris_dt[Petal.Length < 6.5,
+        ':='(N=.N, GRP=.GRP, rN=.I),
+        by=Species]
+
+# remove missing values
+na.omit( iris_dt[,.(N,GRP,rN,Species)] )
+```
+
+
+One great benefit of data.table is the ability to sub-assign by reference: Try it: select all rows that have species==“virginica” and rename those Species entries using := to new_virginica.
+```{r special2, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r special2-solution}
+iris_dt[Species=="virginica", Species:="new_virginica"]
+```
+Show only the newly added columns in your final results and use *na.omit()* to remove all missing values from your table
+
+
+
+### Exercise `{}`
+Calculate the mean of Sepal.Length then calculate the median of absolute differences from  the calculated mean of Sepal.Length and the Petal.Length. Return both results in columns named  *mean_petal* and *diff_sep_len* in one command with no chaining.(Hint: returning the values works the same as in functions)
+```{r bla, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+
+```{r bla-solution}
+iris_dt[, {mean_sepal=mean(Sepal.Length)
+     diff_sep_len=median(abs(Petal.Length-mean_sepal)) 
+     list(mean_sepal, diff_sep_len) },
+   by=Species]
+```
+
+
+
+
+## Subset of the original Data.table
+
+**.SD** (a smaller data.table that is a **Subset** of the original **Data.table** for each group)
+
+**.SDcols** (subset columns which are then used by .SD)
+
+- Select all columns with .SD. Select only a subset of all columns by .SDcols
+
+```{r, echo=FALSE,  fig.align='center'}
+img2 <- readPNG("input/SDcols.png")
+grid.raster(img2)
+```
+
+
+Selecting columns can be done by writing column names in .SDcols (Note: It is important to write it as stings in _c()_ )
+
+```{r sd1,  exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, .SD, .SDcols=c("Sepal.Width", "Species")][1:2]
+```
+
+This allows powerful calculation on subset of desired columns and groups. 
+
+```{r, echo=FALSE,  fig.align='center'}
+img3 <- readPNG("input/SDcols_grp.png")
+grid.raster(img3)
+```
+
+
+Calculations on selected sub-data are conducted using *lapply()*.
+
+```{r sd2,  exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, lapply(.SD, mean), by=Species, .SDcols=1:2]
+```
+
+.SD is amazing for selecting first and last row of certain group since we can imagine every group with selected table as a new separate data table. As well as other operation that can be done on _data.table_.
+
+```{r, echo=FALSE, fig.align='center'}
+img4 <- readPNG("input/SDcols_grp_filter.png")
+grid.raster(img4)
+```
+
+```{r sd3,  exercise=TRUE, exercise.setup = "iris-convert-solution"}
+iris_dt[, .SD[c(1, .N)], by=Species]
+```
+
+### Exercise: .SD
+
+Order the results by Petal.Width and select first three (smallest) observations by species. Calculate mean of first three columns for iris_dt for those observations. Do it in one command with chaining.
+```{r SD, exercise=TRUE, exercise.setup = "iris-convert-solution"}
+
+```
+```{r SD-solution}
+iris_dt[order(Petal.Width),
+        .SD[1:3],
+        by=Species][ ,
+                    lapply(.SD, mean),
+                    .SDcols=Sepal.Length:Petal.Width]
+```
+
+### Regular expression trick within data.table .SD
+
+
+## Combining tables
+
+### Binding tables
+How to “stitch” two or more data objects into one?
+
+```{r cancer}
+tb1 <- data.table(sampleID = c(6:1),
+                  cancer = c("Breast","Breast","Brain","Liver","Brain","Pancreas"))
+tb2 <- data.table(sampleID = c(7, 4, 6, 2, 8), 
+                  gender = c("F","F","M","F","M")) 
+dt_cancer <- merge(tb1, tb2, by="sampleID", all=TRUE)
+```
+
+
+```{r comb, exercise=TRUE, exercise.setup = "cancer"}
+tb1 <- data.table(sampleID = c(6:1),
+                  cancer = c("Breast","Breast","Brain","Liver","Brain","Pancreas"))
+tb2 <- data.table(sampleID = c(7, 4, 6, 2, 8), 
+                  gender = c("F","F","M","F","M")) 
+head(tb1,3)
+head(tb2,3)
+```
+
+#### **rbind()**
+Function **rbind()** binds the tables by rows. Try run the code below and see what happens. Why is that?
+```{r comb2, exercise=TRUE, exercise.setup = "cancer"}
+rbind(tb1, tb2)
+```
+```{r comb2-solution}
+rbind(tb1, tb2, fill=TRUE)
+```
+
+#### **cbind()**
+Function **cbind()** binds the tables. Do you notice anything strange when you run the code below?
+```{r comb3, exercise=TRUE, exercise.setup = "cancer"}
+cbind(tb1, tb2)
+```
+
+
+
+### Merge()
+
+
+```{r, fig.align='center', out.width="95%", fig.cap="Types of joins"}
+knitr::include_graphics("https://www.edureka.co/blog/content/ver.1554115042/uploads/2019/03/Joins-in-SQL-SQL-Joins-Edureka.png")
+```
+
+Specify by which column you want to merge by and set the argument **all=** to TRUE to perform the full join
+```{r mer, exercise=TRUE, exercise.setup = "cancer"}
+merge(tb1, tb2, by="sampleID") #if setkey was used prior then merge(tb1,tb2) works the same
+merge(tb1, tb2, by="sampleID", all=TRUE)
+```
+
+##### Right and left join
+```{r mer2, exercise=TRUE, exercise.setup = "cancer"}
+merge(tb1, tb2, by="sampleID", all.x = TRUE)
+merge(tb1, tb2, by="sampleID", all.y = TRUE)
+```
+
+
+
+### KEYS
+Use setkey() on data table. This will result in ordered table by the key(s) (columns you have specified) that allows for faster manipulation of data (especially like in merge function!!!) 
+
+Setting a key does two things:
+
+  - physically reorders the rows of the data.table by the column(s) provided by reference, always in increasing order.
+  - marks those columns as key columns by setting an attribute called sorted to the data.table.
+
+Since the rows are reordered, a data.table can have at most one key because it can not be sorted in more than one way.
+
+What happened in the code chunk below?
+
+```{r keys, exercise=TRUE, exercise.setup = "cancer"}
+setkey(tb1, sampleID)
+setkey(tb2, sampleID)
+head(tb1, 3)
+head(tb2,3)
+```
+
+#### data.table: **[]** instead of merge()
+What happened here?
+
+```{r mer3, exercise=TRUE, exercise.setup = "cancer"}
+setkey(tb1, sampleID)
+setkey(tb2, sampleID)
+tb1[tb2]
+tb2[tb1]
+```
+
+
+### Summary
+
+```{r}
+data.table("JOIN type" = c("INNER", "LEFT OUTER", "RIGHT OUTER", "FULL OUTER"),
+                         "DT syntax" = c("X[Y, nomatch=0]", "Y[X]", "X[Y]", "-"),
+                         "merge() syntax" = c("merge(X, Y, all=FALSE)", "merge(X, Y, all.x=TRUE)", 
+                                              "merge(X, Y, all.y=TRUE)", "merge(X, Y, all=TRUE)"))
+```
+
+
+## Tidying the table
+
+### Colnames changing
+
+#### names(), colnames
+
+`names(dt_cancer) <- vec_names`
+
+```{r col_names1, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer <- merge(tb1, tb2, by="sampleID", all=TRUE)
+dt_cancer
+names(dt_cancer)[1] <- "id"
+dt_cancer
+```
+
+#### data.table: setnames()
+
+`setnames(dt_cancer, "old_names", "new_names")`
+
+```{r col_names2, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer
+setnames(dt_cancer, "sampleID", "id")
+dt_cancer
+```
+
+
+### Ordering columns
+
+#### subseting
+
+`dt[,.(col3, col10, col2)]`
+
+```{r col_order1, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer[,.(gender, sampleID)]
+```
+
+
+#### data.table: setcolorder()
+
+`setcolorder(dt_cancer, neworder)`
+
+```{r col_order2, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer
+setcolorder(dt_cancer, c("gender","sampleID"))
+dt_cancer
+```
+
+
+
+
+### Ordering rows
+
+We have already learnt how to order rows using order(). 
+
+#### data.table: keyby()
+```{r row_order0, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer[, .(sum(sampleID)), keyby=cancer]
+```
+
+#### data.table: setorder()
+
+`setorder(dt, a, -b)`
+
+```{r row_order1, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer
+setorder(dt_cancer, cancer, -gender)
+dt_cancer
+```
+
+
+
+
+## Reshaping the table
+
+
+```{r tbmake, exercise=TRUE, exercise.setup = "cancer"}
+tb.shape <- copy(tb1)
+tb.shape[, ":=" (
+            BRCA2=sample(40:6000,6),
+            ATM=sample(40:6000,6)) ]
+
+tb.shape
+```
+
+
+```{r tbshape}
+tb1 <- data.table(sampleID = c(6:1),
+                  cancer = c("Breast","Breast","Brain","Liver","Brain","Pancreas"))
+tb.shape <- copy(tb1)
+tb.shape[, ":=" (
+            BRCA2=sample(40:6000,6),
+            ATM=sample(40:6000,6)) ]
+
+```
+
+### Question
+
+What is the mean mutation of each gene?
+
+```{r shape_question, exercise=TRUE, exercise.setup = "tbshape"}
+
+```
+
+```{r shape_question-solution}
+tb.shape[, lapply(.SD, mean), .SDcols=c("BRCA2", "ATM")]
+```
+
+
+### **melt (wide to long)** 
+Convert DT to long form where money is a separate observation. **measure.vars** specify the set of columns we would like to collapse (or combine) together.
+```{r shape, exercise=TRUE, exercise.setup = "tbshape"}
+melt(tb.shape, id.vars = c("sampleID", "cancer"),
+                measure.vars = c("BRCA2", "ATM"))
+```
+We can also specify column indices instead of names.
+```{r shape2, exercise=TRUE, exercise.setup = "tbshape"}
+( melt(tb.shape, measure.vars = c("BRCA2", "ATM"),
+               variable.name = "genes", value.name = "n_mutations") -> tb1.m1 )
+```
+
+
+
+**dcast (long to wide)**
+We want to get the original table from the previous reshaped one using **dcast()**
+```{r tbshape2}
+tb1 <- data.table(sampleID = c(6:1),
+                  cancer = c("Breast","Breast","Brain","Liver","Brain","Pancreas"))
+tb.shape <- copy(tb1)
+tb.shape[, ":=" (
+            BRCA2=sample(40:6000,6),
+            ATM=sample(40:6000,6)) ]
+melt(tb.shape, measure.vars = c("BRCA2", "ATM"),
+               variable.name = "genes", value.name = "n_mutations") -> tb1.m1
+```
+```{r shape3, exercise=TRUE, exercise.setup = "tbshape2"}
+dcast(tb1.m1, sampleID + cancer ~ genes, value.var = "n_mutations")
+```
+
+## Interval sets
+
+We have a a data set of enhancers which are breast cancer specific. We are interested if any of the genes of interest is found within enhancers. 
+
+    How do we do this? We have to overlap them using setkeys() and foverlaps() function.
+
+
+```{r interval0}
+region_enhancer <- data.table(chr = c("chr1", "chr11", "chr17", "chr17"),
+                              start=c(100, 108300000, 9200, 4390100), 
+                              end= c(900, 108301500, 9900, 4391000) )
+location_gene <- data.table( gene = c("BRCA1", "ATM"),
+                             chr = c("chr17", "chr11"),
+                             start = c(43902857, 108230374),
+                             end= c(43983996, 108376593)
+                                 )
+
+region_enhancer; location_gene
+```
+
+```{r interval1, exercise=TRUE}
+region_enhancer <- data.table(chr = c("chr1", "chr11", "chr17", "chr17"),
+                              start=c(100, 108300000, 9200, 4390100), 
+                              end= c(900, 108301500, 9900, 4391000) )
+location_gene <- data.table( gene = c("BRCA1", "ATM"),
+                             chr = c("chr17", "chr11"),
+                             start = c(43902857, 108230374),
+                             end= c(43983996, 108376593)
+                                 )
+
+region_enhancer; location_gene
+```
+
+What does foverlaps do?
+
+```{r interval2, exercise=TRUE, exercise.setup = "interval0"}
+# First we set the values
+setkey(region_enhancer, chr, start, end)
+setkey(location_gene, chr, start, end)
+### Then we use foverlaps
+foverlaps(region_enhancer, location_gene)
+```
+
+
+
+## Exercise
+
+We are going to do an analysis of **mtcars** dataset using data.table. 
+
+```{r mtcar}
+head(mtcars)
+```
+
+
+Do the following:
+
+Convert **mtcars** to data.table called **mtcars_dt**. Add rownames from data.frame to your data.table under the column *carnames*
+```{r why, exercise=TRUE}
+
+```
+```{r why-solution}
+( mtcars_dt <- as.data.table(mtcars, keep.rownames="carnames") )
+```
+
+```{r solution_final}
+mtcars_dt <- as.data.table(mtcars, keep.rownames="carnames")
+```
+
+On the following datasets (dt1 and dt2) perform inner join, left join and outer joins. Do it with *merge()*, and where you can with *[]*
+```{r final4, exercise=TRUE, exercise.setup = "solution_final"}
+dt1 <- mtcars_dt[5:25,.(carnames, mpg, cyl)]
+dt2 <- mtcars_dt[1:10, .(carnames, gear)]
+```
+
+```{r final4-solution}
+## Using merge()
+# Inner Join
+merge(dt1, dt2, by='carnames')
+# Left Join
+merge(dt1, dt2, by='carnames', all.x = T)
+# Outer Join
+merge(dt1, dt2, by='carnames', all = T) 
+
+##Withouth merge()
+setkey(dt1, carnames)
+setkey(dt2, carnames)
+# Left Join
+dt2[dt1]
+```
+
+
+Create a wider table showing the mpg values for cyl vs carnames (Carb)
+```{r kkk, exercise=TRUE, exercise.setup = "solution_final"}
+
+```
+```{r kkk-solution}
+dcast(mtcars_dt, cyl ~ carnames,  value.var = 'mpg')
+```
