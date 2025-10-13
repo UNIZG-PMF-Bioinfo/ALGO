@@ -22,6 +22,10 @@ website:
             href: Week2/week2_part1.qmd
           - text: Additional table
             href: Week2/week2_part2.qmd
+      - text: Week3
+        menu:
+          - text: Visualization
+            href: Week3/week3_part1.qmd
 
   page-footer:
     background: light

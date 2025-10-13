@@ -2,7 +2,7 @@
 title: "Additional table manipulations"
 author: 
   - name: "dr.sc. Paula Štancl"
-    affiliation: "Bioinformatis group"
+    affiliation: "Bioinformatics group"
 format:
   html:
     self-contained: true
@@ -227,7 +227,7 @@ It has no external dependencies (unlike older packages such as `xlsx` or `XLConn
 All three functions come from the **readxl** package.
 
 | Function       | Supported format(s)     | Notes                                                                         |
-|----------------|----------------|---------------------------------------|
+|---------------|---------------|-------------------------------------------|
 | `read_excel()` | Both `.xls` and `.xlsx` | Generic function, automatically detects file type. Recommended in most cases. |
 | `read_xls()`   | Only `.xls`             | Wrapper specialized for old Excel files (97--2003).                           |
 | `read_xlsx()`  | Only `.xlsx`            | Wrapper specialized for modern Excel files (2007+).                           |
@@ -299,7 +299,7 @@ myfiles %>%
 `call("any_function", argument1, argument2)`
 
 ```{r list_table1}
-do.call("sum", list(1:10))
+do.call(sum, list(1:10))
 
 do.call(rbind, myfiles)
 ```
@@ -314,6 +314,7 @@ What is the difference between *do.call* and *lapply*?
 ```{r lapply}
 do.call("sum", list(a=1:10, b=2:12))
 lapply(list(a=1:10, b=2:12), sum)
+rbindlist(myfiles)
 ```
 :::
 
@@ -387,15 +388,14 @@ merge(tb1, tb2, by="sampleID", all.x = TRUE)
 merge(tb1, tb2, by="sampleID", all.y = TRUE)
 ```
 
-
-
 ### KEYS
-Use setkey() on data table. This will result in ordered table by the key(s) (columns you have specified) that allows for faster manipulation of data (especially like in merge function!!!) 
+
+Use setkey() on data table. This will result in ordered table by the key(s) (columns you have specified) that allows for faster manipulation of data (especially like in merge function!!!)
 
 Setting a key does two things:
 
-  - physically reorders the rows of the data.table by the column(s) provided by reference, always in increasing order.
-  - marks those columns as key columns by setting an attribute called sorted to the data.table.
+-   physically reorders the rows of the data.table by the column(s) provided by reference, always in increasing order.
+-   marks those columns as key columns by setting an attribute called sorted to the data.table.
 
 Since the rows are reordered, a data.table can have at most one key because it can not be sorted in more than one way.
 
@@ -408,7 +408,8 @@ head(tb1, 3)
 head(tb2,3)
 ```
 
-#### data.table: **[]** instead of merge()
+#### data.table: **\[\]** instead of merge()
+
 What happened here?
 
 ```{r}
@@ -418,7 +419,6 @@ tb1[tb2]
 tb2[tb1]
 ```
 
-
 ### Summary
 
 ```{r,echo=FALSE}
@@ -427,7 +427,6 @@ data.table("JOIN type" = c("INNER", "LEFT OUTER", "RIGHT OUTER", "FULL OUTER"),
                          "merge() syntax" = c("merge(X, Y, all=FALSE)", "merge(X, Y, all.x=TRUE)", 
                                               "merge(X, Y, all.y=TRUE)", "merge(X, Y, all=TRUE)"))
 ```
-
 
 ## Tidying the table
 
@@ -454,7 +453,7 @@ You can rename columns using data.table: `setnames`
 
 ```{r}
 names(dt_cancer)
-setnames(dt_cancer,  "id", "sampleID")
+setnames(dt_cancer,  "id", "sampleID", skip_absent = TRUE)
 names(dt_cancer)
 ```
 
@@ -520,59 +519,57 @@ We want to get the original table from the previous reshaped one using **dcast()
 dcast(tb1.m1, sampleID + cancer ~ genes, value.var = "n_mutations")
 ```
 
-
-
 #### Exercise
 
-We are going to do an analysis of **mtcars** dataset using data.table. 
+We are going to do an analysis of **mtcars** dataset using data.table.
 
 ```{r mtcar}
 head(mtcars)
 ```
 
-
 Do the following:
 
 Convert **mtcars** to data.table called **mtcars_dt**. Add rownames from data.frame to your data.table under the column *carnames*
-```{r}
 
+```{r}
+# Write solution here
 ```
 
-On the following datasets (dt1 and dt2) perform inner join, left join and outer joins. Do it with *merge()*, and where you can with *[]*
-```{r, eval=FALSE}
-dt1 <- mtcars_dt[5:25,.(carnames, mpg, cyl)]
-dt2 <- mtcars_dt[1:10, .(carnames, gear)]
-## Using merge() -----------------
-# Inner Join
+On the following datasets (dt1 and dt2) perform inner join, left join and outer joins. Do it with *merge()*, and where you can with *\[\]*
 
+```{r, eval=FALSE}
+dt1 <- mtcars_dt[5:25,.(id=carnames, mpg, cyl)]
+dt2 <- mtcars_dt[1:10, .(carnames, gear)]
+
+## Using merge() -----------------
+# Inner Join merge(tb1,tb2) works the same
 # Left Join
 
-# Outer Join
+# Full Join
 
 
 ## Withouth merge() --------------------
 
 # Left Join
 
+
 ```
 
-
-
 Create a wider table showing the mpg values for cyl vs carnames (Carb)
+
 ```{r}
 
 ```
 
-
-
 # Interval sets
 
-We have a a data set of enhancers which are breast cancer specific. We are interested if any of the genes of interest is found within enhancers. 
+We have a a data set of enhancers which are breast cancer specific. We are interested if any of the genes of interest is found within enhancers.
 
-    How do we do this? We have to overlap them using setkeys() and foverlaps() function.
+```         
+How do we do this? We have to overlap them using setkeys() and foverlaps() function.
+```
 
-
-```{r interval0}
+```{r}
 region_enhancer <- data.table(chr = c("chr1", "chr11", "chr17", "chr17"),
                               start=c(100, 108300000, 9200, 4390100), 
                               end= c(900, 108301500, 9900, 4391000) )
@@ -585,26 +582,13 @@ location_gene <- data.table( gene = c("BRCA1", "ATM"),
 region_enhancer; location_gene
 ```
 
-```{r interval1, exercise=TRUE}
-region_enhancer <- data.table(chr = c("chr1", "chr11", "chr17", "chr17"),
-                              start=c(100, 108300000, 9200, 4390100), 
-                              end= c(900, 108301500, 9900, 4391000) )
-location_gene <- data.table( gene = c("BRCA1", "ATM"),
-                             chr = c("chr17", "chr11"),
-                             start = c(43902857, 108230374),
-                             end= c(43983996, 108376593)
-                                 )
-
-region_enhancer; location_gene
-```
 
 What does foverlaps do?
 
-```{r interval2, exercise=TRUE, exercise.setup = "interval0"}
+```{r}
 # First we set the values
 setkey(region_enhancer, chr, start, end)
 setkey(location_gene, chr, start, end)
 ### Then we use foverlaps
 foverlaps(region_enhancer, location_gene)
 ```
-

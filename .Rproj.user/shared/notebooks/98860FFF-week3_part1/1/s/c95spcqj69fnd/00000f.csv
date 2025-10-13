@@ -1,0 +1,2 @@
+"0","table1_wide = dcast(as.data.table(table1), country ~ year, value.var = c(""cases"", ""population""))"
+"0","gt(table1_wide)"

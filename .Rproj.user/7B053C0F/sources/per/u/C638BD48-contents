@@ -1,0 +1,16 @@
+head(table(bla$Species[bla$Sepal.Length > 0 & bla$Petal.Width < 10]))
+
+head(table(bla[Sepal.Length > 0 & Petal.Width < 10, Species]))
+
+
+bla[,tapply(.SD,sum),.SDcols=c("Petal.Length")]
+
+bla[sort(Petal.Length)] %>% head()
+bla[order(Petal.Length)] %>% head()
+
+
+students[,ifelse(.SD=="A", .SD := 5, 
+                 ifelse(.SD == "B", .SD := 4,
+                        .SD :=3
+                        )
+                 ), Student]

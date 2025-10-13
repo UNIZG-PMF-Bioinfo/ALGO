@@ -1,0 +1,594 @@
+---
+title: "Additional table manipulations"
+author: 
+  - name: "dr.sc. Paula Štancl"
+    affiliation: "Bioinformatics group"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc-depth: 5
+    code-fold: false
+    fig-align: center
+    df-print: paged
+    code-summary: "Show code"
+    code-line-numbers: false
+    code-tools: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r setup, include=FALSE}
+## First specify the packages of interest
+packages <- c("png", "grid",  "magrittr",
+              "data.table", "knitr", "readr", "readxl")
+
+## Install if missing, then load
+lapply(packages, function(x) {
+  if (!requireNamespace(x, quietly = TRUE)) {
+    install.packages(x)
+  }
+  library(x, character.only = TRUE)
+})
+```
+
+## Read tabular data
+
+### Path
+
+::: callout-important
+An **absolute path** always contains the root element and the complete directory list required to locate the file.
+
+-   `D:/User/MyFolder/Algorithms_and_programming/Homework/`
+
+A **relative path** needs to be combined with another path in order to access a file.
+
+-   `../Algorithms_and_programming/Homework/`
+:::
+
+We save the path to a CSV file from the web into a variable called \`my_file\`. This file will be used for demonstrations throughout the lecture.
+
+```{r file_location}
+my_file <- "https://raw.githubusercontent.com/bot13956/datasets/master/introduction_to_physics_grades.csv"
+```
+
+### CSV and TSV
+
+Tab Separated Values (TSV)and Comma Separated Values (CSV). A .tsv file will have tab separated values whereas .csv file has comma separated fields.
+
+![](https://rstudio.github.io/cheatsheets/pngs/data-import.png)
+
+::: callout-note
+Each function for correctly importing tables contains important arguments such as,
+
+-   **`header`** - If TRUE then any empty column names are given a name where first data line is a character (non-empty)
+-   **`sep`** - The separator between columns. Most commonly used are ";", "\t",";"..
+-   **`skip`** - number of rows to remove starting from 0 (default) on the first line
+-   **`fill`** - If TRUE then in case the rows have unequal length, blank fields are implicitly added
+-   **`dec`** - the character used in the file for decimal points
+-   **`col_names`** - assign new column names (string)
+
+and many others depending on the used function.
+:::
+
+#### read.csv or read.tsv
+
+Reads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file.
+
+```{r import_csv }
+read.csv( my_file )
+```
+
+#### read.table
+
+Reads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file.
+
+```{r import_table }
+read.table( my_file )
+```
+
+#### fread
+
+Similar to read.table but faster and more convenient. All controls such as sep, colClasses and nrows are automatically detected.
+
+```{r import_fread }
+fread( my_file )
+```
+
+## Read non-tabular data
+
+Import data one line at the time
+
+#### readLines
+
+```{r import_readlines }
+# Apply readLines function to txt file
+readLines(my_file) %>% 
+  head()
+```
+
+#### read_lines from package *readr*
+
+```{r import_read_lines }
+readr::read_lines(my_file) %>% 
+  head()
+```
+
+### Reading tabular data as a list or a vector
+
+`scan()` function can also work when handling data that is stored in simple delimited text files. Unlike the `read.table()` function, the `scan()` function returns a list or a vector, not a dataframe.
+
+-   **`what`** the type of what gives the type of data to be read. (Here 'type' is used in the sense of typeof.) The supported types are logical, integer, numeric, complex, character, raw and list
+
+```{r import_scan }
+scan(my_file, sep=",", what = "character") %>% head
+scan(my_file,sep=",",  what=list("", "", ""), skip = 1) %>% 
+  lapply(., function(x) x[1:8])
+```
+
+## Saving data
+
+::: callout-note
+Important argumnts, my vary depending on the used function
+
+-   **`sep`** - The separator between columns (",", ";")
+-   **`append`** - If TRUE, the file is opened in append mode and column names (header row) are not written. If FALSE, it will overwrite the existing file
+-   **`quote`** - factor fields and column names will only be surrounded by double quotes
+-   **`col.names`** or **`row.names`** - T or F
+
+Examples of how to save data
+
+```{r, eval=FALSE}
+write.table(dt,"PATH/TO/FILE.csv", row.names = FALSE)
+write.csv(dt,"PATH/TO/FILE.csv", row.names = FALSE)
+fwrite(dt, "PATH/TO/FILE.csv") 
+```
+:::
+
+::: callout-tip
+The `fwrite()` function from the `data.table` package is a fast and efficient way to write data tables to disk.
+:::
+
+### R data format
+
+#### Saving a single R object
+
+You can save **one R object** (e.g., a data frame, vector, or model) to a file in **RDS format** using `saveRDS()`.
+
+-   **`saveRDS(object, file)`**: writes the object to disk.\
+-   **`readRDS(file)`**: loads the object back into R.\
+-   You can assign the loaded object to **any name** you like (the original object name is not preserved).
+
+```{r, eval=FALSE}
+# Save a single object to a file
+saveRDS(my_table, "my_data.rds")
+
+# Restore it under a different name
+my_old_table <- readRDS("my_data.rds")
+```
+
+#### Saving multiple R objects (`.RData` / `.rda`)
+
+The `save()` function can store **one or more R objects** together in a single file.\
+These files are usually saved with the extension **`.RData`** or **`.rda`**.
+
+-   **`save(object1, object2, ..., file = "name.RData")`** → saves the specified objects.\
+-   **`load("name.RData")`** → restores all saved objects into the current workspace with their original names.
+
+```{r saveRData, eval=FALSE}
+# Save multiple objects
+save(my_table1, my_table2, file = "data.RData")
+# To load the data again
+load("data.RData")
+```
+
+#### Saving your entire workspace in a specified file
+
+If you want to save **everything currently in your R session** (all variables, data frames, models, functions, etc.), you can use `save.image()`.\
+This is essentially a shortcut for saving the entire global environment into a single file, usually with the extension `.RData`.
+
+-   **`save.image(file = "my_workspace.RData")`** → saves the entire workspace.\
+-   **`load("my_workspace.RData")`** → restores the full workspace later.
+
+```{r saveWorkspace, eval=FALSE}
+# Save everything from the current R session
+save.image(file = "my_work_space.RData")
+# load back the workspace
+load("my_work_space.RData")
+```
+
+::: callout-tip
+While `save.image()` is convenient, it's not always the best choice:
+
+-   It can save **unnecessary objects**, making files very large.\
+-   It may hide **dependencies** (you won't remember later which objects were actually needed).\
+-   For **reproducibility**, it's usually better to save only the objects you need with `save()` or `saveRDS()` and rebuild the rest from your script.
+
+**Rule of thumb:**\
+Use `save.image()` for quick backups or temporary sessions, but prefer `save()` / `saveRDS()` for clean, shareable projects.
+:::
+
+## Excel
+
+### Package: `**readxl**`
+
+The **readxl** package is the most common way to import Excel files in R.\
+It has no external dependencies (unlike older packages such as `xlsx` or `XLConnect`) and works on all platforms.
+
+-   Supports both `.xls` (Excel 97--2003) and `.xlsx` (Excel 2007+) formats.\
+-   Returns a **tibble** .\
+-   Does **not** require Excel or Java to be installed on your computer.\
+-   Provides fast, read-only access (you cannot write Excel files with `readxl`; for that, use `openxlsx` or `writexl`).
+
+#### Difference between `read_excel`, `read_xls`, and `read_xlsx`
+
+All three functions come from the **readxl** package.
+
+| Function       | Supported format(s)     | Notes                                                                         |
+|---------------|---------------|-------------------------------------------|
+| `read_excel()` | Both `.xls` and `.xlsx` | Generic function, automatically detects file type. Recommended in most cases. |
+| `read_xls()`   | Only `.xls`             | Wrapper specialized for old Excel files (97--2003).                           |
+| `read_xlsx()`  | Only `.xlsx`            | Wrapper specialized for modern Excel files (2007+).                           |
+
+::: callout-tip
+In most cases, just use `read_excel()` --- it works for both formats and is the most flexible.
+:::
+
+#### Example of manipulation with Excel files
+
+```{r excel , eval=FALSE}
+# Read the first sheet by index
+read_excel("PATH/TO/EXCEL.xlsx", sheet = 1)
+
+# Read a sheet by name ("ATM" in this case)
+read_excel("PATH/TO/EXCEL.xlsx", sheet = "ATM")
+
+# Save the first table into a new Excel file, sheet named "My_sheet"
+write.xlsx(my_table,
+           file = "PATH/TO/My_EXCEL.xlsx",
+           sheetName = "My_sheet", 
+           col.names = TRUE,
+           row.names = TRUE, 
+           append = FALSE)
+
+# Save a second table into the same file, sheet named "sheet2"
+write.xlsx(my_table2,
+           file = "PATH/TO/My_EXCEL.xlsx",
+           sheetName = "sheet2",
+           append = TRUE,
+           row.names = FALSE)
+```
+
+## Multiple files
+
+::: callout-important
+How to import multiple files at once?
+
+Using **`list.files`** function which has the following important arguments:
+
+-   **`path`** - ptah to your folder containing multiple files and subfolders
+-   **`pattern`** - regular expression
+-   **`full.names`** - If TRUE, the directory path is prepended to the file names to give a relative file path.
+:::
+
+#### Example of importing multiple files
+
+What are the data structures of **temp** and **myfiles** variables?
+
+```{r import_multi}
+temp <- list.files(path = "test_data/", 
+                   pattern="*.csv", 
+                   full.names = TRUE)
+myfiles <- lapply(temp, fread)
+
+temp
+
+myfiles %>% 
+  .[1:2]
+```
+
+### List and tables
+
+#### base R: `do.call`
+
+`do.call()` is mostly used with **`rbind`** or **`cbind`**, but it can apply *any* function to a list of arguments.
+
+`do.call("any_function", arguments_list)`\
+`call("any_function", argument1, argument2)`
+
+```{r list_table1}
+do.call(sum, list(1:10))
+
+do.call(rbind, myfiles)
+```
+
+::: callout-note
+What is the difference between *do.call* and *lapply*?
+
+**lapply()** applies a given function for each element in a list, so there will be several function calls.
+
+**do.call()** applies a given function to the list as a whole, so there is only one function call.
+
+```{r lapply}
+do.call("sum", list(a=1:10, b=2:12))
+lapply(list(a=1:10, b=2:12), sum)
+rbindlist(myfiles)
+```
+:::
+
+#### data.table: `rbindlist`
+
+Same as do.call("rbind", l) on data.frames, but much faster.
+
+```{r list_table}
+rbindlist(myfiles)
+```
+
+#### Convert any list to table
+
+```{r list_table_1}
+my_tb <- fread(my_file)
+my_tb[, new_col := .GRP,.(Count >=50)]
+
+split(my_tb, by=c("Grade", "new_col")) %>% .[1:2]
+split(my_tb, list(my_tb$Grade, my_tb$new_col)) %>% .[1:2]
+split(my_tb, list(my_tb$Grade)) %>% .[1:2]
+```
+
+------------------------------------------------------------------------
+
+## Combining tables
+
+### Binding tables
+
+How to "stitch" two or more data objects into one?
+
+```{r}
+tb1 <- data.table(sampleID = c(6:1),
+                  cancer = c("Breast","Breast","Brain","Liver","Brain","Pancreas"))
+tb2 <- data.table(sampleID = c(7, 4, 6, 2, 8), 
+                  gender = c("F","F","M","F","M")) 
+head(tb1,3)
+head(tb2,3)
+```
+
+Function **rbind()** binds the tables by rows. Try run the code below and see what happens. Why is that?
+
+```{r, error=TRUE}
+rbind(tb1, tb2)
+```
+
+```{r}
+rbind(tb1, tb2, fill=TRUE)
+```
+
+Function **cbind()** binds the tables. Do you notice anything strange when you run the code below?
+
+```{r}
+cbind(tb1, tb2)
+```
+
+### `merge()`
+
+![](https://www.edureka.co/blog/content/ver.1554115042/uploads/2019/03/Joins-in-SQL-SQL-Joins-Edureka.png){fig-align="center"}
+
+Specify by which column you want to merge by and set the argument **all=** to TRUE to perform the full join
+
+```{r}
+merge(tb1, tb2, by="sampleID") #if setkey was used prior then merge(tb1,tb2) works the same
+merge(tb1, tb2, by="sampleID", all=TRUE)
+```
+
+Right and left join
+
+```{r}
+merge(tb1, tb2, by="sampleID", all.x = TRUE)
+merge(tb1, tb2, by="sampleID", all.y = TRUE)
+```
+
+### KEYS
+
+Use setkey() on data table. This will result in ordered table by the key(s) (columns you have specified) that allows for faster manipulation of data (especially like in merge function!!!)
+
+Setting a key does two things:
+
+-   physically reorders the rows of the data.table by the column(s) provided by reference, always in increasing order.
+-   marks those columns as key columns by setting an attribute called sorted to the data.table.
+
+Since the rows are reordered, a data.table can have at most one key because it can not be sorted in more than one way.
+
+What happened in the code chunk below?
+
+```{r}
+setkey(tb1, sampleID)
+setkey(tb2, sampleID)
+head(tb1, 3)
+head(tb2,3)
+```
+
+#### data.table: **\[\]** instead of merge()
+
+What happened here?
+
+```{r}
+setkey(tb1, sampleID)
+setkey(tb2, sampleID)
+tb1[tb2]
+tb2[tb1]
+```
+
+### Summary
+
+```{r,echo=FALSE}
+data.table("JOIN type" = c("INNER", "LEFT OUTER", "RIGHT OUTER", "FULL OUTER"),
+                         "DT syntax" = c("X[Y, nomatch=0]", "Y[X]", "X[Y]", "-"),
+                         "merge() syntax" = c("merge(X, Y, all=FALSE)", "merge(X, Y, all.x=TRUE)", 
+                                              "merge(X, Y, all.y=TRUE)", "merge(X, Y, all=TRUE)"))
+```
+
+## Tidying the table
+
+Tidying a data table often includes renaming columns to make them more informative or consistent.
+
+::: callout-tip
+You can rename columns using `names()` or `colnames()`.
+
+`names(dt_cancer) <- vec_names`
+:::
+
+```{r col_names1, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer <- merge(tb1, tb2, by="sampleID", all=TRUE)
+dt_cancer
+names(dt_cancer)[1] <- "id"
+dt_cancer
+```
+
+::: callout-tip
+You can rename columns using data.table: `setnames`
+
+`setnames(dt_cancer, "old_names", "new_names")`
+:::
+
+```{r}
+names(dt_cancer)
+setnames(dt_cancer,  "id", "sampleID", skip_absent = TRUE)
+names(dt_cancer)
+```
+
+### Ordering columns
+
+Subseting
+
+`dt[,.(col3, col10, col2)]`
+
+```{r col_order1, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer[,.(gender, sampleID)]
+```
+
+data.table: setcolorder()
+
+`setcolorder(dt_cancer, neworder)`
+
+```{r col_order2, exercise=TRUE, exercise.setup = "cancer"}
+dt_cancer
+setcolorder(dt_cancer, c("gender","sampleID"))
+dt_cancer
+```
+
+## Reshaping the table
+
+You can create a modified version of an existing `data.table` by using `copy()` to avoid changing the original data. Then, use `:=` to add or modify columns by reference.
+
+In the example below, we create two new columns (`BRCA2` and `ATM`) filled with random values between 40 and 6000 for 6 rows:
+
+```{r}
+tb.shape <- copy(tb1)
+tb.shape[, ":=" (
+            BRCA2=sample(40:6000,6),
+            ATM=sample(40:6000,6)) ]
+
+tb.shape
+```
+
+#### **`melt (wide to long)`**
+
+Convert DT to long form where money is a separate observation. **measure.vars** specify the set of columns we would like to collapse (or combine) together.
+
+```{r}
+melt(tb.shape, id.vars = c("sampleID", "cancer"),
+                measure.vars = c("BRCA2", "ATM"))
+```
+
+We can also specify column indices instead of names.
+
+```{r}
+(tb1.m1  <- melt(tb.shape, 
+                 measure.vars = c("BRCA2", "ATM"),
+                 variable.name = "genes",
+                 value.name = "n_mutations")  
+ )
+```
+
+#### **`dcast (long to wide)`**
+
+We want to get the original table from the previous reshaped one using **dcast()**
+
+```{r}
+dcast(tb1.m1, sampleID + cancer ~ genes, value.var = "n_mutations")
+```
+
+#### Exercise
+
+We are going to do an analysis of **mtcars** dataset using data.table.
+
+```{r mtcar}
+head(mtcars)
+```
+
+Do the following:
+
+Convert **mtcars** to data.table called **mtcars_dt**. Add rownames from data.frame to your data.table under the column *carnames*
+
+```{r}
+# Write solution here
+```
+
+On the following datasets (dt1 and dt2) perform inner join, left join and outer joins. Do it with *merge()*, and where you can with *\[\]*
+
+```{r, eval=FALSE}
+dt1 <- mtcars_dt[5:25,.(id=carnames, mpg, cyl)]
+dt2 <- mtcars_dt[1:10, .(carnames, gear)]
+
+## Using merge() -----------------
+# Inner Join merge(tb1,tb2) works the same
+# Left Join
+
+# Full Join
+
+
+## Withouth merge() --------------------
+
+# Left Join
+
+
+```
+
+Create a wider table showing the mpg values for cyl vs carnames (Carb)
+
+```{r}
+
+```
+
+# Interval sets
+
+We have a a data set of enhancers which are breast cancer specific. We are interested if any of the genes of interest is found within enhancers.
+
+```         
+How do we do this? We have to overlap them using setkeys() and foverlaps() function.
+```
+
+```{r}
+region_enhancer <- data.table(chr = c("chr1", "chr11", "chr17", "chr17"),
+                              start=c(100, 108300000, 9200, 4390100), 
+                              end= c(900, 108301500, 9900, 4391000) )
+location_gene <- data.table( gene = c("BRCA1", "ATM"),
+                             chr = c("chr17", "chr11"),
+                             start = c(43902857, 108230374),
+                             end= c(43983996, 108376593)
+                                 )
+
+region_enhancer; location_gene
+```
+
+
+What does foverlaps do?
+
+```{r}
+# First we set the values
+setkey(region_enhancer, chr, start, end)
+setkey(location_gene, chr, start, end)
+### Then we use foverlaps
+foverlaps(region_enhancer, location_gene)
+```
