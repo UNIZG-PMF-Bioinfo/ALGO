@@ -1,0 +1,3 @@
+"0",""
+"0","# if I want provinence (+1)"
+"0","covid_dt[type == ""recovery"", sum(cases), .(country, province)][!is.na(province)][V1 == max(V1)]"

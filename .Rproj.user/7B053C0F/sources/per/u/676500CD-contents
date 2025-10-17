@@ -1,0 +1,23 @@
+# Example data
+dt_grade <- data.table(
+  Student = c("Alice", "Bob", "Cara"),
+  Math = c("A", "A", "B"),
+  Science = c("C", "A", "B"),
+  English = c("C", "C", "B")
+)
+
+## make a fancy function
+change_grade <- function(x) {
+  new_vec <- ifelse(x == "A", 5,
+                    ifelse(x == "B", 4,
+                           3))
+  as.numeric(new_vec)
+}
+
+# change column type
+grade_cols <- c("Math","Science","English")
+dt_grade[, (change_grade) := lapply(.SD, change_grade), .SDcols=grade_cols]
+
+# calculate mean
+dt_grade[,lapply(.SD, mean),.SD=is.numeric]
+

@@ -1,0 +1,24 @@
+# Install if necessary
+if (!requireNamespace("GEOquery", quietly = TRUE)) 
+  install.packages("GEOquery")
+
+library(GEOquery)
+
+# Download metadata (GSE130970)
+gse <- getGEO("GSE130970", GSEMatrix = TRUE)
+
+# Extract phenotype / sample metadata
+pheno <- pData(gse[[1]])
+
+# View metadata
+head(pheno)
+
+setDT(pheno)
+
+pheno[,":="(age = str_extract(characteristics_ch1.2, "\\d+") %>% as.numeric)]
+
+pheno$age %>% 
+  summary()
+
+ggplot(pheno, aes(x=age)) +
+  geom_histogram()

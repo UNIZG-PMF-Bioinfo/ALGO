@@ -1,0 +1,458 @@
+---
+title: "Regular expressions"
+author: 
+  - name: "Rosa Karlić"
+    affiliation: "Bioinformatics group"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc-depth: 5
+    code-fold: false
+    fig-align: center
+    df-print: paged
+    code-summary: "Show code"
+    code-line-numbers: false
+    code-tools: true
+execute:
+  echo: true
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+################################ 
+
+```{r setup}
+# load packages tidyverse, data.table
+
+library(tidyverse)
+library(data.table)
+library(gt)
+library(hexbin)
+
+```
+
+##################################################################### 
+
+## **Regular Expressions**
+
+<br/> <br/>
+
+```{r fig6, echo = FALSE, out.width = "70%"}
+knitr::include_graphics("images/memazo.jpg")
+```
+
+<br/>
+
+### **What are Regular Expressions?**
+
+*Regex* are minimal *strings* that represent a **pattern**. <br/> Such
+strings contain **special characters** that can represent:
+
+-   **Boolean Operations**
+
+-   **Grouping**
+
+-   **Quantification**
+
+-   **Wildcards**
+
+### Some History
+
+Regex were born in theoretical computer science during the early 50s as
+part of the description of 'Regular language' coined by Stephen Kleene.
+<br/>
+
+```{r fig7, echo = FALSE, out.width = "50%"}
+knitr::include_graphics("images/kleene.jpg")
+```
+
+<br/>
+
+They started as a representation of more complex diagrams used in the
+field and in theoretical linguistics. <br/>
+
+```{r fig8, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/comp.png")
+```
+
+<br/>
+
+In the late 60's they started to be implemented in text processors,
+being **ed** one of the most popular at the time. This was followed by
+**vi**, **AWK**, **Emacs** the next decade.
+
+Then in the 80's... **PERL** happened... And it's dominance for language
+processing is still at large.
+
+```{r fig9, echo = FALSE, out.width = "70%"}
+knitr::include_graphics("images/perl.png")
+```
+
+<br/>
+
+### Use of regular expressions
+
+Text search and manipulation in editors and IDEs (e.g., VSCode, Sublime
+Text).
+
+Data validation (emails, phone numbers).
+
+Log file parsing and monitoring.
+
+Web scraping and data extraction.
+
+Programming languages: Python, R, Perl, JavaScript, and many more.
+
+Command-line tools and shell scripting for automation.
+
+### Regular expressions in bioinformatics
+
+**File parsing & data extraction:**
+
+FASTA/FASTQ file processing: extracting headers, filtering sequences.
+
+GFF/GTF annotation files: extracting gene features.
+
+VCF (Variant Call Format) files: parsing variant info fields.
+
+**Sequence pattern searching:**
+
+Motif detection (e.g., promoter elements, restriction sites).
+
+Detecting ambiguous nucleotide codes.
+
+**Data cleaning:** standardizing metadata fields in sequencing
+experiment descriptions.
+
+Regular expressions can also be used in R. Let's explore its potential.
+
+## **grep**
+
+Grep is the most common name for matching patterns with regex. It exists
+just as **grep** in base R but be aware that there are many variants of
+it.
+
+### What does grep mean?
+
+**g/re/p** meaning "Global search for Regular Expression and Print
+matching lines"
+
+### How to use it?
+
+```{r grep, echo = TRUE, eval = FALSE}
+grep("pattern", YourStringOfInterest)
+```
+
+### Play with it!
+
+```{r}
+#grep(, )
+```
+
+### Let's get some data.
+
+```{r}
+reg.exmpl <- c("krava", "plava", "prava", "plavac","tava", "vatra", "bla", "blabla", "blablabla", 
+               "abcabcabc", "abcblaabc", "blaXblaX", "abcYabc", "abc1z", "abc4z","plllava",
+               "pava", "XX","XnblaX")
+```
+
+Problem: We want to find all words that contain the substring "va".
+
+```{r}
+
+```
+
+We are just getting their position in the subject array. if you want
+**grep** to print the elements that matched you will need to add **value
+= TRUE**
+
+```{r}
+
+```
+
+## **Anchors**
+
+\^ \$: Starting or ending with substring
+
+```{r, echo=FALSE}
+reg.exmpl
+```
+
+Symbol \^ represents beginning of the string:
+
+```{r}
+grep("^va", reg.exmpl, value=T)
+```
+
+Symbol \$ represents end of the string:
+
+```{r}
+grep("ra$", reg.exmpl, value=T)
+```
+
+A)  Get all the words that contain the substring "bla".
+
+```{r}
+
+```
+
+B)  Get all the words that START with substring "bla".\
+
+```{r}
+
+```
+
+C)  Get all the words that END with substring "bla".\
+
+```{r}
+
+```
+
+## **Wildcards**
+
+We want to find all words that look like: "p" followed by any one
+character, followed by "ava".
+
+In our case this would be plava, prava.\
+When we are not sure of which character we expect, we can just write .
+instead of that character.
+
+Go ahead!
+
+```{r}
+
+```
+
+There are many more WILDCARD characters, some of them are to represent
+things as **any digit** or **any letter**. You'll need to check for your
+homework.
+
+### Restrict your options
+
+If we want to find words containing lava or tava as a substring, we can
+write that as:
+
+```{r}
+grep("[lt]ava", reg.exmpl, value=T)
+```
+
+Here, \[lt\] represents ONE character - either l or t in this position.
+Sets of characters enclosed in square brackets \[\] are called character
+classes. The pattern will match any single character that belongs to
+that set.
+
+## **Quantification Characters**
+
+When we don't know the number of occurrences of some character, we can
+use special symbols to describe what we expect:
+
+? - zero or one <br/> + - one or more <br/> \* - zero or more <br/>
+
+```{r}
+lll <- c("Eample1","Example1", "Exxample1", "Exxxample1")
+lll
+```
+
+For example:
+
+```{r}
+grep("Ex?ample1", lll, value = T)
+grep("Ex+ample1", lll, value = T)
+grep("Ex*ample1", lll, value = T)
+```
+
+When we know the number of occurrences of some character, we can use
+this:
+
+{n} - this symbol appears here exactly n times in a row
+
+{n, m} - this symbol appears here from n to m times in a row
+
+What do you expect to get now?
+
+```{r}
+grep("x{2}", lll, value = T)
+```
+
+```{r}
+grep("x{0,2}", lll, value = T)
+```
+
+```{r}
+grep("x{2}a", lll, value = T)
+```
+
+```{r}
+grep("Ex{2}a", lll, value = T)
+```
+
+## **Special Characters**
+
+What if we want to find "?"?\
+Look at the following example:
+
+```{r, echo = TRUE, eval = TRUE}
+primjer2 <- c("How","to", "find ", "a", "question", "mark?")
+primjer2
+```
+
+Since ? is a special character, if we try to use it like this:
+
+```{r}
+grep("?", primjer2,value=T)
+```
+
+We wont get what we want. We use "" to tell grep that we want the real
+sign and not the special ability of that sign!
+
+```{r playground15, exercise = TRUE, rows.print = 7}
+grep("\\?", primjer2,value=T)
+```
+
+## **Exclude characters**
+
+If you want to find a character that is NOT some character, use "\[\^
+\]"
+
+```{r}
+reg.exmpl
+```
+
+```{r}
+grep(".ava", reg.exmpl, value = T)
+grep("[^l]ava", reg.exmpl, value = T)
+```
+
+## **Groups**
+
+When we want to find groups of characters, we can do it like this:
+
+```{r}
+primjer <- c("GRP1", "GRP2", "GRP3","GRP1GRP2", "GRP1GRP3", "GRP2GRP3", "GRP1GRP1GRP2", "GRP1GRP1GRP3", "GRP1GRP2GRP3","GRP2GRP3","GRP2GRP1GRP2", "GRP2GRP1GRP3", "GRP2GRP2GRP3", "GRP3GRP1GRP2", "GRP3GRP1GRP3", "GRP3GRP2GRP3", "GRP1GRP2GRP1GRP3", "GRP1GRP2GRP2GRP3", "GRP1GRP3GRP2GRP3")
+primjer <- sort(unique(primjer))
+primjer
+```
+
+If we want to work on a group of characters, put them in round brackets!
+
+All words where "GRP1" is repeated 2 times in a row:
+
+```{r}
+grep("(GRP1){2}", primjer, value=T)
+```
+
+All words where "GRP1" is repeated 1 or more times before GRP2 :
+
+```{r }
+grep("(GRP1)+(GRP2)", primjer, value=T)
+```
+
+## **Boolean operators**
+
+OR (\|): Matches either pattern on its left or right. P2 matches "P1" or
+"P2".
+
+## **Functions that use regular expressions**
+
+**grepl(pattern, x)**: Returns TRUE/FALSE if pattern found
+
+**grep(pattern, x)**: Returns indices of matches
+
+**regexpr(pattern, x)**: Returns position of first match
+
+**gregexpr(pattern, x)**: Positions of all matches
+
+**sub(pattern, replacement, x)**: Replace first match
+
+**gsub(pattern, replacement, x)**: Replace all matches
+
+<br>
+
+Example 1: Finding GC dinucleotides with grepl()
+
+```{r}
+seq <- c("ATGCGTA", "CGTTGA", "ATATAT", "GCGCGC")
+# Find sequences with CG dinucleotide
+grepl("CG", seq)
+# [1] TRUE TRUE FALSE TRUE
+
+```
+
+Example 2: Transcribing DNA to mRNA with gsub()
+
+```{r}
+dna_seq <- "ATGCGTACGTTAG"
+
+# Replace all 'T' with 'U' using gsub for full transcription
+mrna_seq <- gsub("T", "U", dna_seq)
+
+print(mrna_seq)
+# Output: "AUGCGUACGUUAG"
+
+```
+
+Example 3: Finding the Position of a Transcription Factor (TF) Binding
+Site with regexpr()
+
+```{r}
+dna_seq <- "GCGTATATAGCGCGTATAAGT"
+
+# Find position of first TATA box using regexpr
+pos <- regexpr("TATA", dna_seq)
+
+print(pos)          # Starting position of first match
+print(attr(pos, "match.length"))  # Length of the match
+
+# Extract the matched sequence
+binding_site <- regmatches(dna_seq, pos)
+print(binding_site)  # Should print "TATA"
+
+```
+
+## Exercises
+
+1.  Find all sequences starting with ATG and followed by any three
+    nucleotides.
+
+```{r}
+seqs <- c("ATGAAA", "ATGCCC", "ATG", "GGGATG")
+# Your code here
+```
+
+2.  Extract all stretches of exactly three or four A's (A{3,4}) in the
+    following DNA sequences.
+
+```{r}
+seqs <- c("AAATTT", "AAAAT", "AAAAA", "TTTAAAG")
+# Your code here
+```
+
+3.  Replace the first stretch of G's (one or more) with X in the
+    following sequences.
+
+```{r}
+seqs <- c("GGATGC", "GGAAGG", "AGGCGG")
+# Your code here
+
+```
+
+4.  Check which sequences contain any character other than A, T, C, or G
+    (e.g., ambiguous nucleotide N).
+
+```{r}
+seqs <- c("ATGCN", "GGCCA", "TTANT")
+# Your code here
+
+```
+
+5.  Find sequences ending with a stop codon (TAA, TAG, or TGA).
+
+```{r}
+seqs <- c("ATGCCCTAA", "ATGCCCTAG", "ATGCCCTGA", "ATGCCC")
+# Your code here
+```

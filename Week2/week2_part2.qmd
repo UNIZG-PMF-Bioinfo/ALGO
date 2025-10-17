@@ -227,7 +227,7 @@ It has no external dependencies (unlike older packages such as `xlsx` or `XLConn
 All three functions come from the **readxl** package.
 
 | Function       | Supported format(s)     | Notes                                                                         |
-|---------------|---------------|-------------------------------------------|
+|----------------|----------------|---------------------------------------|
 | `read_excel()` | Both `.xls` and `.xlsx` | Generic function, automatically detects file type. Recommended in most cases. |
 | `read_xls()`   | Only `.xls`             | Wrapper specialized for old Excel files (97--2003).                           |
 | `read_xlsx()`  | Only `.xlsx`            | Wrapper specialized for modern Excel files (2007+).                           |
@@ -277,7 +277,7 @@ Using **`list.files`** function which has the following important arguments:
 
 What are the data structures of **temp** and **myfiles** variables?
 
-```{r import_multi}
+```{r}
 temp <- list.files(path = "test_data/", 
                    pattern="*.csv", 
                    full.names = TRUE)
@@ -298,7 +298,7 @@ myfiles %>%
 `do.call("any_function", arguments_list)`\
 `call("any_function", argument1, argument2)`
 
-```{r list_table1}
+```{r}
 do.call(sum, list(1:10))
 
 do.call(rbind, myfiles)
@@ -311,7 +311,7 @@ What is the difference between *do.call* and *lapply*?
 
 **do.call()** applies a given function to the list as a whole, so there is only one function call.
 
-```{r lapply}
+```{r}
 do.call("sum", list(a=1:10, b=2:12))
 lapply(list(a=1:10, b=2:12), sum)
 rbindlist(myfiles)
@@ -322,13 +322,13 @@ rbindlist(myfiles)
 
 Same as do.call("rbind", l) on data.frames, but much faster.
 
-```{r list_table}
+```{r }
 rbindlist(myfiles)
 ```
 
 #### Convert any list to table
 
-```{r list_table_1}
+```{r }
 my_tb <- fread(my_file)
 my_tb[, new_col := .GRP,.(Count >=50)]
 
@@ -581,7 +581,6 @@ location_gene <- data.table( gene = c("BRCA1", "ATM"),
 
 region_enhancer; location_gene
 ```
-
 
 What does foverlaps do?
 

@@ -418,5 +418,89 @@
     "title": "Data visualization with ggplot2",
     "section": "Themes",
     "text": "Themes\nMany visual aspects of the plots can be adjusted using theme() and scale_X_Y() There are various themes already available, but they can also be tweaked\nggpubr package let’s you produce publication-ready plots, with various themes, adding statistics to plots and combining various ggplot objects into one figure. https://rpkgs.datanovia.com/ggpubr/\nggsci package includes scientific journal and Sci-Fi themed color palettes for ggplot2 https://cran.r-project.org/web/packages/ggsci/vignettes/ggsci.html\nWe can make our scatterplot a bit nicer.\n\np <- ggplot(data, aes(x = expression_1242_at, y = expression_1866_g_at)) + \n  geom_point() +\n  facet_wrap(~stage) +\n  stat_cor(method = \"pearson\")+\n  theme_classic2()\np\n\n\n\n\nWe can save our plots using the ggsave() function. The function saves a single ggplot object to a file (PNG, PDF, SVG, TIFF, etc.) with customizable size, resolution, and format based on the filename extension.\n\nggsave(\"my.first.plot.png\", plot = p, width = 12, height = 7)\n\nOnce you find the best way to visualize the data, you can simply change the dataset of the ggplot object using the ggplot %+% operator\n\np <- ggplot(mtcars, aes(mpg, wt, color=factor(cyl))) + \n  geom_point(shape=20, size=4)\nprint(p)\n\n\n\np2<-p %+% mtcars[mtcars$disp>200,]\nprint(p2)\n\n\n\n\nFor more information and help with making graphs see the R Graphics Cookbook\n\nExercise\nFor the qpcr_ddCt data set produce plots that visualize: 1. Comparison of TP53 and MYC expression 2. Comparison of ΔCt values across control and treated samples"
+  },
+  {
+    "objectID": "Week3/week3_part2.html",
+    "href": "Week3/week3_part2.html",
+    "title": "Regular expressions",
+    "section": "",
+    "text": "# load packages tidyverse, data.table\n\nlibrary(tidyverse)\nlibrary(data.table)\nlibrary(gt)\nlibrary(hexbin)"
+  },
+  {
+    "objectID": "Week3/week3_part2.html#regular-expressions",
+    "href": "Week3/week3_part2.html#regular-expressions",
+    "title": "Regular expressions",
+    "section": "Regular Expressions",
+    "text": "Regular Expressions\n \n\n\n\n\n\n\n\nWhat are Regular Expressions?\nRegex are minimal strings that represent a pattern.  Such strings contain special characters that can represent:\n\nBoolean Operations\nGrouping\nQuantification\nWildcards\n\n\n\nSome History\nRegex were born in theoretical computer science during the early 50s as part of the description of ‘Regular language’ coined by Stephen Kleene. \n\n\n\n\n\n\nThey started as a representation of more complex diagrams used in the field and in theoretical linguistics. \n\n\n\n\n\n\nIn the late 60’s they started to be implemented in text processors, being ed one of the most popular at the time. This was followed by vi, AWK, Emacs the next decade.\nThen in the 80’s… PERL happened… And it’s dominance for language processing is still at large.\n\n\n\n\n\n\n\n\nUse of regular expressions\nText search and manipulation in editors and IDEs (e.g., VSCode, Sublime Text).\nData validation (emails, phone numbers).\nLog file parsing and monitoring.\nWeb scraping and data extraction.\nProgramming languages: Python, R, Perl, JavaScript, and many more.\nCommand-line tools and shell scripting for automation.\n\n\nRegular expressions in bioinformatics\nFile parsing & data extraction:\nFASTA/FASTQ file processing: extracting headers, filtering sequences.\nGFF/GTF annotation files: extracting gene features.\nVCF (Variant Call Format) files: parsing variant info fields.\nSequence pattern searching:\nMotif detection (e.g., promoter elements, restriction sites).\nDetecting ambiguous nucleotide codes.\nData cleaning: standardizing metadata fields in sequencing experiment descriptions.\nRegular expressions can also be used in R. Let’s explore its potential."
+  },
+  {
+    "objectID": "Week3/week3_part2.html#grep",
+    "href": "Week3/week3_part2.html#grep",
+    "title": "Regular expressions",
+    "section": "grep",
+    "text": "grep\nGrep is the most common name for matching patterns with regex. It exists just as grep in base R but be aware that there are many variants of it.\n\nWhat does grep mean?\ng/re/p meaning “Global search for Regular Expression and Print matching lines”\n\n\nHow to use it?\n\ngrep(\"pattern\", YourStringOfInterest)\n\n\n\nPlay with it!\n\n#grep(, )\n\n\n\nLet’s get some data.\n\nreg.exmpl <- c(\"krava\", \"plava\", \"prava\", \"plavac\",\"tava\", \"vatra\", \"bla\", \"blabla\", \"blablabla\", \n               \"abcabcabc\", \"abcblaabc\", \"blaXblaX\", \"abcYabc\", \"abc1z\", \"abc4z\",\"plllava\",\n               \"pava\", \"XX\",\"XnblaX\")\n\nProblem: We want to find all words that contain the substring “va”.\n\n\n\nWe are just getting their position in the subject array. if you want grep to print the elements that matched you will need to add value = TRUE"
+  },
+  {
+    "objectID": "Week3/week3_part2.html#anchors",
+    "href": "Week3/week3_part2.html#anchors",
+    "title": "Regular expressions",
+    "section": "Anchors",
+    "text": "Anchors\n^ $: Starting or ending with substring\n\n\n [1] \"krava\"     \"plava\"     \"prava\"     \"plavac\"    \"tava\"      \"vatra\"    \n [7] \"bla\"       \"blabla\"    \"blablabla\" \"abcabcabc\" \"abcblaabc\" \"blaXblaX\" \n[13] \"abcYabc\"   \"abc1z\"     \"abc4z\"     \"plllava\"   \"pava\"      \"XX\"       \n[19] \"XnblaX\"   \n\n\nSymbol ^ represents beginning of the string:\n\ngrep(\"^va\", reg.exmpl, value=T)\n\n[1] \"vatra\"\n\n\nSymbol $ represents end of the string:\n\ngrep(\"ra$\", reg.exmpl, value=T)\n\n[1] \"vatra\"\n\n\n\nGet all the words that contain the substring “bla”.\n\n\n\n\n\nGet all the words that START with substring “bla”.\n\n\n\n\n\n\nGet all the words that END with substring “bla”."
+  },
+  {
+    "objectID": "Week3/week3_part2.html#wildcards",
+    "href": "Week3/week3_part2.html#wildcards",
+    "title": "Regular expressions",
+    "section": "Wildcards",
+    "text": "Wildcards\nWe want to find all words that look like: “p” followed by any one character, followed by “ava”.\nIn our case this would be plava, prava.\nWhen we are not sure of which character we expect, we can just write . instead of that character.\nGo ahead!\n\n\n\nThere are many more WILDCARD characters, some of them are to represent things as any digit or any letter. You’ll need to check for your homework.\n\nRestrict your options\nIf we want to find words containing lava or tava as a substring, we can write that as:\n\ngrep(\"[lt]ava\", reg.exmpl, value=T)\n\n[1] \"plava\"   \"plavac\"  \"tava\"    \"plllava\"\n\n\nHere, [lt] represents ONE character - either l or t in this position. Sets of characters enclosed in square brackets [] are called character classes. The pattern will match any single character that belongs to that set."
+  },
+  {
+    "objectID": "Week3/week3_part2.html#quantification-characters",
+    "href": "Week3/week3_part2.html#quantification-characters",
+    "title": "Regular expressions",
+    "section": "Quantification Characters",
+    "text": "Quantification Characters\nWhen we don’t know the number of occurrences of some character, we can use special symbols to describe what we expect:\n? - zero or one  + - one or more  * - zero or more \n\nlll <- c(\"Eample1\",\"Example1\", \"Exxample1\", \"Exxxample1\")\nlll\n\n[1] \"Eample1\"    \"Example1\"   \"Exxample1\"  \"Exxxample1\"\n\n\nFor example:\n\ngrep(\"Ex?ample1\", lll, value = T)\n\n[1] \"Eample1\"  \"Example1\"\n\ngrep(\"Ex+ample1\", lll, value = T)\n\n[1] \"Example1\"   \"Exxample1\"  \"Exxxample1\"\n\ngrep(\"Ex*ample1\", lll, value = T)\n\n[1] \"Eample1\"    \"Example1\"   \"Exxample1\"  \"Exxxample1\"\n\n\nWhen we know the number of occurrences of some character, we can use this:\n{n} - this symbol appears here exactly n times in a row\n{n, m} - this symbol appears here from n to m times in a row\nWhat do you expect to get now?\n\ngrep(\"x{2}\", lll, value = T)\n\n[1] \"Exxample1\"  \"Exxxample1\"\n\n\n\ngrep(\"x{0,2}\", lll, value = T)\n\n[1] \"Eample1\"    \"Example1\"   \"Exxample1\"  \"Exxxample1\"\n\n\n\ngrep(\"x{2}a\", lll, value = T)\n\n[1] \"Exxample1\"  \"Exxxample1\"\n\n\n\ngrep(\"Ex{2}a\", lll, value = T)\n\n[1] \"Exxample1\""
+  },
+  {
+    "objectID": "Week3/week3_part2.html#special-characters",
+    "href": "Week3/week3_part2.html#special-characters",
+    "title": "Regular expressions",
+    "section": "Special Characters",
+    "text": "Special Characters\nWhat if we want to find “?”?\nLook at the following example:\n\nprimjer2 <- c(\"How\",\"to\", \"find \", \"a\", \"question\", \"mark?\")\nprimjer2\n\n[1] \"How\"      \"to\"       \"find \"    \"a\"        \"question\" \"mark?\"   \n\n\nSince ? is a special character, if we try to use it like this:\n\ngrep(\"?\", primjer2,value=T)\n\n[1] \"How\"      \"to\"       \"find \"    \"a\"        \"question\" \"mark?\"   \n\n\nWe wont get what we want. We use “” to tell grep that we want the real sign and not the special ability of that sign!\n\ngrep(\"\\\\?\", primjer2,value=T)\n\n[1] \"mark?\""
+  },
+  {
+    "objectID": "Week3/week3_part2.html#exclude-characters",
+    "href": "Week3/week3_part2.html#exclude-characters",
+    "title": "Regular expressions",
+    "section": "Exclude characters",
+    "text": "Exclude characters\nIf you want to find a character that is NOT some character, use “[^ ]”\n\nreg.exmpl\n\n [1] \"krava\"     \"plava\"     \"prava\"     \"plavac\"    \"tava\"      \"vatra\"    \n [7] \"bla\"       \"blabla\"    \"blablabla\" \"abcabcabc\" \"abcblaabc\" \"blaXblaX\" \n[13] \"abcYabc\"   \"abc1z\"     \"abc4z\"     \"plllava\"   \"pava\"      \"XX\"       \n[19] \"XnblaX\"   \n\n\n\ngrep(\".ava\", reg.exmpl, value = T)\n\n[1] \"krava\"   \"plava\"   \"prava\"   \"plavac\"  \"tava\"    \"plllava\" \"pava\"   \n\ngrep(\"[^l]ava\", reg.exmpl, value = T)\n\n[1] \"krava\" \"prava\" \"tava\"  \"pava\""
+  },
+  {
+    "objectID": "Week3/week3_part2.html#groups",
+    "href": "Week3/week3_part2.html#groups",
+    "title": "Regular expressions",
+    "section": "Groups",
+    "text": "Groups\nWhen we want to find groups of characters, we can do it like this:\n\nprimjer <- c(\"GRP1\", \"GRP2\", \"GRP3\",\"GRP1GRP2\", \"GRP1GRP3\", \"GRP2GRP3\", \"GRP1GRP1GRP2\", \"GRP1GRP1GRP3\", \"GRP1GRP2GRP3\",\"GRP2GRP3\",\"GRP2GRP1GRP2\", \"GRP2GRP1GRP3\", \"GRP2GRP2GRP3\", \"GRP3GRP1GRP2\", \"GRP3GRP1GRP3\", \"GRP3GRP2GRP3\", \"GRP1GRP2GRP1GRP3\", \"GRP1GRP2GRP2GRP3\", \"GRP1GRP3GRP2GRP3\")\nprimjer <- sort(unique(primjer))\nprimjer\n\n [1] \"GRP1\"             \"GRP1GRP1GRP2\"     \"GRP1GRP1GRP3\"     \"GRP1GRP2\"        \n [5] \"GRP1GRP2GRP1GRP3\" \"GRP1GRP2GRP2GRP3\" \"GRP1GRP2GRP3\"     \"GRP1GRP3\"        \n [9] \"GRP1GRP3GRP2GRP3\" \"GRP2\"             \"GRP2GRP1GRP2\"     \"GRP2GRP1GRP3\"    \n[13] \"GRP2GRP2GRP3\"     \"GRP2GRP3\"         \"GRP3\"             \"GRP3GRP1GRP2\"    \n[17] \"GRP3GRP1GRP3\"     \"GRP3GRP2GRP3\"    \n\n\nIf we want to work on a group of characters, put them in round brackets!\nAll words where “GRP1” is repeated 2 times in a row:\n\ngrep(\"(GRP1){2}\", primjer, value=T)\n\n[1] \"GRP1GRP1GRP2\" \"GRP1GRP1GRP3\"\n\n\nAll words where “GRP1” is repeated 1 or more times before GRP2 :\n\ngrep(\"(GRP1)+(GRP2)\", primjer, value=T)\n\n[1] \"GRP1GRP1GRP2\"     \"GRP1GRP2\"         \"GRP1GRP2GRP1GRP3\" \"GRP1GRP2GRP2GRP3\"\n[5] \"GRP1GRP2GRP3\"     \"GRP2GRP1GRP2\"     \"GRP3GRP1GRP2\""
+  },
+  {
+    "objectID": "Week3/week3_part2.html#boolean-operators",
+    "href": "Week3/week3_part2.html#boolean-operators",
+    "title": "Regular expressions",
+    "section": "Boolean operators",
+    "text": "Boolean operators\nOR (|): Matches either pattern on its left or right. P2 matches “P1” or “P2”."
+  },
+  {
+    "objectID": "Week3/week3_part2.html#functions-that-use-regular-expressions",
+    "href": "Week3/week3_part2.html#functions-that-use-regular-expressions",
+    "title": "Regular expressions",
+    "section": "Functions that use regular expressions",
+    "text": "Functions that use regular expressions\ngrepl(pattern, x): Returns TRUE/FALSE if pattern found\ngrep(pattern, x): Returns indices of matches\nregexpr(pattern, x): Returns position of first match\ngregexpr(pattern, x): Positions of all matches\nsub(pattern, replacement, x): Replace first match\ngsub(pattern, replacement, x): Replace all matches\n\nExample 1: Finding GC dinucleotides with grepl()\n\nseq <- c(\"ATGCGTA\", \"CGTTGA\", \"ATATAT\", \"GCGCGC\")\n# Find sequences with CG dinucleotide\ngrepl(\"CG\", seq)\n\n[1]  TRUE  TRUE FALSE  TRUE\n\n# [1] TRUE TRUE FALSE TRUE\n\nExample 2: Transcribing DNA to mRNA with gsub()\n\ndna_seq <- \"ATGCGTACGTTAG\"\n\n# Replace all 'T' with 'U' using gsub for full transcription\nmrna_seq <- gsub(\"T\", \"U\", dna_seq)\n\nprint(mrna_seq)\n\n[1] \"AUGCGUACGUUAG\"\n\n# Output: \"AUGCGUACGUUAG\"\n\nExample 3: Finding the Position of a Transcription Factor (TF) Binding Site with regexpr()\n\ndna_seq <- \"GCGTATATAGCGCGTATAAGT\"\n\n# Find position of first TATA box using regexpr\npos <- regexpr(\"TATA\", dna_seq)\n\nprint(pos)          # Starting position of first match\n\n[1] 4\nattr(,\"match.length\")\n[1] 4\nattr(,\"index.type\")\n[1] \"chars\"\nattr(,\"useBytes\")\n[1] TRUE\n\nprint(attr(pos, \"match.length\"))  # Length of the match\n\n[1] 4\n\n# Extract the matched sequence\nbinding_site <- regmatches(dna_seq, pos)\nprint(binding_site)  # Should print \"TATA\"\n\n[1] \"TATA\""
+  },
+  {
+    "objectID": "Week3/week3_part2.html#exercises",
+    "href": "Week3/week3_part2.html#exercises",
+    "title": "Regular expressions",
+    "section": "Exercises",
+    "text": "Exercises\n\nFind all sequences starting with ATG and followed by any three nucleotides.\n\n\nseqs <- c(\"ATGAAA\", \"ATGCCC\", \"ATG\", \"GGGATG\")\n# Your code here\n\n\nExtract all stretches of exactly three or four A’s (A{3,4}) in the following DNA sequences.\n\n\nseqs <- c(\"AAATTT\", \"AAAAT\", \"AAAAA\", \"TTTAAAG\")\n# Your code here\n\n\nReplace the first stretch of G’s (one or more) with X in the following sequences.\n\n\nseqs <- c(\"GGATGC\", \"GGAAGG\", \"AGGCGG\")\n# Your code here\n\n\nCheck which sequences contain any character other than A, T, C, or G (e.g., ambiguous nucleotide N).\n\n\nseqs <- c(\"ATGCN\", \"GGCCA\", \"TTANT\")\n# Your code here\n\n\nFind sequences ending with a stop codon (TAA, TAG, or TGA).\n\n\nseqs <- c(\"ATGCCCTAA\", \"ATGCCCTAG\", \"ATGCCCTGA\", \"ATGCCC\")\n# Your code here"
   }
 ]

@@ -26,6 +26,8 @@ website:
         menu:
           - text: Visualization
             href: Week3/week3_part1.qmd
+          - text: Regular expressions
+            href: Week3/week3_part2.qmd
 
   page-footer:
     background: light
