@@ -25,9 +25,8 @@ editor:
 
 ################################ 
 
-```{r setup}
+```{r setup, include=FALSE}
 # load packages tidyverse, data.table
-
 library(tidyverse)
 library(data.table)
 library(gt)

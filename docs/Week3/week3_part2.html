@@ -4143,14 +4143,6 @@ vertical-align: -.125em;
 
 <section id="section" class="level32">
 <p class="heading"></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages tidyverse, data.table</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hexbin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="section-1" class="level69">
 <p class="heading"></p>
 </section>
@@ -4231,21 +4223,21 @@ vertical-align: -.125em;
 <section id="how-to-use-it" class="level3">
 <h3 class="anchored" data-anchor-id="how-to-use-it">How to use it?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;pattern&quot;</span>, YourStringOfInterest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;pattern&quot;</span>, YourStringOfInterest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="play-with-it" class="level3">
 <h3 class="anchored" data-anchor-id="play-with-it">Play with it!</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#grep(, )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#grep(, )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="lets-get-some-data." class="level3">
 <h3 class="anchored" data-anchor-id="lets-get-some-data.">Let’s get some data.</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reg.exmpl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;krava&quot;</span>, <span class="st">&quot;plava&quot;</span>, <span class="st">&quot;prava&quot;</span>, <span class="st">&quot;plavac&quot;</span>,<span class="st">&quot;tava&quot;</span>, <span class="st">&quot;vatra&quot;</span>, <span class="st">&quot;bla&quot;</span>, <span class="st">&quot;blabla&quot;</span>, <span class="st">&quot;blablabla&quot;</span>, </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;abcabcabc&quot;</span>, <span class="st">&quot;abcblaabc&quot;</span>, <span class="st">&quot;blaXblaX&quot;</span>, <span class="st">&quot;abcYabc&quot;</span>, <span class="st">&quot;abc1z&quot;</span>, <span class="st">&quot;abc4z&quot;</span>,<span class="st">&quot;plllava&quot;</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;pava&quot;</span>, <span class="st">&quot;XX&quot;</span>,<span class="st">&quot;XnblaX&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>reg.exmpl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;krava&quot;</span>, <span class="st">&quot;plava&quot;</span>, <span class="st">&quot;prava&quot;</span>, <span class="st">&quot;plavac&quot;</span>,<span class="st">&quot;tava&quot;</span>, <span class="st">&quot;vatra&quot;</span>, <span class="st">&quot;bla&quot;</span>, <span class="st">&quot;blabla&quot;</span>, <span class="st">&quot;blablabla&quot;</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;abcabcabc&quot;</span>, <span class="st">&quot;abcblaabc&quot;</span>, <span class="st">&quot;blaXblaX&quot;</span>, <span class="st">&quot;abcYabc&quot;</span>, <span class="st">&quot;abc1z&quot;</span>, <span class="st">&quot;abc4z&quot;</span>,<span class="st">&quot;plllava&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;pava&quot;</span>, <span class="st">&quot;XX&quot;</span>,<span class="st">&quot;XnblaX&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Problem: We want to find all words that contain the substring “va”.</p>
 <div class="cell">
@@ -4270,14 +4262,14 @@ vertical-align: -.125em;
 </div>
 <p>Symbol ^ represents beginning of the string:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;^va&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;^va&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;vatra&quot;</code></pre>
 </div>
 </div>
 <p>Symbol $ represents end of the string:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;ra$&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;ra$&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;vatra&quot;</code></pre>
 </div>
@@ -4317,7 +4309,7 @@ When we are not sure of which character we expect, we can just write . instead o
 <h3 class="anchored" data-anchor-id="restrict-your-options">Restrict your options</h3>
 <p>If we want to find words containing lava or tava as a substring, we can write that as:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;[lt]ava&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;[lt]ava&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;plava&quot;   &quot;plavac&quot;  &quot;tava&quot;    &quot;plllava&quot;</code></pre>
 </div>
@@ -4330,23 +4322,23 @@ When we are not sure of which character we expect, we can just write . instead o
 <p>When we don’t know the number of occurrences of some character, we can use special symbols to describe what we expect:</p>
 <p>? - zero or one <br> + - one or more <br> * - zero or more <br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lll <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Eample1&quot;</span>,<span class="st">&quot;Example1&quot;</span>, <span class="st">&quot;Exxample1&quot;</span>, <span class="st">&quot;Exxxample1&quot;</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lll <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Eample1&quot;</span>,<span class="st">&quot;Example1&quot;</span>, <span class="st">&quot;Exxample1&quot;</span>, <span class="st">&quot;Exxxample1&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>lll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Eample1&quot;    &quot;Example1&quot;   &quot;Exxample1&quot;  &quot;Exxxample1&quot;</code></pre>
 </div>
 </div>
 <p>For example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex?ample1&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex?ample1&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Eample1&quot;  &quot;Example1&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex+ample1&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex+ample1&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Example1&quot;   &quot;Exxample1&quot;  &quot;Exxxample1&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex*ample1&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex*ample1&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Eample1&quot;    &quot;Example1&quot;   &quot;Exxample1&quot;  &quot;Exxxample1&quot;</code></pre>
 </div>
@@ -4356,25 +4348,25 @@ When we are not sure of which character we expect, we can just write . instead o
 <p>{n, m} - this symbol appears here from n to m times in a row</p>
 <p>What do you expect to get now?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{2}&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{2}&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Exxample1&quot;  &quot;Exxxample1&quot;</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{0,2}&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{0,2}&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Eample1&quot;    &quot;Example1&quot;   &quot;Exxample1&quot;  &quot;Exxxample1&quot;</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{2}a&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{2}a&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Exxample1&quot;  &quot;Exxxample1&quot;</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex{2}a&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex{2}a&quot;</span>, lll, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;Exxample1&quot;</code></pre>
 </div>
@@ -4385,22 +4377,22 @@ When we are not sure of which character we expect, we can just write . instead o
 <p>What if we want to find “?”?<br>
 Look at the following example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>primjer2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;How&quot;</span>,<span class="st">&quot;to&quot;</span>, <span class="st">&quot;find &quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;question&quot;</span>, <span class="st">&quot;mark?&quot;</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>primjer2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>primjer2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;How&quot;</span>,<span class="st">&quot;to&quot;</span>, <span class="st">&quot;find &quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;question&quot;</span>, <span class="st">&quot;mark?&quot;</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>primjer2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;How&quot;      &quot;to&quot;       &quot;find &quot;    &quot;a&quot;        &quot;question&quot; &quot;mark?&quot;   </code></pre>
 </div>
 </div>
 <p>Since ? is a special character, if we try to use it like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;?&quot;</span>, primjer2,<span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;?&quot;</span>, primjer2,<span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;How&quot;      &quot;to&quot;       &quot;find &quot;    &quot;a&quot;        &quot;question&quot; &quot;mark?&quot;   </code></pre>
 </div>
 </div>
 <p>We wont get what we want. We use “” to tell grep that we want the real sign and not the special ability of that sign!</p>
 <div class="cell" data-exercise="true" data-rows.print="7">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">?&quot;</span>, primjer2,<span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">?&quot;</span>, primjer2,<span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;mark?&quot;</code></pre>
 </div>
@@ -4410,7 +4402,7 @@ Look at the following example:</p>
 <h2 class="anchored" data-anchor-id="exclude-characters"><strong>Exclude characters</strong></h2>
 <p>If you want to find a character that is NOT some character, use “[^ ]”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>reg.exmpl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>reg.exmpl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] &quot;krava&quot;     &quot;plava&quot;     &quot;prava&quot;     &quot;plavac&quot;    &quot;tava&quot;      &quot;vatra&quot;    
  [7] &quot;bla&quot;       &quot;blabla&quot;    &quot;blablabla&quot; &quot;abcabcabc&quot; &quot;abcblaabc&quot; &quot;blaXblaX&quot; 
@@ -4419,11 +4411,11 @@ Look at the following example:</p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;.ava&quot;</span>, reg.exmpl, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;.ava&quot;</span>, reg.exmpl, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;krava&quot;   &quot;plava&quot;   &quot;prava&quot;   &quot;plavac&quot;  &quot;tava&quot;    &quot;plllava&quot; &quot;pava&quot;   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;[^l]ava&quot;</span>, reg.exmpl, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;[^l]ava&quot;</span>, reg.exmpl, <span class="at">value =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;krava&quot; &quot;prava&quot; &quot;tava&quot;  &quot;pava&quot; </code></pre>
 </div>
@@ -4433,9 +4425,9 @@ Look at the following example:</p>
 <h2 class="anchored" data-anchor-id="groups"><strong>Groups</strong></h2>
 <p>When we want to find groups of characters, we can do it like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>primjer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GRP1&quot;</span>, <span class="st">&quot;GRP2&quot;</span>, <span class="st">&quot;GRP3&quot;</span>,<span class="st">&quot;GRP1GRP2&quot;</span>, <span class="st">&quot;GRP1GRP3&quot;</span>, <span class="st">&quot;GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP1GRP2&quot;</span>, <span class="st">&quot;GRP1GRP1GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP3&quot;</span>,<span class="st">&quot;GRP2GRP3&quot;</span>,<span class="st">&quot;GRP2GRP1GRP2&quot;</span>, <span class="st">&quot;GRP2GRP1GRP3&quot;</span>, <span class="st">&quot;GRP2GRP2GRP3&quot;</span>, <span class="st">&quot;GRP3GRP1GRP2&quot;</span>, <span class="st">&quot;GRP3GRP1GRP3&quot;</span>, <span class="st">&quot;GRP3GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP1GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP3GRP2GRP3&quot;</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>primjer <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(primjer))</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>primjer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>primjer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GRP1&quot;</span>, <span class="st">&quot;GRP2&quot;</span>, <span class="st">&quot;GRP3&quot;</span>,<span class="st">&quot;GRP1GRP2&quot;</span>, <span class="st">&quot;GRP1GRP3&quot;</span>, <span class="st">&quot;GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP1GRP2&quot;</span>, <span class="st">&quot;GRP1GRP1GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP3&quot;</span>,<span class="st">&quot;GRP2GRP3&quot;</span>,<span class="st">&quot;GRP2GRP1GRP2&quot;</span>, <span class="st">&quot;GRP2GRP1GRP3&quot;</span>, <span class="st">&quot;GRP2GRP2GRP3&quot;</span>, <span class="st">&quot;GRP3GRP1GRP2&quot;</span>, <span class="st">&quot;GRP3GRP1GRP3&quot;</span>, <span class="st">&quot;GRP3GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP1GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP3GRP2GRP3&quot;</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>primjer <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(primjer))</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>primjer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] &quot;GRP1&quot;             &quot;GRP1GRP1GRP2&quot;     &quot;GRP1GRP1GRP3&quot;     &quot;GRP1GRP2&quot;        
  [5] &quot;GRP1GRP2GRP1GRP3&quot; &quot;GRP1GRP2GRP2GRP3&quot; &quot;GRP1GRP2GRP3&quot;     &quot;GRP1GRP3&quot;        
@@ -4447,14 +4439,14 @@ Look at the following example:</p>
 <p>If we want to work on a group of characters, put them in round brackets!</p>
 <p>All words where “GRP1” is repeated 2 times in a row:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;(GRP1){2}&quot;</span>, primjer, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;(GRP1){2}&quot;</span>, primjer, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;GRP1GRP1GRP2&quot; &quot;GRP1GRP1GRP3&quot;</code></pre>
 </div>
 </div>
 <p>All words where “GRP1” is repeated 1 or more times before GRP2 :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;(GRP1)+(GRP2)&quot;</span>, primjer, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;(GRP1)+(GRP2)&quot;</span>, primjer, <span class="at">value=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;GRP1GRP1GRP2&quot;     &quot;GRP1GRP2&quot;         &quot;GRP1GRP2GRP1GRP3&quot; &quot;GRP1GRP2GRP2GRP3&quot;
 [5] &quot;GRP1GRP2GRP3&quot;     &quot;GRP2GRP1GRP2&quot;     &quot;GRP3GRP1GRP2&quot;    </code></pre>
@@ -4476,35 +4468,35 @@ Look at the following example:</p>
 <p><br></p>
 <p>Example 1: Finding GC dinucleotides with grepl()</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>seq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCGTA&quot;</span>, <span class="st">&quot;CGTTGA&quot;</span>, <span class="st">&quot;ATATAT&quot;</span>, <span class="st">&quot;GCGCGC&quot;</span>)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Find sequences with CG dinucleotide</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>(<span class="st">&quot;CG&quot;</span>, seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>seq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCGTA&quot;</span>, <span class="st">&quot;CGTTGA&quot;</span>, <span class="st">&quot;ATATAT&quot;</span>, <span class="st">&quot;GCGCGC&quot;</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Find sequences with CG dinucleotide</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>(<span class="st">&quot;CG&quot;</span>, seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE  TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] TRUE TRUE FALSE TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] TRUE TRUE FALSE TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Example 2: Transcribing DNA to mRNA with gsub()</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>dna_seq <span class="ot">&lt;-</span> <span class="st">&quot;ATGCGTACGTTAG&quot;</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace all &#39;T&#39; with &#39;U&#39; using gsub for full transcription</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>mrna_seq <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;U&quot;</span>, dna_seq)</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mrna_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>dna_seq <span class="ot">&lt;-</span> <span class="st">&quot;ATGCGTACGTTAG&quot;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace all &#39;T&#39; with &#39;U&#39; using gsub for full transcription</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>mrna_seq <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;U&quot;</span>, dna_seq)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mrna_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;AUGCGUACGUUAG&quot;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: &quot;AUGCGUACGUUAG&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: &quot;AUGCGUACGUUAG&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Example 3: Finding the Position of a Transcription Factor (TF) Binding Site with regexpr()</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>dna_seq <span class="ot">&lt;-</span> <span class="st">&quot;GCGTATATAGCGCGTATAAGT&quot;</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find position of first TATA box using regexpr</span></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> <span class="fu">regexpr</span>(<span class="st">&quot;TATA&quot;</span>, dna_seq)</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pos)          <span class="co"># Starting position of first match</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>dna_seq <span class="ot">&lt;-</span> <span class="st">&quot;GCGTATATAGCGCGTATAAGT&quot;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find position of first TATA box using regexpr</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> <span class="fu">regexpr</span>(<span class="st">&quot;TATA&quot;</span>, dna_seq)</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pos)          <span class="co"># Starting position of first match</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4
 attr(,&quot;match.length&quot;)
@@ -4514,13 +4506,13 @@ attr(,&quot;index.type&quot;)
 attr(,&quot;useBytes&quot;)
 [1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">attr</span>(pos, <span class="st">&quot;match.length&quot;</span>))  <span class="co"># Length of the match</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">attr</span>(pos, <span class="st">&quot;match.length&quot;</span>))  <span class="co"># Length of the match</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the matched sequence</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>binding_site <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(dna_seq, pos)</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(binding_site)  <span class="co"># Should print &quot;TATA&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the matched sequence</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>binding_site <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(dna_seq, pos)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(binding_site)  <span class="co"># Should print &quot;TATA&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] &quot;TATA&quot;</code></pre>
 </div>
@@ -4532,36 +4524,36 @@ attr(,&quot;useBytes&quot;)
 <li>Find all sequences starting with ATG and followed by any three nucleotides.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGAAA&quot;</span>, <span class="st">&quot;ATGCCC&quot;</span>, <span class="st">&quot;ATG&quot;</span>, <span class="st">&quot;GGGATG&quot;</span>)</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGAAA&quot;</span>, <span class="st">&quot;ATGCCC&quot;</span>, <span class="st">&quot;ATG&quot;</span>, <span class="st">&quot;GGGATG&quot;</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Extract all stretches of exactly three or four A’s (A{3,4}) in the following DNA sequences.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AAATTT&quot;</span>, <span class="st">&quot;AAAAT&quot;</span>, <span class="st">&quot;AAAAA&quot;</span>, <span class="st">&quot;TTTAAAG&quot;</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AAATTT&quot;</span>, <span class="st">&quot;AAAAT&quot;</span>, <span class="st">&quot;AAAAA&quot;</span>, <span class="st">&quot;TTTAAAG&quot;</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
 <li>Replace the first stretch of G’s (one or more) with X in the following sequences.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GGATGC&quot;</span>, <span class="st">&quot;GGAAGG&quot;</span>, <span class="st">&quot;AGGCGG&quot;</span>)</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GGATGC&quot;</span>, <span class="st">&quot;GGAAGG&quot;</span>, <span class="st">&quot;AGGCGG&quot;</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li>Check which sequences contain any character other than A, T, C, or G (e.g., ambiguous nucleotide N).</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCN&quot;</span>, <span class="st">&quot;GGCCA&quot;</span>, <span class="st">&quot;TTANT&quot;</span>)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCN&quot;</span>, <span class="st">&quot;GGCCA&quot;</span>, <span class="st">&quot;TTANT&quot;</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="5" type="1">
 <li>Find sequences ending with a stop codon (TAA, TAG, or TGA).</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCCCTAA&quot;</span>, <span class="st">&quot;ATGCCCTAG&quot;</span>, <span class="st">&quot;ATGCCCTGA&quot;</span>, <span class="st">&quot;ATGCCC&quot;</span>)</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCCCTAA&quot;</span>, <span class="st">&quot;ATGCCCTAG&quot;</span>, <span class="st">&quot;ATGCCCTGA&quot;</span>, <span class="st">&quot;ATGCCC&quot;</span>)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -4754,458 +4746,457 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
-<div class="sourceCode" id="cb63" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Regular expressions&quot;</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: &quot;Rosa Karlić&quot;</span></span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation: &quot;Bioinformatics group&quot;</span></span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co">    self-contained: true</span></span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 5</span></span>
-<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
-<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-align: center</span></span>
-<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a><span class="co">    df-print: paged</span></span>
-<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: &quot;Show code&quot;</span></span>
-<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a><span class="co">    code-line-numbers: false</span></span>
-<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
-<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
-<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
-<span id="cb63-21"><a href="#cb63-21" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> </span></span>
-<span id="cb63-22"><a href="#cb63-22" aria-hidden="true" tabindex="-1"></a><span class="co">  markdown: </span></span>
-<span id="cb63-23"><a href="#cb63-23" aria-hidden="true" tabindex="-1"></a><span class="co">    wrap: 72</span></span>
-<span id="cb63-24"><a href="#cb63-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb63-25"><a href="#cb63-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-26"><a href="#cb63-26" aria-hidden="true" tabindex="-1"></a>################################ </span>
-<span id="cb63-27"><a href="#cb63-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-28"><a href="#cb63-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
-<span id="cb63-29"><a href="#cb63-29" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages tidyverse, data.table</span></span>
-<span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb63-34"><a href="#cb63-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hexbin)</span>
-<span id="cb63-35"><a href="#cb63-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-36"><a href="#cb63-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-37"><a href="#cb63-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-38"><a href="#cb63-38" aria-hidden="true" tabindex="-1"></a>##################################################################### </span>
-<span id="cb63-39"><a href="#cb63-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-40"><a href="#cb63-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Regular Expressions**</span></span>
-<span id="cb63-41"><a href="#cb63-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-42"><a href="#cb63-42" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span> <span class="kw">&lt;br/&gt;</span></span>
-<span id="cb63-43"><a href="#cb63-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-44"><a href="#cb63-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig6, echo = FALSE, out.width = &quot;70%&quot;}</span></span>
-<span id="cb63-45"><a href="#cb63-45" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/memazo.jpg&quot;</span>)</span>
-<span id="cb63-46"><a href="#cb63-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-47"><a href="#cb63-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-48"><a href="#cb63-48" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
-<span id="cb63-49"><a href="#cb63-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-50"><a href="#cb63-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### **What are Regular Expressions?**</span></span>
-<span id="cb63-51"><a href="#cb63-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-52"><a href="#cb63-52" aria-hidden="true" tabindex="-1"></a>*Regex* are minimal *strings* that represent a **pattern**. <span class="kw">&lt;br/&gt;</span> Such</span>
-<span id="cb63-53"><a href="#cb63-53" aria-hidden="true" tabindex="-1"></a>strings contain **special characters** that can represent:</span>
-<span id="cb63-54"><a href="#cb63-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-55"><a href="#cb63-55" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Boolean Operations**</span>
-<span id="cb63-56"><a href="#cb63-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-57"><a href="#cb63-57" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Grouping**</span>
-<span id="cb63-58"><a href="#cb63-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-59"><a href="#cb63-59" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Quantification**</span>
-<span id="cb63-60"><a href="#cb63-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-61"><a href="#cb63-61" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Wildcards**</span>
-<span id="cb63-62"><a href="#cb63-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-63"><a href="#cb63-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### Some History</span></span>
-<span id="cb63-64"><a href="#cb63-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-65"><a href="#cb63-65" aria-hidden="true" tabindex="-1"></a>Regex were born in theoretical computer science during the early 50s as</span>
-<span id="cb63-66"><a href="#cb63-66" aria-hidden="true" tabindex="-1"></a>part of the description of &#39;Regular language&#39; coined by Stephen Kleene.</span>
-<span id="cb63-67"><a href="#cb63-67" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
-<span id="cb63-68"><a href="#cb63-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-69"><a href="#cb63-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig7, echo = FALSE, out.width = &quot;50%&quot;}</span></span>
-<span id="cb63-70"><a href="#cb63-70" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/kleene.jpg&quot;</span>)</span>
-<span id="cb63-71"><a href="#cb63-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-72"><a href="#cb63-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-73"><a href="#cb63-73" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
-<span id="cb63-74"><a href="#cb63-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-75"><a href="#cb63-75" aria-hidden="true" tabindex="-1"></a>They started as a representation of more complex diagrams used in the</span>
-<span id="cb63-76"><a href="#cb63-76" aria-hidden="true" tabindex="-1"></a>field and in theoretical linguistics. <span class="kw">&lt;br/&gt;</span></span>
-<span id="cb63-77"><a href="#cb63-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-78"><a href="#cb63-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig8, echo = FALSE, out.width = &quot;100%&quot;}</span></span>
-<span id="cb63-79"><a href="#cb63-79" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/comp.png&quot;</span>)</span>
-<span id="cb63-80"><a href="#cb63-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-81"><a href="#cb63-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-82"><a href="#cb63-82" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
-<span id="cb63-83"><a href="#cb63-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-84"><a href="#cb63-84" aria-hidden="true" tabindex="-1"></a>In the late 60&#39;s they started to be implemented in text processors,</span>
-<span id="cb63-85"><a href="#cb63-85" aria-hidden="true" tabindex="-1"></a>being **ed** one of the most popular at the time. This was followed by</span>
-<span id="cb63-86"><a href="#cb63-86" aria-hidden="true" tabindex="-1"></a>**vi**, **AWK**, **Emacs** the next decade.</span>
-<span id="cb63-87"><a href="#cb63-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-88"><a href="#cb63-88" aria-hidden="true" tabindex="-1"></a>Then in the 80&#39;s... **PERL** happened... And it&#39;s dominance for language</span>
-<span id="cb63-89"><a href="#cb63-89" aria-hidden="true" tabindex="-1"></a>processing is still at large.</span>
-<span id="cb63-90"><a href="#cb63-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-91"><a href="#cb63-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig9, echo = FALSE, out.width = &quot;70%&quot;}</span></span>
-<span id="cb63-92"><a href="#cb63-92" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/perl.png&quot;</span>)</span>
-<span id="cb63-93"><a href="#cb63-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-94"><a href="#cb63-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-95"><a href="#cb63-95" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
-<span id="cb63-96"><a href="#cb63-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-97"><a href="#cb63-97" aria-hidden="true" tabindex="-1"></a><span class="fu">### Use of regular expressions</span></span>
-<span id="cb63-98"><a href="#cb63-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-99"><a href="#cb63-99" aria-hidden="true" tabindex="-1"></a>Text search and manipulation in editors and IDEs (e.g., VSCode, Sublime</span>
-<span id="cb63-100"><a href="#cb63-100" aria-hidden="true" tabindex="-1"></a>Text).</span>
-<span id="cb63-101"><a href="#cb63-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-102"><a href="#cb63-102" aria-hidden="true" tabindex="-1"></a>Data validation (emails, phone numbers).</span>
-<span id="cb63-103"><a href="#cb63-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-104"><a href="#cb63-104" aria-hidden="true" tabindex="-1"></a>Log file parsing and monitoring.</span>
-<span id="cb63-105"><a href="#cb63-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-106"><a href="#cb63-106" aria-hidden="true" tabindex="-1"></a>Web scraping and data extraction.</span>
-<span id="cb63-107"><a href="#cb63-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-108"><a href="#cb63-108" aria-hidden="true" tabindex="-1"></a>Programming languages: Python, R, Perl, JavaScript, and many more.</span>
-<span id="cb63-109"><a href="#cb63-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-110"><a href="#cb63-110" aria-hidden="true" tabindex="-1"></a>Command-line tools and shell scripting for automation.</span>
-<span id="cb63-111"><a href="#cb63-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-112"><a href="#cb63-112" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regular expressions in bioinformatics</span></span>
-<span id="cb63-113"><a href="#cb63-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-114"><a href="#cb63-114" aria-hidden="true" tabindex="-1"></a>**File parsing &amp; data extraction:**</span>
-<span id="cb63-115"><a href="#cb63-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-116"><a href="#cb63-116" aria-hidden="true" tabindex="-1"></a>FASTA/FASTQ file processing: extracting headers, filtering sequences.</span>
-<span id="cb63-117"><a href="#cb63-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-118"><a href="#cb63-118" aria-hidden="true" tabindex="-1"></a>GFF/GTF annotation files: extracting gene features.</span>
-<span id="cb63-119"><a href="#cb63-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-120"><a href="#cb63-120" aria-hidden="true" tabindex="-1"></a>VCF (Variant Call Format) files: parsing variant info fields.</span>
-<span id="cb63-121"><a href="#cb63-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-122"><a href="#cb63-122" aria-hidden="true" tabindex="-1"></a>**Sequence pattern searching:**</span>
-<span id="cb63-123"><a href="#cb63-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-124"><a href="#cb63-124" aria-hidden="true" tabindex="-1"></a>Motif detection (e.g., promoter elements, restriction sites).</span>
-<span id="cb63-125"><a href="#cb63-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-126"><a href="#cb63-126" aria-hidden="true" tabindex="-1"></a>Detecting ambiguous nucleotide codes.</span>
-<span id="cb63-127"><a href="#cb63-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-128"><a href="#cb63-128" aria-hidden="true" tabindex="-1"></a>**Data cleaning:** standardizing metadata fields in sequencing</span>
-<span id="cb63-129"><a href="#cb63-129" aria-hidden="true" tabindex="-1"></a>experiment descriptions.</span>
-<span id="cb63-130"><a href="#cb63-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-131"><a href="#cb63-131" aria-hidden="true" tabindex="-1"></a>Regular expressions can also be used in R. Let&#39;s explore its potential.</span>
-<span id="cb63-132"><a href="#cb63-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-133"><a href="#cb63-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## **grep**</span></span>
-<span id="cb63-134"><a href="#cb63-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-135"><a href="#cb63-135" aria-hidden="true" tabindex="-1"></a>Grep is the most common name for matching patterns with regex. It exists</span>
-<span id="cb63-136"><a href="#cb63-136" aria-hidden="true" tabindex="-1"></a>just as **grep** in base R but be aware that there are many variants of</span>
-<span id="cb63-137"><a href="#cb63-137" aria-hidden="true" tabindex="-1"></a>it.</span>
-<span id="cb63-138"><a href="#cb63-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-139"><a href="#cb63-139" aria-hidden="true" tabindex="-1"></a><span class="fu">### What does grep mean?</span></span>
-<span id="cb63-140"><a href="#cb63-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-141"><a href="#cb63-141" aria-hidden="true" tabindex="-1"></a>**g/re/p** meaning &quot;Global search for Regular Expression and Print</span>
-<span id="cb63-142"><a href="#cb63-142" aria-hidden="true" tabindex="-1"></a>matching lines&quot;</span>
-<span id="cb63-143"><a href="#cb63-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-144"><a href="#cb63-144" aria-hidden="true" tabindex="-1"></a><span class="fu">### How to use it?</span></span>
-<span id="cb63-145"><a href="#cb63-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-146"><a href="#cb63-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r grep, echo = TRUE, eval = FALSE}</span></span>
-<span id="cb63-147"><a href="#cb63-147" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;pattern&quot;</span>, YourStringOfInterest)</span>
-<span id="cb63-148"><a href="#cb63-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-149"><a href="#cb63-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-150"><a href="#cb63-150" aria-hidden="true" tabindex="-1"></a><span class="fu">### Play with it!</span></span>
-<span id="cb63-151"><a href="#cb63-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-154"><a href="#cb63-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-155"><a href="#cb63-155" aria-hidden="true" tabindex="-1"></a><span class="co">#grep(, )</span></span>
-<span id="cb63-156"><a href="#cb63-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-157"><a href="#cb63-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-158"><a href="#cb63-158" aria-hidden="true" tabindex="-1"></a><span class="fu">### Let&#39;s get some data.</span></span>
-<span id="cb63-159"><a href="#cb63-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-162"><a href="#cb63-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-163"><a href="#cb63-163" aria-hidden="true" tabindex="-1"></a>reg.exmpl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;krava&quot;</span>, <span class="st">&quot;plava&quot;</span>, <span class="st">&quot;prava&quot;</span>, <span class="st">&quot;plavac&quot;</span>,<span class="st">&quot;tava&quot;</span>, <span class="st">&quot;vatra&quot;</span>, <span class="st">&quot;bla&quot;</span>, <span class="st">&quot;blabla&quot;</span>, <span class="st">&quot;blablabla&quot;</span>, </span>
-<span id="cb63-164"><a href="#cb63-164" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;abcabcabc&quot;</span>, <span class="st">&quot;abcblaabc&quot;</span>, <span class="st">&quot;blaXblaX&quot;</span>, <span class="st">&quot;abcYabc&quot;</span>, <span class="st">&quot;abc1z&quot;</span>, <span class="st">&quot;abc4z&quot;</span>,<span class="st">&quot;plllava&quot;</span>,</span>
-<span id="cb63-165"><a href="#cb63-165" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;pava&quot;</span>, <span class="st">&quot;XX&quot;</span>,<span class="st">&quot;XnblaX&quot;</span>)</span>
-<span id="cb63-166"><a href="#cb63-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-167"><a href="#cb63-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-168"><a href="#cb63-168" aria-hidden="true" tabindex="-1"></a>Problem: We want to find all words that contain the substring &quot;va&quot;.</span>
-<span id="cb63-169"><a href="#cb63-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-172"><a href="#cb63-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-173"><a href="#cb63-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-174"><a href="#cb63-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-175"><a href="#cb63-175" aria-hidden="true" tabindex="-1"></a>We are just getting their position in the subject array. if you want</span>
-<span id="cb63-176"><a href="#cb63-176" aria-hidden="true" tabindex="-1"></a>**grep** to print the elements that matched you will need to add **value</span>
-<span id="cb63-177"><a href="#cb63-177" aria-hidden="true" tabindex="-1"></a>= TRUE**</span>
-<span id="cb63-178"><a href="#cb63-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-181"><a href="#cb63-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-182"><a href="#cb63-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-183"><a href="#cb63-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-184"><a href="#cb63-184" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Anchors**</span></span>
-<span id="cb63-185"><a href="#cb63-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-186"><a href="#cb63-186" aria-hidden="true" tabindex="-1"></a>\^ \$: Starting or ending with substring</span>
-<span id="cb63-187"><a href="#cb63-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-188"><a href="#cb63-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
-<span id="cb63-189"><a href="#cb63-189" aria-hidden="true" tabindex="-1"></a>reg.exmpl</span>
-<span id="cb63-190"><a href="#cb63-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-191"><a href="#cb63-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-192"><a href="#cb63-192" aria-hidden="true" tabindex="-1"></a>Symbol \^ represents beginning of the string:</span>
-<span id="cb63-193"><a href="#cb63-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-196"><a href="#cb63-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-197"><a href="#cb63-197" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;^va&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span>
-<span id="cb63-198"><a href="#cb63-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-199"><a href="#cb63-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-200"><a href="#cb63-200" aria-hidden="true" tabindex="-1"></a>Symbol \$ represents end of the string:</span>
-<span id="cb63-201"><a href="#cb63-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-204"><a href="#cb63-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-205"><a href="#cb63-205" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;ra$&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span>
-<span id="cb63-206"><a href="#cb63-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-207"><a href="#cb63-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-208"><a href="#cb63-208" aria-hidden="true" tabindex="-1"></a>A)  Get all the words that contain the substring &quot;bla&quot;.</span>
-<span id="cb63-209"><a href="#cb63-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-212"><a href="#cb63-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-213"><a href="#cb63-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-214"><a href="#cb63-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-215"><a href="#cb63-215" aria-hidden="true" tabindex="-1"></a>B)  Get all the words that START with substring &quot;bla&quot;.\</span>
-<span id="cb63-216"><a href="#cb63-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-219"><a href="#cb63-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-220"><a href="#cb63-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-221"><a href="#cb63-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-222"><a href="#cb63-222" aria-hidden="true" tabindex="-1"></a>C)  Get all the words that END with substring &quot;bla&quot;.\</span>
-<span id="cb63-223"><a href="#cb63-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-226"><a href="#cb63-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-227"><a href="#cb63-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-228"><a href="#cb63-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-229"><a href="#cb63-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Wildcards**</span></span>
-<span id="cb63-230"><a href="#cb63-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-231"><a href="#cb63-231" aria-hidden="true" tabindex="-1"></a>We want to find all words that look like: &quot;p&quot; followed by any one</span>
-<span id="cb63-232"><a href="#cb63-232" aria-hidden="true" tabindex="-1"></a>character, followed by &quot;ava&quot;.</span>
-<span id="cb63-233"><a href="#cb63-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-234"><a href="#cb63-234" aria-hidden="true" tabindex="-1"></a>In our case this would be plava, prava.\</span>
-<span id="cb63-235"><a href="#cb63-235" aria-hidden="true" tabindex="-1"></a>When we are not sure of which character we expect, we can just write .</span>
-<span id="cb63-236"><a href="#cb63-236" aria-hidden="true" tabindex="-1"></a>instead of that character.</span>
-<span id="cb63-237"><a href="#cb63-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-238"><a href="#cb63-238" aria-hidden="true" tabindex="-1"></a>Go ahead!</span>
-<span id="cb63-239"><a href="#cb63-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-242"><a href="#cb63-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-243"><a href="#cb63-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-244"><a href="#cb63-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-245"><a href="#cb63-245" aria-hidden="true" tabindex="-1"></a>There are many more WILDCARD characters, some of them are to represent</span>
-<span id="cb63-246"><a href="#cb63-246" aria-hidden="true" tabindex="-1"></a>things as **any digit** or **any letter**. You&#39;ll need to check for your</span>
-<span id="cb63-247"><a href="#cb63-247" aria-hidden="true" tabindex="-1"></a>homework.</span>
-<span id="cb63-248"><a href="#cb63-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-249"><a href="#cb63-249" aria-hidden="true" tabindex="-1"></a><span class="fu">### Restrict your options</span></span>
-<span id="cb63-250"><a href="#cb63-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-251"><a href="#cb63-251" aria-hidden="true" tabindex="-1"></a>If we want to find words containing lava or tava as a substring, we can</span>
-<span id="cb63-252"><a href="#cb63-252" aria-hidden="true" tabindex="-1"></a>write that as:</span>
-<span id="cb63-253"><a href="#cb63-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-256"><a href="#cb63-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-257"><a href="#cb63-257" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;[lt]ava&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span>
-<span id="cb63-258"><a href="#cb63-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-259"><a href="#cb63-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-260"><a href="#cb63-260" aria-hidden="true" tabindex="-1"></a>Here, <span class="sc">\[</span>lt<span class="sc">\]</span> represents ONE character - either l or t in this position.</span>
-<span id="cb63-261"><a href="#cb63-261" aria-hidden="true" tabindex="-1"></a>Sets of characters enclosed in square brackets <span class="sc">\[\]</span> are called character</span>
-<span id="cb63-262"><a href="#cb63-262" aria-hidden="true" tabindex="-1"></a>classes. The pattern will match any single character that belongs to</span>
-<span id="cb63-263"><a href="#cb63-263" aria-hidden="true" tabindex="-1"></a>that set.</span>
-<span id="cb63-264"><a href="#cb63-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-265"><a href="#cb63-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Quantification Characters**</span></span>
-<span id="cb63-266"><a href="#cb63-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-267"><a href="#cb63-267" aria-hidden="true" tabindex="-1"></a>When we don&#39;t know the number of occurrences of some character, we can</span>
-<span id="cb63-268"><a href="#cb63-268" aria-hidden="true" tabindex="-1"></a>use special symbols to describe what we expect:</span>
-<span id="cb63-269"><a href="#cb63-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-270"><a href="#cb63-270" aria-hidden="true" tabindex="-1"></a>? - zero or one <span class="kw">&lt;br/&gt;</span> + - one or more <span class="kw">&lt;br/&gt;</span> <span class="sc">\*</span> - zero or more <span class="kw">&lt;br/&gt;</span></span>
-<span id="cb63-271"><a href="#cb63-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-274"><a href="#cb63-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-275"><a href="#cb63-275" aria-hidden="true" tabindex="-1"></a>lll <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Eample1&quot;</span>,<span class="st">&quot;Example1&quot;</span>, <span class="st">&quot;Exxample1&quot;</span>, <span class="st">&quot;Exxxample1&quot;</span>)</span>
-<span id="cb63-276"><a href="#cb63-276" aria-hidden="true" tabindex="-1"></a>lll</span>
-<span id="cb63-277"><a href="#cb63-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-278"><a href="#cb63-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-279"><a href="#cb63-279" aria-hidden="true" tabindex="-1"></a>For example:</span>
-<span id="cb63-280"><a href="#cb63-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-283"><a href="#cb63-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-284"><a href="#cb63-284" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex?ample1&quot;</span>, lll, <span class="at">value =</span> T)</span>
-<span id="cb63-285"><a href="#cb63-285" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex+ample1&quot;</span>, lll, <span class="at">value =</span> T)</span>
-<span id="cb63-286"><a href="#cb63-286" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex*ample1&quot;</span>, lll, <span class="at">value =</span> T)</span>
-<span id="cb63-287"><a href="#cb63-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-288"><a href="#cb63-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-289"><a href="#cb63-289" aria-hidden="true" tabindex="-1"></a>When we know the number of occurrences of some character, we can use</span>
-<span id="cb63-290"><a href="#cb63-290" aria-hidden="true" tabindex="-1"></a>this:</span>
-<span id="cb63-291"><a href="#cb63-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-292"><a href="#cb63-292" aria-hidden="true" tabindex="-1"></a>{n} - this symbol appears here exactly n times in a row</span>
-<span id="cb63-293"><a href="#cb63-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-294"><a href="#cb63-294" aria-hidden="true" tabindex="-1"></a>{n, m} - this symbol appears here from n to m times in a row</span>
-<span id="cb63-295"><a href="#cb63-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-296"><a href="#cb63-296" aria-hidden="true" tabindex="-1"></a>What do you expect to get now?</span>
-<span id="cb63-297"><a href="#cb63-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-300"><a href="#cb63-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-301"><a href="#cb63-301" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{2}&quot;</span>, lll, <span class="at">value =</span> T)</span>
-<span id="cb63-302"><a href="#cb63-302" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-303"><a href="#cb63-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-306"><a href="#cb63-306" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-307"><a href="#cb63-307" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{0,2}&quot;</span>, lll, <span class="at">value =</span> T)</span>
-<span id="cb63-308"><a href="#cb63-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-309"><a href="#cb63-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-312"><a href="#cb63-312" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-313"><a href="#cb63-313" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{2}a&quot;</span>, lll, <span class="at">value =</span> T)</span>
-<span id="cb63-314"><a href="#cb63-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-315"><a href="#cb63-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-318"><a href="#cb63-318" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-319"><a href="#cb63-319" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex{2}a&quot;</span>, lll, <span class="at">value =</span> T)</span>
-<span id="cb63-320"><a href="#cb63-320" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-321"><a href="#cb63-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-322"><a href="#cb63-322" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Special Characters**</span></span>
-<span id="cb63-323"><a href="#cb63-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-324"><a href="#cb63-324" aria-hidden="true" tabindex="-1"></a>What if we want to find &quot;?&quot;?\</span>
-<span id="cb63-325"><a href="#cb63-325" aria-hidden="true" tabindex="-1"></a>Look at the following example:</span>
-<span id="cb63-326"><a href="#cb63-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-327"><a href="#cb63-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = TRUE, eval = TRUE}</span></span>
-<span id="cb63-328"><a href="#cb63-328" aria-hidden="true" tabindex="-1"></a>primjer2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;How&quot;</span>,<span class="st">&quot;to&quot;</span>, <span class="st">&quot;find &quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;question&quot;</span>, <span class="st">&quot;mark?&quot;</span>)</span>
-<span id="cb63-329"><a href="#cb63-329" aria-hidden="true" tabindex="-1"></a>primjer2</span>
-<span id="cb63-330"><a href="#cb63-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-331"><a href="#cb63-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-332"><a href="#cb63-332" aria-hidden="true" tabindex="-1"></a>Since ? is a special character, if we try to use it like this:</span>
-<span id="cb63-333"><a href="#cb63-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-336"><a href="#cb63-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-337"><a href="#cb63-337" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;?&quot;</span>, primjer2,<span class="at">value=</span>T)</span>
-<span id="cb63-338"><a href="#cb63-338" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-339"><a href="#cb63-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-340"><a href="#cb63-340" aria-hidden="true" tabindex="-1"></a>We wont get what we want. We use &quot;&quot; to tell grep that we want the real</span>
-<span id="cb63-341"><a href="#cb63-341" aria-hidden="true" tabindex="-1"></a>sign and not the special ability of that sign!</span>
-<span id="cb63-342"><a href="#cb63-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-343"><a href="#cb63-343" aria-hidden="true" tabindex="-1"></a><span class="in">```{r playground15, exercise = TRUE, rows.print = 7}</span></span>
-<span id="cb63-344"><a href="#cb63-344" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">?&quot;</span>, primjer2,<span class="at">value=</span>T)</span>
-<span id="cb63-345"><a href="#cb63-345" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-346"><a href="#cb63-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-347"><a href="#cb63-347" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Exclude characters**</span></span>
-<span id="cb63-348"><a href="#cb63-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-349"><a href="#cb63-349" aria-hidden="true" tabindex="-1"></a>If you want to find a character that is NOT some character, use &quot;<span class="sc">\[</span>\^</span>
-<span id="cb63-350"><a href="#cb63-350" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span>&quot;</span>
-<span id="cb63-351"><a href="#cb63-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-354"><a href="#cb63-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-355"><a href="#cb63-355" aria-hidden="true" tabindex="-1"></a>reg.exmpl</span>
-<span id="cb63-356"><a href="#cb63-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-357"><a href="#cb63-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-360"><a href="#cb63-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-361"><a href="#cb63-361" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;.ava&quot;</span>, reg.exmpl, <span class="at">value =</span> T)</span>
-<span id="cb63-362"><a href="#cb63-362" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;[^l]ava&quot;</span>, reg.exmpl, <span class="at">value =</span> T)</span>
-<span id="cb63-363"><a href="#cb63-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-364"><a href="#cb63-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-365"><a href="#cb63-365" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Groups**</span></span>
-<span id="cb63-366"><a href="#cb63-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-367"><a href="#cb63-367" aria-hidden="true" tabindex="-1"></a>When we want to find groups of characters, we can do it like this:</span>
-<span id="cb63-368"><a href="#cb63-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-371"><a href="#cb63-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-372"><a href="#cb63-372" aria-hidden="true" tabindex="-1"></a>primjer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GRP1&quot;</span>, <span class="st">&quot;GRP2&quot;</span>, <span class="st">&quot;GRP3&quot;</span>,<span class="st">&quot;GRP1GRP2&quot;</span>, <span class="st">&quot;GRP1GRP3&quot;</span>, <span class="st">&quot;GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP1GRP2&quot;</span>, <span class="st">&quot;GRP1GRP1GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP3&quot;</span>,<span class="st">&quot;GRP2GRP3&quot;</span>,<span class="st">&quot;GRP2GRP1GRP2&quot;</span>, <span class="st">&quot;GRP2GRP1GRP3&quot;</span>, <span class="st">&quot;GRP2GRP2GRP3&quot;</span>, <span class="st">&quot;GRP3GRP1GRP2&quot;</span>, <span class="st">&quot;GRP3GRP1GRP3&quot;</span>, <span class="st">&quot;GRP3GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP1GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP3GRP2GRP3&quot;</span>)</span>
-<span id="cb63-373"><a href="#cb63-373" aria-hidden="true" tabindex="-1"></a>primjer <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(primjer))</span>
-<span id="cb63-374"><a href="#cb63-374" aria-hidden="true" tabindex="-1"></a>primjer</span>
-<span id="cb63-375"><a href="#cb63-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-376"><a href="#cb63-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-377"><a href="#cb63-377" aria-hidden="true" tabindex="-1"></a>If we want to work on a group of characters, put them in round brackets!</span>
-<span id="cb63-378"><a href="#cb63-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-379"><a href="#cb63-379" aria-hidden="true" tabindex="-1"></a>All words where &quot;GRP1&quot; is repeated 2 times in a row:</span>
-<span id="cb63-380"><a href="#cb63-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-383"><a href="#cb63-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-384"><a href="#cb63-384" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;(GRP1){2}&quot;</span>, primjer, <span class="at">value=</span>T)</span>
-<span id="cb63-385"><a href="#cb63-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-386"><a href="#cb63-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-387"><a href="#cb63-387" aria-hidden="true" tabindex="-1"></a>All words where &quot;GRP1&quot; is repeated 1 or more times before GRP2 :</span>
-<span id="cb63-388"><a href="#cb63-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-389"><a href="#cb63-389" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
-<span id="cb63-390"><a href="#cb63-390" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;(GRP1)+(GRP2)&quot;</span>, primjer, <span class="at">value=</span>T)</span>
-<span id="cb63-391"><a href="#cb63-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-392"><a href="#cb63-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-393"><a href="#cb63-393" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Boolean operators**</span></span>
-<span id="cb63-394"><a href="#cb63-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-395"><a href="#cb63-395" aria-hidden="true" tabindex="-1"></a>OR (\|): Matches either pattern on its left or right. P2 matches &quot;P1&quot; or</span>
-<span id="cb63-396"><a href="#cb63-396" aria-hidden="true" tabindex="-1"></a>&quot;P2&quot;.</span>
-<span id="cb63-397"><a href="#cb63-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-398"><a href="#cb63-398" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Functions that use regular expressions**</span></span>
-<span id="cb63-399"><a href="#cb63-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-400"><a href="#cb63-400" aria-hidden="true" tabindex="-1"></a>**grepl(pattern, x)**: Returns TRUE/FALSE if pattern found</span>
-<span id="cb63-401"><a href="#cb63-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-402"><a href="#cb63-402" aria-hidden="true" tabindex="-1"></a>**grep(pattern, x)**: Returns indices of matches</span>
-<span id="cb63-403"><a href="#cb63-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-404"><a href="#cb63-404" aria-hidden="true" tabindex="-1"></a>**regexpr(pattern, x)**: Returns position of first match</span>
-<span id="cb63-405"><a href="#cb63-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-406"><a href="#cb63-406" aria-hidden="true" tabindex="-1"></a>**gregexpr(pattern, x)**: Positions of all matches</span>
-<span id="cb63-407"><a href="#cb63-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-408"><a href="#cb63-408" aria-hidden="true" tabindex="-1"></a>**sub(pattern, replacement, x)**: Replace first match</span>
-<span id="cb63-409"><a href="#cb63-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-410"><a href="#cb63-410" aria-hidden="true" tabindex="-1"></a>**gsub(pattern, replacement, x)**: Replace all matches</span>
-<span id="cb63-411"><a href="#cb63-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-412"><a href="#cb63-412" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb63-413"><a href="#cb63-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-414"><a href="#cb63-414" aria-hidden="true" tabindex="-1"></a>Example 1: Finding GC dinucleotides with grepl()</span>
-<span id="cb63-415"><a href="#cb63-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-418"><a href="#cb63-418" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-419"><a href="#cb63-419" aria-hidden="true" tabindex="-1"></a>seq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCGTA&quot;</span>, <span class="st">&quot;CGTTGA&quot;</span>, <span class="st">&quot;ATATAT&quot;</span>, <span class="st">&quot;GCGCGC&quot;</span>)</span>
-<span id="cb63-420"><a href="#cb63-420" aria-hidden="true" tabindex="-1"></a><span class="co"># Find sequences with CG dinucleotide</span></span>
-<span id="cb63-421"><a href="#cb63-421" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>(<span class="st">&quot;CG&quot;</span>, seq)</span>
-<span id="cb63-422"><a href="#cb63-422" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] TRUE TRUE FALSE TRUE</span></span>
-<span id="cb63-423"><a href="#cb63-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-424"><a href="#cb63-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-425"><a href="#cb63-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-426"><a href="#cb63-426" aria-hidden="true" tabindex="-1"></a>Example 2: Transcribing DNA to mRNA with gsub()</span>
-<span id="cb63-427"><a href="#cb63-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-430"><a href="#cb63-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-431"><a href="#cb63-431" aria-hidden="true" tabindex="-1"></a>dna_seq <span class="ot">&lt;-</span> <span class="st">&quot;ATGCGTACGTTAG&quot;</span></span>
-<span id="cb63-432"><a href="#cb63-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-433"><a href="#cb63-433" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace all &#39;T&#39; with &#39;U&#39; using gsub for full transcription</span></span>
-<span id="cb63-434"><a href="#cb63-434" aria-hidden="true" tabindex="-1"></a>mrna_seq <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;U&quot;</span>, dna_seq)</span>
-<span id="cb63-435"><a href="#cb63-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-436"><a href="#cb63-436" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mrna_seq)</span>
-<span id="cb63-437"><a href="#cb63-437" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: &quot;AUGCGUACGUUAG&quot;</span></span>
-<span id="cb63-438"><a href="#cb63-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-439"><a href="#cb63-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-440"><a href="#cb63-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-441"><a href="#cb63-441" aria-hidden="true" tabindex="-1"></a>Example 3: Finding the Position of a Transcription Factor (TF) Binding</span>
-<span id="cb63-442"><a href="#cb63-442" aria-hidden="true" tabindex="-1"></a>Site with regexpr()</span>
-<span id="cb63-443"><a href="#cb63-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-446"><a href="#cb63-446" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-447"><a href="#cb63-447" aria-hidden="true" tabindex="-1"></a>dna_seq <span class="ot">&lt;-</span> <span class="st">&quot;GCGTATATAGCGCGTATAAGT&quot;</span></span>
-<span id="cb63-448"><a href="#cb63-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-449"><a href="#cb63-449" aria-hidden="true" tabindex="-1"></a><span class="co"># Find position of first TATA box using regexpr</span></span>
-<span id="cb63-450"><a href="#cb63-450" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> <span class="fu">regexpr</span>(<span class="st">&quot;TATA&quot;</span>, dna_seq)</span>
-<span id="cb63-451"><a href="#cb63-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-452"><a href="#cb63-452" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pos)          <span class="co"># Starting position of first match</span></span>
-<span id="cb63-453"><a href="#cb63-453" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">attr</span>(pos, <span class="st">&quot;match.length&quot;</span>))  <span class="co"># Length of the match</span></span>
-<span id="cb63-454"><a href="#cb63-454" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-455"><a href="#cb63-455" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the matched sequence</span></span>
-<span id="cb63-456"><a href="#cb63-456" aria-hidden="true" tabindex="-1"></a>binding_site <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(dna_seq, pos)</span>
-<span id="cb63-457"><a href="#cb63-457" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(binding_site)  <span class="co"># Should print &quot;TATA&quot;</span></span>
-<span id="cb63-458"><a href="#cb63-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-459"><a href="#cb63-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-460"><a href="#cb63-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-461"><a href="#cb63-461" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises</span></span>
-<span id="cb63-462"><a href="#cb63-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-463"><a href="#cb63-463" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Find all sequences starting with ATG and followed by any three</span>
-<span id="cb63-464"><a href="#cb63-464" aria-hidden="true" tabindex="-1"></a>    nucleotides.</span>
-<span id="cb63-465"><a href="#cb63-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-468"><a href="#cb63-468" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-469"><a href="#cb63-469" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGAAA&quot;</span>, <span class="st">&quot;ATGCCC&quot;</span>, <span class="st">&quot;ATG&quot;</span>, <span class="st">&quot;GGGATG&quot;</span>)</span>
-<span id="cb63-470"><a href="#cb63-470" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb63-471"><a href="#cb63-471" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-472"><a href="#cb63-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-473"><a href="#cb63-473" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Extract all stretches of exactly three or four A&#39;s (A{3,4}) in the</span>
-<span id="cb63-474"><a href="#cb63-474" aria-hidden="true" tabindex="-1"></a>    following DNA sequences.</span>
-<span id="cb63-475"><a href="#cb63-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-478"><a href="#cb63-478" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-479"><a href="#cb63-479" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AAATTT&quot;</span>, <span class="st">&quot;AAAAT&quot;</span>, <span class="st">&quot;AAAAA&quot;</span>, <span class="st">&quot;TTTAAAG&quot;</span>)</span>
-<span id="cb63-480"><a href="#cb63-480" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb63-481"><a href="#cb63-481" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-482"><a href="#cb63-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-483"><a href="#cb63-483" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Replace the first stretch of G&#39;s (one or more) with X in the</span>
-<span id="cb63-484"><a href="#cb63-484" aria-hidden="true" tabindex="-1"></a>    following sequences.</span>
-<span id="cb63-485"><a href="#cb63-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-488"><a href="#cb63-488" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-489"><a href="#cb63-489" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GGATGC&quot;</span>, <span class="st">&quot;GGAAGG&quot;</span>, <span class="st">&quot;AGGCGG&quot;</span>)</span>
-<span id="cb63-490"><a href="#cb63-490" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb63-491"><a href="#cb63-491" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-492"><a href="#cb63-492" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-493"><a href="#cb63-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-494"><a href="#cb63-494" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Check which sequences contain any character other than A, T, C, or G</span>
-<span id="cb63-495"><a href="#cb63-495" aria-hidden="true" tabindex="-1"></a>    (e.g., ambiguous nucleotide N).</span>
-<span id="cb63-496"><a href="#cb63-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-499"><a href="#cb63-499" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-500"><a href="#cb63-500" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCN&quot;</span>, <span class="st">&quot;GGCCA&quot;</span>, <span class="st">&quot;TTANT&quot;</span>)</span>
-<span id="cb63-501"><a href="#cb63-501" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb63-502"><a href="#cb63-502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-503"><a href="#cb63-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb63-504"><a href="#cb63-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-505"><a href="#cb63-505" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Find sequences ending with a stop codon (TAA, TAG, or TGA).</span>
-<span id="cb63-506"><a href="#cb63-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-509"><a href="#cb63-509" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb63-510"><a href="#cb63-510" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCCCTAA&quot;</span>, <span class="st">&quot;ATGCCCTAG&quot;</span>, <span class="st">&quot;ATGCCCTGA&quot;</span>, <span class="st">&quot;ATGCCC&quot;</span>)</span>
-<span id="cb63-511"><a href="#cb63-511" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb63-512"><a href="#cb63-512" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb62" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Regular expressions&quot;</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: &quot;Rosa Karlić&quot;</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation: &quot;Bioinformatics group&quot;</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co">    self-contained: true</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 5</span></span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-align: center</span></span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a><span class="co">    df-print: paged</span></span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: &quot;Show code&quot;</span></span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a><span class="co">    code-line-numbers: false</span></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> </span></span>
+<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a><span class="co">  markdown: </span></span>
+<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a><span class="co">    wrap: 72</span></span>
+<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a>################################ </span>
+<span id="cb62-27"><a href="#cb62-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-28"><a href="#cb62-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb62-29"><a href="#cb62-29" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages tidyverse, data.table</span></span>
+<span id="cb62-30"><a href="#cb62-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb62-31"><a href="#cb62-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb62-32"><a href="#cb62-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb62-33"><a href="#cb62-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hexbin)</span>
+<span id="cb62-34"><a href="#cb62-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-35"><a href="#cb62-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-36"><a href="#cb62-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-37"><a href="#cb62-37" aria-hidden="true" tabindex="-1"></a>##################################################################### </span>
+<span id="cb62-38"><a href="#cb62-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-39"><a href="#cb62-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Regular Expressions**</span></span>
+<span id="cb62-40"><a href="#cb62-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-41"><a href="#cb62-41" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span> <span class="kw">&lt;br/&gt;</span></span>
+<span id="cb62-42"><a href="#cb62-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-43"><a href="#cb62-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig6, echo = FALSE, out.width = &quot;70%&quot;}</span></span>
+<span id="cb62-44"><a href="#cb62-44" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/memazo.jpg&quot;</span>)</span>
+<span id="cb62-45"><a href="#cb62-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-46"><a href="#cb62-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-47"><a href="#cb62-47" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
+<span id="cb62-48"><a href="#cb62-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-49"><a href="#cb62-49" aria-hidden="true" tabindex="-1"></a><span class="fu">### **What are Regular Expressions?**</span></span>
+<span id="cb62-50"><a href="#cb62-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-51"><a href="#cb62-51" aria-hidden="true" tabindex="-1"></a>*Regex* are minimal *strings* that represent a **pattern**. <span class="kw">&lt;br/&gt;</span> Such</span>
+<span id="cb62-52"><a href="#cb62-52" aria-hidden="true" tabindex="-1"></a>strings contain **special characters** that can represent:</span>
+<span id="cb62-53"><a href="#cb62-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-54"><a href="#cb62-54" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Boolean Operations**</span>
+<span id="cb62-55"><a href="#cb62-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-56"><a href="#cb62-56" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Grouping**</span>
+<span id="cb62-57"><a href="#cb62-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-58"><a href="#cb62-58" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Quantification**</span>
+<span id="cb62-59"><a href="#cb62-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-60"><a href="#cb62-60" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Wildcards**</span>
+<span id="cb62-61"><a href="#cb62-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-62"><a href="#cb62-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### Some History</span></span>
+<span id="cb62-63"><a href="#cb62-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-64"><a href="#cb62-64" aria-hidden="true" tabindex="-1"></a>Regex were born in theoretical computer science during the early 50s as</span>
+<span id="cb62-65"><a href="#cb62-65" aria-hidden="true" tabindex="-1"></a>part of the description of &#39;Regular language&#39; coined by Stephen Kleene.</span>
+<span id="cb62-66"><a href="#cb62-66" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
+<span id="cb62-67"><a href="#cb62-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-68"><a href="#cb62-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig7, echo = FALSE, out.width = &quot;50%&quot;}</span></span>
+<span id="cb62-69"><a href="#cb62-69" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/kleene.jpg&quot;</span>)</span>
+<span id="cb62-70"><a href="#cb62-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-71"><a href="#cb62-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-72"><a href="#cb62-72" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
+<span id="cb62-73"><a href="#cb62-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-74"><a href="#cb62-74" aria-hidden="true" tabindex="-1"></a>They started as a representation of more complex diagrams used in the</span>
+<span id="cb62-75"><a href="#cb62-75" aria-hidden="true" tabindex="-1"></a>field and in theoretical linguistics. <span class="kw">&lt;br/&gt;</span></span>
+<span id="cb62-76"><a href="#cb62-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-77"><a href="#cb62-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig8, echo = FALSE, out.width = &quot;100%&quot;}</span></span>
+<span id="cb62-78"><a href="#cb62-78" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/comp.png&quot;</span>)</span>
+<span id="cb62-79"><a href="#cb62-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-80"><a href="#cb62-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-81"><a href="#cb62-81" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
+<span id="cb62-82"><a href="#cb62-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-83"><a href="#cb62-83" aria-hidden="true" tabindex="-1"></a>In the late 60&#39;s they started to be implemented in text processors,</span>
+<span id="cb62-84"><a href="#cb62-84" aria-hidden="true" tabindex="-1"></a>being **ed** one of the most popular at the time. This was followed by</span>
+<span id="cb62-85"><a href="#cb62-85" aria-hidden="true" tabindex="-1"></a>**vi**, **AWK**, **Emacs** the next decade.</span>
+<span id="cb62-86"><a href="#cb62-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-87"><a href="#cb62-87" aria-hidden="true" tabindex="-1"></a>Then in the 80&#39;s... **PERL** happened... And it&#39;s dominance for language</span>
+<span id="cb62-88"><a href="#cb62-88" aria-hidden="true" tabindex="-1"></a>processing is still at large.</span>
+<span id="cb62-89"><a href="#cb62-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-90"><a href="#cb62-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig9, echo = FALSE, out.width = &quot;70%&quot;}</span></span>
+<span id="cb62-91"><a href="#cb62-91" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/perl.png&quot;</span>)</span>
+<span id="cb62-92"><a href="#cb62-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-93"><a href="#cb62-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-94"><a href="#cb62-94" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br/&gt;</span></span>
+<span id="cb62-95"><a href="#cb62-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-96"><a href="#cb62-96" aria-hidden="true" tabindex="-1"></a><span class="fu">### Use of regular expressions</span></span>
+<span id="cb62-97"><a href="#cb62-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-98"><a href="#cb62-98" aria-hidden="true" tabindex="-1"></a>Text search and manipulation in editors and IDEs (e.g., VSCode, Sublime</span>
+<span id="cb62-99"><a href="#cb62-99" aria-hidden="true" tabindex="-1"></a>Text).</span>
+<span id="cb62-100"><a href="#cb62-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-101"><a href="#cb62-101" aria-hidden="true" tabindex="-1"></a>Data validation (emails, phone numbers).</span>
+<span id="cb62-102"><a href="#cb62-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-103"><a href="#cb62-103" aria-hidden="true" tabindex="-1"></a>Log file parsing and monitoring.</span>
+<span id="cb62-104"><a href="#cb62-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-105"><a href="#cb62-105" aria-hidden="true" tabindex="-1"></a>Web scraping and data extraction.</span>
+<span id="cb62-106"><a href="#cb62-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-107"><a href="#cb62-107" aria-hidden="true" tabindex="-1"></a>Programming languages: Python, R, Perl, JavaScript, and many more.</span>
+<span id="cb62-108"><a href="#cb62-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-109"><a href="#cb62-109" aria-hidden="true" tabindex="-1"></a>Command-line tools and shell scripting for automation.</span>
+<span id="cb62-110"><a href="#cb62-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-111"><a href="#cb62-111" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regular expressions in bioinformatics</span></span>
+<span id="cb62-112"><a href="#cb62-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-113"><a href="#cb62-113" aria-hidden="true" tabindex="-1"></a>**File parsing &amp; data extraction:**</span>
+<span id="cb62-114"><a href="#cb62-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-115"><a href="#cb62-115" aria-hidden="true" tabindex="-1"></a>FASTA/FASTQ file processing: extracting headers, filtering sequences.</span>
+<span id="cb62-116"><a href="#cb62-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-117"><a href="#cb62-117" aria-hidden="true" tabindex="-1"></a>GFF/GTF annotation files: extracting gene features.</span>
+<span id="cb62-118"><a href="#cb62-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-119"><a href="#cb62-119" aria-hidden="true" tabindex="-1"></a>VCF (Variant Call Format) files: parsing variant info fields.</span>
+<span id="cb62-120"><a href="#cb62-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-121"><a href="#cb62-121" aria-hidden="true" tabindex="-1"></a>**Sequence pattern searching:**</span>
+<span id="cb62-122"><a href="#cb62-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-123"><a href="#cb62-123" aria-hidden="true" tabindex="-1"></a>Motif detection (e.g., promoter elements, restriction sites).</span>
+<span id="cb62-124"><a href="#cb62-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-125"><a href="#cb62-125" aria-hidden="true" tabindex="-1"></a>Detecting ambiguous nucleotide codes.</span>
+<span id="cb62-126"><a href="#cb62-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-127"><a href="#cb62-127" aria-hidden="true" tabindex="-1"></a>**Data cleaning:** standardizing metadata fields in sequencing</span>
+<span id="cb62-128"><a href="#cb62-128" aria-hidden="true" tabindex="-1"></a>experiment descriptions.</span>
+<span id="cb62-129"><a href="#cb62-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-130"><a href="#cb62-130" aria-hidden="true" tabindex="-1"></a>Regular expressions can also be used in R. Let&#39;s explore its potential.</span>
+<span id="cb62-131"><a href="#cb62-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-132"><a href="#cb62-132" aria-hidden="true" tabindex="-1"></a><span class="fu">## **grep**</span></span>
+<span id="cb62-133"><a href="#cb62-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-134"><a href="#cb62-134" aria-hidden="true" tabindex="-1"></a>Grep is the most common name for matching patterns with regex. It exists</span>
+<span id="cb62-135"><a href="#cb62-135" aria-hidden="true" tabindex="-1"></a>just as **grep** in base R but be aware that there are many variants of</span>
+<span id="cb62-136"><a href="#cb62-136" aria-hidden="true" tabindex="-1"></a>it.</span>
+<span id="cb62-137"><a href="#cb62-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-138"><a href="#cb62-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### What does grep mean?</span></span>
+<span id="cb62-139"><a href="#cb62-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-140"><a href="#cb62-140" aria-hidden="true" tabindex="-1"></a>**g/re/p** meaning &quot;Global search for Regular Expression and Print</span>
+<span id="cb62-141"><a href="#cb62-141" aria-hidden="true" tabindex="-1"></a>matching lines&quot;</span>
+<span id="cb62-142"><a href="#cb62-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-143"><a href="#cb62-143" aria-hidden="true" tabindex="-1"></a><span class="fu">### How to use it?</span></span>
+<span id="cb62-144"><a href="#cb62-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-145"><a href="#cb62-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r grep, echo = TRUE, eval = FALSE}</span></span>
+<span id="cb62-146"><a href="#cb62-146" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;pattern&quot;</span>, YourStringOfInterest)</span>
+<span id="cb62-147"><a href="#cb62-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-148"><a href="#cb62-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-149"><a href="#cb62-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### Play with it!</span></span>
+<span id="cb62-150"><a href="#cb62-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-153"><a href="#cb62-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-154"><a href="#cb62-154" aria-hidden="true" tabindex="-1"></a><span class="co">#grep(, )</span></span>
+<span id="cb62-155"><a href="#cb62-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-156"><a href="#cb62-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-157"><a href="#cb62-157" aria-hidden="true" tabindex="-1"></a><span class="fu">### Let&#39;s get some data.</span></span>
+<span id="cb62-158"><a href="#cb62-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-161"><a href="#cb62-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-162"><a href="#cb62-162" aria-hidden="true" tabindex="-1"></a>reg.exmpl <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;krava&quot;</span>, <span class="st">&quot;plava&quot;</span>, <span class="st">&quot;prava&quot;</span>, <span class="st">&quot;plavac&quot;</span>,<span class="st">&quot;tava&quot;</span>, <span class="st">&quot;vatra&quot;</span>, <span class="st">&quot;bla&quot;</span>, <span class="st">&quot;blabla&quot;</span>, <span class="st">&quot;blablabla&quot;</span>, </span>
+<span id="cb62-163"><a href="#cb62-163" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;abcabcabc&quot;</span>, <span class="st">&quot;abcblaabc&quot;</span>, <span class="st">&quot;blaXblaX&quot;</span>, <span class="st">&quot;abcYabc&quot;</span>, <span class="st">&quot;abc1z&quot;</span>, <span class="st">&quot;abc4z&quot;</span>,<span class="st">&quot;plllava&quot;</span>,</span>
+<span id="cb62-164"><a href="#cb62-164" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;pava&quot;</span>, <span class="st">&quot;XX&quot;</span>,<span class="st">&quot;XnblaX&quot;</span>)</span>
+<span id="cb62-165"><a href="#cb62-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-166"><a href="#cb62-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-167"><a href="#cb62-167" aria-hidden="true" tabindex="-1"></a>Problem: We want to find all words that contain the substring &quot;va&quot;.</span>
+<span id="cb62-168"><a href="#cb62-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-171"><a href="#cb62-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-172"><a href="#cb62-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-173"><a href="#cb62-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-174"><a href="#cb62-174" aria-hidden="true" tabindex="-1"></a>We are just getting their position in the subject array. if you want</span>
+<span id="cb62-175"><a href="#cb62-175" aria-hidden="true" tabindex="-1"></a>**grep** to print the elements that matched you will need to add **value</span>
+<span id="cb62-176"><a href="#cb62-176" aria-hidden="true" tabindex="-1"></a>= TRUE**</span>
+<span id="cb62-177"><a href="#cb62-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-180"><a href="#cb62-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-181"><a href="#cb62-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-182"><a href="#cb62-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-183"><a href="#cb62-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Anchors**</span></span>
+<span id="cb62-184"><a href="#cb62-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-185"><a href="#cb62-185" aria-hidden="true" tabindex="-1"></a>\^ \$: Starting or ending with substring</span>
+<span id="cb62-186"><a href="#cb62-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-187"><a href="#cb62-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE}</span></span>
+<span id="cb62-188"><a href="#cb62-188" aria-hidden="true" tabindex="-1"></a>reg.exmpl</span>
+<span id="cb62-189"><a href="#cb62-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-190"><a href="#cb62-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-191"><a href="#cb62-191" aria-hidden="true" tabindex="-1"></a>Symbol \^ represents beginning of the string:</span>
+<span id="cb62-192"><a href="#cb62-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-195"><a href="#cb62-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-196"><a href="#cb62-196" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;^va&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span>
+<span id="cb62-197"><a href="#cb62-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-198"><a href="#cb62-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-199"><a href="#cb62-199" aria-hidden="true" tabindex="-1"></a>Symbol \$ represents end of the string:</span>
+<span id="cb62-200"><a href="#cb62-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-203"><a href="#cb62-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-204"><a href="#cb62-204" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;ra$&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span>
+<span id="cb62-205"><a href="#cb62-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-206"><a href="#cb62-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-207"><a href="#cb62-207" aria-hidden="true" tabindex="-1"></a>A)  Get all the words that contain the substring &quot;bla&quot;.</span>
+<span id="cb62-208"><a href="#cb62-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-211"><a href="#cb62-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-212"><a href="#cb62-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-213"><a href="#cb62-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-214"><a href="#cb62-214" aria-hidden="true" tabindex="-1"></a>B)  Get all the words that START with substring &quot;bla&quot;.\</span>
+<span id="cb62-215"><a href="#cb62-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-218"><a href="#cb62-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-219"><a href="#cb62-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-220"><a href="#cb62-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-221"><a href="#cb62-221" aria-hidden="true" tabindex="-1"></a>C)  Get all the words that END with substring &quot;bla&quot;.\</span>
+<span id="cb62-222"><a href="#cb62-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-225"><a href="#cb62-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-226"><a href="#cb62-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-227"><a href="#cb62-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-228"><a href="#cb62-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Wildcards**</span></span>
+<span id="cb62-229"><a href="#cb62-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-230"><a href="#cb62-230" aria-hidden="true" tabindex="-1"></a>We want to find all words that look like: &quot;p&quot; followed by any one</span>
+<span id="cb62-231"><a href="#cb62-231" aria-hidden="true" tabindex="-1"></a>character, followed by &quot;ava&quot;.</span>
+<span id="cb62-232"><a href="#cb62-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-233"><a href="#cb62-233" aria-hidden="true" tabindex="-1"></a>In our case this would be plava, prava.\</span>
+<span id="cb62-234"><a href="#cb62-234" aria-hidden="true" tabindex="-1"></a>When we are not sure of which character we expect, we can just write .</span>
+<span id="cb62-235"><a href="#cb62-235" aria-hidden="true" tabindex="-1"></a>instead of that character.</span>
+<span id="cb62-236"><a href="#cb62-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-237"><a href="#cb62-237" aria-hidden="true" tabindex="-1"></a>Go ahead!</span>
+<span id="cb62-238"><a href="#cb62-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-241"><a href="#cb62-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-242"><a href="#cb62-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-243"><a href="#cb62-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-244"><a href="#cb62-244" aria-hidden="true" tabindex="-1"></a>There are many more WILDCARD characters, some of them are to represent</span>
+<span id="cb62-245"><a href="#cb62-245" aria-hidden="true" tabindex="-1"></a>things as **any digit** or **any letter**. You&#39;ll need to check for your</span>
+<span id="cb62-246"><a href="#cb62-246" aria-hidden="true" tabindex="-1"></a>homework.</span>
+<span id="cb62-247"><a href="#cb62-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-248"><a href="#cb62-248" aria-hidden="true" tabindex="-1"></a><span class="fu">### Restrict your options</span></span>
+<span id="cb62-249"><a href="#cb62-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-250"><a href="#cb62-250" aria-hidden="true" tabindex="-1"></a>If we want to find words containing lava or tava as a substring, we can</span>
+<span id="cb62-251"><a href="#cb62-251" aria-hidden="true" tabindex="-1"></a>write that as:</span>
+<span id="cb62-252"><a href="#cb62-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-255"><a href="#cb62-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-256"><a href="#cb62-256" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;[lt]ava&quot;</span>, reg.exmpl, <span class="at">value=</span>T)</span>
+<span id="cb62-257"><a href="#cb62-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-258"><a href="#cb62-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-259"><a href="#cb62-259" aria-hidden="true" tabindex="-1"></a>Here, <span class="sc">\[</span>lt<span class="sc">\]</span> represents ONE character - either l or t in this position.</span>
+<span id="cb62-260"><a href="#cb62-260" aria-hidden="true" tabindex="-1"></a>Sets of characters enclosed in square brackets <span class="sc">\[\]</span> are called character</span>
+<span id="cb62-261"><a href="#cb62-261" aria-hidden="true" tabindex="-1"></a>classes. The pattern will match any single character that belongs to</span>
+<span id="cb62-262"><a href="#cb62-262" aria-hidden="true" tabindex="-1"></a>that set.</span>
+<span id="cb62-263"><a href="#cb62-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-264"><a href="#cb62-264" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Quantification Characters**</span></span>
+<span id="cb62-265"><a href="#cb62-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-266"><a href="#cb62-266" aria-hidden="true" tabindex="-1"></a>When we don&#39;t know the number of occurrences of some character, we can</span>
+<span id="cb62-267"><a href="#cb62-267" aria-hidden="true" tabindex="-1"></a>use special symbols to describe what we expect:</span>
+<span id="cb62-268"><a href="#cb62-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-269"><a href="#cb62-269" aria-hidden="true" tabindex="-1"></a>? - zero or one <span class="kw">&lt;br/&gt;</span> + - one or more <span class="kw">&lt;br/&gt;</span> <span class="sc">\*</span> - zero or more <span class="kw">&lt;br/&gt;</span></span>
+<span id="cb62-270"><a href="#cb62-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-273"><a href="#cb62-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-274"><a href="#cb62-274" aria-hidden="true" tabindex="-1"></a>lll <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Eample1&quot;</span>,<span class="st">&quot;Example1&quot;</span>, <span class="st">&quot;Exxample1&quot;</span>, <span class="st">&quot;Exxxample1&quot;</span>)</span>
+<span id="cb62-275"><a href="#cb62-275" aria-hidden="true" tabindex="-1"></a>lll</span>
+<span id="cb62-276"><a href="#cb62-276" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-277"><a href="#cb62-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-278"><a href="#cb62-278" aria-hidden="true" tabindex="-1"></a>For example:</span>
+<span id="cb62-279"><a href="#cb62-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-282"><a href="#cb62-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-283"><a href="#cb62-283" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex?ample1&quot;</span>, lll, <span class="at">value =</span> T)</span>
+<span id="cb62-284"><a href="#cb62-284" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex+ample1&quot;</span>, lll, <span class="at">value =</span> T)</span>
+<span id="cb62-285"><a href="#cb62-285" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex*ample1&quot;</span>, lll, <span class="at">value =</span> T)</span>
+<span id="cb62-286"><a href="#cb62-286" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-287"><a href="#cb62-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-288"><a href="#cb62-288" aria-hidden="true" tabindex="-1"></a>When we know the number of occurrences of some character, we can use</span>
+<span id="cb62-289"><a href="#cb62-289" aria-hidden="true" tabindex="-1"></a>this:</span>
+<span id="cb62-290"><a href="#cb62-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-291"><a href="#cb62-291" aria-hidden="true" tabindex="-1"></a>{n} - this symbol appears here exactly n times in a row</span>
+<span id="cb62-292"><a href="#cb62-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-293"><a href="#cb62-293" aria-hidden="true" tabindex="-1"></a>{n, m} - this symbol appears here from n to m times in a row</span>
+<span id="cb62-294"><a href="#cb62-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-295"><a href="#cb62-295" aria-hidden="true" tabindex="-1"></a>What do you expect to get now?</span>
+<span id="cb62-296"><a href="#cb62-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-299"><a href="#cb62-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-300"><a href="#cb62-300" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{2}&quot;</span>, lll, <span class="at">value =</span> T)</span>
+<span id="cb62-301"><a href="#cb62-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-302"><a href="#cb62-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-305"><a href="#cb62-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-306"><a href="#cb62-306" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{0,2}&quot;</span>, lll, <span class="at">value =</span> T)</span>
+<span id="cb62-307"><a href="#cb62-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-308"><a href="#cb62-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-311"><a href="#cb62-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-312"><a href="#cb62-312" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;x{2}a&quot;</span>, lll, <span class="at">value =</span> T)</span>
+<span id="cb62-313"><a href="#cb62-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-314"><a href="#cb62-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-317"><a href="#cb62-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-318"><a href="#cb62-318" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;Ex{2}a&quot;</span>, lll, <span class="at">value =</span> T)</span>
+<span id="cb62-319"><a href="#cb62-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-320"><a href="#cb62-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-321"><a href="#cb62-321" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Special Characters**</span></span>
+<span id="cb62-322"><a href="#cb62-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-323"><a href="#cb62-323" aria-hidden="true" tabindex="-1"></a>What if we want to find &quot;?&quot;?\</span>
+<span id="cb62-324"><a href="#cb62-324" aria-hidden="true" tabindex="-1"></a>Look at the following example:</span>
+<span id="cb62-325"><a href="#cb62-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-326"><a href="#cb62-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = TRUE, eval = TRUE}</span></span>
+<span id="cb62-327"><a href="#cb62-327" aria-hidden="true" tabindex="-1"></a>primjer2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;How&quot;</span>,<span class="st">&quot;to&quot;</span>, <span class="st">&quot;find &quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;question&quot;</span>, <span class="st">&quot;mark?&quot;</span>)</span>
+<span id="cb62-328"><a href="#cb62-328" aria-hidden="true" tabindex="-1"></a>primjer2</span>
+<span id="cb62-329"><a href="#cb62-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-330"><a href="#cb62-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-331"><a href="#cb62-331" aria-hidden="true" tabindex="-1"></a>Since ? is a special character, if we try to use it like this:</span>
+<span id="cb62-332"><a href="#cb62-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-335"><a href="#cb62-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-336"><a href="#cb62-336" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;?&quot;</span>, primjer2,<span class="at">value=</span>T)</span>
+<span id="cb62-337"><a href="#cb62-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-338"><a href="#cb62-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-339"><a href="#cb62-339" aria-hidden="true" tabindex="-1"></a>We wont get what we want. We use &quot;&quot; to tell grep that we want the real</span>
+<span id="cb62-340"><a href="#cb62-340" aria-hidden="true" tabindex="-1"></a>sign and not the special ability of that sign!</span>
+<span id="cb62-341"><a href="#cb62-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-342"><a href="#cb62-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r playground15, exercise = TRUE, rows.print = 7}</span></span>
+<span id="cb62-343"><a href="#cb62-343" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">?&quot;</span>, primjer2,<span class="at">value=</span>T)</span>
+<span id="cb62-344"><a href="#cb62-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-345"><a href="#cb62-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-346"><a href="#cb62-346" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Exclude characters**</span></span>
+<span id="cb62-347"><a href="#cb62-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-348"><a href="#cb62-348" aria-hidden="true" tabindex="-1"></a>If you want to find a character that is NOT some character, use &quot;<span class="sc">\[</span>\^</span>
+<span id="cb62-349"><a href="#cb62-349" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span>&quot;</span>
+<span id="cb62-350"><a href="#cb62-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-353"><a href="#cb62-353" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-354"><a href="#cb62-354" aria-hidden="true" tabindex="-1"></a>reg.exmpl</span>
+<span id="cb62-355"><a href="#cb62-355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-356"><a href="#cb62-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-359"><a href="#cb62-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-360"><a href="#cb62-360" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;.ava&quot;</span>, reg.exmpl, <span class="at">value =</span> T)</span>
+<span id="cb62-361"><a href="#cb62-361" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;[^l]ava&quot;</span>, reg.exmpl, <span class="at">value =</span> T)</span>
+<span id="cb62-362"><a href="#cb62-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-363"><a href="#cb62-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-364"><a href="#cb62-364" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Groups**</span></span>
+<span id="cb62-365"><a href="#cb62-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-366"><a href="#cb62-366" aria-hidden="true" tabindex="-1"></a>When we want to find groups of characters, we can do it like this:</span>
+<span id="cb62-367"><a href="#cb62-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-370"><a href="#cb62-370" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-371"><a href="#cb62-371" aria-hidden="true" tabindex="-1"></a>primjer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GRP1&quot;</span>, <span class="st">&quot;GRP2&quot;</span>, <span class="st">&quot;GRP3&quot;</span>,<span class="st">&quot;GRP1GRP2&quot;</span>, <span class="st">&quot;GRP1GRP3&quot;</span>, <span class="st">&quot;GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP1GRP2&quot;</span>, <span class="st">&quot;GRP1GRP1GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP3&quot;</span>,<span class="st">&quot;GRP2GRP3&quot;</span>,<span class="st">&quot;GRP2GRP1GRP2&quot;</span>, <span class="st">&quot;GRP2GRP1GRP3&quot;</span>, <span class="st">&quot;GRP2GRP2GRP3&quot;</span>, <span class="st">&quot;GRP3GRP1GRP2&quot;</span>, <span class="st">&quot;GRP3GRP1GRP3&quot;</span>, <span class="st">&quot;GRP3GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP1GRP3&quot;</span>, <span class="st">&quot;GRP1GRP2GRP2GRP3&quot;</span>, <span class="st">&quot;GRP1GRP3GRP2GRP3&quot;</span>)</span>
+<span id="cb62-372"><a href="#cb62-372" aria-hidden="true" tabindex="-1"></a>primjer <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(primjer))</span>
+<span id="cb62-373"><a href="#cb62-373" aria-hidden="true" tabindex="-1"></a>primjer</span>
+<span id="cb62-374"><a href="#cb62-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-375"><a href="#cb62-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-376"><a href="#cb62-376" aria-hidden="true" tabindex="-1"></a>If we want to work on a group of characters, put them in round brackets!</span>
+<span id="cb62-377"><a href="#cb62-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-378"><a href="#cb62-378" aria-hidden="true" tabindex="-1"></a>All words where &quot;GRP1&quot; is repeated 2 times in a row:</span>
+<span id="cb62-379"><a href="#cb62-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-382"><a href="#cb62-382" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-383"><a href="#cb62-383" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;(GRP1){2}&quot;</span>, primjer, <span class="at">value=</span>T)</span>
+<span id="cb62-384"><a href="#cb62-384" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-385"><a href="#cb62-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-386"><a href="#cb62-386" aria-hidden="true" tabindex="-1"></a>All words where &quot;GRP1&quot; is repeated 1 or more times before GRP2 :</span>
+<span id="cb62-387"><a href="#cb62-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-388"><a href="#cb62-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb62-389"><a href="#cb62-389" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span>(<span class="st">&quot;(GRP1)+(GRP2)&quot;</span>, primjer, <span class="at">value=</span>T)</span>
+<span id="cb62-390"><a href="#cb62-390" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-391"><a href="#cb62-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-392"><a href="#cb62-392" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Boolean operators**</span></span>
+<span id="cb62-393"><a href="#cb62-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-394"><a href="#cb62-394" aria-hidden="true" tabindex="-1"></a>OR (\|): Matches either pattern on its left or right. P2 matches &quot;P1&quot; or</span>
+<span id="cb62-395"><a href="#cb62-395" aria-hidden="true" tabindex="-1"></a>&quot;P2&quot;.</span>
+<span id="cb62-396"><a href="#cb62-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-397"><a href="#cb62-397" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Functions that use regular expressions**</span></span>
+<span id="cb62-398"><a href="#cb62-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-399"><a href="#cb62-399" aria-hidden="true" tabindex="-1"></a>**grepl(pattern, x)**: Returns TRUE/FALSE if pattern found</span>
+<span id="cb62-400"><a href="#cb62-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-401"><a href="#cb62-401" aria-hidden="true" tabindex="-1"></a>**grep(pattern, x)**: Returns indices of matches</span>
+<span id="cb62-402"><a href="#cb62-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-403"><a href="#cb62-403" aria-hidden="true" tabindex="-1"></a>**regexpr(pattern, x)**: Returns position of first match</span>
+<span id="cb62-404"><a href="#cb62-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-405"><a href="#cb62-405" aria-hidden="true" tabindex="-1"></a>**gregexpr(pattern, x)**: Positions of all matches</span>
+<span id="cb62-406"><a href="#cb62-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-407"><a href="#cb62-407" aria-hidden="true" tabindex="-1"></a>**sub(pattern, replacement, x)**: Replace first match</span>
+<span id="cb62-408"><a href="#cb62-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-409"><a href="#cb62-409" aria-hidden="true" tabindex="-1"></a>**gsub(pattern, replacement, x)**: Replace all matches</span>
+<span id="cb62-410"><a href="#cb62-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-411"><a href="#cb62-411" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb62-412"><a href="#cb62-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-413"><a href="#cb62-413" aria-hidden="true" tabindex="-1"></a>Example 1: Finding GC dinucleotides with grepl()</span>
+<span id="cb62-414"><a href="#cb62-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-417"><a href="#cb62-417" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-418"><a href="#cb62-418" aria-hidden="true" tabindex="-1"></a>seq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCGTA&quot;</span>, <span class="st">&quot;CGTTGA&quot;</span>, <span class="st">&quot;ATATAT&quot;</span>, <span class="st">&quot;GCGCGC&quot;</span>)</span>
+<span id="cb62-419"><a href="#cb62-419" aria-hidden="true" tabindex="-1"></a><span class="co"># Find sequences with CG dinucleotide</span></span>
+<span id="cb62-420"><a href="#cb62-420" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>(<span class="st">&quot;CG&quot;</span>, seq)</span>
+<span id="cb62-421"><a href="#cb62-421" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] TRUE TRUE FALSE TRUE</span></span>
+<span id="cb62-422"><a href="#cb62-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-423"><a href="#cb62-423" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-424"><a href="#cb62-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-425"><a href="#cb62-425" aria-hidden="true" tabindex="-1"></a>Example 2: Transcribing DNA to mRNA with gsub()</span>
+<span id="cb62-426"><a href="#cb62-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-429"><a href="#cb62-429" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-430"><a href="#cb62-430" aria-hidden="true" tabindex="-1"></a>dna_seq <span class="ot">&lt;-</span> <span class="st">&quot;ATGCGTACGTTAG&quot;</span></span>
+<span id="cb62-431"><a href="#cb62-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-432"><a href="#cb62-432" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace all &#39;T&#39; with &#39;U&#39; using gsub for full transcription</span></span>
+<span id="cb62-433"><a href="#cb62-433" aria-hidden="true" tabindex="-1"></a>mrna_seq <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;U&quot;</span>, dna_seq)</span>
+<span id="cb62-434"><a href="#cb62-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-435"><a href="#cb62-435" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mrna_seq)</span>
+<span id="cb62-436"><a href="#cb62-436" aria-hidden="true" tabindex="-1"></a><span class="co"># Output: &quot;AUGCGUACGUUAG&quot;</span></span>
+<span id="cb62-437"><a href="#cb62-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-438"><a href="#cb62-438" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-439"><a href="#cb62-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-440"><a href="#cb62-440" aria-hidden="true" tabindex="-1"></a>Example 3: Finding the Position of a Transcription Factor (TF) Binding</span>
+<span id="cb62-441"><a href="#cb62-441" aria-hidden="true" tabindex="-1"></a>Site with regexpr()</span>
+<span id="cb62-442"><a href="#cb62-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-445"><a href="#cb62-445" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-446"><a href="#cb62-446" aria-hidden="true" tabindex="-1"></a>dna_seq <span class="ot">&lt;-</span> <span class="st">&quot;GCGTATATAGCGCGTATAAGT&quot;</span></span>
+<span id="cb62-447"><a href="#cb62-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-448"><a href="#cb62-448" aria-hidden="true" tabindex="-1"></a><span class="co"># Find position of first TATA box using regexpr</span></span>
+<span id="cb62-449"><a href="#cb62-449" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> <span class="fu">regexpr</span>(<span class="st">&quot;TATA&quot;</span>, dna_seq)</span>
+<span id="cb62-450"><a href="#cb62-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-451"><a href="#cb62-451" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pos)          <span class="co"># Starting position of first match</span></span>
+<span id="cb62-452"><a href="#cb62-452" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">attr</span>(pos, <span class="st">&quot;match.length&quot;</span>))  <span class="co"># Length of the match</span></span>
+<span id="cb62-453"><a href="#cb62-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-454"><a href="#cb62-454" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the matched sequence</span></span>
+<span id="cb62-455"><a href="#cb62-455" aria-hidden="true" tabindex="-1"></a>binding_site <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(dna_seq, pos)</span>
+<span id="cb62-456"><a href="#cb62-456" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(binding_site)  <span class="co"># Should print &quot;TATA&quot;</span></span>
+<span id="cb62-457"><a href="#cb62-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-458"><a href="#cb62-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-459"><a href="#cb62-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-460"><a href="#cb62-460" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises</span></span>
+<span id="cb62-461"><a href="#cb62-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-462"><a href="#cb62-462" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Find all sequences starting with ATG and followed by any three</span>
+<span id="cb62-463"><a href="#cb62-463" aria-hidden="true" tabindex="-1"></a>    nucleotides.</span>
+<span id="cb62-464"><a href="#cb62-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-467"><a href="#cb62-467" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-468"><a href="#cb62-468" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGAAA&quot;</span>, <span class="st">&quot;ATGCCC&quot;</span>, <span class="st">&quot;ATG&quot;</span>, <span class="st">&quot;GGGATG&quot;</span>)</span>
+<span id="cb62-469"><a href="#cb62-469" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb62-470"><a href="#cb62-470" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-471"><a href="#cb62-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-472"><a href="#cb62-472" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Extract all stretches of exactly three or four A&#39;s (A{3,4}) in the</span>
+<span id="cb62-473"><a href="#cb62-473" aria-hidden="true" tabindex="-1"></a>    following DNA sequences.</span>
+<span id="cb62-474"><a href="#cb62-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-477"><a href="#cb62-477" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-478"><a href="#cb62-478" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AAATTT&quot;</span>, <span class="st">&quot;AAAAT&quot;</span>, <span class="st">&quot;AAAAA&quot;</span>, <span class="st">&quot;TTTAAAG&quot;</span>)</span>
+<span id="cb62-479"><a href="#cb62-479" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb62-480"><a href="#cb62-480" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-481"><a href="#cb62-481" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-482"><a href="#cb62-482" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Replace the first stretch of G&#39;s (one or more) with X in the</span>
+<span id="cb62-483"><a href="#cb62-483" aria-hidden="true" tabindex="-1"></a>    following sequences.</span>
+<span id="cb62-484"><a href="#cb62-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-487"><a href="#cb62-487" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-488"><a href="#cb62-488" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;GGATGC&quot;</span>, <span class="st">&quot;GGAAGG&quot;</span>, <span class="st">&quot;AGGCGG&quot;</span>)</span>
+<span id="cb62-489"><a href="#cb62-489" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb62-490"><a href="#cb62-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-491"><a href="#cb62-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-492"><a href="#cb62-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-493"><a href="#cb62-493" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Check which sequences contain any character other than A, T, C, or G</span>
+<span id="cb62-494"><a href="#cb62-494" aria-hidden="true" tabindex="-1"></a>    (e.g., ambiguous nucleotide N).</span>
+<span id="cb62-495"><a href="#cb62-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-498"><a href="#cb62-498" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-499"><a href="#cb62-499" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCN&quot;</span>, <span class="st">&quot;GGCCA&quot;</span>, <span class="st">&quot;TTANT&quot;</span>)</span>
+<span id="cb62-500"><a href="#cb62-500" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb62-501"><a href="#cb62-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-502"><a href="#cb62-502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-503"><a href="#cb62-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-504"><a href="#cb62-504" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Find sequences ending with a stop codon (TAA, TAG, or TGA).</span>
+<span id="cb62-505"><a href="#cb62-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-508"><a href="#cb62-508" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-509"><a href="#cb62-509" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ATGCCCTAA&quot;</span>, <span class="st">&quot;ATGCCCTAG&quot;</span>, <span class="st">&quot;ATGCCCTGA&quot;</span>, <span class="st">&quot;ATGCCC&quot;</span>)</span>
+<span id="cb62-510"><a href="#cb62-510" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb62-511"><a href="#cb62-511" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

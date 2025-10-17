@@ -1,5 +1,0 @@
-"0","covid_dt <- as.data.table(coronavirus::coronavirus)
-"
-"2","Error in as.data.table(coronavirus::coronavirus) : 
-  could not find function ""as.data.table""
-"

@@ -1,0 +1,4 @@
+"0","ensembl <- useEnsembl(biomart = ""genes"", dataset = ""hsapiens_gene_ensembl"")"
+"2","Error in useEnsembl(biomart = ""genes"", dataset = ""hsapiens_gene_ensembl"") : 
+  could not find function ""useEnsembl""
+"
