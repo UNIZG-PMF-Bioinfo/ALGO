@@ -4,7 +4,7 @@ author:
   - name: "dr.sc. Paula Štancl"
     affiliation: "Bioinformatics group"
   - name: "dr.sc. Filip Horvat"
-    affiliation: "Bioinformatics group"
+    affiliation: "Max Perutz Labs, Vienna Biocenter Campus (VBC), Vienna, Austria"
 format:
   html:
     self-contained: true
@@ -22,8 +22,7 @@ execute:
   message: false
 ---
 
-
-##  What is **Bioconductor**?
+## What is **Bioconductor**?
 
 ### Bioinformatics has always benefited from curated packages and repositories.
 
@@ -43,26 +42,26 @@ Bioconductor provides tools for the analysis and comprehension of high-throughpu
 
 **The broad goals of the Bioconductor project are:**
 
-- To provide a **common software platform** that enables the rapid development and deployment of **extensible, scalable, and interoperable** software.
+-   To provide a **common software platform** that enables the rapid development and deployment of **extensible, scalable, and interoperable** software.
 
-- To provide widespread access to a broad range of powerful **statistical and graphical methods** for the analysis of genomic data.
+-   To provide widespread access to a broad range of powerful **statistical and graphical methods** for the analysis of genomic data.
 
-- To facilitate the **inclusion of biological metadata** in the analysis of genomic data, e.g. literature data from PubMed, annotation data from Entrez genes.
+-   To facilitate the **inclusion of biological metadata** in the analysis of genomic data, e.g. literature data from PubMed, annotation data from Entrez genes.
 
-- To further scientific understanding by producing **high-quality documentation** and reproducible research.
+-   To further scientific understanding by producing **high-quality documentation** and reproducible research.
 
-- To **train researchers** on computational and statistical methods for the analysis of genomic data.
+-   To **train researchers** on computational and statistical methods for the analysis of genomic data.
 
 ### How does it look like
 
-[https://www.bioconductor.org/]
+\[https://www.bioconductor.org/\]
 
 ```{r fig4, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/screenshot.jpg")
 ```
 
-
 ## What is **Biostrings**?
+
 ```{r}
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
@@ -73,33 +72,33 @@ if (!requireNamespace("Biostrings", quietly = TRUE))
 library(Biostrings)
 ```
 
-
 Efficient manipulation of biological strings:
 
-- DNA / RNA / AA Sequences
-- Alignments
-
+-   DNA / RNA / AA Sequences
+-   Alignments
 
 ### Sequences
 
 Sequences are treated as objects which can be made of individual entries
+
 ```{r, echo = TRUE, eval = TRUE}
 stSingle <- DNAString("ACTGCTAGCTAGATTAGGCTCCTATCAGA")
 stSingle
 ```
 
 or multiple, which are called sets:
+
 ```{r, echo = TRUE, eval = TRUE}
 stSet <- DNAStringSet(c("ACTGCTAGCTAGATTAGGCTCCTATCAGA", "CTAGCTAGATTAGGCTCCTCATCAGAATCGAGTAACA"))
 stSet
 ```
-
 
 ### Alignments
 
 **Biostrings** can make pairwise alignments (local and global)
 
 pairwiseAlignment
+
 ```{r, echo = TRUE, eval = TRUE}
 stSingle1 <- DNAString("ACTGCTAGCTAGATTAGGCTCCTAGCATCTAGA")
 stSingle2 <- DNAString("CTAGGCTAGATTAGGCTCCTAGCATCAGACGATCGAGTAACA")
@@ -111,32 +110,33 @@ pairwiseAlignment(stSingle1, stSingle2, type = "local")
 
 and while it can not do multiple alignments, it can read them:
 
-- ```readDNAMultipleAlignment()```
+-   `readDNAMultipleAlignment()`
 
-- ```readRNAMultipleAlignment()```
+-   `readRNAMultipleAlignment()`
 
-- ```readAAMultipleAlignment()```
-
+-   `readAAMultipleAlignment()`
 
 ## **Reading Data**
 
 Fasta files are read with functions:
 
-- ```readBStringSet()```
+-   `readBStringSet()`
 
-- ```readDNAStringSet()```
+-   `readDNAStringSet()`
 
-- ```readRNAStringSet()```
+-   `readRNAStringSet()`
 
-- ```readAAStringSet()```
+-   `readAAStringSet()`
 
 Let's read all *C. elegans* coding genes:
+
 ```{r readf, echo = TRUE, eval = TRUE}
 cds <- readDNAStringSet("data/Caenorhabditis_elegans.WBcel235.cds.first_20.fa.gz")
 cds
 ```
 
 Or proteins:
+
 ```{r readfp, echo = TRUE, eval = TRUE}
 pep <- readAAStringSet("data/Caenorhabditis_elegans.WBcel235.pep.first_20.fa.gz")
 pep
@@ -153,6 +153,7 @@ pep[width(pep) >= 530]
 In some cases, functions have the same name as in base R but when applied to a **Biostrings** object you will get the **Biostrings** functionality:
 
 For example:
+
 ```{r, echo = TRUE, eval = TRUE}
 length(pep)
 ```
@@ -165,26 +166,28 @@ head(pep)
 width(pep) # analogous to nchar() 
 ```
 
-
 ## **Counting Patterns/Characters**
 
 Lets recycle this sequence
+
 ```{r, echo = TRUE, eval = TRUE}
 stSingle <- DNAString("ACTGCTAGCTAGATTAGGCTCCTAGCATCAGA")
 ```
 
-Instead of ```grep()```, **Biostrings** allows to match or count substrings to a subject, for example
+Instead of `grep()`, **Biostrings** allows to match or count substrings to a subject, for example
+
 ```{r countp, echo = TRUE, eval = TRUE}
 countPattern("AGA", stSingle)
 matchPattern("AGA", stSingle)
 ```
 
-We can also benefit of knowing that these are Biological sequences and use [IUPAC codes instead](https://www.bioinformatics.org/sms/iupac.html) 
-For example:
+We can also benefit of knowing that these are Biological sequences and use [IUPAC codes instead](https://www.bioinformatics.org/sms/iupac.html) For example:
 
-    R:	A or G
-    Y:	C or T
-    
+```         
+R:  A or G
+Y:  C or T
+```
+
 ```{r countp2, echo = TRUE, eval = TRUE}
 countPattern("R", stSingle, fixed = F)
 matchPattern("R", stSingle, fixed = F)
@@ -192,10 +195,19 @@ countPattern("Y", stSingle, fixed = F)
 matchPattern("Y", stSingle, fixed = F)
 ```
 
+This function work only on `XXString` object and do not work on `XXStringSet` object. How can we count patterns in multiple sequences?
+
+```{r}
+vcountPattern("AACGA",
+              stSet,
+              max.mismatch=2,
+              min.mismatch=1)
+```
 
 ## **More functionality**
 
 Transformations like translation or reverse are also available:
+
 ```{r translate, echo = TRUE, eval = TRUE}
 translate(stSingle)
 ```
@@ -208,14 +220,14 @@ reverse(stSingle)
 reverseComplement(stSingle)
 ```
 
-
 Subseting based on position:
+
 ```{r subseq, echo = TRUE, eval = TRUE}
 subseq(stSingle, start = 3, end = 7)
 ```
 
-
 Frequency of letters:
+
 ```{r freq, echo = TRUE, eval = TRUE}
 alphabetFrequency(stSingle)
 ```
@@ -224,36 +236,66 @@ alphabetFrequency(stSingle)
 alphabetFrequency(stSingle, baseOnly = TRUE, as.prob = TRUE)
 ```
 
-
 Frequency of K-mers:
+
 ```{r freq3, echo = TRUE, eval = TRUE}
 oligonucleotideFrequency(stSingle, width = 3)
 ```
 
-
 Converting to character vector:
+
 ```{r char, echo = TRUE, eval = TRUE}
 toString(stSingle)
 ```
 
+##### Task
 
+a)  Create a function `genSeq` that will randomly generate a DNA sequence of length *n_len*.
 
+```{r}
+# randomly generate a sequence
 
-##  What is **GenomicRanges**?
+```
 
-### Genomic locations within Bioconductor project 
-*GenomicRanges* package defines general purpose containers for storing and manipulating genomic intervals and variables defined along a genome  
+b)  Create a DNAStringSet object `dna` with two sequences names *seq1* and *seq2* of length 1010 and 5305.
 
-<br/>
+```{r}
+# set seed to 41
+
+```
+
+c)  Calculate the GC content.
+
+```{r}
+
+```
+
+d)  Select only the *first* sequence in a `seq1` variable .
+
+```{r}
+
+```
+
+e)  Subset the *first* sequence so it start with the first `ATG`.
+
+```{r}
+
+```
+
+## What is **GenomicRanges**?
+
+### Genomic locations within Bioconductor project
+
+*GenomicRanges* package defines general purpose containers for storing and manipulating genomic intervals and variables defined along a genome
 
 ```{r fig1_ranges, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/genomicRanges.png")
 ```
 
-<br/>
-
 ### Instalation and use
+
 Install with:
+
 ```{r install_granges, echo = TRUE, eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
@@ -261,6 +303,7 @@ BiocManager::install("GenomicRanges")
 ```
 
 Libraries you're gonna need for this lecture:
+
 ```{r run_lecture, echo = TRUE, eval = TRUE,  message=FALSE, warning=FALSE}
 library(GenomicRanges)
 library(IRanges)
@@ -271,101 +314,142 @@ library(dplyr)
 library(magrittr)
 ```
 
+## **IRanges** package
 
-##  **IRanges** package
-### Foundation of integer range manipulation in Bioconductor  
-
-<br/>
+### Foundation of integer range manipulation in Bioconductor
 
 #### IRanges object structure
+
 IRanges object:
+
 ```{r iranges, echo = TRUE, eval = TRUE}
 (range_1 <- IRanges(start = 5, end = 11))
 ```
 
 Let's look at the structure:
+
 ```{r iranges2, echo = TRUE, eval = TRUE}
 str(range_1)
 ```
 
-We can access *start*, *end*, *width* and other slots using ```@```, but this is not recommended.  
-The best approach is to use in-built functions.  
+::: callout-tip
+We can access *start*, *end*, *width* and other slots using `@`, but this is not recommended.\
+The best approach is to use in-built functions.
+:::
 
 Let's create another IRanges object:
+
 ```{r iranges3, echo = T, eval = T}
 (range_2 <- IRanges(start = c(5, 7, 1), 
                     width = c(6, 9, 3)))
 ```
 
-<br/>
-
 #### Basic slots
+
 Accessing *start*, *end* and *width* is simple:
+
 ```{r, echo = T, eval = T}
 start(range_2)
 ```
+
 ```{r, echo = T, eval = T}
 end(range_2)
 ```
+
 ```{r, echo = T, eval = T}
 width(range_2)
 ```
 
-<br/>
-
 #### Some other basic methods
-Joining ranges:
+
+**Joining ranges:**
+
 ```{r,  echo = T, eval = T}
 c(range_1, range_2)
 ```
 
-Subset: 
+**Subset:**
+
 ```{r,  echo = T, eval = T}
 range_2[2:3]
 ```
+
 ```{r,  echo = T, eval = T}
 range_2[width(range_2) > 4]
 ```
 
-Arithmetic operations:
+::: callout-important
+**Arithmetic operations** on `IRanges` do not mean adding to or subtracting from coordinates directly --- instead, they **expand or contract the ranges symmetrically**.
+
+-   `range + k` expands each range by `k` bases on **both** sides.
+-   `range - k` contracts each range by `k` bases on **both** sides.
+
+This means:
+
+$$
+\text{new start} = \text{old start} - k
+$$
+
+$$
+\text{new end} = \text{old end} + k
+$$
+
+$$
+\text{new width} = \text{old width} + 2k
+$$
+:::
+
+```{r,  echo = T, eval = T}
+range_2
+```
+
 ```{r,  echo = T, eval = T}
 range_2 + 1
 ```
+
 ```{r,  echo = T, eval = T}
 range_2 - 1
 ```
 
-Reverse ranges:
+**Reverse ranges:**
+
+The function `rev()` reverses the order of the ranges in the IRanges object --- not their coordinates.
+
 ```{r,  echo = T, eval = T}
 rev(range_2)
 ```
 
-Counting number of ranges over each position:
+**Counting number of ranges over each position:**
+
+The function `coverage()` counts, for every genomic position, **how many ranges overlap** that position.\
+It returns an object of class `Rle` (Run-Length Encoding), which efficiently stores repeated values.
+
 ```{r,  echo = T, eval = T}
 coverage(range_2)
 ```
 
-
 ## **IRanges** methods overview
-#### Set operations
+
+::: callout-important
+**Set operations**
+
 Set operations on *IRanges* object reflect traditional mathematical set operations *complement*, *union*, *intersect*, and *difference*. There are two variants for each operation:
 
-* the first treats each *IRanges* object as a set and returns a normal value
-* the other has a parallel semantic (like pmin/pmax) and performs the operation for each range pairing separately
+-   the first treats each *IRanges* object as a set and returns a normal value
+-   the other has a parallel semantic (like pmin/pmax) and performs the operation for each range pairing separately
 
-```
+```         
 (p)union() # union
 (p)intersect() # intersect
 (p)setdiff() # difference
 (p)gaps() # complement
 ```
 
-<br/>
+**Intra range methods**
 
-#### Intra range methods
 Intra range methods transform each range individually and independently of other ranges. They return an object parallel to the input object - the *i-th* range corresponds to the *i-th* range in the input.
 
-```
+```         
 shift()
 narrow()
 resize()
@@ -375,25 +459,27 @@ reflect()
 restrict()
 ```
 
-<br/>
+**Inter range methods**
 
-#### Inter range methods
 Inter range methods transform all the ranges as a set to produce a new set of ranges. They return an object that is generally NOT parallel to the input object.
 
-```
+```         
 range()
 reduce()
 disjoin()
 ```
+:::
 
 #### Exploring methods
+
 In order to understand what is each of those functions doing, we will create a helper functions to visualize *IRanges*. We want to plot ranges and result of the method applied to those ranges - all on one plot. We will use *ggplot2* which accepts table as input. First we need to create a function which will join ranges and result of the method to one table. We need unique identifier for each range and result of the method so we can plot them in different colors. Something like this:
 
-```
+```         
 IRangesMethodToTable(method, range_1, range_2)
 ```
 
 ### Ranges-to-table function
+
 Function takes ranges and method as input and returns ranges and result of the method in one table:
 
 ```{r, IRangesMethodToTable, eval = T, echo = T}
@@ -429,9 +515,8 @@ IRangesMethodToTable <- function(IRangesMethod, ...){
 }
 ```
 
-<br/>
-
 Test run:
+
 ```{r}
 range_1 <- IRanges(start = c(4, 18, 1), 
                    width = c(3, 4, 3))
@@ -443,7 +528,9 @@ print(joined_ranges_tb)
 ```
 
 ### Plot table
+
 Function takes table from last step and plots ranges and result of the method:
+
 ```{r plotIRanges, eval = T, echo = T}
 plotIRanges <- function(irange_tb){
   
@@ -479,13 +566,12 @@ plotIRanges <- function(irange_tb){
 }
 ```
 
-
 ## Set operations
+
 Set operations reflect traditional mathematical set operations complement, union, intersect, and difference.
 
-<br/>
-
 ### *union()* and *punion()*
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(IRanges::union, range_1, range_2) %>% plotIRanges(.)
 ```
@@ -495,11 +581,11 @@ IRangesMethodToTable(punion, range_1, range_2, fill.gap = TRUE) %>% plotIRanges(
 ```
 
 ### *intersect()* and *pintersect()*
+
 ```{r, eval = T, echo = T}
 range_1 <- IRanges(start = c(9, 18, 1), end = c(13, 22, 9))
 range_2 <- IRanges(start = c(8, 3, 2), end = c(13, 20, 5))
 ```
-
 
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(IRanges::intersect, range_1, range_2) %>% plotIRanges(.)
@@ -510,6 +596,7 @@ IRangesMethodToTable(pintersect, range_1, range_2, resolve.empty = "max.start") 
 ```
 
 ### *setdiff()* and *psetdiff()*
+
 ```{r, echo = T, eval = T}
 range_1 <- IRanges(start = c(4, 18, 1), end = c(7, 22, 4))
 range_2 <- IRanges(start = c(10, 4, 16), end = c(13, 13, 20))
@@ -524,7 +611,8 @@ IRangesMethodToTable(psetdiff, range_1, range_2) %>% plotIRanges(.)
 ```
 
 ### *gaps()* and *pgaps()*
-```gaps()``` accepts only one IRanges object as an argument. It is also one of the inter-range transformations.
+
+`gaps()` accepts only one IRanges object as an argument. It is also one of the inter-range transformations.
 
 ```{r, echo = T, eval = T}
 range_1 <- IRanges(start = c(4, 18, 1), end = c(7, 22, 4))
@@ -539,11 +627,12 @@ IRangesMethodToTable(gaps, c(range_1, range_2)) %>% plotIRanges(.)
 IRangesMethodToTable(pgap, range_1, range_2) %>% plotIRanges(.)
 ```
 
-
 ## Intra range operations
+
 Intra range methods transform each range individually and independently of other ranges. They return an object parallel to the input object - *i-th* range corresponds to the *i-th* range in the input.
 
 ### *shift()*
+
 ```{r, echo = T, eval = T}
 range_1 <- IRanges(start = c(4, 5, 8, 3, 16), 
                    end = c(9, 9, 13, 13, 20))
@@ -558,12 +647,29 @@ IRangesMethodToTable(shift, range_1, shift = -2) %>% plotIRanges(.)
 ```
 
 ### *narrow()*
+
 Relative start and end positions: start at 3rd and end at 5th position
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(narrow, range_1[1], start=3, end=5) %>% plotIRanges(.)
 ```
 
 ### *resize()*
+
+The `fix` argument determines **which part of each range remains constant** when resizing its width.
+
+-   **`fix = "start"`**\
+    The **start coordinate** stays fixed.\
+    The end position shifts to achieve the new width.\
+    (Equivalent to `start = TRUE` logic in other functions.)
+
+-   **`fix = "end"`**\
+    The **end coordinate** stays fixed.\
+    The start position shifts to adjust the width.
+
+-   **`fix = "center"`**\
+    The **midpoint** of the range stays constant, and the range expands or contracts **symmetrically** on both sides.
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(resize, range_1[1], width = 4, fix = "start") %>% plotIRanges(.)
 ```
@@ -573,116 +679,168 @@ IRangesMethodToTable(resize, range_1[1:3], width = 2, fix = "center") %>% plotIR
 ```
 
 ### *flank()*
+
+When using the `flank()` function, several arguments control where the flanking regions are placed:
+
+-   **`start = TRUE`**:\
+    The flanking region is generated **relative to the start** of each range.
+
+-   **`start = FALSE`**:\
+    The flanking region is generated **relative to the end** of each range.
+
+-   **`both = TRUE`**:\
+    Flanking regions are created **on both sides** of the range --- for example, with `width = 2`, two bases are added **before the start** and **after the end** of each range.
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(flank, range_1[1], width = 2, start = TRUE) %>%  plotIRanges(.)
 
 IRangesMethodToTable(flank, range_1, width = 2, start = TRUE) %>%  plotIRanges(.)
 ```
 
-start = TRUE: Means that the flanking region should be located relative to the start of the range. If start = FALSE, the flank would be placed relative to the end.
-both = TRUE: This means that flanks will be created on both sides of the range, i.e., 2 bases flanking before the start and 2 bases after the end of the range.
-
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(flank, range_1[1], width = 2, start = TRUE, both = TRUE) %>% plotIRanges(.)
 ```
 
 ### *promoters()*
-Similar to *flank()*, but takes start as reference point. 
+
+Similar to *flank()*, but takes start as reference point.
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(promoters, upstream = 3, downstream = 2, range_1[1]) %>% plotIRanges(.)
 ```
 
 ### *reflect()*
+
 Reflects (mirrors) the input range(s) relative to the midpoint of the specified bounds (e.g., (10, 11)), flipping the ranges as though the bounds define the axis of reflection.
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(reflect, range_1, bounds = IRanges(start = 10, end = 11)) %>% plotIRanges(.)
 ```
 
 ### *restrict()*
+
+The function `restrict()` **trims or limits ranges** to lie within specified boundaries.\
+It's used when you want to **keep only the portions of ranges that fall inside a given interval**.
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(restrict, range_1, start = 3, end = 9) %>% plotIRanges(.)
 ```
 
-
 ## Inter range operations
+
 Inter range methods transform all the ranges as a set to produce a new set of ranges. They return an object that is generally NOT parallel to the input object.
 
 ### *range()*
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(range, range_1) %>% plotIRanges(.)
 ```
 
 ### *reduce()*
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(reduce, range_1) %>% plotIRanges(.)
 ```
 
 ### *disjoin()*
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(disjoin, range_1[c(1,3)]) %>% plotIRanges(.)
 ```
 
-
 ## Interval overlaps
 
-There are several methods for finding and counting interval overlaps between two IRanges object - query and a subject.  
+There are several methods for finding and counting interval overlaps between two IRanges object - query and a subject.
 
 ### *findOverlaps()*
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 (overlaps <- findOverlaps(range_1, range_2))
 ```
 
-Extracting overlapping ranges from result is done with ```queryHits()``` and ```subjectHits()```.
+Extracting overlapping ranges from result is done with `queryHits()` and `subjectHits()`.
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 (query_ranges <- range_1[queryHits(overlaps)])
 ```
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 (subject_ranges <- range_2[subjectHits(overlaps)])
 ```
 
 ### *countOverlaps()*
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 countOverlaps(range_1, range_2)
 ```
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 countOverlaps(range_2, range_1)
 ```
 
 ### *subsetByOverlaps()*
+
+The function `subsetByOverlaps()` returns **only the ranges from one set that overlap another set**.
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 subsetByOverlaps(range_1, range_2)
 ```
 
-
 ## GenomicRanges methods overview
+
+::: callout-important
 GenomicRanges = IRanges + genomic info. Used to describe:
 
-* annotations, e.g., exons, genes, binding sites, …
-* data, e.g., aligned reads, called peaks, copy number regions
+-   annotations, e.g., exons, genes, binding sites, ...
+-   data, e.g., aligned reads, called peaks, copy number regions
+:::
 
 For example:
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 (grange_1 <- GRanges("chr1", range_1, strand = "+"))
 ```
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 (grange_2 <- GRanges("chr2", range_2, strand = "-"))
 ```
+
+
+::: callout-important
+
+`seqnames` vs `seqlevels` in GenomicRanges
+
+When working with genomic ranges (`GRanges` objects), each range is associated with a **sequence name** — typically a chromosome or contig.  
+Two related functions, `seqnames()` and `seqlevels()`, are used to access this information, but they serve different purposes.
+
+`seqnames()`
+  - Returns the **sequence name (chromosome)** for **each individual range**.  
+  - The output is a vector with one entry per range.
+
+`seqlevels()`
+  - Returns the **set of unique sequence** names (chromosomes) present or allowed in the object.
+  - This defines the **reference genome structure** — even if some levels currently have no ranges.
+
 
 Few additional functions to access new data:
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 seqnames(grange_1) # chromosomes, but can also be contigs, scaffolds etc.
 ```
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 seqlevels(grange_1)
 ```
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 strand(grange_1)
 ```
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 ranges(grange_1)
 ```
 
 Adding additional metadata:
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 mcols(grange_1)$exon_id <- 1:length(grange_1)
 mcols(grange_2)$exon_id <- length(grange_2):1
@@ -695,10 +853,12 @@ grange_1
 mcols(grange_2)
 ```
 
+:::
 
 ## *GRanges* methods overview
 
 All methods which work on *IRanges* objects also work on *GRanges*, with some limitations and/or additional arguments. For example:
+
 ```{r, eval = T, echo = T, warrnings = F}
 grange_1
 grange_2
@@ -706,6 +866,7 @@ grange_2
 ```
 
 Why are there no overlaps? Seqnames/seqlevels are different!
+
 ```{r, eval = T, echo = T, warrnings = F}
 seqlevels(grange_2) <- "chr1"
 grange_1
@@ -717,18 +878,21 @@ grange_2
 ```
 
 Why are there still no overlaps? Strands are different!
+
 ```{r, eval = T, echo = T, warrnings = F}
 (overlaps <- findOverlaps(grange_1, grange_2, ignore.strand = T))
 ```
 
 Another example:
+
 ```{r, eval = T, echo = T, warrnings = F}
 IRangesMethodToTable(GenomicRanges::intersect, grange_1, grange_2, ignore.strand = T) %>% plotIRanges(.)
 ```
 
 Input data to *GRanges* from table:
+
 ```{r, eval = T, echo = T, warrnings = F}
-ranges_tb <- tibble(chromosomes = paste("chr", sample(1:10, 5)), 
+ranges_tb <- data.table::data.table(chromosomes = paste("chr", sample(1:10, 5)), 
                      gene_start = c(1, 8, 5, 3, 2), 
                      gene_end = c(12, 13, 15, 8, 6), 
                      gene_strand = sample(c("+", "-"), 5, replace = T), 
@@ -746,9 +910,10 @@ makeGRangesFromDataFrame(df = ranges_tb,
                          keep.extra.columns = TRUE)
 ```
 
-If your column names are correct you can directly call ```GRanges()``` on data.frame/tibble/data.table: 
+If your column names are correct you can directly call `GRanges()` on data.frame/tibble/data.table:
+
 ```{r, eval = T, echo = T, warrnings = F}
-(ranges_tb <- GRanges(tibble(seqnames = paste("chr", sample(1:10, 5)), 
+(ranges_tb <- GRanges(data.table::data.table(seqnames = paste("chr", sample(1:10, 5)), 
                              start = c(1, 8, 5, 3, 2), 
                              end = c(12, 13, 15, 8, 6), 
                              strand = sample(c("+", "-"), 5, replace = T), 
@@ -756,25 +921,28 @@ If your column names are correct you can directly call ```GRanges()``` on data.f
                              score = sample(1:100, 5))))
 ```
 
-
 ## *GRangesList* methods overview
 
 Used when you want to store exons in transcripts or aligned reads with gaps/paired-end reads.
+
 ```{r, eval = T, echo = T, warrnings = F}
 grange_1_2 <- c(grange_1, grange_2)
 (grange_list <- split(grange_1_2, mcols(grange_1_2)$transcript_id))
 ```
 
 Subset:
+
 ```{r, eval = T, echo = T, warrnings = F}
 grange_list[[1]] 
 # also works: grange_list$"tx_1"
 ```
 
 Accessors and interval operations from *GRanges* also work on *GRangesList*, but usually return a list. For example:
+
 ```{r, eval = T, echo = T, warrnings = F}
 seqnames(grange_list)
 ```
+
 ```{r, eval = T, echo = T, warrnings = F}
 ranges(grange_list)
 strand(grange_list)
@@ -783,61 +951,69 @@ start(grange_list)
 ```
 
 You can also use mathematical and other operations on them:
+
 ```{r, eval = T, echo = T, warrnings = F}
 sum(width(grange_list))
 ```
 
 Most of the *intra*-, *inter*- and *between*-range methods also operate on *GRangesList* objects:
+
 ```{r, eval = T, echo = T, warrnings = F}
 shift(grange_list, 20)
 ```
 
 *GRangesList* to *GRanges*:
+
 ```{r, eval = T, echo = T, warrnings = F}
 unlist(grange_list)
 ```
 
-Loops - ```lapply()```, ```sapply()```, ```mapply()```, ```endoapply()```, ```mendoapply()```, ```Map()``` and ```Reduce()```:
+Loops - `lapply()`, `sapply()`, `mapply()`, `endoapply()`, `mendoapply()`, `Map()` and `Reduce()`:
+
 ```{r, eval = T, echo = T, warrnings = F}
 lapply(grange_list, length)
 ```
+
 ```{r, eval = T, echo = T, warrnings = F}
 sapply(grange_list, length)
 ```
 
-```endoapply()``` transforms an object to another instance of the same class:
+`endoapply()` transforms an object to another instance of the same class:
+
 ```{r, eval = T, echo = T, warrnings = F}
 endoapply(grange_list, rev)
 ```
 
 Overlap *GRangesList* with *GRanges*:
+
 ```{r, eval = T, echo = T, warrnings = F}
 findOverlaps(c(grange_1, grange_2), grange_list)
 ```
 
-
 ## Additional resources
+
 ### Cheat sheets
-*Bioconductor* cheatsheet: https://rpubs.com/Pazz/bioc_cheat_sheet  
 
-*Bioconductor* for Genomic Data Science: http://kasperdanielhansen.github.io/genbioconductor/  
+*Bioconductor* cheatsheet: https://rpubs.com/Pazz/bioc_cheat_sheet
 
+*Bioconductor* for Genomic Data Science: http://kasperdanielhansen.github.io/genbioconductor/
 
 ### Some other useful packages to have in mind:
-*GenomicFeatures* - import and query gene models  
 
-*GenomicAlignments* - representation and manipulation of short genomic alignments  
+*GenomicFeatures* - import and query gene models
 
-*rtracklayer* - R interface to genome annotation files and the UCSC genome browser  
+*GenomicAlignments* - representation and manipulation of short genomic alignments
 
-*BSgenome* - efficient representation of full genomes and their SNPs  
+*rtracklayer* - R interface to genome annotation files and the UCSC genome browser
 
-*ggbio* - visualization tools for genomic data  
+*BSgenome* - efficient representation of full genomes and their SNPs
 
+*ggbio* - visualization tools for genomic data
 
 ### Biological terminology
 
 #### Gene structure
+
 ```{r genes, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/splicing.png")
 ```

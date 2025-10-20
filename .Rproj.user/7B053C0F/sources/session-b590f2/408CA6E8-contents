@@ -28,6 +28,10 @@ website:
             href: Week3/week3_part1.qmd
           - text: Regular expressions
             href: Week3/week3_part2.qmd
+      - text: Week4
+        menu:
+          - text: Genomic data manipulation
+            href: Week4/week4_part1.qmd
 
   page-footer:
     background: light

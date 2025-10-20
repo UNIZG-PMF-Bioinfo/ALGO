@@ -1,14 +1,14 @@
 {
-    "id": "CE6D86CA",
+    "id": "5D95F1ED",
     "path": "C:/Users/Paula/OneDrive/Work/Courses/course_2025_2026/ALGO/Week4/week4_part1.qmd",
     "project_path": "Week4/week4_part1.qmd",
     "type": "quarto_markdown",
-    "hash": "3387766937",
+    "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1760687549818.0,
+    "created": 1760940271149.0,
     "source_on_save": false,
-    "relative_order": 3,
+    "relative_order": 1,
     "properties": {
         "rmdVisualMode": "false",
         "rmdVisualWrapConfigured": "true",
@@ -17,16 +17,16 @@
         "Source": "Source",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "cursorPosition": "797,3",
-        "scrollLine": "782",
-        "rmdVisualModeLocation": "2:0"
+        "cursorPosition": "0,3",
+        "scrollLine": "0",
+        "rmdVisualModeLocation": "19272:15839.9990234375"
     },
     "folds": "",
-    "lastKnownWriteTime": 1760688916,
+    "lastKnownWriteTime": 1760946295,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1760688916245,
+    "last_content_update": 1760946295549,
     "read_only": false,
     "read_only_alternatives": []
 }

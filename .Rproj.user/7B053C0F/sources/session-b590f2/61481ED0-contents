@@ -1,0 +1,38 @@
+#a) Create a function that will randomly generate a DNA sequence of length n_len.
+
+# randomly generate a sequence
+genSeq <- function(n_len) {
+  seq_temp <- sample(c("A", "C", "T", "G"), 
+                     replace = TRUE, 
+                     size = n_len
+  ) %>% 
+    paste0(., collapse = "")
+  return(seq_temp)
+}
+
+#b) Create a DNAStringSet object with two sequences names seq1 and seq2 of length 1010 and 5305. 
+
+# set seed to 41
+set.seed(41)
+dna <- DNAStringSet(c(
+  seq1 = genSeq(1010),
+  seq2 = genSeq(5305)
+))
+#c) Calculate the GC content.
+
+# calculate probability of G and C
+letterFrequency(dna, c("G","C"), as.prob=TRUE) %>% 
+  rowSums()
+
+# d) Select only the first sequence in a seq1 variable .
+
+seq1 <- dna[1] %>% 
+  unlist()
+
+
+# e) Subset the **first** sequence so it start with the first `ATG`.
+start_pos <- matchPattern("ATG", seq1) %>% 
+  start() %>% 
+  .[1]
+
+subseq(seq1, start = start_pos, end = length(seq1))
