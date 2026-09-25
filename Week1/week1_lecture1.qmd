@@ -1,17 +1,7 @@
 ---
 title: "Week 1 - Lecture 1"
-
-format:
-  html:
-    self-contained: true
-    toc: true
-    toc-depth: 5
-    code-fold: false
-    fig-align: center
-    df-print: paged
-    code-summary: "Show code"
-    code-line-numbers: false
-    code-tools: true
+format: html
+editor: visual
 ---
 
 ## Welcome to Algorithms & Programming!
@@ -329,7 +319,7 @@ sample(n3, 4)
 sample(n3, 25, replace=TRUE)
 ```
 
-Take a sample from some basic distributions: ![](normal_distribution.jpg)
+![Take a sample from some basic distributions:](https://qph.cf2.quoracdn.net/main-qimg-8c762cc11a149d82405cccf50bb17296-lq) ![](normal_distribution.jpg)
 
 ```{r, results = "hold"}
 sample(1:100, size = 10)
@@ -611,3 +601,64 @@ df <- df[-5, ]
 R has a number of pre-loaded datasets, `iris` probably being the most famous one.
 
 Load iris and calculate mean length of sepal.
+
+## Pseudocode
+
+**Pseudocode** is a way of writing down what a program should do, step by step, using simple language before we write the actual code.
+
+Think of pseudocode like a recipe:
+
+-   START → What are we trying to do?
+
+-   INPUT → What data do we need?
+
+-   PROCESS → What do we do with the data?
+
+-   OUTPUT → What result do we want?
+
+-   END → The task is finished.
+
+**NOT** the same as prompt engineering!
+
+Prompt engineering tells an AI how you want it to help you solve a problem. Basically, how you talk to ChatGPT.
+
+**Example:**
+
+**a) Code**
+
+```{r}
+# Select 6 random rows from iris
+random_rows <- sample(1:nrow(iris), 6)
+
+# Extract values from Sepal.Width and Petal.Length
+result <- iris[random_rows, c("Sepal.Width", "Petal.Length")]
+
+# Display the result
+print(result)
+```
+
+**b) Pseudocode**
+
+START
+
+Select 6 random rows from the iris data frame
+
+Extract the values from the columns: Sepal.Width, Petal.Length
+
+Store the selected values in a new result
+
+Display the result
+
+END
+
+**c) Prompt engineering**
+
+"Write me an R code for selecting 6 random rows from iris data frame, and saving the values from columns Sepal.Width and Petal.Length in a new variable called result. Use only base R functions. Display the result in the end."
+
+Pseudocode = thinking about the steps (planning your code)
+
+Code = writing those steps in a programming language
+
+Prompt engineering = telling an AI very specifically what you want it to do
+
+Once again: **DO NOT USE AI FOR SOLVING HOMEWORKS!** It is very obvious when you do, you will lose points and you won't be able to solve the final exam which will be written offline.
