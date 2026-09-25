@@ -68,8 +68,11 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 
 if (!requireNamespace("Biostrings", quietly = TRUE))
     BiocManager::install("Biostrings")
+if (!requireNamespace("pwalign", quietly = TRUE))
+    BiocManager::install("pwalign")
 
 library(Biostrings)
+library(pwalign)
 ```
 
 Efficient manipulation of biological strings:
@@ -95,7 +98,7 @@ stSet
 
 ### Alignments
 
-**Biostrings** can make pairwise alignments (local and global)
+Pairwise alignments (local and global) are made with the **pwalign** package (this function used to be part of **Biostrings**)
 
 pairwiseAlignment
 
@@ -105,7 +108,7 @@ stSingle2 <- DNAString("CTAGGCTAGATTAGGCTCCTAGCATCAGACGATCGAGTAACA")
 ```
 
 ```{r aln, echo = TRUE, eval = TRUE}
-pairwiseAlignment(stSingle1, stSingle2, type = "local")
+pwalign::pairwiseAlignment(stSingle1, stSingle2, type = "local")
 ```
 
 and while it can not do multiple alignments, it can read them:
