@@ -1,17 +1,7 @@
 ---
 title: "Week 1 - Lecture 2"
-
-format:
-  html:
-    self-contained: true
-    toc: true
-    toc-depth: 5
-    code-fold: false
-    fig-align: center
-    df-print: paged
-    code-summary: "Show code"
-    code-line-numbers: false
-    code-tools: true
+format: html
+editor: visual
 ---
 
 ## Functions
@@ -63,7 +53,23 @@ mySimpleFun(2, 3)
 product
 ```
 
-## Function as binary operator
+**Function in pseudocode:**
+
+START
+
+save the function as mySimpleFun
+
+set the parameter a so it equals 1 and add parameter b
+
+inside the function define the variable product as a product of parameters a and b
+
+return the product as output
+
+close the function
+
+END
+
+## binary operator
 
 All functions are beautiful, but not all come in the same shape :)
 
@@ -149,6 +155,8 @@ mySimpleFun <- function(a=1,b) {
 ## run the fuction
 mySimpleFun(b=-2)
 ```
+
+**Exercise**: How would you write this function in pseudocode?
 
 **`ifelse(test, yes, no)`** - vectorised
 
@@ -265,5 +273,7 @@ cat_sum
 ```
 
 Most importantly, if there is already a function for what you are trying to do, don't write your own without a good reason. (Homework instructions are a good reason.)
+
+**Exercise**: How would you explain the above code in pseudocode?
 
 # The end
