@@ -28,7 +28,7 @@ packages <- c("png", "grid",  "magrittr",
 ## Install if missing, then load
 lapply(packages, function(x) {
   if (!requireNamespace(x, quietly = TRUE)) {
-    install.packages(x)
+    install.packages(x, repos = "https://cloud.r-project.org")
   }
   library(x, character.only = TRUE)
 })
