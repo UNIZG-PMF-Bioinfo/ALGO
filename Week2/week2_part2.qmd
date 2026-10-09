@@ -616,6 +616,23 @@ setkey(location_gene, chr, start, end)
 foverlaps(region_enhancer, location_gene)
 ```
 
+::: callout-tip
+**What are `start`, `end`, `i.start` and `i.end`?**
+
+Both tables have columns called `start` and `end`, and the result needs both sets of coordinates, so `foverlaps(x, y)` renames one of them:
+
+-   **`start`, `end`** come from **y** (the second table) and keep their names
+-   **`i.start`, `i.end`** come from **x** (the first table); every column of x whose name also exists in y gets the prefix `i.`
+
+```
+  chr   gene     start       end   i.start     i.end
+chr11    ATM 108230374 108376593 108300000 108301500
+               └── gene (y) ──┘   └ enhancer (x) ┘
+```
+
+Why "i"? It comes from data.table's join syntax `X[i]`, where `i` is the table being joined in. `foverlaps(x, y)` works like `y[x]`, so x plays the role of `i`. `chr` has no prefix because it is a join column and is the same in both tables.
+:::
+
 #### Does the order of the tables matter?
 
 The overlapping pair is the same both ways (the chr11 enhancer and ATM). What changes is **which table every row is kept from**. In `foverlaps(x, y)`, **x is the "main" table** (like a left join on x):
@@ -646,4 +663,34 @@ foverlaps(location_gene, region_enhancer, type = "within")
 
 ::: callout-tip
 Put first the table you want one row for. Use `nomatch = NULL` to keep only the rows that overlap.
+:::
+
+::: callout-note
+**Important arguments of `foverlaps(x, y, ...)`**
+
+-   **`type`** - what counts as an overlap between an interval of x and an interval of y:
+    -   `"any"` (default) - the intervals share at least one position
+    -   `"within"` - x lies fully inside y
+    -   `"start"` - x and y start at the same position
+    -   `"end"` - x and y end at the same position
+    -   `"equal"` - x and y have exactly the same start and end
+-   **`nomatch`** - `NA` (default) keeps rows of x without an overlap and fills them with `NA`; `NULL` drops them
+-   **`mult`** - when one row of x overlaps several rows of y: `"all"` (default) returns all of them, `"first"` or `"last"` only one
+-   **`which`** - if `TRUE`, returns only the row numbers of the overlapping rows (`xid`, `yid`) instead of the joined table
+-   **`by.x`**, **`by.y`** - the columns to overlap on; by default the keys of the tables. The last two must be the start and end of the interval
+-   **`maxgap`**, **`minoverlap`** - how far apart intervals can be and still count as overlapping, and how many positions they must share
+
+```{r}
+# Only enhancers that overlap a gene
+foverlaps(region_enhancer, location_gene, nomatch = NULL)
+
+# Enhancers that lie fully inside a gene
+foverlaps(region_enhancer, location_gene, type = "within", nomatch = NULL)
+
+# Enhancers that start at the same position as a gene -> none here
+foverlaps(region_enhancer, location_gene, type = "start", nomatch = NULL)
+
+# Row numbers only: enhancer 2 overlaps gene 1
+foverlaps(region_enhancer, location_gene, which = TRUE)
+```
 :::
