@@ -615,3 +615,35 @@ setkey(location_gene, chr, start, end)
 ### Then we use foverlaps
 foverlaps(region_enhancer, location_gene)
 ```
+
+#### Does the order of the tables matter?
+
+The overlapping pair is the same both ways (the chr11 enhancer and ATM). What changes is **which table every row is kept from**. In `foverlaps(x, y)`, **x is the "main" table** (like a left join on x):
+
+|                | `foverlaps(region_enhancer, location_gene)`         | `foverlaps(location_gene, region_enhancer)`        |
+|----------------|-----------------------------------------------------|----------------------------------------------------|
+| Question asked | "For each **enhancer**, which gene overlaps it?"    | "For each **gene**, which enhancer overlaps it?"   |
+| Rows           | 4, one per enhancer                                 | 2, one per gene                                    |
+| Unmatched rows | 3 enhancers with `gene = NA`                        | BRCA1 with enhancer `start/end = NA`               |
+| `start`, `end` | gene coordinates                                    | enhancer coordinates                               |
+| `i.start`, `i.end` | enhancer coordinates                            | gene coordinates                                   |
+
+The `i.` columns always come from the **first** argument (x).
+
+```{r}
+foverlaps(region_enhancer, location_gene)
+foverlaps(location_gene, region_enhancer)
+```
+
+Order also matters for `type`. With `type = "within"` it means "x lies fully inside y":
+
+```{r}
+# enhancer inside ATM -> match
+foverlaps(region_enhancer, location_gene, type = "within")
+# ATM inside a small enhancer -> no match
+foverlaps(location_gene, region_enhancer, type = "within")
+```
+
+::: callout-tip
+Put first the table you want one row for. Use `nomatch = NULL` to keep only the rows that overlap.
+:::
