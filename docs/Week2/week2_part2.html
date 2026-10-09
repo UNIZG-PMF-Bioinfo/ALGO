@@ -5357,7 +5357,7 @@ Note
 <ul>
 <li><strong><code>header</code></strong> - If TRUE then any empty column names are given a name where first data line is a character (non-empty)</li>
 <li><strong><code>sep</code></strong> - The separator between columns. Most commonly used are “;”, “,”;“..</li>
-<li><strong><code>skip</code></strong> - number of rows to remove starting from 0 (default) on the first line</li>
+<li><strong><code>skip</code></strong> - number of lines to skip before reading starts (default 0). In <code>fread()</code> it can also be a string: reading starts at the first line containing that string</li>
 <li><strong><code>fill</code></strong> - If TRUE then in case the rows have unequal length, blank fields are implicitly added</li>
 <li><strong><code>dec</code></strong> - the character used in the file for decimal points</li>
 <li><strong><code>col_names</code></strong> - assign new column names (string)</li>
@@ -5488,7 +5488,19 @@ Note
 [1] &quot;C&quot; &quot;F&quot; &quot;F&quot; &quot;B&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;F&quot;</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Factors are not supported by <code>scan()</code>; convert afterwards with <code>factor()</code>.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="saving-data" class="level2">
@@ -6219,7 +6231,7 @@ Tip
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["sampleID"],"name":[1],"type":["int"],"align":["right"]},{"label":["cancer"],"name":[2],"type":["chr"],"align":["left"]},{"label":["BRCA2"],"name":[3],"type":["int"],"align":["right"]},{"label":["ATM"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Pancreas","3":"4501","4":"4616"},{"1":"2","2":"Brain","3":"2059","4":"1663"},{"1":"3","2":"Liver","3":"5026","4":"468"},{"1":"4","2":"Brain","3":"625","4":"3195"},{"1":"5","2":"Breast","3":"4193","4":"2129"},{"1":"6","2":"Breast","3":"3130","4":"1711"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["sampleID"],"name":[1],"type":["int"],"align":["right"]},{"label":["cancer"],"name":[2],"type":["chr"],"align":["left"]},{"label":["BRCA2"],"name":[3],"type":["int"],"align":["right"]},{"label":["ATM"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Pancreas","3":"1882","4":"2952"},{"1":"2","2":"Brain","3":"852","4":"2440"},{"1":"3","2":"Liver","3":"2551","4":"1375"},{"1":"4","2":"Brain","3":"5116","4":"1539"},{"1":"5","2":"Breast","3":"1801","4":"2935"},{"1":"6","2":"Breast","3":"5294","4":"3423"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -6233,7 +6245,7 @@ Tip
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["sampleID"],"name":[1],"type":["int"],"align":["right"]},{"label":["cancer"],"name":[2],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[3],"type":["fct"],"align":["left"]},{"label":["value"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Pancreas","3":"BRCA2","4":"4501"},{"1":"2","2":"Brain","3":"BRCA2","4":"2059"},{"1":"3","2":"Liver","3":"BRCA2","4":"5026"},{"1":"4","2":"Brain","3":"BRCA2","4":"625"},{"1":"5","2":"Breast","3":"BRCA2","4":"4193"},{"1":"6","2":"Breast","3":"BRCA2","4":"3130"},{"1":"1","2":"Pancreas","3":"ATM","4":"4616"},{"1":"2","2":"Brain","3":"ATM","4":"1663"},{"1":"3","2":"Liver","3":"ATM","4":"468"},{"1":"4","2":"Brain","3":"ATM","4":"3195"},{"1":"5","2":"Breast","3":"ATM","4":"2129"},{"1":"6","2":"Breast","3":"ATM","4":"1711"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["sampleID"],"name":[1],"type":["int"],"align":["right"]},{"label":["cancer"],"name":[2],"type":["chr"],"align":["left"]},{"label":["variable"],"name":[3],"type":["fct"],"align":["left"]},{"label":["value"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Pancreas","3":"BRCA2","4":"1882"},{"1":"2","2":"Brain","3":"BRCA2","4":"852"},{"1":"3","2":"Liver","3":"BRCA2","4":"2551"},{"1":"4","2":"Brain","3":"BRCA2","4":"5116"},{"1":"5","2":"Breast","3":"BRCA2","4":"1801"},{"1":"6","2":"Breast","3":"BRCA2","4":"5294"},{"1":"1","2":"Pancreas","3":"ATM","4":"2952"},{"1":"2","2":"Brain","3":"ATM","4":"2440"},{"1":"3","2":"Liver","3":"ATM","4":"1375"},{"1":"4","2":"Brain","3":"ATM","4":"1539"},{"1":"5","2":"Breast","3":"ATM","4":"2935"},{"1":"6","2":"Breast","3":"ATM","4":"3423"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -6248,7 +6260,7 @@ Tip
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["sampleID"],"name":[1],"type":["int"],"align":["right"]},{"label":["cancer"],"name":[2],"type":["chr"],"align":["left"]},{"label":["genes"],"name":[3],"type":["fct"],"align":["left"]},{"label":["n_mutations"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Pancreas","3":"BRCA2","4":"4501"},{"1":"2","2":"Brain","3":"BRCA2","4":"2059"},{"1":"3","2":"Liver","3":"BRCA2","4":"5026"},{"1":"4","2":"Brain","3":"BRCA2","4":"625"},{"1":"5","2":"Breast","3":"BRCA2","4":"4193"},{"1":"6","2":"Breast","3":"BRCA2","4":"3130"},{"1":"1","2":"Pancreas","3":"ATM","4":"4616"},{"1":"2","2":"Brain","3":"ATM","4":"1663"},{"1":"3","2":"Liver","3":"ATM","4":"468"},{"1":"4","2":"Brain","3":"ATM","4":"3195"},{"1":"5","2":"Breast","3":"ATM","4":"2129"},{"1":"6","2":"Breast","3":"ATM","4":"1711"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["sampleID"],"name":[1],"type":["int"],"align":["right"]},{"label":["cancer"],"name":[2],"type":["chr"],"align":["left"]},{"label":["genes"],"name":[3],"type":["fct"],"align":["left"]},{"label":["n_mutations"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Pancreas","3":"BRCA2","4":"1882"},{"1":"2","2":"Brain","3":"BRCA2","4":"852"},{"1":"3","2":"Liver","3":"BRCA2","4":"2551"},{"1":"4","2":"Brain","3":"BRCA2","4":"5116"},{"1":"5","2":"Breast","3":"BRCA2","4":"1801"},{"1":"6","2":"Breast","3":"BRCA2","4":"5294"},{"1":"1","2":"Pancreas","3":"ATM","4":"2952"},{"1":"2","2":"Brain","3":"ATM","4":"2440"},{"1":"3","2":"Liver","3":"ATM","4":"1375"},{"1":"4","2":"Brain","3":"ATM","4":"1539"},{"1":"5","2":"Breast","3":"ATM","4":"2935"},{"1":"6","2":"Breast","3":"ATM","4":"3423"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -6262,7 +6274,7 @@ Tip
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["sampleID"],"name":[1],"type":["int"],"align":["right"]},{"label":["cancer"],"name":[2],"type":["chr"],"align":["left"]},{"label":["BRCA2"],"name":[3],"type":["int"],"align":["right"]},{"label":["ATM"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Pancreas","3":"4501","4":"4616"},{"1":"2","2":"Brain","3":"2059","4":"1663"},{"1":"3","2":"Liver","3":"5026","4":"468"},{"1":"4","2":"Brain","3":"625","4":"3195"},{"1":"5","2":"Breast","3":"4193","4":"2129"},{"1":"6","2":"Breast","3":"3130","4":"1711"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["sampleID"],"name":[1],"type":["int"],"align":["right"]},{"label":["cancer"],"name":[2],"type":["chr"],"align":["left"]},{"label":["BRCA2"],"name":[3],"type":["int"],"align":["right"]},{"label":["ATM"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"Pancreas","3":"1882","4":"2952"},{"1":"2","2":"Brain","3":"852","4":"2440"},{"1":"3","2":"Liver","3":"2551","4":"1375"},{"1":"4","2":"Brain","3":"5116","4":"1539"},{"1":"5","2":"Breast","3":"1801","4":"2935"},{"1":"6","2":"Breast","3":"5294","4":"3423"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -6874,7 +6886,7 @@ Tip
 <span id="cb73-65"><a href="#cb73-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-66"><a href="#cb73-66" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`header`** - If TRUE then any empty column names are given a name where first data line is a character (non-empty)</span>
 <span id="cb73-67"><a href="#cb73-67" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`sep`** - The separator between columns. Most commonly used are &quot;;&quot;, &quot;\t&quot;,&quot;;&quot;..</span>
-<span id="cb73-68"><a href="#cb73-68" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`skip`** - number of rows to remove starting from 0 (default) on the first line</span>
+<span id="cb73-68"><a href="#cb73-68" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`skip`** - number of lines to skip before reading starts (default 0). In <span class="in">`fread()`</span> it can also be a string: reading starts at the first line containing that string</span>
 <span id="cb73-69"><a href="#cb73-69" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`fill`** - If TRUE then in case the rows have unequal length, blank fields are implicitly added</span>
 <span id="cb73-70"><a href="#cb73-70" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`dec`** - the character used in the file for decimal points</span>
 <span id="cb73-71"><a href="#cb73-71" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`col_names`** - assign new column names (string)</span>
@@ -6949,476 +6961,478 @@ Tip
 <span id="cb73-140"><a href="#cb73-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(., <span class="cf">function</span>(x) x[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
 <span id="cb73-141"><a href="#cb73-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-142"><a href="#cb73-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-143"><a href="#cb73-143" aria-hidden="true" tabindex="-1"></a>Factors are not supported by <span class="in">`scan()`</span>; convert afterwards with <span class="in">`factor()`</span>.</span>
-<span id="cb73-144"><a href="#cb73-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-145"><a href="#cb73-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## Saving data</span></span>
+<span id="cb73-143"><a href="#cb73-143" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb73-144"><a href="#cb73-144" aria-hidden="true" tabindex="-1"></a>Factors are not supported by <span class="in">`scan()`</span>; convert afterwards with <span class="in">`factor()`</span>.</span>
+<span id="cb73-145"><a href="#cb73-145" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb73-146"><a href="#cb73-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-147"><a href="#cb73-147" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb73-148"><a href="#cb73-148" aria-hidden="true" tabindex="-1"></a>Important argumnts, my vary depending on the used function</span>
-<span id="cb73-149"><a href="#cb73-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-150"><a href="#cb73-150" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`sep`** - The separator between columns (&quot;,&quot;, &quot;;&quot;)</span>
-<span id="cb73-151"><a href="#cb73-151" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`append`** - If TRUE, the file is opened in append mode and column names (header row) are not written. If FALSE, it will overwrite the existing file</span>
-<span id="cb73-152"><a href="#cb73-152" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`quote`** - factor fields and column names will only be surrounded by double quotes</span>
-<span id="cb73-153"><a href="#cb73-153" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`col.names`** or **`row.names`** - T or F</span>
-<span id="cb73-154"><a href="#cb73-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-155"><a href="#cb73-155" aria-hidden="true" tabindex="-1"></a>Examples of how to save data</span>
+<span id="cb73-147"><a href="#cb73-147" aria-hidden="true" tabindex="-1"></a><span class="fu">## Saving data</span></span>
+<span id="cb73-148"><a href="#cb73-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-149"><a href="#cb73-149" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb73-150"><a href="#cb73-150" aria-hidden="true" tabindex="-1"></a>Important argumnts, my vary depending on the used function</span>
+<span id="cb73-151"><a href="#cb73-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-152"><a href="#cb73-152" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`sep`** - The separator between columns (&quot;,&quot;, &quot;;&quot;)</span>
+<span id="cb73-153"><a href="#cb73-153" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`append`** - If TRUE, the file is opened in append mode and column names (header row) are not written. If FALSE, it will overwrite the existing file</span>
+<span id="cb73-154"><a href="#cb73-154" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`quote`** - factor fields and column names will only be surrounded by double quotes</span>
+<span id="cb73-155"><a href="#cb73-155" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`col.names`** or **`row.names`** - T or F</span>
 <span id="cb73-156"><a href="#cb73-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-157"><a href="#cb73-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
-<span id="cb73-158"><a href="#cb73-158" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(dt,<span class="st">&quot;PATH/TO/FILE.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb73-159"><a href="#cb73-159" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dt,<span class="st">&quot;PATH/TO/FILE.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb73-160"><a href="#cb73-160" aria-hidden="true" tabindex="-1"></a><span class="fu">fwrite</span>(dt, <span class="st">&quot;PATH/TO/FILE.csv&quot;</span>) </span>
-<span id="cb73-161"><a href="#cb73-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-162"><a href="#cb73-162" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb73-163"><a href="#cb73-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-164"><a href="#cb73-164" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb73-165"><a href="#cb73-165" aria-hidden="true" tabindex="-1"></a>The <span class="in">`fwrite()`</span> function from the <span class="in">`data.table`</span> package is a fast and efficient way to write data tables to disk.</span>
-<span id="cb73-166"><a href="#cb73-166" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb73-167"><a href="#cb73-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-168"><a href="#cb73-168" aria-hidden="true" tabindex="-1"></a><span class="fu">### R data format</span></span>
+<span id="cb73-157"><a href="#cb73-157" aria-hidden="true" tabindex="-1"></a>Examples of how to save data</span>
+<span id="cb73-158"><a href="#cb73-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-159"><a href="#cb73-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb73-160"><a href="#cb73-160" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(dt,<span class="st">&quot;PATH/TO/FILE.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb73-161"><a href="#cb73-161" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dt,<span class="st">&quot;PATH/TO/FILE.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb73-162"><a href="#cb73-162" aria-hidden="true" tabindex="-1"></a><span class="fu">fwrite</span>(dt, <span class="st">&quot;PATH/TO/FILE.csv&quot;</span>) </span>
+<span id="cb73-163"><a href="#cb73-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-164"><a href="#cb73-164" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb73-165"><a href="#cb73-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-166"><a href="#cb73-166" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb73-167"><a href="#cb73-167" aria-hidden="true" tabindex="-1"></a>The <span class="in">`fwrite()`</span> function from the <span class="in">`data.table`</span> package is a fast and efficient way to write data tables to disk.</span>
+<span id="cb73-168"><a href="#cb73-168" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb73-169"><a href="#cb73-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-170"><a href="#cb73-170" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Saving a single R object</span></span>
+<span id="cb73-170"><a href="#cb73-170" aria-hidden="true" tabindex="-1"></a><span class="fu">### R data format</span></span>
 <span id="cb73-171"><a href="#cb73-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-172"><a href="#cb73-172" aria-hidden="true" tabindex="-1"></a>You can save **one R object** (e.g., a data frame, vector, or model) to a file in **RDS format** using <span class="in">`saveRDS()`</span>.</span>
+<span id="cb73-172"><a href="#cb73-172" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Saving a single R object</span></span>
 <span id="cb73-173"><a href="#cb73-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-174"><a href="#cb73-174" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`saveRDS(object, file)`**: writes the object to disk.\</span>
-<span id="cb73-175"><a href="#cb73-175" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`readRDS(file)`**: loads the object back into R.\</span>
-<span id="cb73-176"><a href="#cb73-176" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>You can assign the loaded object to **any name** you like (the original object name is not preserved).</span>
-<span id="cb73-177"><a href="#cb73-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-178"><a href="#cb73-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
-<span id="cb73-179"><a href="#cb73-179" aria-hidden="true" tabindex="-1"></a><span class="co"># Save a single object to a file</span></span>
-<span id="cb73-180"><a href="#cb73-180" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(my_table, <span class="st">&quot;my_data.rds&quot;</span>)</span>
-<span id="cb73-181"><a href="#cb73-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-182"><a href="#cb73-182" aria-hidden="true" tabindex="-1"></a><span class="co"># Restore it under a different name</span></span>
-<span id="cb73-183"><a href="#cb73-183" aria-hidden="true" tabindex="-1"></a>my_old_table <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;my_data.rds&quot;</span>)</span>
-<span id="cb73-184"><a href="#cb73-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-185"><a href="#cb73-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-186"><a href="#cb73-186" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Saving multiple R objects (`.RData` / `.rda`)</span></span>
+<span id="cb73-174"><a href="#cb73-174" aria-hidden="true" tabindex="-1"></a>You can save **one R object** (e.g., a data frame, vector, or model) to a file in **RDS format** using <span class="in">`saveRDS()`</span>.</span>
+<span id="cb73-175"><a href="#cb73-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-176"><a href="#cb73-176" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`saveRDS(object, file)`**: writes the object to disk.\</span>
+<span id="cb73-177"><a href="#cb73-177" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`readRDS(file)`**: loads the object back into R.\</span>
+<span id="cb73-178"><a href="#cb73-178" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>You can assign the loaded object to **any name** you like (the original object name is not preserved).</span>
+<span id="cb73-179"><a href="#cb73-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-180"><a href="#cb73-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb73-181"><a href="#cb73-181" aria-hidden="true" tabindex="-1"></a><span class="co"># Save a single object to a file</span></span>
+<span id="cb73-182"><a href="#cb73-182" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(my_table, <span class="st">&quot;my_data.rds&quot;</span>)</span>
+<span id="cb73-183"><a href="#cb73-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-184"><a href="#cb73-184" aria-hidden="true" tabindex="-1"></a><span class="co"># Restore it under a different name</span></span>
+<span id="cb73-185"><a href="#cb73-185" aria-hidden="true" tabindex="-1"></a>my_old_table <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;my_data.rds&quot;</span>)</span>
+<span id="cb73-186"><a href="#cb73-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-187"><a href="#cb73-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-188"><a href="#cb73-188" aria-hidden="true" tabindex="-1"></a>The <span class="in">`save()`</span> function can store **one or more R objects** together in a single file.\</span>
-<span id="cb73-189"><a href="#cb73-189" aria-hidden="true" tabindex="-1"></a>These files are usually saved with the extension **`.RData`** or **`.rda`**.</span>
-<span id="cb73-190"><a href="#cb73-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-191"><a href="#cb73-191" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`save(object1, object2, ..., file = &quot;name.RData&quot;)`** → saves the specified objects.\</span>
-<span id="cb73-192"><a href="#cb73-192" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`load(&quot;name.RData&quot;)`** → restores all saved objects into the current workspace with their original names.</span>
-<span id="cb73-193"><a href="#cb73-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-194"><a href="#cb73-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r saveRData, eval=FALSE}</span></span>
-<span id="cb73-195"><a href="#cb73-195" aria-hidden="true" tabindex="-1"></a><span class="co"># Save multiple objects</span></span>
-<span id="cb73-196"><a href="#cb73-196" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(my_table1, my_table2, <span class="at">file =</span> <span class="st">&quot;data.RData&quot;</span>)</span>
-<span id="cb73-197"><a href="#cb73-197" aria-hidden="true" tabindex="-1"></a><span class="co"># To load the data again</span></span>
-<span id="cb73-198"><a href="#cb73-198" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data.RData&quot;</span>)</span>
-<span id="cb73-199"><a href="#cb73-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-200"><a href="#cb73-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-201"><a href="#cb73-201" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Saving your entire workspace in a specified file</span></span>
+<span id="cb73-188"><a href="#cb73-188" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Saving multiple R objects (`.RData` / `.rda`)</span></span>
+<span id="cb73-189"><a href="#cb73-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-190"><a href="#cb73-190" aria-hidden="true" tabindex="-1"></a>The <span class="in">`save()`</span> function can store **one or more R objects** together in a single file.\</span>
+<span id="cb73-191"><a href="#cb73-191" aria-hidden="true" tabindex="-1"></a>These files are usually saved with the extension **`.RData`** or **`.rda`**.</span>
+<span id="cb73-192"><a href="#cb73-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-193"><a href="#cb73-193" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`save(object1, object2, ..., file = &quot;name.RData&quot;)`** → saves the specified objects.\</span>
+<span id="cb73-194"><a href="#cb73-194" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`load(&quot;name.RData&quot;)`** → restores all saved objects into the current workspace with their original names.</span>
+<span id="cb73-195"><a href="#cb73-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-196"><a href="#cb73-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r saveRData, eval=FALSE}</span></span>
+<span id="cb73-197"><a href="#cb73-197" aria-hidden="true" tabindex="-1"></a><span class="co"># Save multiple objects</span></span>
+<span id="cb73-198"><a href="#cb73-198" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(my_table1, my_table2, <span class="at">file =</span> <span class="st">&quot;data.RData&quot;</span>)</span>
+<span id="cb73-199"><a href="#cb73-199" aria-hidden="true" tabindex="-1"></a><span class="co"># To load the data again</span></span>
+<span id="cb73-200"><a href="#cb73-200" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data.RData&quot;</span>)</span>
+<span id="cb73-201"><a href="#cb73-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-202"><a href="#cb73-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-203"><a href="#cb73-203" aria-hidden="true" tabindex="-1"></a>If you want to save **everything currently in your R session** (all variables, data frames, models, functions, etc.), you can use <span class="in">`save.image()`</span>.\</span>
-<span id="cb73-204"><a href="#cb73-204" aria-hidden="true" tabindex="-1"></a>This is essentially a shortcut for saving the entire global environment into a single file, usually with the extension <span class="in">`.RData`</span>.</span>
-<span id="cb73-205"><a href="#cb73-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-206"><a href="#cb73-206" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`save.image(file = &quot;my_workspace.RData&quot;)`** → saves the entire workspace.\</span>
-<span id="cb73-207"><a href="#cb73-207" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`load(&quot;my_workspace.RData&quot;)`** → restores the full workspace later.</span>
-<span id="cb73-208"><a href="#cb73-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-209"><a href="#cb73-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r saveWorkspace, eval=FALSE}</span></span>
-<span id="cb73-210"><a href="#cb73-210" aria-hidden="true" tabindex="-1"></a><span class="co"># Save everything from the current R session</span></span>
-<span id="cb73-211"><a href="#cb73-211" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">&quot;my_work_space.RData&quot;</span>)</span>
-<span id="cb73-212"><a href="#cb73-212" aria-hidden="true" tabindex="-1"></a><span class="co"># load back the workspace</span></span>
-<span id="cb73-213"><a href="#cb73-213" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;my_work_space.RData&quot;</span>)</span>
-<span id="cb73-214"><a href="#cb73-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-215"><a href="#cb73-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-216"><a href="#cb73-216" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb73-217"><a href="#cb73-217" aria-hidden="true" tabindex="-1"></a>While <span class="in">`save.image()`</span> is convenient, it&#39;s not always the best choice:</span>
-<span id="cb73-218"><a href="#cb73-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-219"><a href="#cb73-219" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>It can save **unnecessary objects**, making files very large.\</span>
-<span id="cb73-220"><a href="#cb73-220" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>It may hide **dependencies** (you won&#39;t remember later which objects were actually needed).\</span>
-<span id="cb73-221"><a href="#cb73-221" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>For **reproducibility**, it&#39;s usually better to save only the objects you need with <span class="in">`save()`</span> or <span class="in">`saveRDS()`</span> and rebuild the rest from your script.</span>
-<span id="cb73-222"><a href="#cb73-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-223"><a href="#cb73-223" aria-hidden="true" tabindex="-1"></a>**Rule of thumb:**\</span>
-<span id="cb73-224"><a href="#cb73-224" aria-hidden="true" tabindex="-1"></a>Use <span class="in">`save.image()`</span> for quick backups or temporary sessions, but prefer <span class="in">`save()`</span> / <span class="in">`saveRDS()`</span> for clean, shareable projects.</span>
-<span id="cb73-225"><a href="#cb73-225" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb73-226"><a href="#cb73-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-227"><a href="#cb73-227" aria-hidden="true" tabindex="-1"></a><span class="fu">## Excel</span></span>
+<span id="cb73-203"><a href="#cb73-203" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Saving your entire workspace in a specified file</span></span>
+<span id="cb73-204"><a href="#cb73-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-205"><a href="#cb73-205" aria-hidden="true" tabindex="-1"></a>If you want to save **everything currently in your R session** (all variables, data frames, models, functions, etc.), you can use <span class="in">`save.image()`</span>.\</span>
+<span id="cb73-206"><a href="#cb73-206" aria-hidden="true" tabindex="-1"></a>This is essentially a shortcut for saving the entire global environment into a single file, usually with the extension <span class="in">`.RData`</span>.</span>
+<span id="cb73-207"><a href="#cb73-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-208"><a href="#cb73-208" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`save.image(file = &quot;my_workspace.RData&quot;)`** → saves the entire workspace.\</span>
+<span id="cb73-209"><a href="#cb73-209" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`load(&quot;my_workspace.RData&quot;)`** → restores the full workspace later.</span>
+<span id="cb73-210"><a href="#cb73-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-211"><a href="#cb73-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r saveWorkspace, eval=FALSE}</span></span>
+<span id="cb73-212"><a href="#cb73-212" aria-hidden="true" tabindex="-1"></a><span class="co"># Save everything from the current R session</span></span>
+<span id="cb73-213"><a href="#cb73-213" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">&quot;my_work_space.RData&quot;</span>)</span>
+<span id="cb73-214"><a href="#cb73-214" aria-hidden="true" tabindex="-1"></a><span class="co"># load back the workspace</span></span>
+<span id="cb73-215"><a href="#cb73-215" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;my_work_space.RData&quot;</span>)</span>
+<span id="cb73-216"><a href="#cb73-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-217"><a href="#cb73-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-218"><a href="#cb73-218" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb73-219"><a href="#cb73-219" aria-hidden="true" tabindex="-1"></a>While <span class="in">`save.image()`</span> is convenient, it&#39;s not always the best choice:</span>
+<span id="cb73-220"><a href="#cb73-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-221"><a href="#cb73-221" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>It can save **unnecessary objects**, making files very large.\</span>
+<span id="cb73-222"><a href="#cb73-222" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>It may hide **dependencies** (you won&#39;t remember later which objects were actually needed).\</span>
+<span id="cb73-223"><a href="#cb73-223" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>For **reproducibility**, it&#39;s usually better to save only the objects you need with <span class="in">`save()`</span> or <span class="in">`saveRDS()`</span> and rebuild the rest from your script.</span>
+<span id="cb73-224"><a href="#cb73-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-225"><a href="#cb73-225" aria-hidden="true" tabindex="-1"></a>**Rule of thumb:**\</span>
+<span id="cb73-226"><a href="#cb73-226" aria-hidden="true" tabindex="-1"></a>Use <span class="in">`save.image()`</span> for quick backups or temporary sessions, but prefer <span class="in">`save()`</span> / <span class="in">`saveRDS()`</span> for clean, shareable projects.</span>
+<span id="cb73-227"><a href="#cb73-227" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb73-228"><a href="#cb73-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-229"><a href="#cb73-229" aria-hidden="true" tabindex="-1"></a><span class="fu">### Package: `**readxl**`</span></span>
+<span id="cb73-229"><a href="#cb73-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## Excel</span></span>
 <span id="cb73-230"><a href="#cb73-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-231"><a href="#cb73-231" aria-hidden="true" tabindex="-1"></a>The **readxl** package is the most common way to import Excel files in R.\</span>
-<span id="cb73-232"><a href="#cb73-232" aria-hidden="true" tabindex="-1"></a>It has no external dependencies (unlike older packages such as <span class="in">`xlsx`</span> or <span class="in">`XLConnect`</span>) and works on all platforms.</span>
-<span id="cb73-233"><a href="#cb73-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-234"><a href="#cb73-234" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Supports both <span class="in">`.xls`</span> (Excel 97--2003) and <span class="in">`.xlsx`</span> (Excel 2007+) formats.\</span>
-<span id="cb73-235"><a href="#cb73-235" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Returns a **tibble** .\</span>
-<span id="cb73-236"><a href="#cb73-236" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Does **not** require Excel or Java to be installed on your computer.\</span>
-<span id="cb73-237"><a href="#cb73-237" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Provides fast, read-only access (you cannot write Excel files with <span class="in">`readxl`</span>; for that, use <span class="in">`openxlsx`</span> or <span class="in">`writexl`</span>).</span>
-<span id="cb73-238"><a href="#cb73-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-239"><a href="#cb73-239" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Difference between `read_excel`, `read_xls`, and `read_xlsx`</span></span>
+<span id="cb73-231"><a href="#cb73-231" aria-hidden="true" tabindex="-1"></a><span class="fu">### Package: `**readxl**`</span></span>
+<span id="cb73-232"><a href="#cb73-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-233"><a href="#cb73-233" aria-hidden="true" tabindex="-1"></a>The **readxl** package is the most common way to import Excel files in R.\</span>
+<span id="cb73-234"><a href="#cb73-234" aria-hidden="true" tabindex="-1"></a>It has no external dependencies (unlike older packages such as <span class="in">`xlsx`</span> or <span class="in">`XLConnect`</span>) and works on all platforms.</span>
+<span id="cb73-235"><a href="#cb73-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-236"><a href="#cb73-236" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Supports both <span class="in">`.xls`</span> (Excel 97--2003) and <span class="in">`.xlsx`</span> (Excel 2007+) formats.\</span>
+<span id="cb73-237"><a href="#cb73-237" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Returns a **tibble** .\</span>
+<span id="cb73-238"><a href="#cb73-238" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Does **not** require Excel or Java to be installed on your computer.\</span>
+<span id="cb73-239"><a href="#cb73-239" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Provides fast, read-only access (you cannot write Excel files with <span class="in">`readxl`</span>; for that, use <span class="in">`openxlsx`</span> or <span class="in">`writexl`</span>).</span>
 <span id="cb73-240"><a href="#cb73-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-241"><a href="#cb73-241" aria-hidden="true" tabindex="-1"></a>All three functions come from the **readxl** package.</span>
+<span id="cb73-241"><a href="#cb73-241" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Difference between `read_excel`, `read_xls`, and `read_xlsx`</span></span>
 <span id="cb73-242"><a href="#cb73-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-243"><a href="#cb73-243" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Function <span class="pp">|</span> Supported format(s) <span class="pp">|</span> Notes <span class="pp">|</span></span>
-<span id="cb73-244"><a href="#cb73-244" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------------|------------------|-------------------------------------|</span></span>
-<span id="cb73-245"><a href="#cb73-245" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`read_excel()`</span> <span class="pp">|</span> Both <span class="in">`.xls`</span> and <span class="in">`.xlsx`</span> <span class="pp">|</span> Generic function, automatically detects file type. Recommended in most cases. <span class="pp">|</span></span>
-<span id="cb73-246"><a href="#cb73-246" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`read_xls()`</span> <span class="pp">|</span> Only <span class="in">`.xls`</span> <span class="pp">|</span> Wrapper specialized for old Excel files (97--2003). <span class="pp">|</span></span>
-<span id="cb73-247"><a href="#cb73-247" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`read_xlsx()`</span> <span class="pp">|</span> Only <span class="in">`.xlsx`</span> <span class="pp">|</span> Wrapper specialized for modern Excel files (2007+). <span class="pp">|</span></span>
-<span id="cb73-248"><a href="#cb73-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-249"><a href="#cb73-249" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb73-250"><a href="#cb73-250" aria-hidden="true" tabindex="-1"></a>In most cases, just use <span class="in">`read_excel()`</span> --- it works for both formats and is the most flexible.</span>
-<span id="cb73-251"><a href="#cb73-251" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb73-252"><a href="#cb73-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-253"><a href="#cb73-253" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Example of manipulation with Excel files</span></span>
+<span id="cb73-243"><a href="#cb73-243" aria-hidden="true" tabindex="-1"></a>All three functions come from the **readxl** package.</span>
+<span id="cb73-244"><a href="#cb73-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-245"><a href="#cb73-245" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Function <span class="pp">|</span> Supported format(s) <span class="pp">|</span> Notes <span class="pp">|</span></span>
+<span id="cb73-246"><a href="#cb73-246" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------------|------------------|-------------------------------------|</span></span>
+<span id="cb73-247"><a href="#cb73-247" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`read_excel()`</span> <span class="pp">|</span> Both <span class="in">`.xls`</span> and <span class="in">`.xlsx`</span> <span class="pp">|</span> Generic function, automatically detects file type. Recommended in most cases. <span class="pp">|</span></span>
+<span id="cb73-248"><a href="#cb73-248" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`read_xls()`</span> <span class="pp">|</span> Only <span class="in">`.xls`</span> <span class="pp">|</span> Wrapper specialized for old Excel files (97--2003). <span class="pp">|</span></span>
+<span id="cb73-249"><a href="#cb73-249" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`read_xlsx()`</span> <span class="pp">|</span> Only <span class="in">`.xlsx`</span> <span class="pp">|</span> Wrapper specialized for modern Excel files (2007+). <span class="pp">|</span></span>
+<span id="cb73-250"><a href="#cb73-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-251"><a href="#cb73-251" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb73-252"><a href="#cb73-252" aria-hidden="true" tabindex="-1"></a>In most cases, just use <span class="in">`read_excel()`</span> --- it works for both formats and is the most flexible.</span>
+<span id="cb73-253"><a href="#cb73-253" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb73-254"><a href="#cb73-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-255"><a href="#cb73-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r excel , eval=FALSE}</span></span>
-<span id="cb73-256"><a href="#cb73-256" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the first sheet by index</span></span>
-<span id="cb73-257"><a href="#cb73-257" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&quot;PATH/TO/EXCEL.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="dv">1</span>)</span>
-<span id="cb73-258"><a href="#cb73-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-259"><a href="#cb73-259" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a sheet by name (&quot;ATM&quot; in this case)</span></span>
-<span id="cb73-260"><a href="#cb73-260" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&quot;PATH/TO/EXCEL.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;ATM&quot;</span>)</span>
-<span id="cb73-261"><a href="#cb73-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-262"><a href="#cb73-262" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the first table into a new Excel file, sheet named &quot;My_sheet&quot;</span></span>
-<span id="cb73-263"><a href="#cb73-263" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(my_table,</span>
-<span id="cb73-264"><a href="#cb73-264" aria-hidden="true" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&quot;PATH/TO/My_EXCEL.xlsx&quot;</span>,</span>
-<span id="cb73-265"><a href="#cb73-265" aria-hidden="true" tabindex="-1"></a>           <span class="at">sheetName =</span> <span class="st">&quot;My_sheet&quot;</span>, </span>
-<span id="cb73-266"><a href="#cb73-266" aria-hidden="true" tabindex="-1"></a>           <span class="at">col.names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb73-267"><a href="#cb73-267" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb73-268"><a href="#cb73-268" aria-hidden="true" tabindex="-1"></a>           <span class="at">append =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb73-269"><a href="#cb73-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-270"><a href="#cb73-270" aria-hidden="true" tabindex="-1"></a><span class="co"># Save a second table into the same file, sheet named &quot;sheet2&quot;</span></span>
-<span id="cb73-271"><a href="#cb73-271" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(my_table2,</span>
-<span id="cb73-272"><a href="#cb73-272" aria-hidden="true" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&quot;PATH/TO/My_EXCEL.xlsx&quot;</span>,</span>
-<span id="cb73-273"><a href="#cb73-273" aria-hidden="true" tabindex="-1"></a>           <span class="at">sheetName =</span> <span class="st">&quot;sheet2&quot;</span>,</span>
-<span id="cb73-274"><a href="#cb73-274" aria-hidden="true" tabindex="-1"></a>           <span class="at">append =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb73-275"><a href="#cb73-275" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb73-276"><a href="#cb73-276" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-277"><a href="#cb73-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-278"><a href="#cb73-278" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple files</span></span>
+<span id="cb73-255"><a href="#cb73-255" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Example of manipulation with Excel files</span></span>
+<span id="cb73-256"><a href="#cb73-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-257"><a href="#cb73-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r excel , eval=FALSE}</span></span>
+<span id="cb73-258"><a href="#cb73-258" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the first sheet by index</span></span>
+<span id="cb73-259"><a href="#cb73-259" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&quot;PATH/TO/EXCEL.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="dv">1</span>)</span>
+<span id="cb73-260"><a href="#cb73-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-261"><a href="#cb73-261" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a sheet by name (&quot;ATM&quot; in this case)</span></span>
+<span id="cb73-262"><a href="#cb73-262" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">&quot;PATH/TO/EXCEL.xlsx&quot;</span>, <span class="at">sheet =</span> <span class="st">&quot;ATM&quot;</span>)</span>
+<span id="cb73-263"><a href="#cb73-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-264"><a href="#cb73-264" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the first table into a new Excel file, sheet named &quot;My_sheet&quot;</span></span>
+<span id="cb73-265"><a href="#cb73-265" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(my_table,</span>
+<span id="cb73-266"><a href="#cb73-266" aria-hidden="true" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&quot;PATH/TO/My_EXCEL.xlsx&quot;</span>,</span>
+<span id="cb73-267"><a href="#cb73-267" aria-hidden="true" tabindex="-1"></a>           <span class="at">sheetName =</span> <span class="st">&quot;My_sheet&quot;</span>, </span>
+<span id="cb73-268"><a href="#cb73-268" aria-hidden="true" tabindex="-1"></a>           <span class="at">col.names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb73-269"><a href="#cb73-269" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb73-270"><a href="#cb73-270" aria-hidden="true" tabindex="-1"></a>           <span class="at">append =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb73-271"><a href="#cb73-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-272"><a href="#cb73-272" aria-hidden="true" tabindex="-1"></a><span class="co"># Save a second table into the same file, sheet named &quot;sheet2&quot;</span></span>
+<span id="cb73-273"><a href="#cb73-273" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(my_table2,</span>
+<span id="cb73-274"><a href="#cb73-274" aria-hidden="true" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&quot;PATH/TO/My_EXCEL.xlsx&quot;</span>,</span>
+<span id="cb73-275"><a href="#cb73-275" aria-hidden="true" tabindex="-1"></a>           <span class="at">sheetName =</span> <span class="st">&quot;sheet2&quot;</span>,</span>
+<span id="cb73-276"><a href="#cb73-276" aria-hidden="true" tabindex="-1"></a>           <span class="at">append =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb73-277"><a href="#cb73-277" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb73-278"><a href="#cb73-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-279"><a href="#cb73-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-280"><a href="#cb73-280" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb73-281"><a href="#cb73-281" aria-hidden="true" tabindex="-1"></a>How to import multiple files at once?</span>
-<span id="cb73-282"><a href="#cb73-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-283"><a href="#cb73-283" aria-hidden="true" tabindex="-1"></a>Using **`list.files`** function which has the following important arguments:</span>
+<span id="cb73-280"><a href="#cb73-280" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple files</span></span>
+<span id="cb73-281"><a href="#cb73-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-282"><a href="#cb73-282" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb73-283"><a href="#cb73-283" aria-hidden="true" tabindex="-1"></a>How to import multiple files at once?</span>
 <span id="cb73-284"><a href="#cb73-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-285"><a href="#cb73-285" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`path`** - ptah to your folder containing multiple files and subfolders</span>
-<span id="cb73-286"><a href="#cb73-286" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`pattern`** - regular expression</span>
-<span id="cb73-287"><a href="#cb73-287" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`full.names`** - If TRUE, the directory path is prepended to the file names to give a relative file path.</span>
-<span id="cb73-288"><a href="#cb73-288" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb73-289"><a href="#cb73-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-290"><a href="#cb73-290" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Example of importing multiple files</span></span>
+<span id="cb73-285"><a href="#cb73-285" aria-hidden="true" tabindex="-1"></a>Using **`list.files`** function which has the following important arguments:</span>
+<span id="cb73-286"><a href="#cb73-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-287"><a href="#cb73-287" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`path`** - ptah to your folder containing multiple files and subfolders</span>
+<span id="cb73-288"><a href="#cb73-288" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`pattern`** - regular expression</span>
+<span id="cb73-289"><a href="#cb73-289" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`full.names`** - If TRUE, the directory path is prepended to the file names to give a relative file path.</span>
+<span id="cb73-290"><a href="#cb73-290" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb73-291"><a href="#cb73-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-292"><a href="#cb73-292" aria-hidden="true" tabindex="-1"></a>What are the data structures of **temp** and **myfiles** variables?</span>
+<span id="cb73-292"><a href="#cb73-292" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Example of importing multiple files</span></span>
 <span id="cb73-293"><a href="#cb73-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-296"><a href="#cb73-296" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-297"><a href="#cb73-297" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;test_data/&quot;</span>, </span>
-<span id="cb73-298"><a href="#cb73-298" aria-hidden="true" tabindex="-1"></a>                   <span class="at">pattern=</span><span class="st">&quot;*.csv&quot;</span>, </span>
-<span id="cb73-299"><a href="#cb73-299" aria-hidden="true" tabindex="-1"></a>                   <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb73-300"><a href="#cb73-300" aria-hidden="true" tabindex="-1"></a>myfiles <span class="ot">&lt;-</span> <span class="fu">lapply</span>(temp, fread)</span>
-<span id="cb73-301"><a href="#cb73-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-302"><a href="#cb73-302" aria-hidden="true" tabindex="-1"></a>temp</span>
+<span id="cb73-294"><a href="#cb73-294" aria-hidden="true" tabindex="-1"></a>What are the data structures of **temp** and **myfiles** variables?</span>
+<span id="cb73-295"><a href="#cb73-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-298"><a href="#cb73-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-299"><a href="#cb73-299" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&quot;test_data/&quot;</span>, </span>
+<span id="cb73-300"><a href="#cb73-300" aria-hidden="true" tabindex="-1"></a>                   <span class="at">pattern=</span><span class="st">&quot;*.csv&quot;</span>, </span>
+<span id="cb73-301"><a href="#cb73-301" aria-hidden="true" tabindex="-1"></a>                   <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb73-302"><a href="#cb73-302" aria-hidden="true" tabindex="-1"></a>myfiles <span class="ot">&lt;-</span> <span class="fu">lapply</span>(temp, fread)</span>
 <span id="cb73-303"><a href="#cb73-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-304"><a href="#cb73-304" aria-hidden="true" tabindex="-1"></a>myfiles <span class="sc">%&gt;%</span> </span>
-<span id="cb73-305"><a href="#cb73-305" aria-hidden="true" tabindex="-1"></a>  .[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb73-306"><a href="#cb73-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-307"><a href="#cb73-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-308"><a href="#cb73-308" aria-hidden="true" tabindex="-1"></a><span class="fu">### List and tables</span></span>
+<span id="cb73-304"><a href="#cb73-304" aria-hidden="true" tabindex="-1"></a>temp</span>
+<span id="cb73-305"><a href="#cb73-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-306"><a href="#cb73-306" aria-hidden="true" tabindex="-1"></a>myfiles <span class="sc">%&gt;%</span> </span>
+<span id="cb73-307"><a href="#cb73-307" aria-hidden="true" tabindex="-1"></a>  .[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb73-308"><a href="#cb73-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-309"><a href="#cb73-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-310"><a href="#cb73-310" aria-hidden="true" tabindex="-1"></a><span class="fu">#### base R: `do.call`</span></span>
+<span id="cb73-310"><a href="#cb73-310" aria-hidden="true" tabindex="-1"></a><span class="fu">### List and tables</span></span>
 <span id="cb73-311"><a href="#cb73-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-312"><a href="#cb73-312" aria-hidden="true" tabindex="-1"></a><span class="in">`do.call()`</span> is mostly used with **`rbind`** or **`cbind`**, but it can apply *any* function to a list of arguments.</span>
+<span id="cb73-312"><a href="#cb73-312" aria-hidden="true" tabindex="-1"></a><span class="fu">#### base R: `do.call`</span></span>
 <span id="cb73-313"><a href="#cb73-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-314"><a href="#cb73-314" aria-hidden="true" tabindex="-1"></a><span class="in">`do.call(&quot;any_function&quot;, arguments_list)`</span>\</span>
-<span id="cb73-315"><a href="#cb73-315" aria-hidden="true" tabindex="-1"></a><span class="in">`call(&quot;any_function&quot;, argument1, argument2)`</span></span>
-<span id="cb73-316"><a href="#cb73-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-319"><a href="#cb73-319" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-320"><a href="#cb73-320" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(sum, <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span>
-<span id="cb73-321"><a href="#cb73-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-322"><a href="#cb73-322" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(rbind, myfiles)</span>
-<span id="cb73-323"><a href="#cb73-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-324"><a href="#cb73-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-325"><a href="#cb73-325" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb73-326"><a href="#cb73-326" aria-hidden="true" tabindex="-1"></a>What is the difference between *do.call* and *lapply*?</span>
-<span id="cb73-327"><a href="#cb73-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-328"><a href="#cb73-328" aria-hidden="true" tabindex="-1"></a>**lapply()** applies a given function for each element in a list, so there will be several function calls.</span>
+<span id="cb73-314"><a href="#cb73-314" aria-hidden="true" tabindex="-1"></a><span class="in">`do.call()`</span> is mostly used with **`rbind`** or **`cbind`**, but it can apply *any* function to a list of arguments.</span>
+<span id="cb73-315"><a href="#cb73-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-316"><a href="#cb73-316" aria-hidden="true" tabindex="-1"></a><span class="in">`do.call(&quot;any_function&quot;, arguments_list)`</span>\</span>
+<span id="cb73-317"><a href="#cb73-317" aria-hidden="true" tabindex="-1"></a><span class="in">`call(&quot;any_function&quot;, argument1, argument2)`</span></span>
+<span id="cb73-318"><a href="#cb73-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-321"><a href="#cb73-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-322"><a href="#cb73-322" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(sum, <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span>
+<span id="cb73-323"><a href="#cb73-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-324"><a href="#cb73-324" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(rbind, myfiles)</span>
+<span id="cb73-325"><a href="#cb73-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-326"><a href="#cb73-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-327"><a href="#cb73-327" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb73-328"><a href="#cb73-328" aria-hidden="true" tabindex="-1"></a>What is the difference between *do.call* and *lapply*?</span>
 <span id="cb73-329"><a href="#cb73-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-330"><a href="#cb73-330" aria-hidden="true" tabindex="-1"></a>**do.call()** applies a given function to the list as a whole, so there is only one function call.</span>
+<span id="cb73-330"><a href="#cb73-330" aria-hidden="true" tabindex="-1"></a>**lapply()** applies a given function for each element in a list, so there will be several function calls.</span>
 <span id="cb73-331"><a href="#cb73-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-334"><a href="#cb73-334" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-335"><a href="#cb73-335" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">b=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>), sum)</span>
-<span id="cb73-336"><a href="#cb73-336" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(<span class="st">&quot;sum&quot;</span>, <span class="fu">list</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">b=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>))</span>
-<span id="cb73-337"><a href="#cb73-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-338"><a href="#cb73-338" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb73-339"><a href="#cb73-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-340"><a href="#cb73-340" aria-hidden="true" tabindex="-1"></a><span class="fu">#### data.table: `rbindlist`</span></span>
+<span id="cb73-332"><a href="#cb73-332" aria-hidden="true" tabindex="-1"></a>**do.call()** applies a given function to the list as a whole, so there is only one function call.</span>
+<span id="cb73-333"><a href="#cb73-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-336"><a href="#cb73-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-337"><a href="#cb73-337" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">b=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>), sum)</span>
+<span id="cb73-338"><a href="#cb73-338" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(<span class="st">&quot;sum&quot;</span>, <span class="fu">list</span>(<span class="at">a=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">b=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">12</span>))</span>
+<span id="cb73-339"><a href="#cb73-339" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-340"><a href="#cb73-340" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb73-341"><a href="#cb73-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-342"><a href="#cb73-342" aria-hidden="true" tabindex="-1"></a>Same as do.call(&quot;rbind&quot;, l) on data.frames, but much faster.</span>
+<span id="cb73-342"><a href="#cb73-342" aria-hidden="true" tabindex="-1"></a><span class="fu">#### data.table: `rbindlist`</span></span>
 <span id="cb73-343"><a href="#cb73-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-344"><a href="#cb73-344" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
-<span id="cb73-345"><a href="#cb73-345" aria-hidden="true" tabindex="-1"></a><span class="fu">rbindlist</span>(myfiles)</span>
-<span id="cb73-346"><a href="#cb73-346" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-347"><a href="#cb73-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-348"><a href="#cb73-348" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Convert a table to a list: `split`</span></span>
+<span id="cb73-344"><a href="#cb73-344" aria-hidden="true" tabindex="-1"></a>Same as do.call(&quot;rbind&quot;, l) on data.frames, but much faster.</span>
+<span id="cb73-345"><a href="#cb73-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-346"><a href="#cb73-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb73-347"><a href="#cb73-347" aria-hidden="true" tabindex="-1"></a><span class="fu">rbindlist</span>(myfiles)</span>
+<span id="cb73-348"><a href="#cb73-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-349"><a href="#cb73-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-350"><a href="#cb73-350" aria-hidden="true" tabindex="-1"></a><span class="in">`split()`</span> is the opposite of <span class="in">`rbindlist()`</span>: it cuts one table into a **list of smaller tables**, one per group. Each list element contains the rows that share the same value(s) of the grouping variable(s), and the element names are those values (e.g. <span class="in">`&quot;C.1&quot;`</span> = Grade C and new_col 1).</span>
+<span id="cb73-350"><a href="#cb73-350" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Convert a table to a list: `split`</span></span>
 <span id="cb73-351"><a href="#cb73-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-352"><a href="#cb73-352" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`by`** (data.table only) - column names to group by, given as a character vector. Groups appear in the order they first occur in the table</span>
-<span id="cb73-353"><a href="#cb73-353" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`f`** (base R) - a vector, or a list of vectors, with one value per row. Groups are sorted alphabetically</span>
-<span id="cb73-354"><a href="#cb73-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-355"><a href="#cb73-355" aria-hidden="true" tabindex="-1"></a>Here we first create <span class="in">`new_col`</span> with <span class="in">`.GRP`</span>, the group number: 1 for rows with <span class="in">`Count &lt; 50`</span>, 2 for rows with <span class="in">`Count &gt;= 50`</span>.</span>
+<span id="cb73-352"><a href="#cb73-352" aria-hidden="true" tabindex="-1"></a><span class="in">`split()`</span> is the opposite of <span class="in">`rbindlist()`</span>: it cuts one table into a **list of smaller tables**, one per group. Each list element contains the rows that share the same value(s) of the grouping variable(s), and the element names are those values (e.g. <span class="in">`&quot;C.1&quot;`</span> = Grade C and new_col 1).</span>
+<span id="cb73-353"><a href="#cb73-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-354"><a href="#cb73-354" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`by`** (data.table only) - column names to group by, given as a character vector. Groups appear in the order they first occur in the table</span>
+<span id="cb73-355"><a href="#cb73-355" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`f`** (base R) - a vector, or a list of vectors, with one value per row. Groups are sorted alphabetically</span>
 <span id="cb73-356"><a href="#cb73-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-357"><a href="#cb73-357" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
-<span id="cb73-358"><a href="#cb73-358" aria-hidden="true" tabindex="-1"></a>my_tb <span class="ot">&lt;-</span> <span class="fu">fread</span>(my_file)</span>
-<span id="cb73-359"><a href="#cb73-359" aria-hidden="true" tabindex="-1"></a>my_tb[, new_col <span class="sc">:</span><span class="er">=</span> .GRP,.(Count <span class="sc">&gt;=</span><span class="dv">50</span>)]</span>
-<span id="cb73-360"><a href="#cb73-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-361"><a href="#cb73-361" aria-hidden="true" tabindex="-1"></a><span class="fu">split</span>(my_tb, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Grade&quot;</span>, <span class="st">&quot;new_col&quot;</span>)) <span class="sc">%&gt;%</span> .[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb73-362"><a href="#cb73-362" aria-hidden="true" tabindex="-1"></a><span class="fu">split</span>(my_tb, <span class="fu">list</span>(my_tb<span class="sc">$</span>Grade, my_tb<span class="sc">$</span>new_col)) <span class="sc">%&gt;%</span> .[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb73-363"><a href="#cb73-363" aria-hidden="true" tabindex="-1"></a><span class="fu">split</span>(my_tb, <span class="fu">list</span>(my_tb<span class="sc">$</span>Grade)) <span class="sc">%&gt;%</span> .[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb73-364"><a href="#cb73-364" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-365"><a href="#cb73-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-366"><a href="#cb73-366" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb73-357"><a href="#cb73-357" aria-hidden="true" tabindex="-1"></a>Here we first create <span class="in">`new_col`</span> with <span class="in">`.GRP`</span>, the group number: 1 for rows with <span class="in">`Count &lt; 50`</span>, 2 for rows with <span class="in">`Count &gt;= 50`</span>.</span>
+<span id="cb73-358"><a href="#cb73-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-359"><a href="#cb73-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb73-360"><a href="#cb73-360" aria-hidden="true" tabindex="-1"></a>my_tb <span class="ot">&lt;-</span> <span class="fu">fread</span>(my_file)</span>
+<span id="cb73-361"><a href="#cb73-361" aria-hidden="true" tabindex="-1"></a>my_tb[, new_col <span class="sc">:</span><span class="er">=</span> .GRP,.(Count <span class="sc">&gt;=</span><span class="dv">50</span>)]</span>
+<span id="cb73-362"><a href="#cb73-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-363"><a href="#cb73-363" aria-hidden="true" tabindex="-1"></a><span class="fu">split</span>(my_tb, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Grade&quot;</span>, <span class="st">&quot;new_col&quot;</span>)) <span class="sc">%&gt;%</span> .[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb73-364"><a href="#cb73-364" aria-hidden="true" tabindex="-1"></a><span class="fu">split</span>(my_tb, <span class="fu">list</span>(my_tb<span class="sc">$</span>Grade, my_tb<span class="sc">$</span>new_col)) <span class="sc">%&gt;%</span> .[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb73-365"><a href="#cb73-365" aria-hidden="true" tabindex="-1"></a><span class="fu">split</span>(my_tb, <span class="fu">list</span>(my_tb<span class="sc">$</span>Grade)) <span class="sc">%&gt;%</span> .[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb73-366"><a href="#cb73-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-367"><a href="#cb73-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-368"><a href="#cb73-368" aria-hidden="true" tabindex="-1"></a><span class="fu">## Combining tables</span></span>
+<span id="cb73-368"><a href="#cb73-368" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb73-369"><a href="#cb73-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-370"><a href="#cb73-370" aria-hidden="true" tabindex="-1"></a><span class="fu">### Binding tables</span></span>
+<span id="cb73-370"><a href="#cb73-370" aria-hidden="true" tabindex="-1"></a><span class="fu">## Combining tables</span></span>
 <span id="cb73-371"><a href="#cb73-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-372"><a href="#cb73-372" aria-hidden="true" tabindex="-1"></a>How to &quot;stitch&quot; two or more data objects into one?</span>
+<span id="cb73-372"><a href="#cb73-372" aria-hidden="true" tabindex="-1"></a><span class="fu">### Binding tables</span></span>
 <span id="cb73-373"><a href="#cb73-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-376"><a href="#cb73-376" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-377"><a href="#cb73-377" aria-hidden="true" tabindex="-1"></a>tb1 <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">sampleID =</span> <span class="fu">c</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">1</span>),</span>
-<span id="cb73-378"><a href="#cb73-378" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cancer =</span> <span class="fu">c</span>(<span class="st">&quot;Breast&quot;</span>,<span class="st">&quot;Breast&quot;</span>,<span class="st">&quot;Brain&quot;</span>,<span class="st">&quot;Liver&quot;</span>,<span class="st">&quot;Brain&quot;</span>,<span class="st">&quot;Pancreas&quot;</span>))</span>
-<span id="cb73-379"><a href="#cb73-379" aria-hidden="true" tabindex="-1"></a>tb2 <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">sampleID =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">8</span>), </span>
-<span id="cb73-380"><a href="#cb73-380" aria-hidden="true" tabindex="-1"></a>                  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>)) </span>
-<span id="cb73-381"><a href="#cb73-381" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tb1,<span class="dv">3</span>)</span>
-<span id="cb73-382"><a href="#cb73-382" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tb2,<span class="dv">3</span>)</span>
-<span id="cb73-383"><a href="#cb73-383" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-384"><a href="#cb73-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-385"><a href="#cb73-385" aria-hidden="true" tabindex="-1"></a>Function **rbind()** binds the tables by rows. Try run the code below and see what happens. Why is that?</span>
+<span id="cb73-374"><a href="#cb73-374" aria-hidden="true" tabindex="-1"></a>How to &quot;stitch&quot; two or more data objects into one?</span>
+<span id="cb73-375"><a href="#cb73-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-378"><a href="#cb73-378" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-379"><a href="#cb73-379" aria-hidden="true" tabindex="-1"></a>tb1 <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">sampleID =</span> <span class="fu">c</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">1</span>),</span>
+<span id="cb73-380"><a href="#cb73-380" aria-hidden="true" tabindex="-1"></a>                  <span class="at">cancer =</span> <span class="fu">c</span>(<span class="st">&quot;Breast&quot;</span>,<span class="st">&quot;Breast&quot;</span>,<span class="st">&quot;Brain&quot;</span>,<span class="st">&quot;Liver&quot;</span>,<span class="st">&quot;Brain&quot;</span>,<span class="st">&quot;Pancreas&quot;</span>))</span>
+<span id="cb73-381"><a href="#cb73-381" aria-hidden="true" tabindex="-1"></a>tb2 <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">sampleID =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">8</span>), </span>
+<span id="cb73-382"><a href="#cb73-382" aria-hidden="true" tabindex="-1"></a>                  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">&quot;F&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;M&quot;</span>)) </span>
+<span id="cb73-383"><a href="#cb73-383" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tb1,<span class="dv">3</span>)</span>
+<span id="cb73-384"><a href="#cb73-384" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tb2,<span class="dv">3</span>)</span>
+<span id="cb73-385"><a href="#cb73-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-386"><a href="#cb73-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-387"><a href="#cb73-387" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error=TRUE}</span></span>
-<span id="cb73-388"><a href="#cb73-388" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(tb1, tb2)</span>
-<span id="cb73-389"><a href="#cb73-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-390"><a href="#cb73-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-393"><a href="#cb73-393" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-394"><a href="#cb73-394" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(tb1, tb2, <span class="at">fill=</span><span class="cn">TRUE</span>)</span>
-<span id="cb73-395"><a href="#cb73-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-396"><a href="#cb73-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-397"><a href="#cb73-397" aria-hidden="true" tabindex="-1"></a>Function **cbind()** binds the tables. Do you notice anything strange when you run the code below?</span>
+<span id="cb73-387"><a href="#cb73-387" aria-hidden="true" tabindex="-1"></a>Function **rbind()** binds the tables by rows. Try run the code below and see what happens. Why is that?</span>
+<span id="cb73-388"><a href="#cb73-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-389"><a href="#cb73-389" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error=TRUE}</span></span>
+<span id="cb73-390"><a href="#cb73-390" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(tb1, tb2)</span>
+<span id="cb73-391"><a href="#cb73-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-392"><a href="#cb73-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-395"><a href="#cb73-395" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-396"><a href="#cb73-396" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(tb1, tb2, <span class="at">fill=</span><span class="cn">TRUE</span>)</span>
+<span id="cb73-397"><a href="#cb73-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-398"><a href="#cb73-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-401"><a href="#cb73-401" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-402"><a href="#cb73-402" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(tb1, tb2)</span>
-<span id="cb73-403"><a href="#cb73-403" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-404"><a href="#cb73-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-405"><a href="#cb73-405" aria-hidden="true" tabindex="-1"></a><span class="fu">### `merge()`</span></span>
+<span id="cb73-399"><a href="#cb73-399" aria-hidden="true" tabindex="-1"></a>Function **cbind()** binds the tables. Do you notice anything strange when you run the code below?</span>
+<span id="cb73-400"><a href="#cb73-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-403"><a href="#cb73-403" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-404"><a href="#cb73-404" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(tb1, tb2)</span>
+<span id="cb73-405"><a href="#cb73-405" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-406"><a href="#cb73-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-407"><a href="#cb73-407" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://www.edureka.co/blog/content/ver.1554115042/uploads/2019/03/Joins-in-SQL-SQL-Joins-Edureka.png)</span>{fig-align=&quot;center&quot;}</span>
+<span id="cb73-407"><a href="#cb73-407" aria-hidden="true" tabindex="-1"></a><span class="fu">### `merge()`</span></span>
 <span id="cb73-408"><a href="#cb73-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-409"><a href="#cb73-409" aria-hidden="true" tabindex="-1"></a>Specify by which column you want to merge by and set the argument **all=** to TRUE to perform the full join</span>
+<span id="cb73-409"><a href="#cb73-409" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://www.edureka.co/blog/content/ver.1554115042/uploads/2019/03/Joins-in-SQL-SQL-Joins-Edureka.png)</span>{fig-align=&quot;center&quot;}</span>
 <span id="cb73-410"><a href="#cb73-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-413"><a href="#cb73-413" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-414"><a href="#cb73-414" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>) <span class="co">#if setkey was used prior then merge(tb1,tb2) works the same</span></span>
-<span id="cb73-415"><a href="#cb73-415" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>, <span class="at">all=</span><span class="cn">TRUE</span>)</span>
-<span id="cb73-416"><a href="#cb73-416" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-417"><a href="#cb73-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-418"><a href="#cb73-418" aria-hidden="true" tabindex="-1"></a>Right and left join</span>
+<span id="cb73-411"><a href="#cb73-411" aria-hidden="true" tabindex="-1"></a>Specify by which column you want to merge by and set the argument **all=** to TRUE to perform the full join</span>
+<span id="cb73-412"><a href="#cb73-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-415"><a href="#cb73-415" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-416"><a href="#cb73-416" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>) <span class="co">#if setkey was used prior then merge(tb1,tb2) works the same</span></span>
+<span id="cb73-417"><a href="#cb73-417" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>, <span class="at">all=</span><span class="cn">TRUE</span>)</span>
+<span id="cb73-418"><a href="#cb73-418" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-419"><a href="#cb73-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-422"><a href="#cb73-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-423"><a href="#cb73-423" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb73-424"><a href="#cb73-424" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>, <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb73-425"><a href="#cb73-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-426"><a href="#cb73-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-427"><a href="#cb73-427" aria-hidden="true" tabindex="-1"></a><span class="fu">### KEYS</span></span>
+<span id="cb73-420"><a href="#cb73-420" aria-hidden="true" tabindex="-1"></a>Right and left join</span>
+<span id="cb73-421"><a href="#cb73-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-424"><a href="#cb73-424" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-425"><a href="#cb73-425" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb73-426"><a href="#cb73-426" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>, <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb73-427"><a href="#cb73-427" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-428"><a href="#cb73-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-429"><a href="#cb73-429" aria-hidden="true" tabindex="-1"></a>Use setkey() on data table. This will result in ordered table by the key(s) (columns you have specified) that allows for faster manipulation of data (especially like in merge function!!!)</span>
+<span id="cb73-429"><a href="#cb73-429" aria-hidden="true" tabindex="-1"></a><span class="fu">### KEYS</span></span>
 <span id="cb73-430"><a href="#cb73-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-431"><a href="#cb73-431" aria-hidden="true" tabindex="-1"></a>Setting a key does two things:</span>
+<span id="cb73-431"><a href="#cb73-431" aria-hidden="true" tabindex="-1"></a>Use setkey() on data table. This will result in ordered table by the key(s) (columns you have specified) that allows for faster manipulation of data (especially like in merge function!!!)</span>
 <span id="cb73-432"><a href="#cb73-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-433"><a href="#cb73-433" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>physically reorders the rows of the data.table by the column(s) provided by reference, always in increasing order.</span>
-<span id="cb73-434"><a href="#cb73-434" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>marks those columns as key columns by setting an attribute called sorted to the data.table.</span>
-<span id="cb73-435"><a href="#cb73-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-436"><a href="#cb73-436" aria-hidden="true" tabindex="-1"></a>Since the rows are reordered, a data.table can have at most one key because it can not be sorted in more than one way.</span>
+<span id="cb73-433"><a href="#cb73-433" aria-hidden="true" tabindex="-1"></a>Setting a key does two things:</span>
+<span id="cb73-434"><a href="#cb73-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-435"><a href="#cb73-435" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>physically reorders the rows of the data.table by the column(s) provided by reference, always in increasing order.</span>
+<span id="cb73-436"><a href="#cb73-436" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>marks those columns as key columns by setting an attribute called sorted to the data.table.</span>
 <span id="cb73-437"><a href="#cb73-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-438"><a href="#cb73-438" aria-hidden="true" tabindex="-1"></a>What happened in the code chunk below?</span>
+<span id="cb73-438"><a href="#cb73-438" aria-hidden="true" tabindex="-1"></a>Since the rows are reordered, a data.table can have at most one key because it can not be sorted in more than one way.</span>
 <span id="cb73-439"><a href="#cb73-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-442"><a href="#cb73-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-443"><a href="#cb73-443" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(tb1, sampleID)</span>
-<span id="cb73-444"><a href="#cb73-444" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(tb2, sampleID)</span>
-<span id="cb73-445"><a href="#cb73-445" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tb1, <span class="dv">3</span>)</span>
-<span id="cb73-446"><a href="#cb73-446" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tb2,<span class="dv">3</span>)</span>
-<span id="cb73-447"><a href="#cb73-447" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-448"><a href="#cb73-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-449"><a href="#cb73-449" aria-hidden="true" tabindex="-1"></a><span class="fu">#### data.table: **\[\]** instead of merge()</span></span>
+<span id="cb73-440"><a href="#cb73-440" aria-hidden="true" tabindex="-1"></a>What happened in the code chunk below?</span>
+<span id="cb73-441"><a href="#cb73-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-444"><a href="#cb73-444" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-445"><a href="#cb73-445" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(tb1, sampleID)</span>
+<span id="cb73-446"><a href="#cb73-446" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(tb2, sampleID)</span>
+<span id="cb73-447"><a href="#cb73-447" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tb1, <span class="dv">3</span>)</span>
+<span id="cb73-448"><a href="#cb73-448" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tb2,<span class="dv">3</span>)</span>
+<span id="cb73-449"><a href="#cb73-449" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-450"><a href="#cb73-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-451"><a href="#cb73-451" aria-hidden="true" tabindex="-1"></a>What happened here?</span>
+<span id="cb73-451"><a href="#cb73-451" aria-hidden="true" tabindex="-1"></a><span class="fu">#### data.table: **\[\]** instead of merge()</span></span>
 <span id="cb73-452"><a href="#cb73-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-455"><a href="#cb73-455" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-456"><a href="#cb73-456" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(tb1, sampleID)</span>
-<span id="cb73-457"><a href="#cb73-457" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(tb2, sampleID)</span>
-<span id="cb73-458"><a href="#cb73-458" aria-hidden="true" tabindex="-1"></a>tb1[tb2]</span>
-<span id="cb73-459"><a href="#cb73-459" aria-hidden="true" tabindex="-1"></a>tb2[tb1]</span>
-<span id="cb73-460"><a href="#cb73-460" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-461"><a href="#cb73-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-462"><a href="#cb73-462" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb73-453"><a href="#cb73-453" aria-hidden="true" tabindex="-1"></a>What happened here?</span>
+<span id="cb73-454"><a href="#cb73-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-457"><a href="#cb73-457" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-458"><a href="#cb73-458" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(tb1, sampleID)</span>
+<span id="cb73-459"><a href="#cb73-459" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(tb2, sampleID)</span>
+<span id="cb73-460"><a href="#cb73-460" aria-hidden="true" tabindex="-1"></a>tb1[tb2]</span>
+<span id="cb73-461"><a href="#cb73-461" aria-hidden="true" tabindex="-1"></a>tb2[tb1]</span>
+<span id="cb73-462"><a href="#cb73-462" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-463"><a href="#cb73-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-464"><a href="#cb73-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,echo=FALSE}</span></span>
-<span id="cb73-465"><a href="#cb73-465" aria-hidden="true" tabindex="-1"></a><span class="fu">data.table</span>(<span class="st">&quot;JOIN type&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;INNER&quot;</span>, <span class="st">&quot;LEFT OUTER&quot;</span>, <span class="st">&quot;RIGHT OUTER&quot;</span>, <span class="st">&quot;FULL OUTER&quot;</span>),</span>
-<span id="cb73-466"><a href="#cb73-466" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;DT syntax&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;X[Y, nomatch=0]&quot;</span>, <span class="st">&quot;Y[X]&quot;</span>, <span class="st">&quot;X[Y]&quot;</span>, <span class="st">&quot;-&quot;</span>),</span>
-<span id="cb73-467"><a href="#cb73-467" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;merge() syntax&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;merge(X, Y, all=FALSE)&quot;</span>, <span class="st">&quot;merge(X, Y, all.x=TRUE)&quot;</span>, </span>
-<span id="cb73-468"><a href="#cb73-468" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;merge(X, Y, all.y=TRUE)&quot;</span>, <span class="st">&quot;merge(X, Y, all=TRUE)&quot;</span>))</span>
-<span id="cb73-469"><a href="#cb73-469" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-470"><a href="#cb73-470" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-471"><a href="#cb73-471" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tidying the table</span></span>
+<span id="cb73-464"><a href="#cb73-464" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb73-465"><a href="#cb73-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-466"><a href="#cb73-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,echo=FALSE}</span></span>
+<span id="cb73-467"><a href="#cb73-467" aria-hidden="true" tabindex="-1"></a><span class="fu">data.table</span>(<span class="st">&quot;JOIN type&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;INNER&quot;</span>, <span class="st">&quot;LEFT OUTER&quot;</span>, <span class="st">&quot;RIGHT OUTER&quot;</span>, <span class="st">&quot;FULL OUTER&quot;</span>),</span>
+<span id="cb73-468"><a href="#cb73-468" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;DT syntax&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;X[Y, nomatch=0]&quot;</span>, <span class="st">&quot;Y[X]&quot;</span>, <span class="st">&quot;X[Y]&quot;</span>, <span class="st">&quot;-&quot;</span>),</span>
+<span id="cb73-469"><a href="#cb73-469" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;merge() syntax&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;merge(X, Y, all=FALSE)&quot;</span>, <span class="st">&quot;merge(X, Y, all.x=TRUE)&quot;</span>, </span>
+<span id="cb73-470"><a href="#cb73-470" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;merge(X, Y, all.y=TRUE)&quot;</span>, <span class="st">&quot;merge(X, Y, all=TRUE)&quot;</span>))</span>
+<span id="cb73-471"><a href="#cb73-471" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-472"><a href="#cb73-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-473"><a href="#cb73-473" aria-hidden="true" tabindex="-1"></a>Tidying a data table often includes renaming columns to make them more informative or consistent.</span>
+<span id="cb73-473"><a href="#cb73-473" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tidying the table</span></span>
 <span id="cb73-474"><a href="#cb73-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-475"><a href="#cb73-475" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb73-476"><a href="#cb73-476" aria-hidden="true" tabindex="-1"></a>You can rename columns using <span class="in">`names()`</span> or <span class="in">`colnames()`</span>.</span>
-<span id="cb73-477"><a href="#cb73-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-478"><a href="#cb73-478" aria-hidden="true" tabindex="-1"></a><span class="in">`names(dt_cancer) &lt;- vec_names`</span></span>
-<span id="cb73-479"><a href="#cb73-479" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb73-480"><a href="#cb73-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-481"><a href="#cb73-481" aria-hidden="true" tabindex="-1"></a><span class="in">```{r col_names1, exercise=TRUE, exercise.setup = &quot;cancer&quot;}</span></span>
-<span id="cb73-482"><a href="#cb73-482" aria-hidden="true" tabindex="-1"></a>dt_cancer <span class="ot">&lt;-</span> <span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>, <span class="at">all=</span><span class="cn">TRUE</span>)</span>
-<span id="cb73-483"><a href="#cb73-483" aria-hidden="true" tabindex="-1"></a>dt_cancer</span>
-<span id="cb73-484"><a href="#cb73-484" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dt_cancer)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;id&quot;</span></span>
+<span id="cb73-475"><a href="#cb73-475" aria-hidden="true" tabindex="-1"></a>Tidying a data table often includes renaming columns to make them more informative or consistent.</span>
+<span id="cb73-476"><a href="#cb73-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-477"><a href="#cb73-477" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb73-478"><a href="#cb73-478" aria-hidden="true" tabindex="-1"></a>You can rename columns using <span class="in">`names()`</span> or <span class="in">`colnames()`</span>.</span>
+<span id="cb73-479"><a href="#cb73-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-480"><a href="#cb73-480" aria-hidden="true" tabindex="-1"></a><span class="in">`names(dt_cancer) &lt;- vec_names`</span></span>
+<span id="cb73-481"><a href="#cb73-481" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb73-482"><a href="#cb73-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-483"><a href="#cb73-483" aria-hidden="true" tabindex="-1"></a><span class="in">```{r col_names1, exercise=TRUE, exercise.setup = &quot;cancer&quot;}</span></span>
+<span id="cb73-484"><a href="#cb73-484" aria-hidden="true" tabindex="-1"></a>dt_cancer <span class="ot">&lt;-</span> <span class="fu">merge</span>(tb1, tb2, <span class="at">by=</span><span class="st">&quot;sampleID&quot;</span>, <span class="at">all=</span><span class="cn">TRUE</span>)</span>
 <span id="cb73-485"><a href="#cb73-485" aria-hidden="true" tabindex="-1"></a>dt_cancer</span>
-<span id="cb73-486"><a href="#cb73-486" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-487"><a href="#cb73-487" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-488"><a href="#cb73-488" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb73-489"><a href="#cb73-489" aria-hidden="true" tabindex="-1"></a>You can rename columns using data.table: <span class="in">`setnames`</span></span>
-<span id="cb73-490"><a href="#cb73-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-491"><a href="#cb73-491" aria-hidden="true" tabindex="-1"></a><span class="in">`setnames(dt_cancer, &quot;old_names&quot;, &quot;new_names&quot;)`</span></span>
-<span id="cb73-492"><a href="#cb73-492" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb73-493"><a href="#cb73-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-496"><a href="#cb73-496" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-497"><a href="#cb73-497" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dt_cancer)</span>
-<span id="cb73-498"><a href="#cb73-498" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(dt_cancer,  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;sampleID&quot;</span>, <span class="at">skip_absent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb73-486"><a href="#cb73-486" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dt_cancer)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;id&quot;</span></span>
+<span id="cb73-487"><a href="#cb73-487" aria-hidden="true" tabindex="-1"></a>dt_cancer</span>
+<span id="cb73-488"><a href="#cb73-488" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-489"><a href="#cb73-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-490"><a href="#cb73-490" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb73-491"><a href="#cb73-491" aria-hidden="true" tabindex="-1"></a>You can rename columns using data.table: <span class="in">`setnames`</span></span>
+<span id="cb73-492"><a href="#cb73-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-493"><a href="#cb73-493" aria-hidden="true" tabindex="-1"></a><span class="in">`setnames(dt_cancer, &quot;old_names&quot;, &quot;new_names&quot;)`</span></span>
+<span id="cb73-494"><a href="#cb73-494" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb73-495"><a href="#cb73-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-498"><a href="#cb73-498" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb73-499"><a href="#cb73-499" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dt_cancer)</span>
-<span id="cb73-500"><a href="#cb73-500" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-501"><a href="#cb73-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-502"><a href="#cb73-502" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ordering columns</span></span>
+<span id="cb73-500"><a href="#cb73-500" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(dt_cancer,  <span class="st">&quot;id&quot;</span>, <span class="st">&quot;sampleID&quot;</span>, <span class="at">skip_absent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb73-501"><a href="#cb73-501" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dt_cancer)</span>
+<span id="cb73-502"><a href="#cb73-502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-503"><a href="#cb73-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-504"><a href="#cb73-504" aria-hidden="true" tabindex="-1"></a>Subseting</span>
+<span id="cb73-504"><a href="#cb73-504" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ordering columns</span></span>
 <span id="cb73-505"><a href="#cb73-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-506"><a href="#cb73-506" aria-hidden="true" tabindex="-1"></a><span class="in">`dt[,.(col3, col10, col2)]`</span></span>
+<span id="cb73-506"><a href="#cb73-506" aria-hidden="true" tabindex="-1"></a>Subseting</span>
 <span id="cb73-507"><a href="#cb73-507" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-508"><a href="#cb73-508" aria-hidden="true" tabindex="-1"></a><span class="in">```{r col_order1, exercise=TRUE, exercise.setup = &quot;cancer&quot;}</span></span>
-<span id="cb73-509"><a href="#cb73-509" aria-hidden="true" tabindex="-1"></a>dt_cancer[,.(gender, sampleID)]</span>
-<span id="cb73-510"><a href="#cb73-510" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-511"><a href="#cb73-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-512"><a href="#cb73-512" aria-hidden="true" tabindex="-1"></a>data.table: setcolorder()</span>
+<span id="cb73-508"><a href="#cb73-508" aria-hidden="true" tabindex="-1"></a><span class="in">`dt[,.(col3, col10, col2)]`</span></span>
+<span id="cb73-509"><a href="#cb73-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-510"><a href="#cb73-510" aria-hidden="true" tabindex="-1"></a><span class="in">```{r col_order1, exercise=TRUE, exercise.setup = &quot;cancer&quot;}</span></span>
+<span id="cb73-511"><a href="#cb73-511" aria-hidden="true" tabindex="-1"></a>dt_cancer[,.(gender, sampleID)]</span>
+<span id="cb73-512"><a href="#cb73-512" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-513"><a href="#cb73-513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-514"><a href="#cb73-514" aria-hidden="true" tabindex="-1"></a><span class="in">`setcolorder(dt_cancer, neworder)`</span></span>
+<span id="cb73-514"><a href="#cb73-514" aria-hidden="true" tabindex="-1"></a>data.table: setcolorder()</span>
 <span id="cb73-515"><a href="#cb73-515" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-516"><a href="#cb73-516" aria-hidden="true" tabindex="-1"></a><span class="in">```{r col_order2, exercise=TRUE, exercise.setup = &quot;cancer&quot;}</span></span>
-<span id="cb73-517"><a href="#cb73-517" aria-hidden="true" tabindex="-1"></a>dt_cancer</span>
-<span id="cb73-518"><a href="#cb73-518" aria-hidden="true" tabindex="-1"></a><span class="fu">setcolorder</span>(dt_cancer, <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>,<span class="st">&quot;sampleID&quot;</span>))</span>
+<span id="cb73-516"><a href="#cb73-516" aria-hidden="true" tabindex="-1"></a><span class="in">`setcolorder(dt_cancer, neworder)`</span></span>
+<span id="cb73-517"><a href="#cb73-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-518"><a href="#cb73-518" aria-hidden="true" tabindex="-1"></a><span class="in">```{r col_order2, exercise=TRUE, exercise.setup = &quot;cancer&quot;}</span></span>
 <span id="cb73-519"><a href="#cb73-519" aria-hidden="true" tabindex="-1"></a>dt_cancer</span>
-<span id="cb73-520"><a href="#cb73-520" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-521"><a href="#cb73-521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-522"><a href="#cb73-522" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reshaping the table</span></span>
+<span id="cb73-520"><a href="#cb73-520" aria-hidden="true" tabindex="-1"></a><span class="fu">setcolorder</span>(dt_cancer, <span class="fu">c</span>(<span class="st">&quot;gender&quot;</span>,<span class="st">&quot;sampleID&quot;</span>))</span>
+<span id="cb73-521"><a href="#cb73-521" aria-hidden="true" tabindex="-1"></a>dt_cancer</span>
+<span id="cb73-522"><a href="#cb73-522" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-523"><a href="#cb73-523" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-524"><a href="#cb73-524" aria-hidden="true" tabindex="-1"></a>You can create a modified version of an existing <span class="in">`data.table`</span> by using <span class="in">`copy()`</span> to avoid changing the original data. Then, use <span class="in">`:=`</span> to add or modify columns by reference.</span>
+<span id="cb73-524"><a href="#cb73-524" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reshaping the table</span></span>
 <span id="cb73-525"><a href="#cb73-525" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-526"><a href="#cb73-526" aria-hidden="true" tabindex="-1"></a>In the example below, we create two new columns (<span class="in">`BRCA2`</span> and <span class="in">`ATM`</span>) filled with random values between 40 and 6000 for 6 rows:</span>
+<span id="cb73-526"><a href="#cb73-526" aria-hidden="true" tabindex="-1"></a>You can create a modified version of an existing <span class="in">`data.table`</span> by using <span class="in">`copy()`</span> to avoid changing the original data. Then, use <span class="in">`:=`</span> to add or modify columns by reference.</span>
 <span id="cb73-527"><a href="#cb73-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-530"><a href="#cb73-530" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-531"><a href="#cb73-531" aria-hidden="true" tabindex="-1"></a>tb.shape <span class="ot">&lt;-</span> <span class="fu">copy</span>(tb1)</span>
-<span id="cb73-532"><a href="#cb73-532" aria-hidden="true" tabindex="-1"></a>tb.shape[, <span class="st">&quot;:=&quot;</span> (</span>
-<span id="cb73-533"><a href="#cb73-533" aria-hidden="true" tabindex="-1"></a>            <span class="at">BRCA2=</span><span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">6000</span>,<span class="dv">6</span>),</span>
-<span id="cb73-534"><a href="#cb73-534" aria-hidden="true" tabindex="-1"></a>            <span class="at">ATM=</span><span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">6000</span>,<span class="dv">6</span>)) ]</span>
-<span id="cb73-535"><a href="#cb73-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-536"><a href="#cb73-536" aria-hidden="true" tabindex="-1"></a>tb.shape</span>
-<span id="cb73-537"><a href="#cb73-537" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-538"><a href="#cb73-538" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-539"><a href="#cb73-539" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **`melt (wide to long)`**</span></span>
+<span id="cb73-528"><a href="#cb73-528" aria-hidden="true" tabindex="-1"></a>In the example below, we create two new columns (<span class="in">`BRCA2`</span> and <span class="in">`ATM`</span>) filled with random values between 40 and 6000 for 6 rows:</span>
+<span id="cb73-529"><a href="#cb73-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-532"><a href="#cb73-532" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-533"><a href="#cb73-533" aria-hidden="true" tabindex="-1"></a>tb.shape <span class="ot">&lt;-</span> <span class="fu">copy</span>(tb1)</span>
+<span id="cb73-534"><a href="#cb73-534" aria-hidden="true" tabindex="-1"></a>tb.shape[, <span class="st">&quot;:=&quot;</span> (</span>
+<span id="cb73-535"><a href="#cb73-535" aria-hidden="true" tabindex="-1"></a>            <span class="at">BRCA2=</span><span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">6000</span>,<span class="dv">6</span>),</span>
+<span id="cb73-536"><a href="#cb73-536" aria-hidden="true" tabindex="-1"></a>            <span class="at">ATM=</span><span class="fu">sample</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">6000</span>,<span class="dv">6</span>)) ]</span>
+<span id="cb73-537"><a href="#cb73-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-538"><a href="#cb73-538" aria-hidden="true" tabindex="-1"></a>tb.shape</span>
+<span id="cb73-539"><a href="#cb73-539" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-540"><a href="#cb73-540" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-541"><a href="#cb73-541" aria-hidden="true" tabindex="-1"></a>Convert DT to long form where money is a separate observation. **measure.vars** specify the set of columns we would like to collapse (or combine) together.</span>
+<span id="cb73-541"><a href="#cb73-541" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **`melt (wide to long)`**</span></span>
 <span id="cb73-542"><a href="#cb73-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-545"><a href="#cb73-545" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-546"><a href="#cb73-546" aria-hidden="true" tabindex="-1"></a><span class="fu">melt</span>(tb.shape, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">&quot;sampleID&quot;</span>, <span class="st">&quot;cancer&quot;</span>),</span>
-<span id="cb73-547"><a href="#cb73-547" aria-hidden="true" tabindex="-1"></a>                <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="st">&quot;BRCA2&quot;</span>, <span class="st">&quot;ATM&quot;</span>))</span>
-<span id="cb73-548"><a href="#cb73-548" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-549"><a href="#cb73-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-550"><a href="#cb73-550" aria-hidden="true" tabindex="-1"></a>We can also specify column indices instead of names.</span>
+<span id="cb73-543"><a href="#cb73-543" aria-hidden="true" tabindex="-1"></a>Convert DT to long form where money is a separate observation. **measure.vars** specify the set of columns we would like to collapse (or combine) together.</span>
+<span id="cb73-544"><a href="#cb73-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-547"><a href="#cb73-547" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-548"><a href="#cb73-548" aria-hidden="true" tabindex="-1"></a><span class="fu">melt</span>(tb.shape, <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="st">&quot;sampleID&quot;</span>, <span class="st">&quot;cancer&quot;</span>),</span>
+<span id="cb73-549"><a href="#cb73-549" aria-hidden="true" tabindex="-1"></a>                <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="st">&quot;BRCA2&quot;</span>, <span class="st">&quot;ATM&quot;</span>))</span>
+<span id="cb73-550"><a href="#cb73-550" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-551"><a href="#cb73-551" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-554"><a href="#cb73-554" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-555"><a href="#cb73-555" aria-hidden="true" tabindex="-1"></a>(tb1.m1  <span class="ot">&lt;-</span> <span class="fu">melt</span>(tb.shape, </span>
-<span id="cb73-556"><a href="#cb73-556" aria-hidden="true" tabindex="-1"></a>                 <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="st">&quot;BRCA2&quot;</span>, <span class="st">&quot;ATM&quot;</span>),</span>
-<span id="cb73-557"><a href="#cb73-557" aria-hidden="true" tabindex="-1"></a>                 <span class="at">variable.name =</span> <span class="st">&quot;genes&quot;</span>,</span>
-<span id="cb73-558"><a href="#cb73-558" aria-hidden="true" tabindex="-1"></a>                 <span class="at">value.name =</span> <span class="st">&quot;n_mutations&quot;</span>)  </span>
-<span id="cb73-559"><a href="#cb73-559" aria-hidden="true" tabindex="-1"></a> )</span>
-<span id="cb73-560"><a href="#cb73-560" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-561"><a href="#cb73-561" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-562"><a href="#cb73-562" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **`dcast (long to wide)`**</span></span>
+<span id="cb73-552"><a href="#cb73-552" aria-hidden="true" tabindex="-1"></a>We can also specify column indices instead of names.</span>
+<span id="cb73-553"><a href="#cb73-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-556"><a href="#cb73-556" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-557"><a href="#cb73-557" aria-hidden="true" tabindex="-1"></a>(tb1.m1  <span class="ot">&lt;-</span> <span class="fu">melt</span>(tb.shape, </span>
+<span id="cb73-558"><a href="#cb73-558" aria-hidden="true" tabindex="-1"></a>                 <span class="at">measure.vars =</span> <span class="fu">c</span>(<span class="st">&quot;BRCA2&quot;</span>, <span class="st">&quot;ATM&quot;</span>),</span>
+<span id="cb73-559"><a href="#cb73-559" aria-hidden="true" tabindex="-1"></a>                 <span class="at">variable.name =</span> <span class="st">&quot;genes&quot;</span>,</span>
+<span id="cb73-560"><a href="#cb73-560" aria-hidden="true" tabindex="-1"></a>                 <span class="at">value.name =</span> <span class="st">&quot;n_mutations&quot;</span>)  </span>
+<span id="cb73-561"><a href="#cb73-561" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb73-562"><a href="#cb73-562" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-563"><a href="#cb73-563" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-564"><a href="#cb73-564" aria-hidden="true" tabindex="-1"></a>We want to get the original table from the previous reshaped one using **dcast()**</span>
+<span id="cb73-564"><a href="#cb73-564" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **`dcast (long to wide)`**</span></span>
 <span id="cb73-565"><a href="#cb73-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-568"><a href="#cb73-568" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-569"><a href="#cb73-569" aria-hidden="true" tabindex="-1"></a><span class="fu">dcast</span>(tb1.m1, sampleID <span class="sc">+</span> cancer <span class="sc">~</span> genes, <span class="at">value.var =</span> <span class="st">&quot;n_mutations&quot;</span>)</span>
-<span id="cb73-570"><a href="#cb73-570" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-571"><a href="#cb73-571" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-572"><a href="#cb73-572" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Exercise</span></span>
+<span id="cb73-566"><a href="#cb73-566" aria-hidden="true" tabindex="-1"></a>We want to get the original table from the previous reshaped one using **dcast()**</span>
+<span id="cb73-567"><a href="#cb73-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-570"><a href="#cb73-570" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-571"><a href="#cb73-571" aria-hidden="true" tabindex="-1"></a><span class="fu">dcast</span>(tb1.m1, sampleID <span class="sc">+</span> cancer <span class="sc">~</span> genes, <span class="at">value.var =</span> <span class="st">&quot;n_mutations&quot;</span>)</span>
+<span id="cb73-572"><a href="#cb73-572" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-573"><a href="#cb73-573" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-574"><a href="#cb73-574" aria-hidden="true" tabindex="-1"></a>We are going to do an analysis of **mtcars** dataset using data.table.</span>
+<span id="cb73-574"><a href="#cb73-574" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Exercise</span></span>
 <span id="cb73-575"><a href="#cb73-575" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-576"><a href="#cb73-576" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mtcar}</span></span>
-<span id="cb73-577"><a href="#cb73-577" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span>
-<span id="cb73-578"><a href="#cb73-578" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-579"><a href="#cb73-579" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-580"><a href="#cb73-580" aria-hidden="true" tabindex="-1"></a>Do the following:</span>
+<span id="cb73-576"><a href="#cb73-576" aria-hidden="true" tabindex="-1"></a>We are going to do an analysis of **mtcars** dataset using data.table.</span>
+<span id="cb73-577"><a href="#cb73-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-578"><a href="#cb73-578" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mtcar}</span></span>
+<span id="cb73-579"><a href="#cb73-579" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span>
+<span id="cb73-580"><a href="#cb73-580" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-581"><a href="#cb73-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-582"><a href="#cb73-582" aria-hidden="true" tabindex="-1"></a>Convert **mtcars** to data.table called **mtcars_dt**. Add rownames from data.frame to your data.table under the column *carnames*</span>
+<span id="cb73-582"><a href="#cb73-582" aria-hidden="true" tabindex="-1"></a>Do the following:</span>
 <span id="cb73-583"><a href="#cb73-583" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-586"><a href="#cb73-586" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-587"><a href="#cb73-587" aria-hidden="true" tabindex="-1"></a><span class="co"># Write solution here</span></span>
-<span id="cb73-588"><a href="#cb73-588" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-589"><a href="#cb73-589" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-590"><a href="#cb73-590" aria-hidden="true" tabindex="-1"></a>On the following datasets (dt1 and dt2) perform inner join, left join and outer joins. Do it with *merge()*, and where you can with *\[\]*</span>
+<span id="cb73-584"><a href="#cb73-584" aria-hidden="true" tabindex="-1"></a>Convert **mtcars** to data.table called **mtcars_dt**. Add rownames from data.frame to your data.table under the column *carnames*</span>
+<span id="cb73-585"><a href="#cb73-585" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-588"><a href="#cb73-588" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-589"><a href="#cb73-589" aria-hidden="true" tabindex="-1"></a><span class="co"># Write solution here</span></span>
+<span id="cb73-590"><a href="#cb73-590" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-591"><a href="#cb73-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-592"><a href="#cb73-592" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
-<span id="cb73-593"><a href="#cb73-593" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> mtcars_dt[<span class="dv">5</span><span class="sc">:</span><span class="dv">25</span>,.(<span class="at">id=</span>carnames, mpg, cyl)]</span>
-<span id="cb73-594"><a href="#cb73-594" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> mtcars_dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, .(carnames, gear)]</span>
-<span id="cb73-595"><a href="#cb73-595" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-596"><a href="#cb73-596" aria-hidden="true" tabindex="-1"></a><span class="do">## Using merge() -----------------</span></span>
-<span id="cb73-597"><a href="#cb73-597" aria-hidden="true" tabindex="-1"></a><span class="co"># Inner Join merge(tb1,tb2) works the same</span></span>
-<span id="cb73-598"><a href="#cb73-598" aria-hidden="true" tabindex="-1"></a><span class="co"># Left Join</span></span>
-<span id="cb73-599"><a href="#cb73-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-600"><a href="#cb73-600" aria-hidden="true" tabindex="-1"></a><span class="co"># Full Join</span></span>
+<span id="cb73-592"><a href="#cb73-592" aria-hidden="true" tabindex="-1"></a>On the following datasets (dt1 and dt2) perform inner join, left join and outer joins. Do it with *merge()*, and where you can with *\[\]*</span>
+<span id="cb73-593"><a href="#cb73-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-594"><a href="#cb73-594" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb73-595"><a href="#cb73-595" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> mtcars_dt[<span class="dv">5</span><span class="sc">:</span><span class="dv">25</span>,.(<span class="at">id=</span>carnames, mpg, cyl)]</span>
+<span id="cb73-596"><a href="#cb73-596" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> mtcars_dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, .(carnames, gear)]</span>
+<span id="cb73-597"><a href="#cb73-597" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-598"><a href="#cb73-598" aria-hidden="true" tabindex="-1"></a><span class="do">## Using merge() -----------------</span></span>
+<span id="cb73-599"><a href="#cb73-599" aria-hidden="true" tabindex="-1"></a><span class="co"># Inner Join merge(tb1,tb2) works the same</span></span>
+<span id="cb73-600"><a href="#cb73-600" aria-hidden="true" tabindex="-1"></a><span class="co"># Left Join</span></span>
 <span id="cb73-601"><a href="#cb73-601" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-602"><a href="#cb73-602" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-603"><a href="#cb73-603" aria-hidden="true" tabindex="-1"></a><span class="do">## Withouth merge() --------------------</span></span>
+<span id="cb73-602"><a href="#cb73-602" aria-hidden="true" tabindex="-1"></a><span class="co"># Full Join</span></span>
+<span id="cb73-603"><a href="#cb73-603" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-604"><a href="#cb73-604" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-605"><a href="#cb73-605" aria-hidden="true" tabindex="-1"></a><span class="co"># Left Join</span></span>
+<span id="cb73-605"><a href="#cb73-605" aria-hidden="true" tabindex="-1"></a><span class="do">## Withouth merge() --------------------</span></span>
 <span id="cb73-606"><a href="#cb73-606" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-607"><a href="#cb73-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-608"><a href="#cb73-608" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-607"><a href="#cb73-607" aria-hidden="true" tabindex="-1"></a><span class="co"># Left Join</span></span>
+<span id="cb73-608"><a href="#cb73-608" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-609"><a href="#cb73-609" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-610"><a href="#cb73-610" aria-hidden="true" tabindex="-1"></a>Create a wider table showing the mpg values for cyl vs carnames (Carb)</span>
+<span id="cb73-610"><a href="#cb73-610" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-611"><a href="#cb73-611" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-614"><a href="#cb73-614" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-615"><a href="#cb73-615" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-616"><a href="#cb73-616" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-617"><a href="#cb73-617" aria-hidden="true" tabindex="-1"></a><span class="fu"># Interval sets</span></span>
+<span id="cb73-612"><a href="#cb73-612" aria-hidden="true" tabindex="-1"></a>Create a wider table showing the mpg values for cyl vs carnames (Carb)</span>
+<span id="cb73-613"><a href="#cb73-613" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-616"><a href="#cb73-616" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-617"><a href="#cb73-617" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-618"><a href="#cb73-618" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-619"><a href="#cb73-619" aria-hidden="true" tabindex="-1"></a>We have a a data set of enhancers which are breast cancer specific. We are interested if any of the genes of interest is found within enhancers.</span>
+<span id="cb73-619"><a href="#cb73-619" aria-hidden="true" tabindex="-1"></a><span class="fu"># Interval sets</span></span>
 <span id="cb73-620"><a href="#cb73-620" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-621"><a href="#cb73-621" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
-<span id="cb73-622"><a href="#cb73-622" aria-hidden="true" tabindex="-1"></a><span class="in">How do we do this? We have to overlap them using setkeys() and foverlaps() function.</span></span>
-<span id="cb73-623"><a href="#cb73-623" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-624"><a href="#cb73-624" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-627"><a href="#cb73-627" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-628"><a href="#cb73-628" aria-hidden="true" tabindex="-1"></a>region_enhancer <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">chr =</span> <span class="fu">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr11&quot;</span>, <span class="st">&quot;chr17&quot;</span>, <span class="st">&quot;chr17&quot;</span>),</span>
-<span id="cb73-629"><a href="#cb73-629" aria-hidden="true" tabindex="-1"></a>                              <span class="at">start=</span><span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">108300000</span>, <span class="dv">9200</span>, <span class="dv">4390100</span>), </span>
-<span id="cb73-630"><a href="#cb73-630" aria-hidden="true" tabindex="-1"></a>                              <span class="at">end=</span> <span class="fu">c</span>(<span class="dv">900</span>, <span class="dv">108301500</span>, <span class="dv">9900</span>, <span class="dv">4391000</span>) )</span>
-<span id="cb73-631"><a href="#cb73-631" aria-hidden="true" tabindex="-1"></a>location_gene <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">gene =</span> <span class="fu">c</span>(<span class="st">&quot;BRCA1&quot;</span>, <span class="st">&quot;ATM&quot;</span>),</span>
-<span id="cb73-632"><a href="#cb73-632" aria-hidden="true" tabindex="-1"></a>                             <span class="at">chr =</span> <span class="fu">c</span>(<span class="st">&quot;chr17&quot;</span>, <span class="st">&quot;chr11&quot;</span>),</span>
-<span id="cb73-633"><a href="#cb73-633" aria-hidden="true" tabindex="-1"></a>                             <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">43902857</span>, <span class="dv">108230374</span>),</span>
-<span id="cb73-634"><a href="#cb73-634" aria-hidden="true" tabindex="-1"></a>                             <span class="at">end=</span> <span class="fu">c</span>(<span class="dv">43983996</span>, <span class="dv">108376593</span>)</span>
-<span id="cb73-635"><a href="#cb73-635" aria-hidden="true" tabindex="-1"></a>                                 )</span>
-<span id="cb73-636"><a href="#cb73-636" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-637"><a href="#cb73-637" aria-hidden="true" tabindex="-1"></a>region_enhancer; location_gene</span>
-<span id="cb73-638"><a href="#cb73-638" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb73-639"><a href="#cb73-639" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-640"><a href="#cb73-640" aria-hidden="true" tabindex="-1"></a>What does foverlaps do?</span>
+<span id="cb73-621"><a href="#cb73-621" aria-hidden="true" tabindex="-1"></a>We have a a data set of enhancers which are breast cancer specific. We are interested if any of the genes of interest is found within enhancers.</span>
+<span id="cb73-622"><a href="#cb73-622" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-623"><a href="#cb73-623" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb73-624"><a href="#cb73-624" aria-hidden="true" tabindex="-1"></a><span class="in">How do we do this? We have to overlap them using setkeys() and foverlaps() function.</span></span>
+<span id="cb73-625"><a href="#cb73-625" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-626"><a href="#cb73-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-629"><a href="#cb73-629" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-630"><a href="#cb73-630" aria-hidden="true" tabindex="-1"></a>region_enhancer <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">chr =</span> <span class="fu">c</span>(<span class="st">&quot;chr1&quot;</span>, <span class="st">&quot;chr11&quot;</span>, <span class="st">&quot;chr17&quot;</span>, <span class="st">&quot;chr17&quot;</span>),</span>
+<span id="cb73-631"><a href="#cb73-631" aria-hidden="true" tabindex="-1"></a>                              <span class="at">start=</span><span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">108300000</span>, <span class="dv">9200</span>, <span class="dv">4390100</span>), </span>
+<span id="cb73-632"><a href="#cb73-632" aria-hidden="true" tabindex="-1"></a>                              <span class="at">end=</span> <span class="fu">c</span>(<span class="dv">900</span>, <span class="dv">108301500</span>, <span class="dv">9900</span>, <span class="dv">4391000</span>) )</span>
+<span id="cb73-633"><a href="#cb73-633" aria-hidden="true" tabindex="-1"></a>location_gene <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">gene =</span> <span class="fu">c</span>(<span class="st">&quot;BRCA1&quot;</span>, <span class="st">&quot;ATM&quot;</span>),</span>
+<span id="cb73-634"><a href="#cb73-634" aria-hidden="true" tabindex="-1"></a>                             <span class="at">chr =</span> <span class="fu">c</span>(<span class="st">&quot;chr17&quot;</span>, <span class="st">&quot;chr11&quot;</span>),</span>
+<span id="cb73-635"><a href="#cb73-635" aria-hidden="true" tabindex="-1"></a>                             <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">43902857</span>, <span class="dv">108230374</span>),</span>
+<span id="cb73-636"><a href="#cb73-636" aria-hidden="true" tabindex="-1"></a>                             <span class="at">end=</span> <span class="fu">c</span>(<span class="dv">43983996</span>, <span class="dv">108376593</span>)</span>
+<span id="cb73-637"><a href="#cb73-637" aria-hidden="true" tabindex="-1"></a>                                 )</span>
+<span id="cb73-638"><a href="#cb73-638" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-639"><a href="#cb73-639" aria-hidden="true" tabindex="-1"></a>region_enhancer; location_gene</span>
+<span id="cb73-640"><a href="#cb73-640" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb73-641"><a href="#cb73-641" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-644"><a href="#cb73-644" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb73-645"><a href="#cb73-645" aria-hidden="true" tabindex="-1"></a><span class="co"># First we set the values</span></span>
-<span id="cb73-646"><a href="#cb73-646" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(region_enhancer, chr, start, end)</span>
-<span id="cb73-647"><a href="#cb73-647" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(location_gene, chr, start, end)</span>
-<span id="cb73-648"><a href="#cb73-648" aria-hidden="true" tabindex="-1"></a><span class="do">### Then we use foverlaps</span></span>
-<span id="cb73-649"><a href="#cb73-649" aria-hidden="true" tabindex="-1"></a><span class="fu">foverlaps</span>(region_enhancer, location_gene)</span>
-<span id="cb73-650"><a href="#cb73-650" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb73-642"><a href="#cb73-642" aria-hidden="true" tabindex="-1"></a>What does foverlaps do?</span>
+<span id="cb73-643"><a href="#cb73-643" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-646"><a href="#cb73-646" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb73-647"><a href="#cb73-647" aria-hidden="true" tabindex="-1"></a><span class="co"># First we set the values</span></span>
+<span id="cb73-648"><a href="#cb73-648" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(region_enhancer, chr, start, end)</span>
+<span id="cb73-649"><a href="#cb73-649" aria-hidden="true" tabindex="-1"></a><span class="fu">setkey</span>(location_gene, chr, start, end)</span>
+<span id="cb73-650"><a href="#cb73-650" aria-hidden="true" tabindex="-1"></a><span class="do">### Then we use foverlaps</span></span>
+<span id="cb73-651"><a href="#cb73-651" aria-hidden="true" tabindex="-1"></a><span class="fu">foverlaps</span>(region_enhancer, location_gene)</span>
+<span id="cb73-652"><a href="#cb73-652" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

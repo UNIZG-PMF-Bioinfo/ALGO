@@ -65,7 +65,7 @@ Each function for correctly importing tables contains important arguments such a
 
 -   **`header`** - If TRUE then any empty column names are given a name where first data line is a character (non-empty)
 -   **`sep`** - The separator between columns. Most commonly used are ";", "\t",";"..
--   **`skip`** - number of rows to remove starting from 0 (default) on the first line
+-   **`skip`** - number of lines to skip before reading starts (default 0). In `fread()` it can also be a string: reading starts at the first line containing that string
 -   **`fill`** - If TRUE then in case the rows have unequal length, blank fields are implicitly added
 -   **`dec`** - the character used in the file for decimal points
 -   **`col_names`** - assign new column names (string)
@@ -140,7 +140,9 @@ scan(my_file, sep = ",", what = list(integer(), numeric(), character()), skip = 
   lapply(., function(x) x[1:8])
 ```
 
+::: callout-tip
 Factors are not supported by `scan()`; convert afterwards with `factor()`.
+:::
 
 ## Saving data
 
