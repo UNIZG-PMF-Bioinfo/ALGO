@@ -1,7 +1,7 @@
 ---
 title: "Additional table manipulations"
 author: 
-  - name: "dr.sc. Paula Štancl"
+  - name: "dr.sc. Paula Breyer"
     affiliation: "Bioinformatics group"
 format:
   html:
@@ -128,6 +128,20 @@ scan(my_file,sep=",",  what=list("", "", ""), skip = 1) %>%
   lapply(., function(x) x[1:8])
 ```
 
+`what` takes *example values*, not type names. Writing the type names as strings reads every column as character:
+
+```{r import_scan_types }
+# Wrong: "integer", "numeric" are just strings -> all columns are character
+scan(my_file, sep = ",", what = list("integer", "numeric", "character"), skip = 1) %>%
+  lapply(., function(x) x[1:8])
+
+# Right: empty vectors of the wanted type -> integer, numeric, character
+scan(my_file, sep = ",", what = list(integer(), numeric(), character()), skip = 1) %>%
+  lapply(., function(x) x[1:8])
+```
+
+Factors are not supported by `scan()`; convert afterwards with `factor()`.
+
 ## Saving data
 
 ::: callout-note
@@ -226,11 +240,11 @@ It has no external dependencies (unlike older packages such as `xlsx` or `XLConn
 
 All three functions come from the **readxl** package.
 
-| Function       | Supported format(s)     | Notes                                                                         |
-|----------------|----------------|---------------------------------------|
+| Function | Supported format(s) | Notes |
+|------------------|------------------|-------------------------------------|
 | `read_excel()` | Both `.xls` and `.xlsx` | Generic function, automatically detects file type. Recommended in most cases. |
-| `read_xls()`   | Only `.xls`             | Wrapper specialized for old Excel files (97--2003).                           |
-| `read_xlsx()`  | Only `.xlsx`            | Wrapper specialized for modern Excel files (2007+).                           |
+| `read_xls()` | Only `.xls` | Wrapper specialized for old Excel files (97--2003). |
+| `read_xlsx()` | Only `.xlsx` | Wrapper specialized for modern Excel files (2007+). |
 
 ::: callout-tip
 In most cases, just use `read_excel()` --- it works for both formats and is the most flexible.
@@ -312,9 +326,8 @@ What is the difference between *do.call* and *lapply*?
 **do.call()** applies a given function to the list as a whole, so there is only one function call.
 
 ```{r}
-do.call("sum", list(a=1:10, b=2:12))
 lapply(list(a=1:10, b=2:12), sum)
-rbindlist(myfiles)
+do.call("sum", list(a=1:10, b=2:12))
 ```
 :::
 
@@ -326,7 +339,14 @@ Same as do.call("rbind", l) on data.frames, but much faster.
 rbindlist(myfiles)
 ```
 
-#### Convert any list to table
+#### Convert a table to a list: `split`
+
+`split()` is the opposite of `rbindlist()`: it cuts one table into a **list of smaller tables**, one per group. Each list element contains the rows that share the same value(s) of the grouping variable(s), and the element names are those values (e.g. `"C.1"` = Grade C and new_col 1).
+
+-   **`by`** (data.table only) - column names to group by, given as a character vector. Groups appear in the order they first occur in the table
+-   **`f`** (base R) - a vector, or a list of vectors, with one value per row. Groups are sorted alphabetically
+
+Here we first create `new_col` with `.GRP`, the group number: 1 for rows with `Count < 50`, 2 for rows with `Count >= 50`.
 
 ```{r }
 my_tb <- fread(my_file)
