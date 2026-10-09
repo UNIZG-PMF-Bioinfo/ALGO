@@ -606,6 +606,8 @@ region_enhancer; location_gene
 
 What does foverlaps do?
 
+![](figures/foverlaps.png){fig-align="center"}
+
 ```{r}
 # First we set the values
 setkey(region_enhancer, chr, start, end)
