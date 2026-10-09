@@ -669,7 +669,6 @@ Put first the table you want one row for. Use `nomatch = NULL` to keep only the 
 -   **`mult`** - when one row of x overlaps several rows of y: `"all"` (default) returns all of them, `"first"` or `"last"` only one
 -   **`which`** - if `TRUE`, returns only the row numbers of the overlapping rows (`xid`, `yid`) instead of the joined table
 -   **`by.x`**, **`by.y`** - the columns to overlap on; by default the keys of the tables. The last two must be the start and end of the interval
--   **`maxgap`**, **`minoverlap`** - how far apart intervals can be and still count as overlapping, and how many positions they must share
 
 ```{r}
 # Only enhancers that overlap a gene
