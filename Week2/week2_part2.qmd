@@ -652,15 +652,6 @@ foverlaps(region_enhancer, location_gene)
 foverlaps(location_gene, region_enhancer)
 ```
 
-Order also matters for `type`. With `type = "within"` it means "x lies fully inside y":
-
-```{r}
-# enhancer inside ATM -> match
-foverlaps(region_enhancer, location_gene, type = "within")
-# ATM inside a small enhancer -> no match
-foverlaps(location_gene, region_enhancer, type = "within")
-```
-
 ::: callout-tip
 Put first the table you want one row for. Use `nomatch = NULL` to keep only the rows that overlap.
 :::
@@ -670,7 +661,7 @@ Put first the table you want one row for. Use `nomatch = NULL` to keep only the 
 
 -   **`type`** - what counts as an overlap between an interval of x and an interval of y:
     -   `"any"` (default) - the intervals share at least one position
-    -   `"within"` - x lies fully inside y
+    -   `"within"` - x lies fully inside y (so here the order of x and y matters)
     -   `"start"` - x and y start at the same position
     -   `"end"` - x and y end at the same position
     -   `"equal"` - x and y have exactly the same start and end
