@@ -1,8 +1,8 @@
 ---
 title: "Data visualization with ggplot2"
-author: 
-  - name: "Rosa Karlić"
-    affiliation: "Bioinformatics group"
+author:
+- name: Rosa Karlić
+  affiliation: Bioinformatics group
 format:
   html:
     self-contained: true
@@ -11,15 +11,15 @@ format:
     code-fold: false
     fig-align: center
     df-print: paged
-    code-summary: "Show code"
+    code-summary: Show code
     code-line-numbers: false
     code-tools: true
 execute:
   echo: true
   warning: false
   message: false
-editor: 
-  markdown: 
+editor:
+  markdown:
     wrap: 72
 ---
 
@@ -352,8 +352,9 @@ ggplot(df, aes(y = Gene2_expr)) +
   labs(title = "Boxplot: Gene2 expression")
 
 # Continuous: violin
-ggplot(df, aes(y = Protein_expr,  x = factor(1))) + 
-  labs(title = "Violin: Protein expression")+
+ggplot(df, aes(y = Gene2_expr,  x = factor(1))) + 
+  labs(title = "Violin plot: Gene2 expression")+
+  geom_violin(fill = "orange") +
   theme(axis.ticks.x = element_blank(), 
         axis.text.x = element_blank(),
         axis.title.x = element_blank())
@@ -504,7 +505,7 @@ gt(qpcr_ddCt, caption = "Tidied qPCR data, example 2")
 
 1.  Comparison of TP53 and MYC expression
 2.  Comparison of ΔCt values across control and treated samples
-3.  Average protein levels per treatment group
+3.  Average relative gene expression per treatment group
 4.  Value of deltaDeltaCt by sample and gene
 
 ### ggplot2 vs. base R plots
@@ -579,7 +580,10 @@ geometric objects include:
 
 geom_point() which is used to draw a dot plot\
 geom_line() used to draw a line plot\
-geom_bar() used to draw a bar chart.
+geom_bar() or geom_col() used to draw a bar chart\
+`geom_bar()` counts the number of observations in\
+each category automatically. `geom_col()` uses values that have already
+been calculated and supplied in the dataset.\
 
 Available graphs can be seen at [R graph
 gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
@@ -601,7 +605,7 @@ In this lecture we will be using microarray expression data for 2
 microarray probes measured in leukemia patients with different cancer
 stages. The data is available at
 http://hex.bioinfo.hr/\~rosa/R_workshop/1242_at.leukemia.txt and
-http://hex.bioinfo.hr/\~rosa/R_workshop/1866_g\_at.leukemia.txt
+http://hex.bioinfo.hr/\~rosa/R_workshop/1866_g_at.leukemia.txt
 
 ```{r }
 # read in the data for the 1242_at probe expression levels
@@ -706,7 +710,6 @@ globally - inside individual layers to apply locally - set outside
 *aes()* to apply a constant value rather than a mapped variable
 
 ```{r}
-
 # 1. Aesthetics mapped inside aes(): color mapped to Species (varies by data)
 p1 <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
   geom_point() +
@@ -726,6 +729,81 @@ p3 <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
   ggtitle("Color aes() in point layer, fixed color outside aes() in smooth")
 p3
 ```
+
+### Example: Scales
+
+Scales control how data values are mapped to visual properties such as
+colors, sizes, and axis positions.
+
+While `aes()` defines **which variable** controls an aesthetic,
+`scale_*()` functions define **how its values are displayed**.
+
+Common scale functions include:
+
+-   `scale_color_*()` – controls colors of points and lines
+-   `scale_fill_*()` – controls fill colors of bars and boxplots
+-   `scale_x_*()` and `scale_y_*()` – control axis scales
+-   `scale_size_*()` – controls point sizes
+
+#### Changing colors
+
+```{r}
+# Default colors
+p <- ggplot(iris, aes(x = Sepal.Length,
+                      y = Sepal.Width,
+                      color = Species)) +
+  geom_point(size = 3)
+
+p
+
+# Manually specify colors
+p + scale_color_manual(
+  values = c("setosa" = "red",
+             "versicolor" = "blue",
+             "virginica" = "green")
+)
+
+# Use a predefined color palette
+p + scale_color_viridis_d()
+```
+
+The `_d` suffix indicates a discrete scale, used for categorical
+variables. The `_c` suffix indicates a continuous scale, used for
+numerical variables.
+
+#### Modifying axis scales
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(1, 6, 1)
+  ) +
+  scale_y_continuous(
+    breaks = seq(10, 35, 5)
+  ) +
+  labs(
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon"
+  ) +
+  theme_light()
+```
+
+We can also transform an axis using a logarithmic scale:
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  scale_y_log10() +
+  theme_light()
+```
+
+**Remember:**
+
+-   `aes()` maps variables to visual properties.
+-   `scale_*()` controls how those mappings are displayed.
+-   `theme()` controls non-data elements such as backgrounds, gridlines,
+    and fonts.
 
 ### Example: Identify parts of the plot are produced by which part of command
 
@@ -767,12 +845,12 @@ produced it:
 
 ## Facets
 
-### Example 3: Let's build another graph
+### Example: Let's build another graph
 
 We want to see if there is any connection between expression of probe
-1242_at and probe 1866_g\_at in the leukemia dataset. We will create a
-graph with numerical x (1242_at expression) and y (1866_g\_at
-expression) axes.
+1242_at and probe 1866_g_at in the leukemia dataset. We will create a
+graph with numerical x (1242_at expression) and y (1866_g_at expression)
+axes.
 
 First let's read in and combine the datasets.
 
@@ -793,7 +871,7 @@ head(data)
 ```
 
 Now we want to make a scatterplot and see whether there is any
-connection between expression_1242_at (x axis) and expression_1866_g\_at
+connection between expression_1242_at (x axis) and expression_1866_g_at
 (y axis) in leukemia dataset.
 
 **Hint:** You need to make a basic layer, define aesthetics and add a
@@ -826,6 +904,10 @@ p <- ggplot(data, aes(x = expression_1242_at, y = expression_1866_g_at)) + geom_
 p
 ```
 
+-   `facet_wrap()` is useful when splitting by one categorical variable.
+-   `facet_grid()` arranges plots in a grid according to two categorical
+    variables.
+
 <div>
 
 </div>
@@ -852,9 +934,9 @@ We can also show medians and ranges in various ways:
 
 ```{r}
 y <- c(18, 11, 16)
-df <- data.frame(x = 1:3, y = y, se = c(1.2, 0.5, 1.0))
+df_se <- data.frame(x = 1:3, y = y, se = c(1.2, 0.5, 1.0))
 
-base <- ggplot(df, aes(x, y, ymin = y - se, ymax = y + se))
+base <- ggplot(df_se, aes(x, y, ymin = y - se, ymax = y + se))
 
 ```
 
@@ -889,7 +971,7 @@ details, significance tests, and effect sizes included by default.
 ggplot2 plot. [ggsignif](https://const-ae.github.io/ggsignif/)
 
 Lets add a correlation coefficient to the scatterplot with
-expression_1242_at on the x axis and expression_1866_g\_at on the y axis
+expression_1242_at on the x axis and expression_1866_g_at on the y axis
 (with facets by stage).
 
 ```{r}
@@ -904,7 +986,7 @@ p
 ## Themes
 
 Many visual aspects of the plots can be adjusted using theme() and
-scale_X\_Y() There are various themes already available, but they can
+scale_X_Y() There are various themes already available, but they can
 also be tweaked
 
 **ggpubr** package let's you produce publication-ready plots, with
@@ -950,8 +1032,94 @@ print(p2)
 For more information and help with making graphs see the [R Graphics
 Cookbook](https://r-graphics.org/)
 
-### Exercise
+## Exercises
 
-For the **qpcr_ddCt** data set produce plots that visualize: 1.
-Comparison of TP53 and MYC expression 2. Comparison of ΔCt values across
-control and treated samples
+Use the datasets `qpcr_ddCt` and `df` created during the lecture to
+complete the following exercises.
+
+### Exercise 1. Comparison of TP53 and MYC expression
+
+Using the `qpcr_ddCt` dataset, visualize the relative expression of TP53
+and MYC in control and treated samples.
+
+1.  Create a boxplot showing relative expression (`fold_change`) for
+    TP53 and MYC.
+2.  Color the boxes according to experimental condition.
+3.  Add individual sample measurements to the plot.
+4.  Add an appropriate title, axis labels, and a theme.
+
+**Hint:** Use `geom_boxplot()`, `geom_jitter()`, and `fill` inside
+`aes()`. You can select the two genes using
+`Gene %in% c("TP53", "MYC")`.
+
+```{r}
+# Your code here
+
+```
+
+### Exercise 2. Comparison of ΔCt values across conditions
+
+Using the `qpcr_ddCt` dataset, compare normalized Ct values between
+control and treated samples.
+
+1.  Create a boxplot of `deltaCt` values for each experimental
+    condition.
+2.  Color the boxes by condition.
+3.  Use `facet_wrap()` to display each gene in a separate panel.
+4.  Overlay individual measurements.
+5.  Add informative axis labels and a theme.
+
+**Hint:** Map `Condition` to the x-axis, `deltaCt` to the y-axis, and
+use `facet_wrap(~Gene)`.
+
+```{r}
+# Your code here
+
+```
+
+### Exercise 3. Visualizing mutation frequencies
+
+Using the simulated dataset `df`, investigate whether mutation
+frequencies differ between treatment groups.
+
+1.  Create a barplot showing the number of WT and mutated samples in
+    each treatment group.
+2.  Modify the graph to show proportions rather than absolute counts.
+3.  Change the fill colors using `scale_fill_manual()`.
+4.  Add informative labels and use a minimal theme.
+
+**Hint:** Use `geom_bar(position = "dodge")` for counts and
+`geom_bar(position = "fill")` for proportions.
+
+```{r}
+# Your code here
+
+```
+
+**Question:** When would you choose to show absolute counts rather than
+proportions? What information is lost when using a 100% stacked barplot?
+
+### Exercise 4. Summarizing and visualizing gene expression
+
+Using the simulated dataset `df`, compare the average expression of
+`Gene1` between control and treated samples.
+
+1.  Calculate the mean and standard deviation of `Gene1_expr` for each
+    treatment group.
+2.  Create a barplot showing mean expression.
+3.  Add error bars representing ±1 standard deviation.
+4.  Overlay individual observations on the graph.
+5.  Change the theme and save the resulting graph as a PNG file.
+
+**Hint:** Use `data.table` or `dplyr` to calculate summary statistics,
+`geom_col()` for the means, `geom_errorbar()` for standard deviations,
+and `ggsave()` to save the graph.
+
+```{r}
+# Your code here
+
+```
+
+**Question:** What is the difference between standard deviation (SD) and
+standard error of the mean (SEM)? Which one is more appropriate for
+showing the variability of individual samples?
