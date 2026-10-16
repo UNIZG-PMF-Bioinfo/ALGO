@@ -308,12 +308,11 @@ BiocManager::install("GenomicRanges")
 Libraries you're gonna need for this lecture:
 
 ```{r run_lecture, echo = TRUE, eval = TRUE,  message=FALSE, warning=FALSE}
+library(data.table) # load before IRanges so that shift() is IRanges::shift
 library(GenomicRanges)
 library(IRanges)
 # library(ggbio)
 library(ggplot2)
-library(tibble)
-library(dplyr)
 library(magrittr)
 ```
 
@@ -494,23 +493,22 @@ IRangesMethodToTable <- function(IRangesMethod, ...){
   # create list of IRanges
   irange_list <- list(..., irange_result)
 
-  # loop through the list: transform to table, add unique id, bind to one table
-  irange_tb <- lapply(1:length(irange_list), function(index){
+  # loop through the list: transform to table, add unique id
+  irange_tb <- lapply(seq_along(irange_list), function(index){
 
     if(class(irange_list[[index]]) %in% c("IRanges", "GRanges")){
-      irange_list[[index]] %>%
-        as.data.frame(.) %>%
-        as_tibble(.) %>%
-        dplyr::mutate(range_id = index)
+      as.data.table(irange_list[[index]])[, range_id := index]
     }
 
-  }) %>%
-    dplyr::bind_rows(.) %>%
+  })
 
-    # replace last added range with NA
-    dplyr::mutate(range_id = ifelse(test = (range_id == max(range_id)),
-                                    yes = NA,
-                                    no = paste("range", range_id, sep = ".")))
+  # bind to one table (NULLs are skipped, missing columns filled with NA)
+  irange_tb <- rbindlist(irange_tb, use.names = TRUE, fill = TRUE)
+
+  # replace last added range with NA
+  irange_tb[, range_id := fifelse(range_id == max(range_id),
+                                  NA_character_,
+                                  paste("range", range_id, sep = "."))]
 
   # return table
   return(irange_tb)
@@ -540,14 +538,15 @@ plotIRanges <- function(irange_tb){
   # calculate max. x-limit
   xlim_max <- max(irange_tb$end)
   
+  # copy so the input table is not modified by reference
+  irange_tb <- copy(as.data.table(irange_tb))
+
   # add range_ymin to separate ranges on y-axis
-  irange_tb %<>% 
-    dplyr::mutate(range_ymin = 1:n())
-  
+  irange_tb[, range_ymin := 1:.N]
+
   # add range ID if it doesn't exist
   if(!("range_id" %in% names(irange_tb))){
-    irange_tb %<>% 
-      dplyr::mutate(range_id = "range.1")
+    irange_tb[, range_id := "range.1"]
   }
   
   # plot
