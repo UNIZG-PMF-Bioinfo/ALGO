@@ -804,17 +804,36 @@ Inter range methods transform all the ranges as a set to produce a new set of ra
 
 ### *range()*
 
+The function `range()` returns **one range from the smallest start to the largest end** of all ranges - the region which covers everything, including the gaps between ranges.\
+For example, the whole region spanned by all exons of a gene. Here ranges 3-13 and 16-20 give 3-20 (position 14-15 is in no range, but is included).
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(range, range_1) %>% plotIRanges(.)
 ```
 
 ### *reduce()*
 
+The function `reduce()` **merges overlapping (and touching) ranges** into one, but **keeps the gaps** between them. The result is the smallest set of non-overlapping ranges which cover exactly the same positions as the input.\
+For example, merging overlapping reads or exons of all transcripts of a gene into regions which are covered at least once. Here 4-9, 5-9, 8-13 and 3-13 are merged into 3-13, and 16-20 stays on its own.
+
+::: callout-note
+**Important arguments of `reduce(x, min.gapwidth)`**
+
+-   **`min.gapwidth`** - ranges separated by a gap **smaller** than this are merged. Default is `1`, so only overlapping or touching ranges (e.g. 1-3 and 4-6) are merged. With `min.gapwidth = 2`, 1-3 and 5-8 (gap of one position) are also merged into 1-8
+:::
+
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(reduce, range_1) %>% plotIRanges(.)
 ```
 
 ### *disjoin()*
+
+The function `disjoin()` **cuts the ranges at every start and end**, so that the result consists of non-overlapping pieces, and each position is covered by exactly the same input ranges within a piece.\
+For example, splitting exons of different transcripts into parts which are shared by all transcripts and parts which are unique to some of them. Here 4-9 and 8-13 give three pieces: 4-7 (only in the 1st range), 8-9 (in both) and 10-13 (only in the 2nd range).
+
+::: callout-tip
+Compare the three methods on the same ranges: `range()` gives **1** range (gaps filled), `reduce()` gives as **few** ranges as possible (gaps kept), `disjoin()` gives as **many** pieces as needed so that no two pieces overlap.
+:::
 
 ```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}
 IRangesMethodToTable(disjoin, range_1[c(1,3)]) %>% plotIRanges(.)

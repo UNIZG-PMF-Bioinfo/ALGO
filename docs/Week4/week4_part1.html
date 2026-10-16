@@ -6651,6 +6651,8 @@ Note
 <p>Inter range methods transform all the ranges as a set to produce a new set of ranges. They return an object that is generally NOT parallel to the input object.</p>
 <section id="range" class="level3">
 <h3 class="anchored" data-anchor-id="range"><em>range()</em></h3>
+<p>The function <code>range()</code> returns <strong>one range from the smallest start to the largest end</strong> of all ranges - the region which covers everything, including the gaps between ranges.<br>
+For example, the whole region spanned by all exons of a gene. Here ranges 3-13 and 16-20 give 3-20 (position 14-15 is in no range, but is included).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(range, range_1) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -6664,6 +6666,24 @@ Note
 </section>
 <section id="reduce" class="level3">
 <h3 class="anchored" data-anchor-id="reduce"><em>reduce()</em></h3>
+<p>The function <code>reduce()</code> <strong>merges overlapping (and touching) ranges</strong> into one, but <strong>keeps the gaps</strong> between them. The result is the smallest set of non-overlapping ranges which cover exactly the same positions as the input.<br>
+For example, merging overlapping reads or exons of all transcripts of a gene into regions which are covered at least once. Here 4-9, 5-9, 8-13 and 3-13 are merged into 3-13, and 16-20 stays on its own.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Important arguments of <code>reduce(x, min.gapwidth)</code></strong></p>
+<ul>
+<li><strong><code>min.gapwidth</code></strong> - ranges separated by a gap <strong>smaller</strong> than this are merged. Default is <code>1</code>, so only overlapping or touching ranges (e.g. 1-3 and 4-6) are merged. With <code>min.gapwidth = 2</code>, 1-3 and 5-8 (gap of one position) are also merged into 1-8</li>
+</ul>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(reduce, range_1) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -6677,6 +6697,21 @@ Note
 </section>
 <section id="disjoin" class="level3">
 <h3 class="anchored" data-anchor-id="disjoin"><em>disjoin()</em></h3>
+<p>The function <code>disjoin()</code> <strong>cuts the ranges at every start and end</strong>, so that the result consists of non-overlapping pieces, and each position is covered by exactly the same input ranges within a piece.<br>
+For example, splitting exons of different transcripts into parts which are shared by all transcripts and parts which are unique to some of them. Here 4-9 and 8-13 give three pieces: 4-7 (only in the 1st range), 8-9 (in both) and 10-13 (only in the 2nd range).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Compare the three methods on the same ranges: <code>range()</code> gives <strong>1</strong> range (gaps filled), <code>reduce()</code> gives as <strong>few</strong> ranges as possible (gaps kept), <code>disjoin()</code> gives as <strong>many</strong> pieces as needed so that no two pieces overlap.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(disjoin, range_1[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -7045,11 +7080,11 @@ Note
 <div class="cell-output cell-output-stdout">
 <pre><code>   chromosomes gene_start gene_end gene_strand gene_id score
         &lt;char&gt;      &lt;num&gt;    &lt;num&gt;      &lt;char&gt;  &lt;char&gt; &lt;int&gt;
-1:      chr 10          1       12           -  gene_3    49
-2:       chr 2          8       13           +  gene_1    82
-3:       chr 4          5       15           -  gene_8    24
-4:       chr 1          3        8           -  gene_2    34
-5:       chr 3          2        6           +  gene_4    79</code></pre>
+1:      chr 10          1       12           -  gene_8    71
+2:       chr 4          8       13           + gene_10    83
+3:       chr 1          5       15           -  gene_7    80
+4:       chr 2          3        8           -  gene_5    33
+5:       chr 5          2        6           +  gene_1    36</code></pre>
 </div>
 </div>
 <div class="cell" data-warrnings="false">
@@ -7063,11 +7098,11 @@ Note
 <pre><code>GRanges object with 5 ranges and 2 metadata columns:
       seqnames    ranges strand |     gene_id     score
          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;integer&gt;
-  [1]   chr 10      1-12      - |      gene_3        49
-  [2]    chr 2      8-13      + |      gene_1        82
-  [3]    chr 4      5-15      - |      gene_8        24
-  [4]    chr 1       3-8      - |      gene_2        34
-  [5]    chr 3       2-6      + |      gene_4        79
+  [1]   chr 10      1-12      - |      gene_8        71
+  [2]    chr 4      8-13      + |     gene_10        83
+  [3]    chr 1      5-15      - |      gene_7        80
+  [4]    chr 2       3-8      - |      gene_5        33
+  [5]    chr 5       2-6      + |      gene_1        36
   -------
   seqinfo: 5 sequences from an unspecified genome; no seqlengths</code></pre>
 </div>
@@ -7084,11 +7119,11 @@ Note
 <pre><code>GRanges object with 5 ranges and 2 metadata columns:
       seqnames    ranges strand |     gene_id     score
          &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;integer&gt;
-  [1]    chr 9      1-12      + |      gene_7        39
-  [2]    chr 3      8-13      - |      gene_9        57
-  [3]    chr 1      5-15      + |      gene_1        19
-  [4]   chr 10       3-8      - |     gene_10        24
-  [5]    chr 4       2-6      - |      gene_5        25
+  [1]    chr 6      1-12      - |     gene_10        43
+  [2]    chr 7      8-13      - |      gene_8        40
+  [3]    chr 1      5-15      + |      gene_5        46
+  [4]    chr 5       3-8      - |      gene_9        20
+  [5]    chr 2       2-6      + |      gene_3        75
   -------
   seqinfo: 5 sequences from an unspecified genome; no seqlengths</code></pre>
 </div>
@@ -8617,300 +8652,319 @@ GRanges object with 3 ranges and 2 metadata columns:
 <span id="cb196-817"><a href="#cb196-817" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb196-818"><a href="#cb196-818" aria-hidden="true" tabindex="-1"></a><span class="fu">### *range()*</span></span>
 <span id="cb196-819"><a href="#cb196-819" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-820"><a href="#cb196-820" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-821"><a href="#cb196-821" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(range, range_1) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span>
-<span id="cb196-822"><a href="#cb196-822" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-823"><a href="#cb196-823" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-824"><a href="#cb196-824" aria-hidden="true" tabindex="-1"></a><span class="fu">### *reduce()*</span></span>
-<span id="cb196-825"><a href="#cb196-825" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-826"><a href="#cb196-826" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-827"><a href="#cb196-827" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(reduce, range_1) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span>
-<span id="cb196-828"><a href="#cb196-828" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-829"><a href="#cb196-829" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-830"><a href="#cb196-830" aria-hidden="true" tabindex="-1"></a><span class="fu">### *disjoin()*</span></span>
+<span id="cb196-820"><a href="#cb196-820" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`range()`</span> returns **one range from the smallest start to the largest end** of all ranges - the region which covers everything, including the gaps between ranges.\</span>
+<span id="cb196-821"><a href="#cb196-821" aria-hidden="true" tabindex="-1"></a>For example, the whole region spanned by all exons of a gene. Here ranges 3-13 and 16-20 give 3-20 (position 14-15 is in no range, but is included).</span>
+<span id="cb196-822"><a href="#cb196-822" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-823"><a href="#cb196-823" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-824"><a href="#cb196-824" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(range, range_1) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span>
+<span id="cb196-825"><a href="#cb196-825" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-826"><a href="#cb196-826" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-827"><a href="#cb196-827" aria-hidden="true" tabindex="-1"></a><span class="fu">### *reduce()*</span></span>
+<span id="cb196-828"><a href="#cb196-828" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-829"><a href="#cb196-829" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`reduce()`</span> **merges overlapping (and touching) ranges** into one, but **keeps the gaps** between them. The result is the smallest set of non-overlapping ranges which cover exactly the same positions as the input.\</span>
+<span id="cb196-830"><a href="#cb196-830" aria-hidden="true" tabindex="-1"></a>For example, merging overlapping reads or exons of all transcripts of a gene into regions which are covered at least once. Here 4-9, 5-9, 8-13 and 3-13 are merged into 3-13, and 16-20 stays on its own.</span>
 <span id="cb196-831"><a href="#cb196-831" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-832"><a href="#cb196-832" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-833"><a href="#cb196-833" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(disjoin, range_1[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span>
-<span id="cb196-834"><a href="#cb196-834" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-835"><a href="#cb196-835" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-836"><a href="#cb196-836" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interval overlaps</span></span>
+<span id="cb196-832"><a href="#cb196-832" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb196-833"><a href="#cb196-833" aria-hidden="true" tabindex="-1"></a>**Important arguments of `reduce(x, min.gapwidth)`**</span>
+<span id="cb196-834"><a href="#cb196-834" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-835"><a href="#cb196-835" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**`min.gapwidth`** - ranges separated by a gap **smaller** than this are merged. Default is <span class="in">`1`</span>, so only overlapping or touching ranges (e.g. 1-3 and 4-6) are merged. With <span class="in">`min.gapwidth = 2`</span>, 1-3 and 5-8 (gap of one position) are also merged into 1-8</span>
+<span id="cb196-836"><a href="#cb196-836" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb196-837"><a href="#cb196-837" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-838"><a href="#cb196-838" aria-hidden="true" tabindex="-1"></a>There are several methods for finding and counting interval overlaps between two IRanges object - query and a subject.</span>
-<span id="cb196-839"><a href="#cb196-839" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-840"><a href="#cb196-840" aria-hidden="true" tabindex="-1"></a><span class="fu">### *findOverlaps()*</span></span>
+<span id="cb196-838"><a href="#cb196-838" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-839"><a href="#cb196-839" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(reduce, range_1) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span>
+<span id="cb196-840"><a href="#cb196-840" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb196-841"><a href="#cb196-841" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-842"><a href="#cb196-842" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-843"><a href="#cb196-843" aria-hidden="true" tabindex="-1"></a>(overlaps <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(range_1, range_2))</span>
-<span id="cb196-844"><a href="#cb196-844" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-845"><a href="#cb196-845" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-846"><a href="#cb196-846" aria-hidden="true" tabindex="-1"></a>Extracting overlapping ranges from result is done with <span class="in">`queryHits()`</span> and <span class="in">`subjectHits()`</span>.</span>
-<span id="cb196-847"><a href="#cb196-847" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-848"><a href="#cb196-848" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-849"><a href="#cb196-849" aria-hidden="true" tabindex="-1"></a>(query_ranges <span class="ot">&lt;-</span> range_1[<span class="fu">queryHits</span>(overlaps)])</span>
-<span id="cb196-850"><a href="#cb196-850" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-851"><a href="#cb196-851" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-852"><a href="#cb196-852" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-853"><a href="#cb196-853" aria-hidden="true" tabindex="-1"></a>(subject_ranges <span class="ot">&lt;-</span> range_2[<span class="fu">subjectHits</span>(overlaps)])</span>
-<span id="cb196-854"><a href="#cb196-854" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-855"><a href="#cb196-855" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-856"><a href="#cb196-856" aria-hidden="true" tabindex="-1"></a><span class="fu">### *countOverlaps()*</span></span>
-<span id="cb196-857"><a href="#cb196-857" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-858"><a href="#cb196-858" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-859"><a href="#cb196-859" aria-hidden="true" tabindex="-1"></a><span class="fu">countOverlaps</span>(range_1, range_2)</span>
-<span id="cb196-860"><a href="#cb196-860" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-861"><a href="#cb196-861" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-862"><a href="#cb196-862" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-863"><a href="#cb196-863" aria-hidden="true" tabindex="-1"></a><span class="fu">countOverlaps</span>(range_2, range_1)</span>
-<span id="cb196-864"><a href="#cb196-864" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-865"><a href="#cb196-865" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-866"><a href="#cb196-866" aria-hidden="true" tabindex="-1"></a><span class="fu">### *subsetByOverlaps()*</span></span>
-<span id="cb196-867"><a href="#cb196-867" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-868"><a href="#cb196-868" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`subsetByOverlaps()`</span> returns **only the ranges from one set that overlap another set**.</span>
-<span id="cb196-869"><a href="#cb196-869" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-870"><a href="#cb196-870" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-871"><a href="#cb196-871" aria-hidden="true" tabindex="-1"></a><span class="fu">subsetByOverlaps</span>(range_1, range_2)</span>
-<span id="cb196-872"><a href="#cb196-872" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-873"><a href="#cb196-873" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-874"><a href="#cb196-874" aria-hidden="true" tabindex="-1"></a><span class="fu">## GenomicRanges methods overview</span></span>
-<span id="cb196-875"><a href="#cb196-875" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-876"><a href="#cb196-876" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb196-877"><a href="#cb196-877" aria-hidden="true" tabindex="-1"></a>GenomicRanges = IRanges + genomic info. Used to describe:</span>
-<span id="cb196-878"><a href="#cb196-878" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-879"><a href="#cb196-879" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>annotations, e.g., exons, genes, binding sites, ...</span>
-<span id="cb196-880"><a href="#cb196-880" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>data, e.g., aligned reads, called peaks, copy number regions</span>
-<span id="cb196-881"><a href="#cb196-881" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb196-882"><a href="#cb196-882" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-883"><a href="#cb196-883" aria-hidden="true" tabindex="-1"></a>For example:</span>
+<span id="cb196-842"><a href="#cb196-842" aria-hidden="true" tabindex="-1"></a><span class="fu">### *disjoin()*</span></span>
+<span id="cb196-843"><a href="#cb196-843" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-844"><a href="#cb196-844" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`disjoin()`</span> **cuts the ranges at every start and end**, so that the result consists of non-overlapping pieces, and each position is covered by exactly the same input ranges within a piece.\</span>
+<span id="cb196-845"><a href="#cb196-845" aria-hidden="true" tabindex="-1"></a>For example, splitting exons of different transcripts into parts which are shared by all transcripts and parts which are unique to some of them. Here 4-9 and 8-13 give three pieces: 4-7 (only in the 1st range), 8-9 (in both) and 10-13 (only in the 2nd range).</span>
+<span id="cb196-846"><a href="#cb196-846" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-847"><a href="#cb196-847" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb196-848"><a href="#cb196-848" aria-hidden="true" tabindex="-1"></a>Compare the three methods on the same ranges: <span class="in">`range()`</span> gives **1** range (gaps filled), `reduce()` gives as **few** ranges as possible (gaps kept), `disjoin()` gives as **many** pieces as needed so that no two pieces overlap.</span>
+<span id="cb196-849"><a href="#cb196-849" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb196-850"><a href="#cb196-850" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-851"><a href="#cb196-851" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-852"><a href="#cb196-852" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(disjoin, range_1[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)]) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span>
+<span id="cb196-853"><a href="#cb196-853" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-854"><a href="#cb196-854" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-855"><a href="#cb196-855" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interval overlaps</span></span>
+<span id="cb196-856"><a href="#cb196-856" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-857"><a href="#cb196-857" aria-hidden="true" tabindex="-1"></a>There are several methods for finding and counting interval overlaps between two IRanges object - query and a subject.</span>
+<span id="cb196-858"><a href="#cb196-858" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-859"><a href="#cb196-859" aria-hidden="true" tabindex="-1"></a><span class="fu">### *findOverlaps()*</span></span>
+<span id="cb196-860"><a href="#cb196-860" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-861"><a href="#cb196-861" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-862"><a href="#cb196-862" aria-hidden="true" tabindex="-1"></a>(overlaps <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(range_1, range_2))</span>
+<span id="cb196-863"><a href="#cb196-863" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-864"><a href="#cb196-864" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-865"><a href="#cb196-865" aria-hidden="true" tabindex="-1"></a>Extracting overlapping ranges from result is done with <span class="in">`queryHits()`</span> and <span class="in">`subjectHits()`</span>.</span>
+<span id="cb196-866"><a href="#cb196-866" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-867"><a href="#cb196-867" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-868"><a href="#cb196-868" aria-hidden="true" tabindex="-1"></a>(query_ranges <span class="ot">&lt;-</span> range_1[<span class="fu">queryHits</span>(overlaps)])</span>
+<span id="cb196-869"><a href="#cb196-869" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-870"><a href="#cb196-870" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-871"><a href="#cb196-871" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-872"><a href="#cb196-872" aria-hidden="true" tabindex="-1"></a>(subject_ranges <span class="ot">&lt;-</span> range_2[<span class="fu">subjectHits</span>(overlaps)])</span>
+<span id="cb196-873"><a href="#cb196-873" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-874"><a href="#cb196-874" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-875"><a href="#cb196-875" aria-hidden="true" tabindex="-1"></a><span class="fu">### *countOverlaps()*</span></span>
+<span id="cb196-876"><a href="#cb196-876" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-877"><a href="#cb196-877" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-878"><a href="#cb196-878" aria-hidden="true" tabindex="-1"></a><span class="fu">countOverlaps</span>(range_1, range_2)</span>
+<span id="cb196-879"><a href="#cb196-879" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-880"><a href="#cb196-880" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-881"><a href="#cb196-881" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-882"><a href="#cb196-882" aria-hidden="true" tabindex="-1"></a><span class="fu">countOverlaps</span>(range_2, range_1)</span>
+<span id="cb196-883"><a href="#cb196-883" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb196-884"><a href="#cb196-884" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-885"><a href="#cb196-885" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-886"><a href="#cb196-886" aria-hidden="true" tabindex="-1"></a>(grange_1 <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">&quot;chr1&quot;</span>, range_1, <span class="at">strand =</span> <span class="st">&quot;+&quot;</span>))</span>
-<span id="cb196-887"><a href="#cb196-887" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-885"><a href="#cb196-885" aria-hidden="true" tabindex="-1"></a><span class="fu">### *subsetByOverlaps()*</span></span>
+<span id="cb196-886"><a href="#cb196-886" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-887"><a href="#cb196-887" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`subsetByOverlaps()`</span> returns **only the ranges from one set that overlap another set**.</span>
 <span id="cb196-888"><a href="#cb196-888" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb196-889"><a href="#cb196-889" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-890"><a href="#cb196-890" aria-hidden="true" tabindex="-1"></a>(grange_2 <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">&quot;chr2&quot;</span>, range_2, <span class="at">strand =</span> <span class="st">&quot;-&quot;</span>))</span>
+<span id="cb196-890"><a href="#cb196-890" aria-hidden="true" tabindex="-1"></a><span class="fu">subsetByOverlaps</span>(range_1, range_2)</span>
 <span id="cb196-891"><a href="#cb196-891" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb196-892"><a href="#cb196-892" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-893"><a href="#cb196-893" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-894"><a href="#cb196-894" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb196-895"><a href="#cb196-895" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-896"><a href="#cb196-896" aria-hidden="true" tabindex="-1"></a><span class="in">`seqnames`</span> vs <span class="in">`seqlevels`</span> in GenomicRanges</span>
+<span id="cb196-893"><a href="#cb196-893" aria-hidden="true" tabindex="-1"></a><span class="fu">## GenomicRanges methods overview</span></span>
+<span id="cb196-894"><a href="#cb196-894" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-895"><a href="#cb196-895" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb196-896"><a href="#cb196-896" aria-hidden="true" tabindex="-1"></a>GenomicRanges = IRanges + genomic info. Used to describe:</span>
 <span id="cb196-897"><a href="#cb196-897" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-898"><a href="#cb196-898" aria-hidden="true" tabindex="-1"></a>When working with genomic ranges (<span class="in">`GRanges`</span> objects), each range is associated with a **sequence name** — typically a chromosome or contig.  </span>
-<span id="cb196-899"><a href="#cb196-899" aria-hidden="true" tabindex="-1"></a>Two related functions, <span class="in">`seqnames()`</span> and <span class="in">`seqlevels()`</span>, are used to access this information, but they serve different purposes.</span>
-<span id="cb196-900"><a href="#cb196-900" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-901"><a href="#cb196-901" aria-hidden="true" tabindex="-1"></a><span class="in">`seqnames()`</span></span>
-<span id="cb196-902"><a href="#cb196-902" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Returns the **sequence name (chromosome)** for **each individual range**.  </span>
-<span id="cb196-903"><a href="#cb196-903" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>The output is a vector with one entry per range.</span>
-<span id="cb196-904"><a href="#cb196-904" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-905"><a href="#cb196-905" aria-hidden="true" tabindex="-1"></a><span class="in">`seqlevels()`</span></span>
-<span id="cb196-906"><a href="#cb196-906" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Returns the **set of unique sequence** names (chromosomes) present or allowed in the object.</span>
-<span id="cb196-907"><a href="#cb196-907" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>This defines the **reference genome structure** — even if some levels currently have no ranges.</span>
-<span id="cb196-908"><a href="#cb196-908" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-909"><a href="#cb196-909" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-910"><a href="#cb196-910" aria-hidden="true" tabindex="-1"></a>Few additional functions to access new data:</span>
-<span id="cb196-911"><a href="#cb196-911" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-912"><a href="#cb196-912" aria-hidden="true" tabindex="-1"></a><span class="fu">seqnames</span>(grange_1) <span class="co"># chromosomes, but can also be contigs, scaffolds etc.</span></span>
-<span id="cb196-913"><a href="#cb196-913" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-898"><a href="#cb196-898" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>annotations, e.g., exons, genes, binding sites, ...</span>
+<span id="cb196-899"><a href="#cb196-899" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>data, e.g., aligned reads, called peaks, copy number regions</span>
+<span id="cb196-900"><a href="#cb196-900" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb196-901"><a href="#cb196-901" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-902"><a href="#cb196-902" aria-hidden="true" tabindex="-1"></a>For example:</span>
+<span id="cb196-903"><a href="#cb196-903" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-904"><a href="#cb196-904" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-905"><a href="#cb196-905" aria-hidden="true" tabindex="-1"></a>(grange_1 <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">&quot;chr1&quot;</span>, range_1, <span class="at">strand =</span> <span class="st">&quot;+&quot;</span>))</span>
+<span id="cb196-906"><a href="#cb196-906" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-907"><a href="#cb196-907" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-908"><a href="#cb196-908" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-909"><a href="#cb196-909" aria-hidden="true" tabindex="-1"></a>(grange_2 <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(<span class="st">&quot;chr2&quot;</span>, range_2, <span class="at">strand =</span> <span class="st">&quot;-&quot;</span>))</span>
+<span id="cb196-910"><a href="#cb196-910" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-911"><a href="#cb196-911" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-912"><a href="#cb196-912" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-913"><a href="#cb196-913" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
 <span id="cb196-914"><a href="#cb196-914" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-915"><a href="#cb196-915" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-916"><a href="#cb196-916" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(grange_1)</span>
-<span id="cb196-917"><a href="#cb196-917" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-918"><a href="#cb196-918" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-919"><a href="#cb196-919" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-920"><a href="#cb196-920" aria-hidden="true" tabindex="-1"></a><span class="fu">strand</span>(grange_1)</span>
-<span id="cb196-921"><a href="#cb196-921" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-922"><a href="#cb196-922" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-923"><a href="#cb196-923" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-924"><a href="#cb196-924" aria-hidden="true" tabindex="-1"></a><span class="fu">ranges</span>(grange_1)</span>
-<span id="cb196-925"><a href="#cb196-925" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-926"><a href="#cb196-926" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-927"><a href="#cb196-927" aria-hidden="true" tabindex="-1"></a>Adding additional metadata:</span>
+<span id="cb196-915"><a href="#cb196-915" aria-hidden="true" tabindex="-1"></a><span class="in">`seqnames`</span> vs <span class="in">`seqlevels`</span> in GenomicRanges</span>
+<span id="cb196-916"><a href="#cb196-916" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-917"><a href="#cb196-917" aria-hidden="true" tabindex="-1"></a>When working with genomic ranges (<span class="in">`GRanges`</span> objects), each range is associated with a **sequence name** — typically a chromosome or contig.  </span>
+<span id="cb196-918"><a href="#cb196-918" aria-hidden="true" tabindex="-1"></a>Two related functions, <span class="in">`seqnames()`</span> and <span class="in">`seqlevels()`</span>, are used to access this information, but they serve different purposes.</span>
+<span id="cb196-919"><a href="#cb196-919" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-920"><a href="#cb196-920" aria-hidden="true" tabindex="-1"></a><span class="in">`seqnames()`</span></span>
+<span id="cb196-921"><a href="#cb196-921" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Returns the **sequence name (chromosome)** for **each individual range**.  </span>
+<span id="cb196-922"><a href="#cb196-922" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>The output is a vector with one entry per range.</span>
+<span id="cb196-923"><a href="#cb196-923" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-924"><a href="#cb196-924" aria-hidden="true" tabindex="-1"></a><span class="in">`seqlevels()`</span></span>
+<span id="cb196-925"><a href="#cb196-925" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Returns the **set of unique sequence** names (chromosomes) present or allowed in the object.</span>
+<span id="cb196-926"><a href="#cb196-926" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>This defines the **reference genome structure** — even if some levels currently have no ranges.</span>
+<span id="cb196-927"><a href="#cb196-927" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb196-928"><a href="#cb196-928" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-929"><a href="#cb196-929" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-930"><a href="#cb196-930" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_1)<span class="sc">$</span>exon_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(grange_1)</span>
-<span id="cb196-931"><a href="#cb196-931" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_2)<span class="sc">$</span>exon_id <span class="ot">&lt;-</span> <span class="fu">length</span>(grange_2)<span class="sc">:</span><span class="dv">1</span></span>
-<span id="cb196-932"><a href="#cb196-932" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_1)<span class="sc">$</span>transcript_id <span class="ot">&lt;-</span> <span class="st">&quot;tx_1&quot;</span></span>
-<span id="cb196-933"><a href="#cb196-933" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_2)<span class="sc">$</span>transcript_id <span class="ot">&lt;-</span> <span class="st">&quot;tx_2&quot;</span></span>
-<span id="cb196-934"><a href="#cb196-934" aria-hidden="true" tabindex="-1"></a>grange_1</span>
-<span id="cb196-935"><a href="#cb196-935" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-936"><a href="#cb196-936" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-937"><a href="#cb196-937" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
-<span id="cb196-938"><a href="#cb196-938" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_2)</span>
-<span id="cb196-939"><a href="#cb196-939" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-940"><a href="#cb196-940" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-941"><a href="#cb196-941" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb196-942"><a href="#cb196-942" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-943"><a href="#cb196-943" aria-hidden="true" tabindex="-1"></a><span class="fu">## *GRanges* methods overview</span></span>
-<span id="cb196-944"><a href="#cb196-944" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-945"><a href="#cb196-945" aria-hidden="true" tabindex="-1"></a>All methods which work on *IRanges* objects also work on *GRanges*, with some limitations and/or additional arguments. For example:</span>
-<span id="cb196-946"><a href="#cb196-946" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-947"><a href="#cb196-947" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-948"><a href="#cb196-948" aria-hidden="true" tabindex="-1"></a>grange_1</span>
-<span id="cb196-949"><a href="#cb196-949" aria-hidden="true" tabindex="-1"></a>grange_2</span>
-<span id="cb196-950"><a href="#cb196-950" aria-hidden="true" tabindex="-1"></a>(overlaps <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(grange_1, grange_2))</span>
-<span id="cb196-951"><a href="#cb196-951" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-952"><a href="#cb196-952" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-953"><a href="#cb196-953" aria-hidden="true" tabindex="-1"></a>Why are there no overlaps? Seqnames/seqlevels are different!</span>
-<span id="cb196-954"><a href="#cb196-954" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-955"><a href="#cb196-955" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-956"><a href="#cb196-956" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(grange_2) <span class="ot">&lt;-</span> <span class="st">&quot;chr1&quot;</span></span>
-<span id="cb196-957"><a href="#cb196-957" aria-hidden="true" tabindex="-1"></a>grange_1</span>
-<span id="cb196-958"><a href="#cb196-958" aria-hidden="true" tabindex="-1"></a>grange_2</span>
-<span id="cb196-959"><a href="#cb196-959" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-960"><a href="#cb196-960" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-961"><a href="#cb196-961" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-962"><a href="#cb196-962" aria-hidden="true" tabindex="-1"></a>(overlaps <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(grange_1, grange_2))</span>
-<span id="cb196-963"><a href="#cb196-963" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-964"><a href="#cb196-964" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-965"><a href="#cb196-965" aria-hidden="true" tabindex="-1"></a>Why are there still no overlaps? Strands are different!</span>
-<span id="cb196-966"><a href="#cb196-966" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-967"><a href="#cb196-967" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb196-968"><a href="#cb196-968" aria-hidden="true" tabindex="-1"></a>**`ignore.strand`** - GRanges methods by default compare only ranges on the **same strand** (<span class="in">`&quot;*&quot;`</span> matches both <span class="in">`&quot;+&quot;`</span> and <span class="in">`&quot;-&quot;`</span>).</span>
-<span id="cb196-969"><a href="#cb196-969" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-970"><a href="#cb196-970" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`FALSE`</span> (default) - ranges on <span class="in">`&quot;+&quot;`</span> and <span class="in">`&quot;-&quot;`</span> never overlap</span>
-<span id="cb196-971"><a href="#cb196-971" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`TRUE`</span> - strand is ignored and only the positions are compared. Methods that return new ranges, like <span class="in">`intersect()`</span>, then return them with strand <span class="in">`&quot;*&quot;`</span></span>
-<span id="cb196-972"><a href="#cb196-972" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb196-929"><a href="#cb196-929" aria-hidden="true" tabindex="-1"></a>Few additional functions to access new data:</span>
+<span id="cb196-930"><a href="#cb196-930" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-931"><a href="#cb196-931" aria-hidden="true" tabindex="-1"></a><span class="fu">seqnames</span>(grange_1) <span class="co"># chromosomes, but can also be contigs, scaffolds etc.</span></span>
+<span id="cb196-932"><a href="#cb196-932" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-933"><a href="#cb196-933" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-934"><a href="#cb196-934" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-935"><a href="#cb196-935" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(grange_1)</span>
+<span id="cb196-936"><a href="#cb196-936" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-937"><a href="#cb196-937" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-938"><a href="#cb196-938" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-939"><a href="#cb196-939" aria-hidden="true" tabindex="-1"></a><span class="fu">strand</span>(grange_1)</span>
+<span id="cb196-940"><a href="#cb196-940" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-941"><a href="#cb196-941" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-942"><a href="#cb196-942" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-943"><a href="#cb196-943" aria-hidden="true" tabindex="-1"></a><span class="fu">ranges</span>(grange_1)</span>
+<span id="cb196-944"><a href="#cb196-944" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-945"><a href="#cb196-945" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-946"><a href="#cb196-946" aria-hidden="true" tabindex="-1"></a>Adding additional metadata:</span>
+<span id="cb196-947"><a href="#cb196-947" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-948"><a href="#cb196-948" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-949"><a href="#cb196-949" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_1)<span class="sc">$</span>exon_id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(grange_1)</span>
+<span id="cb196-950"><a href="#cb196-950" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_2)<span class="sc">$</span>exon_id <span class="ot">&lt;-</span> <span class="fu">length</span>(grange_2)<span class="sc">:</span><span class="dv">1</span></span>
+<span id="cb196-951"><a href="#cb196-951" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_1)<span class="sc">$</span>transcript_id <span class="ot">&lt;-</span> <span class="st">&quot;tx_1&quot;</span></span>
+<span id="cb196-952"><a href="#cb196-952" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_2)<span class="sc">$</span>transcript_id <span class="ot">&lt;-</span> <span class="st">&quot;tx_2&quot;</span></span>
+<span id="cb196-953"><a href="#cb196-953" aria-hidden="true" tabindex="-1"></a>grange_1</span>
+<span id="cb196-954"><a href="#cb196-954" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-955"><a href="#cb196-955" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-956"><a href="#cb196-956" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, fig.height = 2, fig.width = 6}</span></span>
+<span id="cb196-957"><a href="#cb196-957" aria-hidden="true" tabindex="-1"></a><span class="fu">mcols</span>(grange_2)</span>
+<span id="cb196-958"><a href="#cb196-958" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-959"><a href="#cb196-959" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-960"><a href="#cb196-960" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb196-961"><a href="#cb196-961" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-962"><a href="#cb196-962" aria-hidden="true" tabindex="-1"></a><span class="fu">## *GRanges* methods overview</span></span>
+<span id="cb196-963"><a href="#cb196-963" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-964"><a href="#cb196-964" aria-hidden="true" tabindex="-1"></a>All methods which work on *IRanges* objects also work on *GRanges*, with some limitations and/or additional arguments. For example:</span>
+<span id="cb196-965"><a href="#cb196-965" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-966"><a href="#cb196-966" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-967"><a href="#cb196-967" aria-hidden="true" tabindex="-1"></a>grange_1</span>
+<span id="cb196-968"><a href="#cb196-968" aria-hidden="true" tabindex="-1"></a>grange_2</span>
+<span id="cb196-969"><a href="#cb196-969" aria-hidden="true" tabindex="-1"></a>(overlaps <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(grange_1, grange_2))</span>
+<span id="cb196-970"><a href="#cb196-970" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-971"><a href="#cb196-971" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-972"><a href="#cb196-972" aria-hidden="true" tabindex="-1"></a>Why are there no overlaps? Seqnames/seqlevels are different!</span>
 <span id="cb196-973"><a href="#cb196-973" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb196-974"><a href="#cb196-974" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-975"><a href="#cb196-975" aria-hidden="true" tabindex="-1"></a>(overlaps <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(grange_1, grange_2, <span class="at">ignore.strand =</span> T))</span>
-<span id="cb196-976"><a href="#cb196-976" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-977"><a href="#cb196-977" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-978"><a href="#cb196-978" aria-hidden="true" tabindex="-1"></a>Another example:</span>
+<span id="cb196-975"><a href="#cb196-975" aria-hidden="true" tabindex="-1"></a><span class="fu">seqlevels</span>(grange_2) <span class="ot">&lt;-</span> <span class="st">&quot;chr1&quot;</span></span>
+<span id="cb196-976"><a href="#cb196-976" aria-hidden="true" tabindex="-1"></a>grange_1</span>
+<span id="cb196-977"><a href="#cb196-977" aria-hidden="true" tabindex="-1"></a>grange_2</span>
+<span id="cb196-978"><a href="#cb196-978" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb196-979"><a href="#cb196-979" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb196-980"><a href="#cb196-980" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-981"><a href="#cb196-981" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(GenomicRanges<span class="sc">::</span>intersect, grange_1, grange_2, <span class="at">ignore.strand =</span> T) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span>
+<span id="cb196-981"><a href="#cb196-981" aria-hidden="true" tabindex="-1"></a>(overlaps <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(grange_1, grange_2))</span>
 <span id="cb196-982"><a href="#cb196-982" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb196-983"><a href="#cb196-983" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-984"><a href="#cb196-984" aria-hidden="true" tabindex="-1"></a>Input data to *GRanges* from table:</span>
+<span id="cb196-984"><a href="#cb196-984" aria-hidden="true" tabindex="-1"></a>Why are there still no overlaps? Strands are different!</span>
 <span id="cb196-985"><a href="#cb196-985" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-986"><a href="#cb196-986" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-987"><a href="#cb196-987" aria-hidden="true" tabindex="-1"></a>ranges_tb <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">data.table</span>(<span class="at">chromosomes =</span> <span class="fu">paste</span>(<span class="st">&quot;chr&quot;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>)), </span>
-<span id="cb196-988"><a href="#cb196-988" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gene_start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>), </span>
-<span id="cb196-989"><a href="#cb196-989" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gene_end =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">6</span>), </span>
-<span id="cb196-990"><a href="#cb196-990" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gene_strand =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>), <span class="dv">5</span>, <span class="at">replace =</span> T), </span>
-<span id="cb196-991"><a href="#cb196-991" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gene_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;gene_&quot;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>)), </span>
-<span id="cb196-992"><a href="#cb196-992" aria-hidden="true" tabindex="-1"></a>                     <span class="at">score =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">5</span>))</span>
-<span id="cb196-993"><a href="#cb196-993" aria-hidden="true" tabindex="-1"></a> <span class="fu">print</span>(ranges_tb)</span>
-<span id="cb196-994"><a href="#cb196-994" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-995"><a href="#cb196-995" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-996"><a href="#cb196-996" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-997"><a href="#cb196-997" aria-hidden="true" tabindex="-1"></a><span class="fu">makeGRangesFromDataFrame</span>(<span class="at">df =</span> ranges_tb, </span>
-<span id="cb196-998"><a href="#cb196-998" aria-hidden="true" tabindex="-1"></a>                         <span class="at">seqnames.field =</span> <span class="st">&quot;chromosomes&quot;</span>,</span>
-<span id="cb196-999"><a href="#cb196-999" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start.field =</span> <span class="st">&quot;gene_start&quot;</span>, </span>
-<span id="cb196-1000"><a href="#cb196-1000" aria-hidden="true" tabindex="-1"></a>                         <span class="at">end.field =</span> <span class="st">&quot;gene_end&quot;</span>, </span>
-<span id="cb196-1001"><a href="#cb196-1001" aria-hidden="true" tabindex="-1"></a>                         <span class="at">strand.field =</span> <span class="st">&quot;gene_strand&quot;</span>, </span>
-<span id="cb196-1002"><a href="#cb196-1002" aria-hidden="true" tabindex="-1"></a>                         <span class="at">keep.extra.columns =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb196-1003"><a href="#cb196-1003" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-986"><a href="#cb196-986" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb196-987"><a href="#cb196-987" aria-hidden="true" tabindex="-1"></a>**`ignore.strand`** - GRanges methods by default compare only ranges on the **same strand** (<span class="in">`&quot;*&quot;`</span> matches both <span class="in">`&quot;+&quot;`</span> and <span class="in">`&quot;-&quot;`</span>).</span>
+<span id="cb196-988"><a href="#cb196-988" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-989"><a href="#cb196-989" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`FALSE`</span> (default) - ranges on <span class="in">`&quot;+&quot;`</span> and <span class="in">`&quot;-&quot;`</span> never overlap</span>
+<span id="cb196-990"><a href="#cb196-990" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`TRUE`</span> - strand is ignored and only the positions are compared. Methods that return new ranges, like <span class="in">`intersect()`</span>, then return them with strand <span class="in">`&quot;*&quot;`</span></span>
+<span id="cb196-991"><a href="#cb196-991" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb196-992"><a href="#cb196-992" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-993"><a href="#cb196-993" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-994"><a href="#cb196-994" aria-hidden="true" tabindex="-1"></a>(overlaps <span class="ot">&lt;-</span> <span class="fu">findOverlaps</span>(grange_1, grange_2, <span class="at">ignore.strand =</span> T))</span>
+<span id="cb196-995"><a href="#cb196-995" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-996"><a href="#cb196-996" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-997"><a href="#cb196-997" aria-hidden="true" tabindex="-1"></a>Another example:</span>
+<span id="cb196-998"><a href="#cb196-998" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-999"><a href="#cb196-999" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1000"><a href="#cb196-1000" aria-hidden="true" tabindex="-1"></a><span class="fu">IRangesMethodToTable</span>(GenomicRanges<span class="sc">::</span>intersect, grange_1, grange_2, <span class="at">ignore.strand =</span> T) <span class="sc">%&gt;%</span> <span class="fu">plotIRanges</span>(.)</span>
+<span id="cb196-1001"><a href="#cb196-1001" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1002"><a href="#cb196-1002" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1003"><a href="#cb196-1003" aria-hidden="true" tabindex="-1"></a>Input data to *GRanges* from table:</span>
 <span id="cb196-1004"><a href="#cb196-1004" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1005"><a href="#cb196-1005" aria-hidden="true" tabindex="-1"></a>If your column names are correct you can directly call <span class="in">`GRanges()`</span> on data.frame/tibble/data.table:</span>
-<span id="cb196-1006"><a href="#cb196-1006" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1007"><a href="#cb196-1007" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1008"><a href="#cb196-1008" aria-hidden="true" tabindex="-1"></a>(ranges_tb <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(data.table<span class="sc">::</span><span class="fu">data.table</span>(<span class="at">seqnames =</span> <span class="fu">paste</span>(<span class="st">&quot;chr&quot;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>)), </span>
-<span id="cb196-1009"><a href="#cb196-1009" aria-hidden="true" tabindex="-1"></a>                             <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>), </span>
-<span id="cb196-1010"><a href="#cb196-1010" aria-hidden="true" tabindex="-1"></a>                             <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">6</span>), </span>
-<span id="cb196-1011"><a href="#cb196-1011" aria-hidden="true" tabindex="-1"></a>                             <span class="at">strand =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>), <span class="dv">5</span>, <span class="at">replace =</span> T), </span>
-<span id="cb196-1012"><a href="#cb196-1012" aria-hidden="true" tabindex="-1"></a>                             <span class="at">gene_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;gene_&quot;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>)), </span>
-<span id="cb196-1013"><a href="#cb196-1013" aria-hidden="true" tabindex="-1"></a>                             <span class="at">score =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">5</span>))))</span>
-<span id="cb196-1014"><a href="#cb196-1014" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1015"><a href="#cb196-1015" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1016"><a href="#cb196-1016" aria-hidden="true" tabindex="-1"></a><span class="fu">## *GRangesList* methods overview</span></span>
-<span id="cb196-1017"><a href="#cb196-1017" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1018"><a href="#cb196-1018" aria-hidden="true" tabindex="-1"></a>Used when you want to store exons in transcripts or aligned reads with gaps/paired-end reads.</span>
-<span id="cb196-1019"><a href="#cb196-1019" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1020"><a href="#cb196-1020" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1021"><a href="#cb196-1021" aria-hidden="true" tabindex="-1"></a>grange_1_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(grange_1, grange_2)</span>
-<span id="cb196-1022"><a href="#cb196-1022" aria-hidden="true" tabindex="-1"></a>(grange_list <span class="ot">&lt;-</span> <span class="fu">split</span>(grange_1_2, <span class="fu">mcols</span>(grange_1_2)<span class="sc">$</span>transcript_id))</span>
-<span id="cb196-1023"><a href="#cb196-1023" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1024"><a href="#cb196-1024" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1025"><a href="#cb196-1025" aria-hidden="true" tabindex="-1"></a>Subset:</span>
-<span id="cb196-1026"><a href="#cb196-1026" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1027"><a href="#cb196-1027" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1028"><a href="#cb196-1028" aria-hidden="true" tabindex="-1"></a>grange_list[[<span class="dv">1</span>]] </span>
-<span id="cb196-1029"><a href="#cb196-1029" aria-hidden="true" tabindex="-1"></a><span class="co"># also works: grange_list$&quot;tx_1&quot;</span></span>
-<span id="cb196-1030"><a href="#cb196-1030" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1031"><a href="#cb196-1031" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1032"><a href="#cb196-1032" aria-hidden="true" tabindex="-1"></a>Accessors and interval operations from *GRanges* also work on *GRangesList*, but usually return a list. For example:</span>
-<span id="cb196-1033"><a href="#cb196-1033" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1034"><a href="#cb196-1034" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1035"><a href="#cb196-1035" aria-hidden="true" tabindex="-1"></a><span class="fu">seqnames</span>(grange_list)</span>
-<span id="cb196-1036"><a href="#cb196-1036" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1037"><a href="#cb196-1037" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1038"><a href="#cb196-1038" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1039"><a href="#cb196-1039" aria-hidden="true" tabindex="-1"></a><span class="fu">ranges</span>(grange_list)</span>
-<span id="cb196-1040"><a href="#cb196-1040" aria-hidden="true" tabindex="-1"></a><span class="fu">strand</span>(grange_list)</span>
-<span id="cb196-1041"><a href="#cb196-1041" aria-hidden="true" tabindex="-1"></a><span class="fu">start</span>(grange_list)</span>
-<span id="cb196-1042"><a href="#cb196-1042" aria-hidden="true" tabindex="-1"></a><span class="co"># and so on ...</span></span>
-<span id="cb196-1043"><a href="#cb196-1043" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1044"><a href="#cb196-1044" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1045"><a href="#cb196-1045" aria-hidden="true" tabindex="-1"></a>You can also use mathematical and other operations on them:</span>
-<span id="cb196-1046"><a href="#cb196-1046" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1047"><a href="#cb196-1047" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1048"><a href="#cb196-1048" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">width</span>(grange_list))</span>
+<span id="cb196-1005"><a href="#cb196-1005" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1006"><a href="#cb196-1006" aria-hidden="true" tabindex="-1"></a>ranges_tb <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">data.table</span>(<span class="at">chromosomes =</span> <span class="fu">paste</span>(<span class="st">&quot;chr&quot;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>)), </span>
+<span id="cb196-1007"><a href="#cb196-1007" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gene_start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>), </span>
+<span id="cb196-1008"><a href="#cb196-1008" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gene_end =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">6</span>), </span>
+<span id="cb196-1009"><a href="#cb196-1009" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gene_strand =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>), <span class="dv">5</span>, <span class="at">replace =</span> T), </span>
+<span id="cb196-1010"><a href="#cb196-1010" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gene_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;gene_&quot;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>)), </span>
+<span id="cb196-1011"><a href="#cb196-1011" aria-hidden="true" tabindex="-1"></a>                     <span class="at">score =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">5</span>))</span>
+<span id="cb196-1012"><a href="#cb196-1012" aria-hidden="true" tabindex="-1"></a> <span class="fu">print</span>(ranges_tb)</span>
+<span id="cb196-1013"><a href="#cb196-1013" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1014"><a href="#cb196-1014" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1015"><a href="#cb196-1015" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1016"><a href="#cb196-1016" aria-hidden="true" tabindex="-1"></a><span class="fu">makeGRangesFromDataFrame</span>(<span class="at">df =</span> ranges_tb, </span>
+<span id="cb196-1017"><a href="#cb196-1017" aria-hidden="true" tabindex="-1"></a>                         <span class="at">seqnames.field =</span> <span class="st">&quot;chromosomes&quot;</span>,</span>
+<span id="cb196-1018"><a href="#cb196-1018" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start.field =</span> <span class="st">&quot;gene_start&quot;</span>, </span>
+<span id="cb196-1019"><a href="#cb196-1019" aria-hidden="true" tabindex="-1"></a>                         <span class="at">end.field =</span> <span class="st">&quot;gene_end&quot;</span>, </span>
+<span id="cb196-1020"><a href="#cb196-1020" aria-hidden="true" tabindex="-1"></a>                         <span class="at">strand.field =</span> <span class="st">&quot;gene_strand&quot;</span>, </span>
+<span id="cb196-1021"><a href="#cb196-1021" aria-hidden="true" tabindex="-1"></a>                         <span class="at">keep.extra.columns =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb196-1022"><a href="#cb196-1022" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1023"><a href="#cb196-1023" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1024"><a href="#cb196-1024" aria-hidden="true" tabindex="-1"></a>If your column names are correct you can directly call <span class="in">`GRanges()`</span> on data.frame/tibble/data.table:</span>
+<span id="cb196-1025"><a href="#cb196-1025" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1026"><a href="#cb196-1026" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1027"><a href="#cb196-1027" aria-hidden="true" tabindex="-1"></a>(ranges_tb <span class="ot">&lt;-</span> <span class="fu">GRanges</span>(data.table<span class="sc">::</span><span class="fu">data.table</span>(<span class="at">seqnames =</span> <span class="fu">paste</span>(<span class="st">&quot;chr&quot;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>)), </span>
+<span id="cb196-1028"><a href="#cb196-1028" aria-hidden="true" tabindex="-1"></a>                             <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>), </span>
+<span id="cb196-1029"><a href="#cb196-1029" aria-hidden="true" tabindex="-1"></a>                             <span class="at">end =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">6</span>), </span>
+<span id="cb196-1030"><a href="#cb196-1030" aria-hidden="true" tabindex="-1"></a>                             <span class="at">strand =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;+&quot;</span>, <span class="st">&quot;-&quot;</span>), <span class="dv">5</span>, <span class="at">replace =</span> T), </span>
+<span id="cb196-1031"><a href="#cb196-1031" aria-hidden="true" tabindex="-1"></a>                             <span class="at">gene_id =</span> <span class="fu">paste0</span>(<span class="st">&quot;gene_&quot;</span>, <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>)), </span>
+<span id="cb196-1032"><a href="#cb196-1032" aria-hidden="true" tabindex="-1"></a>                             <span class="at">score =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">5</span>))))</span>
+<span id="cb196-1033"><a href="#cb196-1033" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1034"><a href="#cb196-1034" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1035"><a href="#cb196-1035" aria-hidden="true" tabindex="-1"></a><span class="fu">## *GRangesList* methods overview</span></span>
+<span id="cb196-1036"><a href="#cb196-1036" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1037"><a href="#cb196-1037" aria-hidden="true" tabindex="-1"></a>Used when you want to store exons in transcripts or aligned reads with gaps/paired-end reads.</span>
+<span id="cb196-1038"><a href="#cb196-1038" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1039"><a href="#cb196-1039" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1040"><a href="#cb196-1040" aria-hidden="true" tabindex="-1"></a>grange_1_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(grange_1, grange_2)</span>
+<span id="cb196-1041"><a href="#cb196-1041" aria-hidden="true" tabindex="-1"></a>(grange_list <span class="ot">&lt;-</span> <span class="fu">split</span>(grange_1_2, <span class="fu">mcols</span>(grange_1_2)<span class="sc">$</span>transcript_id))</span>
+<span id="cb196-1042"><a href="#cb196-1042" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1043"><a href="#cb196-1043" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1044"><a href="#cb196-1044" aria-hidden="true" tabindex="-1"></a>Subset:</span>
+<span id="cb196-1045"><a href="#cb196-1045" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1046"><a href="#cb196-1046" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1047"><a href="#cb196-1047" aria-hidden="true" tabindex="-1"></a>grange_list[[<span class="dv">1</span>]] </span>
+<span id="cb196-1048"><a href="#cb196-1048" aria-hidden="true" tabindex="-1"></a><span class="co"># also works: grange_list$&quot;tx_1&quot;</span></span>
 <span id="cb196-1049"><a href="#cb196-1049" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb196-1050"><a href="#cb196-1050" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1051"><a href="#cb196-1051" aria-hidden="true" tabindex="-1"></a>Most of the *intra*-, *inter*- and *between*-range methods also operate on *GRangesList* objects:</span>
+<span id="cb196-1051"><a href="#cb196-1051" aria-hidden="true" tabindex="-1"></a>Accessors and interval operations from *GRanges* also work on *GRangesList*, but usually return a list. For example:</span>
 <span id="cb196-1052"><a href="#cb196-1052" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb196-1053"><a href="#cb196-1053" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1054"><a href="#cb196-1054" aria-hidden="true" tabindex="-1"></a><span class="fu">shift</span>(grange_list, <span class="dv">20</span>)</span>
+<span id="cb196-1054"><a href="#cb196-1054" aria-hidden="true" tabindex="-1"></a><span class="fu">seqnames</span>(grange_list)</span>
 <span id="cb196-1055"><a href="#cb196-1055" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb196-1056"><a href="#cb196-1056" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1057"><a href="#cb196-1057" aria-hidden="true" tabindex="-1"></a>*GRangesList* to *GRanges*:</span>
-<span id="cb196-1058"><a href="#cb196-1058" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1059"><a href="#cb196-1059" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1060"><a href="#cb196-1060" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(grange_list)</span>
-<span id="cb196-1061"><a href="#cb196-1061" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1062"><a href="#cb196-1062" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1063"><a href="#cb196-1063" aria-hidden="true" tabindex="-1"></a>Loops - <span class="in">`lapply()`</span>, <span class="in">`sapply()`</span>, <span class="in">`mapply()`</span>, <span class="in">`endoapply()`</span>, <span class="in">`mendoapply()`</span>, <span class="in">`Map()`</span> and <span class="in">`Reduce()`</span>:</span>
-<span id="cb196-1064"><a href="#cb196-1064" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1065"><a href="#cb196-1065" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1066"><a href="#cb196-1066" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(grange_list, length)</span>
-<span id="cb196-1067"><a href="#cb196-1067" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1068"><a href="#cb196-1068" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1069"><a href="#cb196-1069" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1070"><a href="#cb196-1070" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(grange_list, length)</span>
-<span id="cb196-1071"><a href="#cb196-1071" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1072"><a href="#cb196-1072" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1073"><a href="#cb196-1073" aria-hidden="true" tabindex="-1"></a><span class="in">`endoapply()`</span> transforms an object to another instance of the same class:</span>
-<span id="cb196-1074"><a href="#cb196-1074" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1075"><a href="#cb196-1075" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1076"><a href="#cb196-1076" aria-hidden="true" tabindex="-1"></a><span class="fu">endoapply</span>(grange_list, rev)</span>
-<span id="cb196-1077"><a href="#cb196-1077" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1078"><a href="#cb196-1078" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1079"><a href="#cb196-1079" aria-hidden="true" tabindex="-1"></a>Overlap *GRangesList* with *GRanges*:</span>
-<span id="cb196-1080"><a href="#cb196-1080" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1081"><a href="#cb196-1081" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
-<span id="cb196-1082"><a href="#cb196-1082" aria-hidden="true" tabindex="-1"></a><span class="fu">findOverlaps</span>(<span class="fu">c</span>(grange_1, grange_2), grange_list)</span>
-<span id="cb196-1083"><a href="#cb196-1083" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1084"><a href="#cb196-1084" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1085"><a href="#cb196-1085" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional resources</span></span>
-<span id="cb196-1086"><a href="#cb196-1086" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1087"><a href="#cb196-1087" aria-hidden="true" tabindex="-1"></a><span class="fu">### Cheat sheets</span></span>
-<span id="cb196-1088"><a href="#cb196-1088" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1089"><a href="#cb196-1089" aria-hidden="true" tabindex="-1"></a>*Bioconductor* cheatsheet: https://rpubs.com/Pazz/bioc_cheat_sheet</span>
-<span id="cb196-1090"><a href="#cb196-1090" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1091"><a href="#cb196-1091" aria-hidden="true" tabindex="-1"></a>*Bioconductor* for Genomic Data Science: http://kasperdanielhansen.github.io/genbioconductor/</span>
-<span id="cb196-1092"><a href="#cb196-1092" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1093"><a href="#cb196-1093" aria-hidden="true" tabindex="-1"></a><span class="fu">### Some other useful packages to have in mind:</span></span>
-<span id="cb196-1094"><a href="#cb196-1094" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1095"><a href="#cb196-1095" aria-hidden="true" tabindex="-1"></a>*GenomicFeatures* - import and query gene models</span>
-<span id="cb196-1096"><a href="#cb196-1096" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1097"><a href="#cb196-1097" aria-hidden="true" tabindex="-1"></a>*GenomicAlignments* - representation and manipulation of short genomic alignments</span>
-<span id="cb196-1098"><a href="#cb196-1098" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1099"><a href="#cb196-1099" aria-hidden="true" tabindex="-1"></a>*rtracklayer* - R interface to genome annotation files and the UCSC genome browser</span>
-<span id="cb196-1100"><a href="#cb196-1100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1101"><a href="#cb196-1101" aria-hidden="true" tabindex="-1"></a>*BSgenome* - efficient representation of full genomes and their SNPs</span>
-<span id="cb196-1102"><a href="#cb196-1102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1103"><a href="#cb196-1103" aria-hidden="true" tabindex="-1"></a>*ggbio* - visualization tools for genomic data</span>
-<span id="cb196-1104"><a href="#cb196-1104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1105"><a href="#cb196-1105" aria-hidden="true" tabindex="-1"></a><span class="fu">### Biological terminology</span></span>
-<span id="cb196-1106"><a href="#cb196-1106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1107"><a href="#cb196-1107" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Gene structure</span></span>
-<span id="cb196-1108"><a href="#cb196-1108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1109"><a href="#cb196-1109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r genes, echo = FALSE, out.width = &quot;100%&quot;}</span></span>
-<span id="cb196-1110"><a href="#cb196-1110" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/splicing.png&quot;</span>)</span>
-<span id="cb196-1111"><a href="#cb196-1111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb196-1112"><a href="#cb196-1112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb196-1113"><a href="#cb196-1113" aria-hidden="true" tabindex="-1"></a>Upstream/downstream vs. sense/antisense vs. plus/minus strand</span>
+<span id="cb196-1057"><a href="#cb196-1057" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1058"><a href="#cb196-1058" aria-hidden="true" tabindex="-1"></a><span class="fu">ranges</span>(grange_list)</span>
+<span id="cb196-1059"><a href="#cb196-1059" aria-hidden="true" tabindex="-1"></a><span class="fu">strand</span>(grange_list)</span>
+<span id="cb196-1060"><a href="#cb196-1060" aria-hidden="true" tabindex="-1"></a><span class="fu">start</span>(grange_list)</span>
+<span id="cb196-1061"><a href="#cb196-1061" aria-hidden="true" tabindex="-1"></a><span class="co"># and so on ...</span></span>
+<span id="cb196-1062"><a href="#cb196-1062" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1063"><a href="#cb196-1063" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1064"><a href="#cb196-1064" aria-hidden="true" tabindex="-1"></a>You can also use mathematical and other operations on them:</span>
+<span id="cb196-1065"><a href="#cb196-1065" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1066"><a href="#cb196-1066" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1067"><a href="#cb196-1067" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">width</span>(grange_list))</span>
+<span id="cb196-1068"><a href="#cb196-1068" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1069"><a href="#cb196-1069" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1070"><a href="#cb196-1070" aria-hidden="true" tabindex="-1"></a>Most of the *intra*-, *inter*- and *between*-range methods also operate on *GRangesList* objects:</span>
+<span id="cb196-1071"><a href="#cb196-1071" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1072"><a href="#cb196-1072" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1073"><a href="#cb196-1073" aria-hidden="true" tabindex="-1"></a><span class="fu">shift</span>(grange_list, <span class="dv">20</span>)</span>
+<span id="cb196-1074"><a href="#cb196-1074" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1075"><a href="#cb196-1075" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1076"><a href="#cb196-1076" aria-hidden="true" tabindex="-1"></a>*GRangesList* to *GRanges*:</span>
+<span id="cb196-1077"><a href="#cb196-1077" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1078"><a href="#cb196-1078" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1079"><a href="#cb196-1079" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(grange_list)</span>
+<span id="cb196-1080"><a href="#cb196-1080" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1081"><a href="#cb196-1081" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1082"><a href="#cb196-1082" aria-hidden="true" tabindex="-1"></a>Loops - <span class="in">`lapply()`</span>, <span class="in">`sapply()`</span>, <span class="in">`mapply()`</span>, <span class="in">`endoapply()`</span>, <span class="in">`mendoapply()`</span>, <span class="in">`Map()`</span> and <span class="in">`Reduce()`</span>:</span>
+<span id="cb196-1083"><a href="#cb196-1083" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1084"><a href="#cb196-1084" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1085"><a href="#cb196-1085" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(grange_list, length)</span>
+<span id="cb196-1086"><a href="#cb196-1086" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1087"><a href="#cb196-1087" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1088"><a href="#cb196-1088" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1089"><a href="#cb196-1089" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(grange_list, length)</span>
+<span id="cb196-1090"><a href="#cb196-1090" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1091"><a href="#cb196-1091" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1092"><a href="#cb196-1092" aria-hidden="true" tabindex="-1"></a><span class="in">`endoapply()`</span> transforms an object to another instance of the same class:</span>
+<span id="cb196-1093"><a href="#cb196-1093" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1094"><a href="#cb196-1094" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1095"><a href="#cb196-1095" aria-hidden="true" tabindex="-1"></a><span class="fu">endoapply</span>(grange_list, rev)</span>
+<span id="cb196-1096"><a href="#cb196-1096" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1097"><a href="#cb196-1097" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1098"><a href="#cb196-1098" aria-hidden="true" tabindex="-1"></a>Overlap *GRangesList* with *GRanges*:</span>
+<span id="cb196-1099"><a href="#cb196-1099" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1100"><a href="#cb196-1100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = T, echo = T, warrnings = F}</span></span>
+<span id="cb196-1101"><a href="#cb196-1101" aria-hidden="true" tabindex="-1"></a><span class="fu">findOverlaps</span>(<span class="fu">c</span>(grange_1, grange_2), grange_list)</span>
+<span id="cb196-1102"><a href="#cb196-1102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1103"><a href="#cb196-1103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1104"><a href="#cb196-1104" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional resources</span></span>
+<span id="cb196-1105"><a href="#cb196-1105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1106"><a href="#cb196-1106" aria-hidden="true" tabindex="-1"></a><span class="fu">### Cheat sheets</span></span>
+<span id="cb196-1107"><a href="#cb196-1107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1108"><a href="#cb196-1108" aria-hidden="true" tabindex="-1"></a>*Bioconductor* cheatsheet: https://rpubs.com/Pazz/bioc_cheat_sheet</span>
+<span id="cb196-1109"><a href="#cb196-1109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1110"><a href="#cb196-1110" aria-hidden="true" tabindex="-1"></a>*Bioconductor* for Genomic Data Science: http://kasperdanielhansen.github.io/genbioconductor/</span>
+<span id="cb196-1111"><a href="#cb196-1111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1112"><a href="#cb196-1112" aria-hidden="true" tabindex="-1"></a><span class="fu">### Some other useful packages to have in mind:</span></span>
+<span id="cb196-1113"><a href="#cb196-1113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1114"><a href="#cb196-1114" aria-hidden="true" tabindex="-1"></a>*GenomicFeatures* - import and query gene models</span>
+<span id="cb196-1115"><a href="#cb196-1115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1116"><a href="#cb196-1116" aria-hidden="true" tabindex="-1"></a>*GenomicAlignments* - representation and manipulation of short genomic alignments</span>
+<span id="cb196-1117"><a href="#cb196-1117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1118"><a href="#cb196-1118" aria-hidden="true" tabindex="-1"></a>*rtracklayer* - R interface to genome annotation files and the UCSC genome browser</span>
+<span id="cb196-1119"><a href="#cb196-1119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1120"><a href="#cb196-1120" aria-hidden="true" tabindex="-1"></a>*BSgenome* - efficient representation of full genomes and their SNPs</span>
+<span id="cb196-1121"><a href="#cb196-1121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1122"><a href="#cb196-1122" aria-hidden="true" tabindex="-1"></a>*ggbio* - visualization tools for genomic data</span>
+<span id="cb196-1123"><a href="#cb196-1123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1124"><a href="#cb196-1124" aria-hidden="true" tabindex="-1"></a><span class="fu">### Biological terminology</span></span>
+<span id="cb196-1125"><a href="#cb196-1125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1126"><a href="#cb196-1126" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Gene structure</span></span>
+<span id="cb196-1127"><a href="#cb196-1127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1128"><a href="#cb196-1128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r genes, echo = FALSE, out.width = &quot;100%&quot;}</span></span>
+<span id="cb196-1129"><a href="#cb196-1129" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/splicing.png&quot;</span>)</span>
+<span id="cb196-1130"><a href="#cb196-1130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb196-1131"><a href="#cb196-1131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-1132"><a href="#cb196-1132" aria-hidden="true" tabindex="-1"></a>Upstream/downstream vs. sense/antisense vs. plus/minus strand</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
