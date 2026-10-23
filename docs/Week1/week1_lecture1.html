@@ -188,6 +188,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../Week4/week4_part1.html">
  <span class="dropdown-text">Genomic data manipulation</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../Week4/week4_part2.html">
+ <span class="dropdown-text">Querying Ensembl with biomaRt</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -716,8 +720,8 @@ length</code></pre>
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(n3, <span class="dv">4</span>)</span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(n3, <span class="dv">25</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0 0 1 3
- [1] 2 0 0 3 0 0 1 3 3 2 2 5 5 2 3 0 2 3 2 2 3 3 3 2 2</code></pre>
+<pre><code>[1] 3 3 0 1
+ [1] 2 0 3 3 1 1 1 3 0 0 2 3 3 3 1 0 2 0 2 1 2 3 2 0 2</code></pre>
 </div>
 </div>
 <p><img src="https://qph.cf2.quoracdn.net/main-qimg-8c762cc11a149d82405cccf50bb17296-lq.png" class="img-fluid" alt="Take a sample from some basic distributions:"> <img src="normal_distribution.jpg" class="img-fluid"></p>
@@ -726,12 +730,12 @@ length</code></pre>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10</span>, <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="dv">100</span>)</span>
 <span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="at">mean=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="fl">0.7</span>); s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 72 16 92 24 38 66 40 21 19 34
- [1] 44.55476 98.12855 38.86540 77.83292 68.16906 37.00823 18.02245 14.11505
- [9] 15.35684 68.07121
- [1] 3.893873 3.939720 2.889655 2.655584 2.269022 3.304847 3.986386 2.585499
- [9] 2.707160 3.872845 2.869973 2.731876 2.881065 3.353292 3.760547 3.820111
-[17] 3.521243 2.679733 2.096074 2.755262</code></pre>
+<pre><code> [1] 97 26 54 78 90 45 61 88 74 11
+ [1] 58.637236  8.711887 29.099696 98.529047 51.641408  4.996978 40.893179
+ [8]  4.497525 25.427796 17.341556
+ [1] 3.203826 3.668979 3.247627 3.026937 4.042577 4.412998 3.383335 3.065404
+ [9] 2.843527 2.510934 2.982078 2.795535 3.113646 2.780719 3.071975 3.866459
+[17] 1.974920 2.491366 4.589818 1.987674</code></pre>
 </div>
 </div>
 </section>
@@ -761,8 +765,8 @@ length</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">expr =</span> <span class="fu">mean</span>(<span class="fu">sample</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">size =</span> <span class="dv">3</span>)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 5.000000 4.666667 4.333333 3.666667 5.333333 7.000000 5.666667 8.000000
- [9] 5.333333 7.333333</code></pre>
+<pre><code> [1] 4.000000 5.666667 5.333333 6.666667 6.000000 4.333333 5.666667 3.000000
+ [9] 6.000000 4.000000</code></pre>
 </div>
 </div>
 </section>
@@ -771,16 +775,16 @@ length</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.128688</code></pre>
+<pre><code>[1] 3.153017</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5996194</code></pre>
+<pre><code>[1] 0.6997046</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      0%      25%      50%      75%     100% 
-2.096074 2.700303 2.885360 3.775438 3.986386 </code></pre>
+1.974920 2.791831 3.068689 3.454746 4.589818 </code></pre>
 </div>
 </div>
 </section>
@@ -1197,12 +1201,12 @@ Levels: 0 1 2 3 5</code></pre>
 <span id="cb165-8"><a href="#cb165-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Sepal.Width Petal.Length
-89          3.0          4.1
-72          2.8          4.0
-32          3.4          1.5
-84          2.7          5.1
-150         3.0          5.1
-3           3.2          1.3</code></pre>
+103         3.0          5.9
+77          2.8          4.8
+113         3.0          5.5
+148         3.0          5.2
+102         2.7          5.1
+28          3.5          1.5</code></pre>
 </div>
 </div>
 <p><strong>b) Pseudocode</strong></p>

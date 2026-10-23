@@ -32,6 +32,8 @@ website:
         menu:
           - text: Genomic data manipulation
             href: Week4/week4_part1.qmd
+          - text: Querying Ensembl with biomaRt
+            href: Week4/week4_part2.qmd
 
   page-footer:
     background: light
